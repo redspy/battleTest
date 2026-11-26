@@ -13,9 +13,9 @@ signal hosts_changed
 
 const SET_ID := "pokemon"
 const BATTLE_MODE := "battle"
-const BEACON := "BT4|pokemon|battle"
+const BEACON := "BT5|pokemon|battle"
 
-const PORT := 47315
+const PORT := 47316
 const BEACON_PORT := 47311
 
 var view := {}             # 내 자리에서 본 상태 (화면이 읽는다)

@@ -4,6 +4,14 @@ extends Control
 ## 그림을 좌우로 밀면 목록의 이전/다음으로 넘어간다.
 
 var set_id: String
+const NATURE_NAMES := {
+	"hardy": "노력", "lonely": "외로움", "adamant": "고집", "naughty": "개구쟁이", "brave": "용감",
+	"bold": "대담", "docile": "온순", "impish": "장난꾸러기", "lax": "촐랑", "relaxed": "무사태평",
+	"modest": "조심", "mild": "의젓", "bashful": "수줍음", "rash": "덜렁", "quiet": "냉정",
+	"calm": "차분", "gentle": "얌전", "careful": "신중", "quirky": "변덕", "sassy": "건방",
+	"timid": "겁쟁이", "hasty": "성급", "jolly": "명랑", "naive": "천진난만", "serious": "성실",
+}
+
 var list: Array        # [{species, form, item?, ability?, moves?}]
 var index := 0
 var _form := ""
@@ -91,8 +99,8 @@ func _build() -> void:
 
 	if f.has("baseStats"):
 		_col.add_child(_stats(f["baseStats"], m.get("training", {})))
-	if m.has("item") or m.has("ability"):
-		_col.add_child(_held(m))
+	if m.has("item") or m.has("ability") or f.has("battleAbility"):
+		_col.add_child(_held(m, f))
 	_col.add_child(_moves(m.get("moves", sp.get("moves", [])), m.has("moves") or sp.has("moves")))
 	if set_id == "pokemon":
 		_col.add_child(UI.label("이 포켓몬을 쓰는 팀: %d" % Data.usage(set_id, m["species"]), 21, UI.TEXT_DIM))
@@ -101,9 +109,13 @@ func _stats(base: Dictionary, training: Dictionary) -> Control:
 	var c := Lay.card(UI.PANEL, 18)
 	var col: VBoxContainer = c[1]
 	col.add_child(UI.label("레벨 50 능력치", 26, UI.ACCENT))
-	var source := "공개 팀 배분" if training.has("source") else ("연습용 배분" if training.has("points") else "포인트 0 · 능력 보정 없음")
-	if training.has("boost") and training.has("reduce"):
-		source += " · %s ↑ / %s ↓" % [Data.STAT_LABELS[training["boost"]], Data.STAT_LABELS[training["reduce"]]]
+	var source := "공개 팀 포인트" if training.has("source") else ("연습용 포인트" if training.has("points") else "포인트 0")
+	var nature := str(training.get("nature", ""))
+	if not nature.is_empty():
+		var label := "성격  " + str(NATURE_NAMES.get(nature, nature))
+		if training.has("boost") and training.has("reduce"):
+			label += " · %s ↑ / %s ↓" % [Data.STAT_LABELS[training["boost"]], Data.STAT_LABELS[training["reduce"]]]
+		col.add_child(Lay.wrap(label, 23, UI.TEXT))
 	col.add_child(Lay.wrap(source, 20, UI.TEXT_DIM))
 	var stats := Data.battle_stats(base, training)
 	var points: Dictionary = training.get("points", {})
@@ -121,13 +133,23 @@ func _stats(base: Dictionary, training: Dictionary) -> Control:
 	col.add_child(table)
 	return c[0]
 
-func _held(m: Dictionary) -> Control:
+func _held(m: Dictionary, form: Dictionary) -> Control:
 	var c := Lay.card(UI.PANEL, 18)
 	var col: VBoxContainer = c[1]
 	var s: Dictionary = Data.sets[set_id]
 	for pair in [["지닌 도구", "item", "items"], ["특성", "ability", "abilities"]]:
 		var v = m.get(pair[1])
-		col.add_child(UI.label(pair[0], 24, UI.ACCENT))
+		var label: String = pair[0]
+		if pair[1] == "ability":
+			if _form.begins_with("mega"):
+				v = form.get("battleAbility")
+				label = "메가진화 후 특성"
+			else:
+				var listed := str(m.get("form", "base"))
+				var starting := str(m.get("preMegaForm", "eternal" if m["species"] == "floette" else "base")) if listed.begins_with("mega") else listed
+				if _form != starting or v == null:
+					v = form.get("battleAbility")
+		col.add_child(UI.label(label, 24, UI.ACCENT))
 		if v == null or str(v) == "":
 			col.add_child(UI.label("미확인", 22, UI.TEXT_DIM))
 			continue

@@ -4,11 +4,24 @@ extends Control
 
 var _set_id: String
 const STAT_KO := Data.STAT_LABELS
+const ANIMATION_PACE := 1.45
+const PLAYBACK_RATES := [1.0, 1.5, 2.0]
+const FIELD_EFFECTS := {
+	"쾌청": "불꽃 기술이 강해지고 물 기술이 약해집니다.",
+	"비": "물 기술이 강해지고 불꽃 기술이 약해집니다.",
+	"모래바람": "일부 포켓몬이 턴 끝에 피해를 받고 바위 타입의 특수방어가 오릅니다.",
+	"눈": "얼음 타입의 방어가 오릅니다.",
+	"그래스필드": "지면에 있는 포켓몬의 풀 기술이 강해지고 턴 끝에 HP가 회복됩니다.",
+	"일렉트릭필드": "지면에 있는 포켓몬의 전기 기술이 강해집니다.",
+	"사이코필드": "지면에 있는 포켓몬의 에스퍼 기술이 강해지고 상대의 선공기를 막습니다.",
+	"트릭룸": "같은 우선도에서는 스피드가 느린 포켓몬부터 행동합니다.",
+}
 
 var _b := {}                  # 지금 화면에 보이는 상태 (사건을 재생하며 따라간다)
 var _me := 0
 var _gimmick := ""
 var _playing := false
+var _playback_index := 0
 var _pending := []            # 재생을 기다리는 보기
 var _leave_armed := 0.0
 
@@ -50,6 +63,12 @@ func _ready() -> void:
 	_turn = UI.label("턴 1", 30, UI.ACCENT)
 	_turn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(_turn)
+	var speed := UI.button("속도 1×", 22)
+	var speed_label: Label = speed.get_meta("label")
+	speed.tapped.connect(func():
+		_playback_index = (_playback_index + 1) % PLAYBACK_RATES.size()
+		speed_label.text = "속도 " + str(PLAYBACK_RATES[_playback_index]).trim_suffix(".0") + "×")
+	head.add_child(speed)
 	var details := UI.button("상태 보기", 22)
 	details.tapped.connect(_show_status)
 	head.add_child(details)
@@ -204,19 +223,27 @@ func _draw_status() -> void:
 		_status_content.remove_child(child)
 		child.queue_free()
 	var field := _status_card("필드 · 턴 %d" % int(_b["turn"]))
-	field.add_child(Lay.wrap("날씨  " + _timed_effect(str(_b.get("weather", "")), int(_b.get("weatherTurns", 0))), 24))
-	field.add_child(Lay.wrap("필드 효과  " + _timed_effect(str(_b.get("terrain", "")), int(_b.get("terrainTurns", 0))), 24))
+	var field_sources: Dictionary = _b.get("effectSources", {})
+	for entry in [["날씨", "weather"], ["필드 효과", "terrain"]]:
+		var key: String = entry[1]
+		var name := str(_b.get(key, ""))
+		_show_effect(field, str(entry[0]) + "  " + _timed_effect(name, int(_b.get(key + "Turns", 0))), field_sources.get(key, "") if name != "" else "", FIELD_EFFECTS.get(name, ""))
 	var room := int(_b.get("trickRoom", 0))
-	field.add_child(Lay.wrap("트릭룸  " + _timed_effect("적용 중" if room > 0 else "", room), 24))
+	_show_effect(field, "트릭룸  " + _timed_effect("적용 중" if room > 0 else "", room), field_sources.get("trickRoom", "") if room > 0 else "", FIELD_EFFECTS["트릭룸"] if room > 0 else "")
 	for seat in [_me, 1 - _me]:
 		var side: Dictionary = _b["sides"][seat]
 		var roster := _status_card("내 포켓몬" if seat == _me else "상대 포켓몬")
+		var side_sources: Dictionary = side.get("effectSources", {})
+		if side.get("stealthRock", false):
+			_show_effect(roster, "스텔스록", side_sources.get("stealthRock", ""), "교체로 나온 포켓몬이 바위 타입 상성에 따라 피해를 받습니다.")
+		if int(side.get("toxicSpikes", 0)) > 0:
+			_show_effect(roster, "독압정 · %d겹" % int(side["toxicSpikes"]), side_sources.get("toxicSpikes", ""), "지면에 있는 포켓몬이 교체로 등장할 때 독에 걸릴 수 있습니다.")
 		var tailwind := int(side.get("tailwind", 0))
 		if tailwind > 0:
-			roster.add_child(Lay.wrap(_timed_effect("순풍", tailwind), 22, UI.ACCENT))
+			_show_effect(roster, _timed_effect("순풍", tailwind), side_sources.get("tailwind", ""), "이 진영 포켓몬의 스피드가 두 배가 됩니다.")
 		var residual_turns := int(side.get("gmaxResidualTurns", 0))
 		if residual_turns > 0:
-			roster.add_child(Lay.wrap(_timed_effect(str(side["gmaxResidual"]) + " 지속 피해", residual_turns), 22, UI.ACCENT))
+			_show_effect(roster, _timed_effect(str(side["gmaxResidual"]) + " 지속 피해", residual_turns), side_sources.get("gmaxResidual", ""), "해당 타입이 아닌 포켓몬이 턴 끝에 피해를 받습니다.")
 		for index in side["mons"].size():
 			var mon: Dictionary = side["mons"][index]
 			if mon.get("hidden", false):
@@ -233,6 +260,29 @@ func _draw_status() -> void:
 					if int(mon.get(key, 0)) != 0:
 						stages.append("%s %+d" % [STAT_KO[key], int(mon[key])])
 				roster.add_child(Lay.wrap("능력 변화  " + ("없음" if stages.is_empty() else " · ".join(stages)), 22, UI.TEXT_DIM))
+				_show_stage_history(roster, mon.get("stageHistory", []))
+
+func _show_effect(col: VBoxContainer, title: String, source: String, effect: String) -> void:
+	col.add_child(Lay.wrap(title, 24))
+	if source != "":
+		col.add_child(Lay.wrap("원인  " + source, 21, UI.TEXT_DIM))
+	if effect != "":
+		col.add_child(Lay.wrap(effect, 21, UI.TEXT_DIM))
+
+func _show_stage_history(col: VBoxContainer, history: Array) -> void:
+	if history.is_empty():
+		return
+	col.add_child(Lay.wrap("최근 능력 변화 원인", 21, UI.ACCENT))
+	var groups: Array[Dictionary] = []
+	for entry in history:
+		var source := str(entry["source"])
+		var change := "%s %+d" % [STAT_KO[entry["stat"]], int(entry["delta"])]
+		if groups.is_empty() or groups.back()["source"] != source or groups.back()["stats"].has(entry["stat"]):
+			groups.append({ "source": source, "changes": [], "stats": [] })
+		groups.back()["changes"].append(change)
+		groups.back()["stats"].append(entry["stat"])
+	for entry in groups.slice(-5):
+		col.add_child(Lay.wrap("%s\n%s" % [entry["source"], " · ".join(entry["changes"])], 20, UI.TEXT_DIM))
 
 func _status_card(title: String) -> VBoxContainer:
 	var card := Lay.card()
@@ -254,7 +304,7 @@ func _pokemon_status(mon: Dictionary) -> String:
 		effects.append("잠듦")
 	elif str(mon.get("status", "")) != "":
 		effects.append(str(mon["status"]))
-	var volatile := {"confusion": "혼란", "leechSeed": "씨뿌리기", "trapped": "교체 제한", "throatChop": "소리 기술 제한", "charge": "충전 중", "recharge": "반동으로 휴식", "dot": "그을음", "slow": "둔화"}
+	var volatile := {"confusion": "혼란", "destinyBond": "길동무", "encoreTurns": "앵콜", "taunt": "도발", "disableTurns": "기술 봉쇄", "leechSeed": "씨뿌리기", "trapped": "교체 제한", "throatChop": "소리 기술 제한", "charge": "충전 중", "recharge": "반동으로 휴식", "dot": "그을음", "slow": "둔화"}
 	for flag in volatile:
 		if mon.get(flag):
 			effects.append(volatile[flag])
@@ -409,11 +459,17 @@ func _move_button(a: Dictionary, me: Dictionary, foe: Dictionary) -> Control:
 		var remaining := int(me.get("pp", {}).get(move_id, 0))
 		head.add_child(UI.chip("PP %d/%d" % [remaining, max_pp], Color(0.62, 0.82, 1.0)))
 	col.add_child(head)
-	col.add_child(Lay.wrap(str(mv.get("desc", "")) if a["ok"] else "사용 불가: %s" % a["why"], 19, UI.TEXT_DIM))
+	var description := str(mv.get("desc", "")) if a["ok"] else "사용 불가: %s" % a["why"]
+	if a.has("target"):
+		var ally: Dictionary = _b["sides"][_me]["mons"][int(a["target"])]
+		description = "되살리기 · " + Data.display_name(_set_id, ally["id"], ally["form"])
+	col.add_child(Lay.wrap(description, 19, UI.TEXT_DIM))
 	if a["ok"]:
 		var id := str(a["id"])
 		tap.tapped.connect(func():
 			var action := { "k": "move", "id": id }
+			if a.has("target"):
+				action["target"] = a["target"]
 			if _gimmick != "":
 				action["gimmick"] = _gimmick
 			_gimmick = ""
@@ -456,8 +512,11 @@ func _act(a: Dictionary) -> void:
 
 # ───────────── 사건 재생 ─────────────
 
+func _animation_time(seconds: float) -> float:
+	return seconds * ANIMATION_PACE / float(PLAYBACK_RATES[_playback_index])
+
 func _wait(t: float) -> void:
-	await get_tree().create_timer(t).timeout
+	await get_tree().create_timer(_animation_time(t)).timeout
 
 func _who(seat: int) -> String:
 	return "나의 " if seat == _me else "상대 "
@@ -470,9 +529,11 @@ func _float_text(slot: int, text: String, color: Color) -> void:
 	l.size = Vector2(spr.size.x, 70)
 	l.position = spr.global_position + Vector2(0, spr.size.y * 0.3)
 	add_child(l)
+	if is_instance_valid(_status_layer):
+		move_child(_status_layer, -1)
 	var tw := l.create_tween()
-	tw.tween_property(l, "position:y", l.position.y - 80, 0.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tw.parallel().tween_property(l, "modulate:a", 0.0, 0.3).set_delay(0.4)
+	tw.tween_property(l, "position:y", l.position.y - 80, _animation_time(0.7)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(l, "modulate:a", 0.0, _animation_time(0.3)).set_delay(_animation_time(0.4))
 	tw.tween_callback(l.queue_free)
 
 func _play(e: Dictionary, final: Dictionary) -> void:
@@ -492,12 +553,12 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 					fresh[k] = 0
 				side["mons"][to] = fresh
 			var tw := spr.create_tween()
-			tw.tween_property(spr, "modulate:a", 0.0, 0.15)
+			tw.tween_property(spr, "modulate:a", 0.0, _animation_time(0.15))
 			await tw.finished
 			side["active"] = to
 			_draw_side(seat)
 			spr.modulate.a = 0.0
-			spr.create_tween().tween_property(spr, "modulate:a", 1.0, 0.2)
+			spr.create_tween().tween_property(spr, "modulate:a", 1.0, _animation_time(0.2))
 			_log.text = "%s%s 등장!" % [_who(seat), _name(seat)]
 			await _wait(0.55)
 		"use":
@@ -505,8 +566,8 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_log.text = "%s%s의 [%s]!" % [_who(seat), _name(seat), move_name]
 			var dir := -1.0 if slot == 1 else 1.0
 			var tw := spr.create_tween().set_trans(Tween.TRANS_QUAD)
-			tw.tween_property(spr, "position", spr.position + Vector2(-50 * dir, 40 * dir), 0.12)
-			tw.tween_property(spr, "position", spr.position, 0.18)
+			tw.tween_property(spr, "position", spr.position + Vector2(-50 * dir, 40 * dir), _animation_time(0.12))
+			tw.tween_property(spr, "position", spr.position, _animation_time(0.18))
 			await _wait(0.55)
 		"dmg":
 			_active(seat)["hp"] = int(e["hp"])
@@ -523,8 +584,8 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			var amp := 16.0 if big else 9.0
 			var tw := spr.create_tween()
 			for i in 4:
-				tw.tween_property(spr, "position:x", spr.position.x + (amp if i % 2 == 0 else -amp), 0.04)
-			tw.tween_property(spr, "position:x", spr.position.x, 0.04)
+				tw.tween_property(spr, "position:x", spr.position.x + (amp if i % 2 == 0 else -amp), _animation_time(0.04))
+			tw.tween_property(spr, "position:x", spr.position.x, _animation_time(0.04))
 			Input.vibrate_handheld(30 if big else 15)
 			await _wait(0.6)
 		"heal":
@@ -538,18 +599,21 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_log.text = "%s%s · %s" % [_who(seat), _name(seat), e["what"]]
 			await _wait(0.6)
 		"field":
-			_log.text = str(e["what"])
-			await _wait(0.35)
+			var source := str(e.get("source", ""))
+			_log.text = str(e["what"]) if source.is_empty() else "%s · %s" % [e["what"], source]
+			await _wait(0.55)
 		"status":
 			_log.text = "%s%s: %s" % [_who(seat), _name(seat), e["what"]]
 			await _wait(0.45)
 		"stage":
-			_log.text = "%s%s의 %s %s" % [_who(seat), _name(seat), STAT_KO.get(str(e["stat"]), ""), "상승 ▲" if int(e["delta"]) > 0 else "하락 ▼"]
-			await _wait(0.45)
+			var source := str(e.get("source", ""))
+			var change := "%s%s · %s %+d" % [_who(seat), _name(seat), STAT_KO.get(str(e["stat"]), ""), int(e["delta"])]
+			_log.text = change if source.is_empty() else "%s\n%s" % [change, source]
+			await _wait(0.55)
 		"faint":
 			_log.text = "%s%s 쓰러졌다!" % [_who(seat), _name(seat)]
 			var tw := spr.create_tween()
-			tw.tween_property(spr, "modulate:a", 0.0, 0.35)
+			tw.tween_property(spr, "modulate:a", 0.0, _animation_time(0.35))
 			Input.vibrate_handheld(40)
 			await _wait(0.7)
 		"over":

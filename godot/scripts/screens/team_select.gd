@@ -64,7 +64,7 @@ func _team_item(t: Dictionary) -> Control:
 	name.clip_text = true
 	head.add_child(name)
 	col.add_child(head)
-	if t["event"] != "PTC26":
+	if t["event"] != "PTC26" and str(t.get("player", "")) != "":
 		col.add_child(UI.label(str(t["player"]), 21, UI.TEXT_DIM))
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 4)

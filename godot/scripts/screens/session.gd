@@ -124,7 +124,11 @@ func _build_lobby(v: Dictionary) -> void:
 		if t.is_empty():
 			col.add_child(UI.label("팀을 고르지 않았습니다" if p["here"] else "상대를 기다리는 중", 23, UI.TEXT_DIM))
 		else:
-			col.add_child(Lay.wrap(str(t["name"]) if t["event"] == "PTC26" else "%s — %s" % [t["name"], t["player"]], 24, UI.TEXT))
+			var team_name := str(t["name"])
+			var player := str(t.get("player", ""))
+			if t["event"] != "PTC26" and not player.is_empty():
+				team_name += " — " + player
+			col.add_child(Lay.wrap(team_name, 24, UI.TEXT))
 			col.add_child(_mini_row(t["members"]))
 		_col.add_child(c[0])
 	var my: Dictionary = players[me]

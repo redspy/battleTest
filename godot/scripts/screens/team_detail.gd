@@ -10,7 +10,7 @@ func _init(p_set: String, p_team: Dictionary) -> void:
 	team = p_team
 
 func _ready() -> void:
-	var col := Lay.page(self, str(team["name"]), str(team.get("placement", team["player"])))
+	var col := Lay.page(self, str(team["name"]), str(team.get("placement", team.get("player", ""))))
 	col.add_child(_concept())
 	col.add_child(UI.label("멤버 (탭하면 크게 보기)", 26, UI.TEXT))
 	var grid := GridContainer.new()

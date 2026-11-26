@@ -2205,6 +2205,379 @@
       ],
       "singlesUnavailable": true,
       "pp": 12
+    },
+    "Encore": {
+      "ko": "앵콜",
+      "en": "Encore",
+      "type": "노말",
+      "category": "support",
+      "desc": "상대의 마지막 기술을 3턴 동안 반복하게 합니다.",
+      "effects": [
+        {
+          "kind": "encore"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Mystical Fire": {
+      "ko": "매지컬플레임",
+      "en": "Mystical Fire",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "상대의 특수공격이 1랭크 내려갑니다.",
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spa",
+          "stages": 1
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12,
+      "power": 75
+    },
+    "Expanding Force": {
+      "ko": "와이드포스",
+      "en": "Expanding Force",
+      "type": "에스퍼",
+      "category": "attack",
+      "desc": "시전자가 사이코필드의 효과를 받으면 위력이 상승합니다.",
+      "effects": [],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12,
+      "power": 80
+    },
+    "Dark Pulse": {
+      "ko": "악의파동",
+      "en": "Dark Pulse",
+      "type": "악",
+      "category": "attack",
+      "desc": "20% 확률로 상대를 풀죽게 합니다.",
+      "effects": [
+        {
+          "kind": "flinch",
+          "chance": 20
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16,
+      "power": 80
+    },
+    "Shell Smash": {
+      "ko": "껍질깨기",
+      "en": "Shell Smash",
+      "type": "노말",
+      "category": "support",
+      "desc": "방어·특수방어가 1랭크 하락하고, 공격·특수공격·스피드가 2랭크 상승합니다.",
+      "effects": [
+        {
+          "kind": "selfStages",
+          "stats": {
+            "def": -1,
+            "spd": -1,
+            "atk": 2,
+            "spa": 2,
+            "spe": 2
+          }
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Terrain Pulse": {
+      "ko": "대지의파동",
+      "en": "Terrain Pulse",
+      "type": "노말",
+      "category": "attack",
+      "desc": "지면에 있을 때 필드에 맞춰 타입이 바뀌고 위력이 두 배가 됩니다.",
+      "effects": [],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12,
+      "power": 50
+    },
+    "Aura Sphere": {
+      "ko": "파동탄",
+      "en": "Aura Sphere",
+      "type": "격투",
+      "category": "attack",
+      "desc": "명중 판정 없이 공격합니다.",
+      "effects": [],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20,
+      "power": 80
+    },
+    "Shadow Claw": {
+      "ko": "섀도크루",
+      "en": "Shadow Claw",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "급소에 맞기 쉽습니다.",
+      "effects": [],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16,
+      "power": 70
+    },
+    "Morning Sun": {
+      "ko": "아침햇살",
+      "en": "Morning Sun",
+      "type": "노말",
+      "category": "support",
+      "desc": "날씨에 따라 자신의 HP를 회복합니다.",
+      "effects": [
+        {
+          "kind": "weatherHeal"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Fiery Dance": {
+      "ko": "불꽃춤",
+      "en": "Fiery Dance",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "50% 확률로 자신의 특수공격이 상승합니다.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": 1,
+          "chance": 50
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12,
+      "power": 80
+    },
+    "Stealth Rock": {
+      "ko": "스텔스록",
+      "en": "Stealth Rock",
+      "type": "바위",
+      "category": "support",
+      "desc": "상대 진영에 바위 타입의 교체 피해를 설치합니다.",
+      "effects": [
+        {
+          "kind": "stealthRock"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "foeSide",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Thunder Wave": {
+      "ko": "전기자석파",
+      "en": "Thunder Wave",
+      "type": "전기",
+      "category": "support",
+      "desc": "상대에게 마비를 겁니다.",
+      "effects": [
+        {
+          "kind": "status",
+          "status": "마비"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Taunt": {
+      "ko": "도발",
+      "en": "Taunt",
+      "type": "악",
+      "category": "support",
+      "desc": "상대의 변화 기술을 3턴 동안 제한합니다.",
+      "effects": [
+        {
+          "kind": "taunt"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Destiny Bond": {
+      "ko": "길동무",
+      "en": "Destiny Bond",
+      "type": "고스트",
+      "category": "support",
+      "desc": "다음 행동까지 직접 공격으로 쓰러지면 공격한 상대도 쓰러집니다.",
+      "effects": [
+        {
+          "kind": "destinyBond"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Revival Blessing": {
+      "ko": "회생의기도",
+      "en": "Revival Blessing",
+      "type": "노말",
+      "category": "support",
+      "desc": "기절한 아군 한 마리를 최대 HP의 절반으로 되살립니다.",
+      "effects": [
+        {
+          "kind": "revival"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 1
+    },
+    "Double Shock": {
+      "ko": "전광쌍격",
+      "en": "Double Shock",
+      "type": "전기",
+      "category": "attack",
+      "desc": "공격 후 교체할 때까지 전기 타입을 잃습니다.",
+      "effects": [
+        {
+          "kind": "loseElectric"
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 8,
+      "power": 120
+    },
+    "Ice Punch": {
+      "ko": "냉동펀치",
+      "en": "Ice Punch",
+      "type": "얼음",
+      "category": "attack",
+      "desc": "10% 확률로 상대를 얼립니다.",
+      "effects": [
+        {
+          "kind": "status",
+          "status": "얼음",
+          "chance": 10
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16,
+      "power": 75
+    },
+    "Fire Blast": {
+      "ko": "불대문자",
+      "en": "Fire Blast",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "10% 확률로 상대에게 화상을 입힙니다.",
+      "effects": [
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 10
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 85,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8,
+      "power": 110
+    },
+    "Moonlight": {
+      "ko": "달의빛",
+      "en": "Moonlight",
+      "type": "페어리",
+      "category": "support",
+      "desc": "날씨에 따라 자신의 HP를 회복합니다.",
+      "effects": [
+        {
+          "kind": "weatherHeal"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
     }
   },
   "items": {
@@ -2347,6 +2720,26 @@
     "White Herb": {
       "ko": "하양허브",
       "desc": "능력 랭크가 내려갔을 때 한 번 원래대로 되돌린다(1회용)."
+    },
+    "Terrain Extender": {
+      "ko": "그라운드코트",
+      "desc": "자신이 펼친 필드를 8턴 동안 유지합니다."
+    },
+    "Blastoisinite": {
+      "ko": "거북왕나이트",
+      "desc": "거북왕을 메가진화시킵니다."
+    },
+    "Banettite": {
+      "ko": "다크펫나이트",
+      "desc": "다크펫을 메가진화시킵니다."
+    },
+    "Clefablite": {
+      "ko": "픽시나이트",
+      "desc": "픽시를 메가진화시킵니다."
+    },
+    "Air Balloon": {
+      "ko": "풍선",
+      "desc": "공격에 맞기 전까지 땅 기술을 피합니다."
     }
   },
   "abilities": {
@@ -2354,7 +2747,8 @@
       "ko": "배틀스위치"
     },
     "Flower Veil": {
-      "ko": "플라워베일"
+      "ko": "플라워베일",
+      "desc": "자신과 아군 풀 타입 포켓몬의 상태이상과 상대에 의한 능력 저하를 막습니다."
     },
     "Intimidate": {
       "ko": "위협"
@@ -2366,7 +2760,8 @@
       "ko": "까칠한피부"
     },
     "Hospitality": {
-      "ko": "대접"
+      "ko": "대접",
+      "desc": "등장하면 동시에 출전한 아군의 HP를 회복합니다. 싱글에서는 발동하지 않습니다."
     },
     "Toxic Debris": {
       "ko": "독치장"
@@ -2384,7 +2779,8 @@
       "ko": "인분"
     },
     "Friend Guard": {
-      "ko": "프렌드가드"
+      "ko": "프렌드가드",
+      "desc": "동시에 출전한 아군이 받는 피해를 줄입니다. 싱글에서는 발동하지 않습니다."
     },
     "Levitate": {
       "ko": "부유"
@@ -2436,6 +2832,146 @@
     },
     "Grassy Surge": {
       "ko": "그래스메이커"
+    },
+    "Mega Launcher": {
+      "ko": "메가런처",
+      "desc": "파동 계열 공격의 위력이 1.5배가 됩니다."
+    },
+    "Iron Fist": {
+      "ko": "철주먹",
+      "desc": "펀치 기술의 위력이 1.2배가 됩니다."
+    },
+    "Disguise": {
+      "ko": "탈",
+      "desc": "한 번 공격을 막고 최대 HP의 1/8을 잃습니다."
+    },
+    "Flame Body": {
+      "ko": "불꽃몸",
+      "desc": "접촉 공격을 한 상대가 화상을 입을 수 있습니다."
+    },
+    "Unaware": {
+      "ko": "천진",
+      "desc": "피해를 계산할 때 상대의 능력치 랭크 변화를 무시합니다."
+    },
+    "Magic Bounce": {
+      "ko": "매직미러",
+      "desc": "일부 변화 기술을 되돌립니다."
+    },
+    "Armor Tail": {
+      "ko": "테일아머",
+      "desc": "상대의 선공 기술을 막습니다."
+    },
+    "Compound Eyes": {
+      "ko": "복안",
+      "desc": "기술의 명중률이 1.3배가 됩니다."
+    },
+    "Cursed Body": {
+      "ko": "저주받은바디",
+      "desc": "공격에 맞으면 30% 확률로 상대가 사용한 기술을 4턴 동안 봉쇄합니다."
+    },
+    "Lightning Rod": {
+      "ko": "피뢰침",
+      "desc": "전기 기술을 무효로 하고 특수공격이 1랭크 오릅니다."
+    },
+    "Piercing Drill": {
+      "ko": "관통드릴",
+      "desc": "접촉 기술이 방어를 뚫고 원래 피해의 ¼을 줍니다."
+    },
+    "Poison Touch": {
+      "ko": "독수",
+      "desc": "접촉 기술로 공격하면 30% 확률로 상대를 독에 걸리게 합니다."
+    },
+    "Rock Head": {
+      "ko": "돌머리",
+      "desc": "공격 기술의 반동 피해를 받지 않습니다."
+    },
+    "Sand Force": {
+      "ko": "모래의힘",
+      "desc": "모래바람에서 땅·바위·강철 기술이 강해지고 모래바람 피해를 받지 않습니다."
+    },
+    "Soundproof": {
+      "ko": "방음",
+      "desc": "소리 기술을 무효화합니다."
+    },
+    "Speed Boost": {
+      "ko": "가속",
+      "desc": "턴이 끝날 때 스피드가 1랭크 오릅니다."
+    },
+    "Thermal Exchange": {
+      "ko": "열교환",
+      "desc": "불꽃 기술에 맞으면 공격이 1랭크 오릅니다. 화상에 걸리지 않습니다."
+    },
+    "Thick Fat": {
+      "ko": "두꺼운지방",
+      "desc": "불꽃·얼음 기술로 받는 피해가 줄어듭니다."
+    },
+    "Good as Gold": {
+      "ko": "황금몸",
+      "desc": "상대의 변화 기술을 막습니다."
+    },
+    "Supreme Overlord": {
+      "ko": "총대장",
+      "desc": "쓰러진 아군 수에 따라 기술의 위력이 증가합니다."
+    },
+    "Contrary": {
+      "ko": "심술꾸러기",
+      "desc": "능력치 랭크가 오르거나 내려가는 방향이 반대로 적용됩니다."
+    },
+    "Competitive": {
+      "ko": "승기",
+      "desc": "상대 때문에 능력이 내려가면 특수공격이 2랭크 오릅니다."
+    },
+    "Psychic Surge": {
+      "ko": "사이코메이커",
+      "desc": "등장하면 사이코필드를 펼칩니다."
+    },
+    "Torrent": {
+      "ko": "급류",
+      "desc": "HP가 최대치의 ⅓ 이하일 때 물 타입 기술의 위력이 증가합니다."
+    },
+    "Insomnia": {
+      "ko": "불면",
+      "desc": "잠듦 상태에 걸리지 않습니다."
+    },
+    "Regenerator": {
+      "ko": "재생력",
+      "desc": "교체로 물러나면 최대 HP의 ⅓을 회복합니다."
+    },
+    "Inner Focus": {
+      "ko": "정신력",
+      "desc": "풀죽지 않고 위협의 공격 하락을 막습니다."
+    },
+    "Chlorophyll": {
+      "ko": "엽록소",
+      "desc": "쾌청일 때 스피드가 두 배가 됩니다."
+    },
+    "Fairy Aura": {
+      "ko": "페어리오라",
+      "desc": "필드의 페어리 타입 공격 위력을 높입니다."
+    },
+    "Spicy Spray": {
+      "ko": "하바네로분출",
+      "desc": "접촉 기술로 공격한 상대를 화상에 걸리게 합니다."
+    },
+    "Tough Claws": {
+      "ko": "단단한발톱",
+      "desc": "접촉 기술의 위력이 증가합니다."
+    },
+    "Aerilate": {
+      "ko": "스카이스킨",
+      "desc": "노말 공격을 비행 타입으로 바꾸고 위력을 높입니다."
+    },
+    "No Guard": {
+      "ko": "노가드",
+      "desc": "자신이 쓰거나 자신을 대상으로 하는 기술이 빗나가지 않습니다."
+    },
+    "Shadow Tag": {
+      "ko": "그림자밟기",
+      "desc": "상대의 교체를 막습니다. 고스트 타입과 그림자밟기 특성을 가진 상대는 교체할 수 있습니다."
+    },
+    "Multiscale": {
+      "ko": "멀티스케일",
+      "desc": "HP가 최대일 때 받는 공격 피해가 절반으로 줄어듭니다."
     }
   },
   "practiceSets": {

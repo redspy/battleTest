@@ -144,6 +144,55 @@
       ]
     },
     {
+      "id": "blastoise",
+      "no": 9,
+      "en": "Blastoise",
+      "ko": "거북왕",
+      "types": [
+        "물"
+      ],
+      "role": "껍질깨기 특수 에이스",
+      "roleText": "껍질깨기 특수 에이스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0009_blastoise_base",
+          "baseStats": {
+            "hp": 79,
+            "atk": 83,
+            "def": 100,
+            "spa": 85,
+            "spd": 105,
+            "spe": 78
+          },
+          "battleAbility": "Torrent",
+          "weightKg": 85.5,
+          "assetSource": "https://namu.wiki/w/%EA%B1%B0%EB%B6%81%EC%99%95"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0009_blastoise_mega",
+          "baseStats": {
+            "hp": 79,
+            "atk": 103,
+            "def": 120,
+            "spa": 135,
+            "spd": 115,
+            "spe": 78
+          },
+          "battleAbility": "Mega Launcher",
+          "weightKg": 101.1,
+          "types": [
+            "물"
+          ],
+          "requiresItem": "Blastoisinite",
+          "assetSource": "https://namu.wiki/w/%EA%B1%B0%EB%B6%81%EC%99%95"
+        }
+      ]
+    },
+    {
       "id": "raichu",
       "no": 26,
       "en": "Raichu",
@@ -219,6 +268,56 @@
           "battleAbility": "No Guard",
           "weightKg": 26.0,
           "requiresItem": "Raichunite Y"
+        }
+      ]
+    },
+    {
+      "id": "clefable",
+      "no": 36,
+      "en": "Clefable",
+      "ko": "픽시",
+      "types": [
+        "페어리"
+      ],
+      "role": "설치 기술 견제",
+      "roleText": "설치 기술 견제",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0036_clefable_base",
+          "baseStats": {
+            "hp": 95,
+            "atk": 70,
+            "def": 73,
+            "spa": 95,
+            "spd": 90,
+            "spe": 60
+          },
+          "battleAbility": "Cute Charm",
+          "weightKg": 40.0,
+          "assetSource": "https://namu.wiki/w/%ED%94%BD%EC%8B%9C%28%ED%8F%AC%EC%BC%93%EB%AA%AC%EC%8A%A4%ED%84%B0%29"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0036_clefable_mega",
+          "baseStats": {
+            "hp": 95,
+            "atk": 80,
+            "def": 93,
+            "spa": 135,
+            "spd": 110,
+            "spe": 70
+          },
+          "battleAbility": "Magic Bounce",
+          "weightKg": 42.3,
+          "types": [
+            "페어리",
+            "비행"
+          ],
+          "requiresItem": "Clefablite",
+          "assetSource": "https://namu.wiki/w/%ED%94%BD%EC%8B%9C%28%ED%8F%AC%EC%BC%93%EB%AA%AC%EC%8A%A4%ED%84%B0%29"
         }
       ]
     },
@@ -588,6 +687,55 @@
           },
           "battleAbility": "Marvel Scale",
           "weightKg": 162.0
+        }
+      ]
+    },
+    {
+      "id": "banette",
+      "no": 354,
+      "en": "Banette",
+      "ko": "다크펫",
+      "types": [
+        "고스트"
+      ],
+      "role": "길동무 선봉",
+      "roleText": "길동무 선봉",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0354_banette_base",
+          "baseStats": {
+            "hp": 64,
+            "atk": 115,
+            "def": 65,
+            "spa": 83,
+            "spd": 63,
+            "spe": 65
+          },
+          "battleAbility": "Insomnia",
+          "weightKg": 12.5,
+          "assetSource": "https://namu.wiki/w/%EB%8B%A4%ED%81%AC%ED%8E%AB"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0354_banette_mega",
+          "baseStats": {
+            "hp": 64,
+            "atk": 165,
+            "def": 75,
+            "spa": 93,
+            "spd": 83,
+            "spe": 75
+          },
+          "battleAbility": "Prankster",
+          "weightKg": 13.0,
+          "types": [
+            "고스트"
+          ],
+          "requiresItem": "Banettite",
+          "assetSource": "https://namu.wiki/w/%EB%8B%A4%ED%81%AC%ED%8E%AB"
         }
       ]
     },
@@ -962,6 +1110,36 @@
           },
           "battleAbility": "Prankster",
           "weightKg": 6.6
+        }
+      ]
+    },
+    {
+      "id": "volcarona",
+      "no": 637,
+      "en": "Volcarona",
+      "ko": "불카모스",
+      "types": [
+        "벌레",
+        "불꽃"
+      ],
+      "role": "나비춤 에이스",
+      "roleText": "나비춤 에이스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0637_volcarona_base",
+          "baseStats": {
+            "hp": 85,
+            "atk": 60,
+            "def": 65,
+            "spa": 135,
+            "spd": 105,
+            "spe": 100
+          },
+          "battleAbility": "Flame Body",
+          "weightKg": 46.0,
+          "assetSource": "https://namu.wiki/w/%EB%B6%88%EC%B9%B4%EB%AA%A8%EC%8A%A4"
         }
       ]
     },
@@ -1341,6 +1519,36 @@
       ]
     },
     {
+      "id": "mimikyu",
+      "no": 778,
+      "en": "Mimikyu",
+      "ko": "따라큐",
+      "types": [
+        "고스트",
+        "페어리"
+      ],
+      "role": "탈을 활용한 마무리",
+      "roleText": "탈을 활용한 마무리",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0778_mimikyu_base",
+          "baseStats": {
+            "hp": 55,
+            "atk": 90,
+            "def": 80,
+            "spa": 50,
+            "spd": 105,
+            "spe": 96
+          },
+          "battleAbility": "Disguise",
+          "weightKg": 0.7,
+          "assetSource": "https://namu.wiki/w/%EB%94%B0%EB%9D%BC%ED%81%90"
+        }
+      ]
+    },
+    {
       "id": "kommoo",
       "no": 784,
       "en": "Kommo-o",
@@ -1560,6 +1768,36 @@
           },
           "battleAbility": "Pressure",
           "weightKg": 43.0
+        }
+      ]
+    },
+    {
+      "id": "pawmot",
+      "no": 923,
+      "en": "Pawmot",
+      "ko": "빠르모트",
+      "types": [
+        "전기",
+        "격투"
+      ],
+      "role": "회생의기도 지원",
+      "roleText": "회생의기도 지원",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0923_pawmot_base",
+          "baseStats": {
+            "hp": 70,
+            "atk": 115,
+            "def": 70,
+            "spa": 70,
+            "spd": 60,
+            "spe": 105
+          },
+          "battleAbility": "Volt Absorb",
+          "weightKg": 41.0,
+          "assetSource": "https://namu.wiki/w/%EB%B9%A0%EB%A5%B4%EB%AA%A8%ED%8A%B8"
         }
       ]
     },

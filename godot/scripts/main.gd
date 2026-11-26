@@ -94,7 +94,7 @@ func _specialtest() -> bool:
 		BEngine._end_turn(gmax, 0, [])
 	if giant["form"] != "base" or giant["max"] != normal_hp:
 		return false
-	if Data.sets[Net.SET_ID]["info"]["events"][0]["id"] != "PTC26":
+	if Data.sets[Net.SET_ID]["info"]["events"].slice(0, 2).map(func(event): return event["id"]) != ["SINGLES", "PTC26"]:
 		return false
 	var members := 0
 	for t in Data.sets[Net.SET_ID]["teams"]:
@@ -142,8 +142,87 @@ func _pp_test() -> bool:
 	BEngine._swap(state, 0, 0, events)
 	return int(actor["pp"]["Protect"]) == 0
 
+func _singles_test() -> bool:
+	var terrain_team: Dictionary = Data.team(Net.SET_ID, "singles-1")
+	var revival_team: Dictionary = Data.team(Net.SET_ID, "singles-2")
+	var attacker := { "species": "garchomp", "moves": ["Earthquake", "Protect"] }
+	var events := []
+	var terrain := BEngine.create(terrain_team["members"].slice(0, 3), [attacker], 7)
+	if terrain["terrain"] != "사이코필드" or terrain["terrainTurns"] != 8:
+		return false
+	var field_view := BEngine.view(terrain, 0)
+	if not str(field_view["effectSources"]["terrain"]).contains("사이코메이커") or not str(field_view["effectSources"]["terrain"]).contains("그라운드코트"):
+		return false
+	BEngine._swap(terrain, 0, 1, events)
+	BEngine._transform(terrain, 0, "mega", events)
+	var blastoise := BEngine.active(terrain, 0)
+	BEngine._use(terrain, 0, "Shell Smash", events)
+	var pulse := BEngine.preview_move(terrain, blastoise, "Terrain Pulse", "")
+	if blastoise["form"] != "mega" or blastoise["spa"] != 2 or blastoise["def"] != -1 or pulse["type"] != "에스퍼" or pulse["power"] != 100:
+		return false
+	var staged: Array = BEngine.view(terrain, 0)["sides"][0]["mons"][1]["stageHistory"]
+	if staged.size() != 5 or not staged.all(func(event): return str(event["source"]).contains("껍질깨기")):
+		return false
+	BEngine._swap(terrain, 0, 0, events)
+	if not blastoise["stageHistory"].is_empty() or staged.size() != 5:
+		return false
+	var revival := BEngine.create(revival_team["members"].slice(0, 3), [attacker, attacker], 7)
+	var banette := BEngine.active(revival, 0)
+	banette["hp"] = 1
+	BEngine.submit(revival, 0, { "k": "move", "id": "Destiny Bond", "gimmick": "mega" })
+	BEngine.submit(revival, 1, { "k": "move", "id": "Earthquake" })
+	if not revival["sides"][0]["need"] or not revival["sides"][1]["need"]:
+		return false
+	BEngine.submit(revival, 0, { "k": "swap", "to": 1 })
+	BEngine.submit(revival, 1, { "k": "swap", "to": 1 })
+	var revive := { "k": "move", "id": "Revival Blessing", "target": 0 }
+	BEngine.submit(revival, 0, revive)
+	BEngine.submit(revival, 1, { "k": "move", "id": "Protect" })
+	if banette["hp"] != floori(float(banette["max"]) / 2.0) or banette["form"] != "mega" or banette.get("down", false):
+		return false
+	if BEngine.active(revival, 0)["pp"]["Revival Blessing"] != 0:
+		return false
+	BEngine._swap(revival, 0, 0, events)
+	banette["hp"] = 0
+	BEngine._faints(revival, events)
+	BEngine._swap(revival, 0, 2, events)
+	return BEngine.preview_move(revival, BEngine.active(revival, 0), "Last Respects", "")["power"] == 150
+
+func _team_profile_test() -> bool:
+	for team in Data.sets[Net.SET_ID]["teams"]:
+		for member in team["members"]:
+			if str(member.get("ability", "")).is_empty() or str(member.get("abilitySource", "")).is_empty():
+				return false
+			var training: Dictionary = member.get("training", {})
+			if str(training.get("nature", "")).is_empty() or str(training.get("natureSource", "")).is_empty():
+				return false
+	var raichu := { "species": "raichu", "ability": "Lightning Rod", "moves": ["Thunderbolt", "Protect"] }
+	var farigiraf := { "species": "farigiraf", "ability": "Armor Tail", "moves": ["Protect"] }
+	var scizor := { "species": "scizor", "ability": "Technician", "moves": ["Bullet Punch"] }
+	var events := []
+	var lightning := BEngine.create([raichu], [raichu], 7)
+	var rod := BEngine.active(lightning, 1)
+	BEngine._use(lightning, 0, "Thunderbolt", events)
+	if rod["spa"] != 1 or rod["hp"] != rod["max"]:
+		return false
+	var priority := BEngine.create([scizor], [farigiraf], 7)
+	BEngine._use(priority, 0, "Bullet Punch", events)
+	var armor := BEngine.active(priority, 1)
+	if armor["hp"] != armor["max"]:
+		return false
+	var espathra := { "species": "espathra", "ability": "Speed Boost", "moves": ["Protect"] }
+	var speed := BEngine.create([espathra], [farigiraf], 7)
+	BEngine._end_turn(speed, 0, events)
+	return BEngine.active(speed, 0)["spe"] == 1
+
 func _selftest() -> void:
 	var fails := 0
+	if not _team_profile_test():
+		print("[selftest] 대회 팀 특성·성격 자료 오류")
+		fails += 1
+	if not _singles_test():
+		print("[selftest] 싱글 추천 덱 전투 규칙 오류")
+		fails += 1
 	if not _pp_test():
 		print("[selftest] 기술 PP 규칙 오류")
 		fails += 1
@@ -297,6 +376,11 @@ func _shots() -> void:
 	await _shot("home")
 	Nav.push(TeamSelectScreen.new(set_id), false)
 	await _shot("teams")
+	for id in ["singles-1", "singles-2"]:
+		Nav.push(TeamDetailScreen.new(set_id, Data.team(set_id, id)), false)
+		await _shot(id)
+		Nav.pop()
+		await _wait(Nav.DURATION + 0.16)
 	var team := Data.team(set_id, "ptc26-1")
 	Nav.push(TeamDetailScreen.new(set_id, team), false)
 	await _shot("detail")
@@ -341,6 +425,17 @@ func _shots() -> void:
 	screen._show_status()
 	await _shot("battle_status")
 	screen.on_back()
+	var battle_view := screen._b
+	var singles: Dictionary = Data.team(set_id, "singles-1")
+	var status_demo := BEngine.create(singles["members"].slice(0, 3), [team["members"][3]], 13)
+	BEngine._swap(status_demo, 0, 1, [])
+	BEngine._transform(status_demo, 0, "mega", [])
+	BEngine._use(status_demo, 0, "Shell Smash", [])
+	screen._b = BEngine.view(status_demo, 0)
+	screen._show_status()
+	await _shot("battle_status_causes")
+	screen.on_back()
+	screen._b = battle_view
 	screen._gimmick = "mega"
 	screen._draw_actions()
 	await _shot("mega_preview")

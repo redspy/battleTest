@@ -6,6 +6,11 @@
   "pick": 4,
   "events": [
     {
+      "id": "SINGLES",
+      "name": "싱글배틀 추천 덱",
+      "note": "포켓몬 챔피언스 · 6마리 중 3마리 선출"
+    },
+    {
       "id": "PTC26",
       "name": "포켓몬 트레이너스 컵 2026 · 마스터 TOP 8",
       "date": "2026-05-25",
@@ -25,6 +30,372 @@
     }
   ],
   "teams": [
+    {
+      "id": "singles-1",
+      "event": "SINGLES",
+      "rank": 1,
+      "name": "에써르·메가거북왕",
+      "tags": [
+        "싱글",
+        "M-C"
+      ],
+      "summary": "에써르의 사이코필드에서 거북왕이 껍질깨기를 쓰고 대지의파동으로 공격합니다.",
+      "sourceUrl": "https://game8.jp/pokemon-champions/779319",
+      "members": [
+        {
+          "species": "indeedee",
+          "form": "base",
+          "ability": "Psychic Surge",
+          "item": "Terrain Extender",
+          "moves": [
+            "Encore",
+            "Dazzling Gleam",
+            "Mystical Fire",
+            "Expanding Force"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 22,
+              "atk": 0,
+              "def": 6,
+              "spa": 12,
+              "spd": 0,
+              "spe": 26
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "blastoise",
+          "form": "mega",
+          "ability": "Torrent",
+          "item": "Blastoisinite",
+          "moves": [
+            "Dark Pulse",
+            "Shell Smash",
+            "Terrain Pulse",
+            "Aura Sphere"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 1,
+              "atk": 0,
+              "def": 1,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "ability": "Unburden",
+          "item": "Psychic Seed",
+          "moves": [
+            "Close Combat",
+            "Throat Chop",
+            "Swords Dance",
+            "Dire Claw"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 30,
+              "atk": 31,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 5
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "mimikyu",
+          "form": "base",
+          "ability": "Disguise",
+          "item": "Life Orb",
+          "moves": [
+            "Shadow Sneak",
+            "Shadow Claw",
+            "Play Rough",
+            "Swords Dance"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 1,
+              "atk": 32,
+              "def": 1,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "volcarona",
+          "form": "base",
+          "ability": "Flame Body",
+          "item": "Sitrus Berry",
+          "moves": [
+            "Morning Sun",
+            "Giga Drain",
+            "Quiver Dance",
+            "Fiery Dance"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 22,
+              "spa": 0,
+              "spd": 0,
+              "spe": 12
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "clefable",
+          "form": "mega",
+          "ability": "Unaware",
+          "item": "Clefablite",
+          "moves": [
+            "Encore",
+            "Stealth Rock",
+            "Thunder Wave",
+            "Moonblast"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 31,
+              "atk": 0,
+              "def": 13,
+              "spa": 0,
+              "spd": 10,
+              "spe": 12
+            },
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        }
+      ],
+      "placement": "추천"
+    },
+    {
+      "id": "singles-2",
+      "event": "SINGLES",
+      "rank": 2,
+      "name": "메가다크펫 부활 덱",
+      "tags": [
+        "싱글",
+        "M-C"
+      ],
+      "summary": "메가다크펫의 길동무로 맞교환하고 빠르모트의 회생의기도로 되살립니다. 대쓰여너가 성묘로 마무리합니다.",
+      "sourceUrl": "https://game8.jp/pokemon-champions/779319",
+      "members": [
+        {
+          "species": "banette",
+          "form": "mega",
+          "ability": "Insomnia",
+          "item": "Banettite",
+          "moves": [
+            "Shadow Sneak",
+            "Taunt",
+            "Poltergeist",
+            "Destiny Bond"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 1,
+              "spa": 0,
+              "spd": 1,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spe",
+            "nature": "brave",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "pawmot",
+          "form": "base",
+          "ability": "Iron Fist",
+          "item": "Focus Sash",
+          "moves": [
+            "Close Combat",
+            "Revival Blessing",
+            "Double Shock",
+            "Ice Punch"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "ability": "Adaptability",
+          "item": "Choice Scarf",
+          "moves": [
+            "Aqua Jet",
+            "Wave Crash",
+            "Last Respects",
+            "Flip Turn"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "ability": "Good as Gold",
+          "item": "Air Balloon",
+          "moves": [
+            "Make It Rain",
+            "Recover",
+            "Shadow Ball",
+            "Nasty Plot"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 31,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 3,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "clefable",
+          "form": "mega",
+          "ability": "Unaware",
+          "item": "Clefablite",
+          "moves": [
+            "Fire Blast",
+            "Moonlight",
+            "Moonblast",
+            "Calm Mind"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 1,
+              "spa": 32,
+              "spd": 1,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "ability": "Supreme Overlord",
+          "item": "Black Glasses",
+          "moves": [
+            "Iron Head",
+            "Swords Dance",
+            "Kowtow Cleave",
+            "Sucker Punch"
+          ],
+          "training": {
+            "source": "https://game8.jp/pokemon-champions/779319",
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://game8.jp/pokemon-champions/779319"
+          },
+          "abilitySource": "https://game8.jp/pokemon-champions/779319"
+        }
+      ],
+      "placement": "추천"
+    },
     {
       "id": "ptc26-1",
       "event": "PTC26",
@@ -60,9 +431,12 @@
               "spe": 32
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         },
         {
           "species": "aegislash",
@@ -85,9 +459,12 @@
               "spe": 32
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         },
         {
           "species": "incineroar",
@@ -110,9 +487,12 @@
               "spe": 1
             },
             "boost": "spd",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Sitrus Berry"
+          "item": "Sitrus Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         },
         {
           "species": "charizard",
@@ -135,9 +515,12 @@
               "spe": 32
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Charizardite Y"
+          "item": "Charizardite Y",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         },
         {
           "species": "garchomp",
@@ -160,9 +543,12 @@
               "spe": 32
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         },
         {
           "species": "sinistcha",
@@ -185,9 +571,12 @@
               "spe": 0
             },
             "boost": "def",
-            "reduce": "spe"
+            "reduce": "spe",
+            "nature": "relaxed",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
           },
-          "item": "Kasib Berry"
+          "item": "Kasib Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e"
         }
       ],
       "replicaCode": "CEM5K27S1W"
@@ -227,9 +616,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         },
         {
           "species": "talonflame",
@@ -252,9 +644,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spd"
+            "reduce": "spd",
+            "nature": "naive",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Charcoal"
+          "item": "Charcoal",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         },
         {
           "species": "floette",
@@ -277,9 +672,12 @@
               "spe": 32
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         },
         {
           "species": "garchomp",
@@ -302,9 +700,12 @@
               "spe": 31
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Sitrus Berry"
+          "item": "Sitrus Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         },
         {
           "species": "scizor",
@@ -327,9 +728,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Scizorite"
+          "item": "Scizorite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         },
         {
           "species": "kingambit",
@@ -352,9 +756,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
           },
-          "item": "Chople Berry"
+          "item": "Chople Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c"
         }
       ]
     },
@@ -393,9 +800,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         },
         {
           "species": "sinistcha",
@@ -418,9 +828,12 @@
               "spe": 0
             },
             "boost": "def",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Kasib Berry"
+          "item": "Kasib Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         },
         {
           "species": "maushold",
@@ -443,9 +856,12 @@
               "spe": 0
             },
             "boost": "def",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "impish",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Chople Berry"
+          "item": "Chople Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         },
         {
           "species": "delphox",
@@ -468,9 +884,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Delphoxite"
+          "item": "Delphoxite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         },
         {
           "species": "floette",
@@ -492,9 +911,12 @@
               "spe": 32
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         },
         {
           "species": "incineroar",
@@ -517,9 +939,12 @@
               "spe": 1
             },
             "boost": "spd",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
           },
-          "item": "Passho Berry"
+          "item": "Passho Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4"
         }
       ],
       "replicaCode": "T7157CHUVJ"
@@ -558,8 +983,11 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
+          },
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         },
         {
           "species": "floette",
@@ -581,9 +1009,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         },
         {
           "species": "excadrill",
@@ -605,9 +1036,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         },
         {
           "species": "pelipper",
@@ -629,9 +1063,12 @@
               "spe": 2
             },
             "boost": "spd",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "calm",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
           },
-          "item": "Sharp Beak"
+          "item": "Sharp Beak",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         },
         {
           "species": "archaludon",
@@ -653,9 +1090,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
           },
-          "item": "Leftovers"
+          "item": "Leftovers",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         },
         {
           "species": "basculegion",
@@ -677,9 +1117,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e"
         }
       ]
     },
@@ -717,9 +1160,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         },
         {
           "species": "incineroar",
@@ -741,9 +1187,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "impish",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Sitrus Berry"
+          "item": "Sitrus Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         },
         {
           "species": "scizor",
@@ -765,9 +1214,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Scizorite"
+          "item": "Scizorite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         },
         {
           "species": "rotom",
@@ -789,9 +1241,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         },
         {
           "species": "sinistcha",
@@ -813,9 +1268,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "spe"
+            "reduce": "spe",
+            "nature": "relaxed",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Occa Berry"
+          "item": "Occa Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         },
         {
           "species": "garchomp",
@@ -837,9 +1295,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
           },
-          "item": "Haban Berry"
+          "item": "Haban Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac"
         }
       ]
     },
@@ -877,9 +1338,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Tyranitarite"
+          "item": "Tyranitarite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         },
         {
           "species": "incineroar",
@@ -901,9 +1365,12 @@
               "spe": 2
             },
             "boost": "spd",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Chople Berry"
+          "item": "Chople Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         },
         {
           "species": "excadrill",
@@ -925,9 +1392,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         },
         {
           "species": "sinistcha",
@@ -949,9 +1419,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Sitrus Berry"
+          "item": "Sitrus Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         },
         {
           "species": "rotom",
@@ -973,9 +1446,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Magnet"
+          "item": "Magnet",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         },
         {
           "species": "floette",
@@ -997,9 +1473,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
           },
-          "item": "Floettite"
+          "item": "Floettite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb"
         }
       ]
     },
@@ -1037,9 +1516,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Tyranitarite"
+          "item": "Tyranitarite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         },
         {
           "species": "scovillain",
@@ -1061,9 +1543,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Scovillainite"
+          "item": "Scovillainite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         },
         {
           "species": "excadrill",
@@ -1085,9 +1570,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         },
         {
           "species": "corviknight",
@@ -1109,9 +1597,12 @@
               "spe": 2
             },
             "boost": "def",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "impish",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Leftovers"
+          "item": "Leftovers",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         },
         {
           "species": "sylveon",
@@ -1133,9 +1624,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Fairy Feather"
+          "item": "Fairy Feather",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         },
         {
           "species": "basculegion",
@@ -1157,9 +1651,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a"
         }
       ]
     },
@@ -1197,9 +1694,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Fairy Feather"
+          "item": "Fairy Feather",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         },
         {
           "species": "charizard",
@@ -1221,9 +1721,12 @@
               "spe": 2
             },
             "boost": "spa",
-            "reduce": "atk"
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Charizardite Y"
+          "item": "Charizardite Y",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         },
         {
           "species": "garchomp",
@@ -1245,9 +1748,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Choice Scarf"
+          "item": "Choice Scarf",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         },
         {
           "species": "aerodactyl",
@@ -1269,9 +1775,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Aerodactylite"
+          "item": "Aerodactylite",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         },
         {
           "species": "kingambit",
@@ -1293,9 +1802,12 @@
               "spe": 2
             },
             "boost": "atk",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Chople Berry"
+          "item": "Chople Berry",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         },
         {
           "species": "basculegion",
@@ -1317,9 +1829,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
           },
-          "item": "Focus Sash"
+          "item": "Focus Sash",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99"
         }
       ]
     },
@@ -1349,9 +1864,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Blaze",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         },
         {
           "species": "salamence",
@@ -1366,9 +1885,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         },
         {
           "species": "basculegion",
@@ -1383,9 +1906,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         },
         {
           "species": "kingambit",
@@ -1401,8 +1928,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         },
         {
           "species": "sneasler",
@@ -1417,9 +1948,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         },
         {
           "species": "whimsicott",
@@ -1435,11 +1970,15 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokepast.es/3f1a5003b936e8a9"
+          },
+          "ability": "Prankster",
+          "abilitySource": "https://pokepast.es/3f1a5003b936e8a9"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/IlBcWMyr"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd4ed"
     },
     {
       "id": "vrnc2-2",
@@ -1467,8 +2006,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Cursed Body",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         },
         {
           "species": "kingambit",
@@ -1484,8 +2027,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         },
         {
           "species": "incineroar",
@@ -1500,9 +2047,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         },
         {
           "species": "sneasler",
@@ -1517,9 +2068,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         },
         {
           "species": "toxapex",
@@ -1534,9 +2089,13 @@
               "spd": 32,
               "spe": 0
             },
-            "boost": "spd",
-            "reduce": "spa"
-          }
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Regenerator",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         },
         {
           "species": "garchomp",
@@ -1551,12 +2110,16 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
+          },
+          "ability": "Rough Skin",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/rrWIhPgV"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd400"
     },
     {
       "id": "vrnc2-3",
@@ -1584,9 +2147,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         },
         {
           "species": "salamence",
@@ -1601,9 +2168,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         },
         {
           "species": "basculegion",
@@ -1618,9 +2189,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         },
         {
           "species": "incineroar",
@@ -1635,9 +2210,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         },
         {
           "species": "sneasler",
@@ -1652,9 +2231,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         },
         {
           "species": "rillaboom",
@@ -1670,11 +2253,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/VspydWhf"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd2e9"
     },
     {
       "id": "vrnc2-4",
@@ -1702,8 +2289,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Lightning Rod",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         },
         {
           "species": "salamence",
@@ -1719,8 +2310,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         },
         {
           "species": "gholdengo",
@@ -1736,8 +2331,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Good as Gold",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         },
         {
           "species": "arcanine",
@@ -1752,9 +2351,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Rock Head",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         },
         {
           "species": "milotic",
@@ -1769,9 +2372,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "spa",
-            "reduce": "atk"
-          }
+            "boost": "spd",
+            "reduce": "atk",
+            "nature": "calm",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Competitive",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         },
         {
           "species": "rillaboom",
@@ -1787,11 +2394,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/OBHSQsnY"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd321"
     },
     {
       "id": "vrnc2-5",
@@ -1819,9 +2430,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Cursed Body",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         },
         {
           "species": "kingambit",
@@ -1837,8 +2452,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         },
         {
           "species": "incineroar",
@@ -1853,9 +2472,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spe",
+            "nature": "sassy",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         },
         {
           "species": "vivillon",
@@ -1870,9 +2493,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "def",
-            "reduce": "atk"
-          }
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Compound Eyes",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         },
         {
           "species": "kommoo",
@@ -1887,9 +2514,13 @@
               "spd": 2,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Soundproof",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         },
         {
           "species": "rillaboom",
@@ -1905,11 +2536,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/a6te004F"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd572"
     },
     {
       "id": "vrnc2-6",
@@ -1936,9 +2571,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Cursed Body",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         },
         {
           "species": "kingambit",
@@ -1954,8 +2593,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         },
         {
           "species": "incineroar",
@@ -1970,9 +2613,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spe",
+            "nature": "sassy",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         },
         {
           "species": "sneasler",
@@ -1987,9 +2634,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         },
         {
           "species": "hippowdon",
@@ -2004,9 +2655,13 @@
               "spd": 2,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Sand Stream",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         },
         {
           "species": "rillaboom",
@@ -2021,12 +2676,16 @@
               "spd": 2,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spe",
+            "nature": "sassy",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/CAwXXJEc"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd52f"
     },
     {
       "id": "vrnc2-7",
@@ -2054,8 +2713,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Lightning Rod",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         },
         {
           "species": "staraptor",
@@ -2071,8 +2734,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         },
         {
           "species": "primarina",
@@ -2088,8 +2755,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Torrent",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         },
         {
           "species": "gholdengo",
@@ -2105,8 +2776,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Good as Gold",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         },
         {
           "species": "arcanine",
@@ -2121,9 +2796,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Rock Head",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         },
         {
           "species": "rillaboom",
@@ -2139,11 +2818,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/3oxJ6cLr"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd5f0"
     },
     {
       "id": "vrnc2-8",
@@ -2170,9 +2853,13 @@
               "spd": 2,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Sand Stream",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         },
         {
           "species": "staraptor",
@@ -2188,8 +2875,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         },
         {
           "species": "gholdengo",
@@ -2205,8 +2896,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Good as Gold",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         },
         {
           "species": "milotic",
@@ -2221,9 +2916,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "spa",
-            "reduce": "atk"
-          }
+            "boost": "spd",
+            "reduce": "atk",
+            "nature": "calm",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Competitive",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         },
         {
           "species": "sinistcha",
@@ -2238,9 +2937,13 @@
               "spd": 2,
               "spe": 0
             },
-            "boost": "spa",
-            "reduce": "atk"
-          }
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Hospitality",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         },
         {
           "species": "excadrill",
@@ -2256,11 +2959,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
+          },
+          "ability": "Sand Rush",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/wtX1o2nL"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd790"
     },
     {
       "id": "vrnc1-1",
@@ -2290,9 +2997,12 @@
             },
             "boost": "spa",
             "reduce": "atk",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Flower Veil"
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         },
         {
           "species": "salamence",
@@ -2309,9 +3019,12 @@
             },
             "boost": "spa",
             "reduce": "atk",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Intimidate"
+          "ability": "Intimidate",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         },
         {
           "species": "incineroar",
@@ -2328,9 +3041,12 @@
             },
             "boost": "spd",
             "reduce": "spa",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "careful",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Intimidate"
+          "ability": "Intimidate",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         },
         {
           "species": "basculegion",
@@ -2347,9 +3063,12 @@
             },
             "boost": "atk",
             "reduce": "spa",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Adaptability"
+          "ability": "Adaptability",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         },
         {
           "species": "sneasler",
@@ -2366,9 +3085,12 @@
             },
             "boost": "spe",
             "reduce": "spa",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "jolly",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Unburden"
+          "ability": "Unburden",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         },
         {
           "species": "rillaboom",
@@ -2385,12 +3107,15 @@
             },
             "boost": "atk",
             "reduce": "spa",
-            "source": "https://pokepast.es/f4196edc9ac3f376"
+            "source": "https://pokepast.es/f4196edc9ac3f376",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/f4196edc9ac3f376"
           },
-          "ability": "Grassy Surge"
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokepast.es/f4196edc9ac3f376"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/RkLnn8be"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd3e2"
     },
     {
       "id": "vrnc1-2",
@@ -2420,8 +3145,12 @@
             },
             "boost": "spa",
             "reduce": "atk",
-            "source": "https://pokepast.es/30495c7204e09ea2"
-          }
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Toxic Debris",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd301"
         },
         {
           "species": "staraptor",
@@ -2438,8 +3167,12 @@
             },
             "boost": "spe",
             "reduce": "spa",
-            "source": "https://pokepast.es/30495c7204e09ea2"
-          }
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "jolly",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd301"
         },
         {
           "species": "houndstone",
@@ -2456,9 +3189,12 @@
             },
             "boost": "atk",
             "reduce": "spa",
-            "source": "https://pokepast.es/30495c7204e09ea2"
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
           },
-          "ability": "Sand Rush"
+          "ability": "Sand Rush",
+          "abilitySource": "https://pokepast.es/30495c7204e09ea2"
         },
         {
           "species": "kingambit",
@@ -2475,9 +3211,12 @@
             },
             "boost": "atk",
             "reduce": "spa",
-            "source": "https://pokepast.es/30495c7204e09ea2"
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
           },
-          "ability": "Defiant"
+          "ability": "Defiant",
+          "abilitySource": "https://pokepast.es/30495c7204e09ea2"
         },
         {
           "species": "hippowdon",
@@ -2494,9 +3233,12 @@
             },
             "boost": "atk",
             "reduce": "spa",
-            "source": "https://pokepast.es/30495c7204e09ea2"
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "adamant",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
           },
-          "ability": "Sand Stream"
+          "ability": "Sand Stream",
+          "abilitySource": "https://pokepast.es/30495c7204e09ea2"
         },
         {
           "species": "whimsicott",
@@ -2513,12 +3255,15 @@
             },
             "boost": "spa",
             "reduce": "atk",
-            "source": "https://pokepast.es/30495c7204e09ea2"
+            "source": "https://pokepast.es/30495c7204e09ea2",
+            "nature": "modest",
+            "natureSource": "https://pokepast.es/30495c7204e09ea2"
           },
-          "ability": "Prankster"
+          "ability": "Prankster",
+          "abilitySource": "https://pokepast.es/30495c7204e09ea2"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/Cql8Z4sh"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde259a336a32a44fd301"
     },
     {
       "id": "vrnc1-3",
@@ -2546,9 +3291,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Blaze",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         },
         {
           "species": "floette",
@@ -2563,9 +3312,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         },
         {
           "species": "basculegion",
@@ -2581,8 +3334,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         },
         {
           "species": "kingambit",
@@ -2598,8 +3355,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         },
         {
           "species": "whimsicott",
@@ -2615,8 +3376,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Prankster",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         },
         {
           "species": "garchomp",
@@ -2632,11 +3397,15 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
+          },
+          "ability": "Rough Skin",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/0kmpg1ls"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd533"
     },
     {
       "id": "vrnc1-4",
@@ -2664,9 +3433,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         },
         {
           "species": "salamence",
@@ -2681,9 +3454,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         },
         {
           "species": "incineroar",
@@ -2698,9 +3475,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         },
         {
           "species": "basculegion",
@@ -2716,8 +3497,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         },
         {
           "species": "sneasler",
@@ -2732,9 +3517,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         },
         {
           "species": "rillaboom",
@@ -2750,11 +3539,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/Qkyygwyh"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd510"
     },
     {
       "id": "vrnc1-5",
@@ -2781,9 +3574,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         },
         {
           "species": "dragonite",
@@ -2798,9 +3595,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Inner Focus",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         },
         {
           "species": "basculegion",
@@ -2816,8 +3617,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         },
         {
           "species": "kingambit",
@@ -2833,8 +3638,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         },
         {
           "species": "sneasler",
@@ -2850,8 +3659,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Poison Touch",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         },
         {
           "species": "rillaboom",
@@ -2867,11 +3680,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/0LHEgdwS"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde279a336a32a44fd57a"
     },
     {
       "id": "vrnc1-6",
@@ -2898,9 +3715,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Blaze",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         },
         {
           "species": "garchomp",
@@ -2915,9 +3736,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Rough Skin",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         },
         {
           "species": "incineroar",
@@ -2932,9 +3757,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         },
         {
           "species": "farigiraf",
@@ -2949,9 +3778,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "spa",
-            "reduce": "atk"
-          }
+            "boost": "spd",
+            "reduce": "atk",
+            "nature": "calm",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Armor Tail",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         },
         {
           "species": "sylveon",
@@ -2967,8 +3800,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Pixilate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         },
         {
           "species": "venusaur",
@@ -2984,11 +3821,15 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
+          },
+          "ability": "Chlorophyll",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/nK8kvegH"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd703"
     },
     {
       "id": "vrnc1-7",
@@ -3017,8 +3858,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Blaze",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         },
         {
           "species": "staraptor",
@@ -3034,8 +3879,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         },
         {
           "species": "indeedee",
@@ -3051,8 +3900,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "timid",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Psychic Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         },
         {
           "species": "espathra",
@@ -3067,9 +3920,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Speed Boost",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         },
         {
           "species": "sylveon",
@@ -3085,8 +3942,12 @@
               "spe": 0
             },
             "boost": "spa",
-            "reduce": "atk"
-          }
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Pixilate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         },
         {
           "species": "garchomp",
@@ -3101,12 +3962,16 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
+          },
+          "ability": "Rough Skin",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/IEW2u6Bd"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd775"
     },
     {
       "id": "vrnc1-8",
@@ -3134,9 +3999,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Flower Veil",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         },
         {
           "species": "salamence",
@@ -3151,9 +4020,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         },
         {
           "species": "incineroar",
@@ -3168,9 +4041,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "atk",
-            "reduce": "spa"
-          }
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         },
         {
           "species": "basculegion",
@@ -3186,8 +4063,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Adaptability",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         },
         {
           "species": "sneasler",
@@ -3203,8 +4084,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Unburden",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         },
         {
           "species": "rillaboom",
@@ -3220,11 +4105,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
+          },
+          "ability": "Grassy Surge",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/b6UqzpQi"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde289a336a32a44fd7f2"
     },
     {
       "id": "vrnc1-10",
@@ -3248,9 +4137,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "atk"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Blaze",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         },
         {
           "species": "salamence",
@@ -3265,9 +4158,13 @@
               "spd": 0,
               "spe": 32
             },
-            "boost": "spe",
-            "reduce": "spa"
-          }
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Intimidate",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         },
         {
           "species": "kingambit",
@@ -3283,8 +4180,12 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Defiant",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         },
         {
           "species": "sneasler",
@@ -3300,8 +4201,12 @@
               "spe": 32
             },
             "boost": "spe",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "jolly",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Poison Touch",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         },
         {
           "species": "farigiraf",
@@ -3316,9 +4221,13 @@
               "spd": 0,
               "spe": 0
             },
-            "boost": "spa",
-            "reduce": "atk"
-          }
+            "boost": "spd",
+            "reduce": "atk",
+            "nature": "calm",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Armor Tail",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         },
         {
           "species": "mudsdale",
@@ -3334,11 +4243,15 @@
               "spe": 0
             },
             "boost": "atk",
-            "reduce": "spa"
-          }
+            "reduce": "spa",
+            "nature": "adamant",
+            "natureSource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
+          },
+          "ability": "Inner Focus",
+          "abilitySource": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
         }
       ],
-      "sourceUrl": "https://www.vrpastes.com/KlYd9juC"
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6afbde299a336a32a44fd902"
     }
   ]
 }
