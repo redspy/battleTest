@@ -1,0 +1,14 @@
+/node_modules/
+/build/
+/godot/.godot/
+/godot/data/
+/godot/sprites/
+/pokemon_gifs/
+/monster_gifs/
+/_monster_gifs/
+*.apk
+*.apk.idsig
+*.keystore
+*.jks
+.env
+.env.*

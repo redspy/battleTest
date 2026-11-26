@@ -1,0 +1,63 @@
+﻿species_id,form_id,showdown_id,name_ko,species_name_ja,form_ko,form_name_en,dex_types_en,app_types_ko,base_hp,base_atk,base_def,base_spa,base_spd,base_spe,base_total,lv50_neutral_0sp_hp,lv50_neutral_0sp_atk,lv50_neutral_0sp_def,lv50_neutral_0sp_spa,lv50_neutral_0sp_spd,lv50_neutral_0sp_spe,tournament_slots,row_scope,base_stat_source
+venusaur,base,venusaur,이상해꽃,フシギバナ,기본,Venusaur,Grass/Poison,풀/독,80,82,83,100,100,80,525,155,102,103,120,120,100,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+venusaur,mega,venusaurmega,이상해꽃,フシギバナ,메가,Venusaur-Mega,Grass/Poison,풀/독,80,100,123,122,120,80,625,155,120,143,142,140,100,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+venusaur,gmax,venusaurgmax,이상해꽃,フシギバナ,거다이맥스,Venusaur-Gmax,Grass/Poison,풀/독,80,82,83,100,100,80,525,155,102,103,120,120,100,0,reference-only: Gigantamax,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+charizard,base,charizard,리자몽,リザードン,기본,Charizard,Fire/Flying,불꽃/비행,78,84,78,109,85,100,534,153,104,98,129,105,120,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+charizard,megax,charizardmegax,리자몽,リザードン,메가 X,Charizard-Mega-X,Fire/Dragon,불꽃/드래곤,78,130,111,130,85,100,634,153,150,131,150,105,120,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+charizard,megay,charizardmegay,리자몽,リザードン,메가 Y,Charizard-Mega-Y,Fire/Flying,불꽃/비행,78,104,78,159,115,100,634,153,124,98,179,135,120,5,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+charizard,gmax,charizardgmax,리자몽,リザードン,거다이맥스,Charizard-Gmax,Fire/Flying,불꽃/비행,78,84,78,109,85,100,534,153,104,98,129,105,120,0,reference-only: Gigantamax,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+raichu,base,raichu,라이츄,ライチュウ,기본,Raichu,Electric,전기,60,90,55,90,80,110,485,135,110,75,110,100,130,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+raichu,alola,raichualola,라이츄,ライチュウ,알로라,Raichu-Alola,Electric/Psychic,전기/에스퍼,60,85,50,95,85,110,485,135,105,70,115,105,130,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+raichu,megax,raichumegax,라이츄,ライチュウ,메가 X,Raichu-Mega-X,Electric,전기,60,135,95,90,95,110,585,135,155,115,110,115,130,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+raichu,megay,raichumegay,라이츄,ライチュウ,메가 Y,Raichu-Mega-Y,Electric,전기,60,100,55,160,80,130,585,135,120,75,180,100,150,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+arcanine,base,arcanine,윈디,ウインディ,기본,Arcanine,Fire,불꽃,90,110,80,100,80,95,555,165,130,100,120,100,115,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+arcanine,hisui,arcaninehisui,윈디,ウインディ,히스이,Arcanine-Hisui,Fire/Rock,불꽃/바위,95,115,80,95,80,90,555,170,135,100,115,100,110,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+gengar,base,gengar,팬텀,ゲンガー,기본,Gengar,Ghost/Poison,고스트/독,60,65,60,130,75,110,500,135,85,80,150,95,130,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+gengar,mega,gengarmega,팬텀,ゲンガー,메가,Gengar-Mega,Ghost/Poison,고스트/독,60,65,80,170,95,130,600,135,85,100,190,115,150,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+gengar,gmax,gengargmax,팬텀,ゲンガー,거다이맥스,Gengar-Gmax,Ghost/Poison,고스트/독,60,65,60,130,75,110,500,135,85,80,150,95,130,0,reference-only: Gigantamax,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+dragonite,base,dragonite,망나뇽,カイリュー,기본,Dragonite,Dragon/Flying,드래곤/비행,91,134,95,100,100,80,600,166,154,115,120,120,100,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+dragonite,mega,dragonitemega,망나뇽,カイリュー,메가,Dragonite-Mega,Dragon/Flying,드래곤/비행,91,124,115,145,125,100,700,166,144,135,165,145,120,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+tyranitar,base,tyranitar,마기라스,バンギラス,기본,Tyranitar,Rock/Dark,바위/악,100,134,110,95,100,61,600,175,154,130,115,120,81,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+tyranitar,mega,tyranitarmega,마기라스,バンギラス,메가,Tyranitar-Mega,Rock/Dark,바위/악,100,164,150,95,120,71,700,175,184,170,115,140,91,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+milotic,base,milotic,밀로틱,ミロカロス,기본,Milotic,Water,물,95,60,79,100,125,81,540,170,80,99,120,145,101,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+salamence,base,salamence,보만다,ボーマンダ,기본,Salamence,Dragon/Flying,드래곤/비행,95,135,80,110,80,100,600,170,155,100,130,100,120,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+salamence,mega,salamencemega,보만다,ボーマンダ,메가,Salamence-Mega,Dragon/Flying,드래곤/비행,95,145,130,120,90,120,700,170,165,150,140,110,140,7,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+staraptor,base,staraptor,찌르호크,ムクホーク,기본,Staraptor,Normal/Flying,노말/비행,85,120,70,50,60,100,485,160,140,90,70,80,120,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+staraptor,mega,staraptormega,찌르호크,ムクホーク,메가,Staraptor-Mega,Fighting/Flying,노말/비행,85,140,100,60,90,110,585,160,160,120,80,110,130,4,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+garchomp,base,garchomp,한카리아스,ガブリアス,기본,Garchomp,Dragon/Ground,드래곤/땅,108,130,95,80,85,102,600,183,150,115,100,105,122,4,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+garchomp,mega,garchompmega,한카리아스,ガブリアス,메가,Garchomp-Mega,Dragon/Ground,드래곤/땅,108,170,115,120,95,92,700,183,190,135,140,115,112,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+garchomp,megaz,garchompmegaz,한카리아스,ガブリアス,메가 Z,Garchomp-Mega-Z,Dragon,드래곤/땅,108,130,85,141,85,151,700,183,150,105,161,105,171,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+hippowdon,base,hippowdon,하마돈,カバルドン,수컷,Hippowdon,Ground,땅,108,112,118,68,72,47,525,183,132,138,88,92,67,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+hippowdon,female,hippowdon,하마돈,カバルドン,암컷,Hippowdon,Ground,땅,108,112,118,68,72,47,525,183,132,138,88,92,67,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+froslass,base,froslass,눈여아,ユキメノコ,기본,Froslass,Ice/Ghost,얼음/고스트,70,80,70,80,70,110,480,145,100,90,100,90,130,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+froslass,mega,froslassmega,눈여아,ユキメノコ,메가,Froslass-Mega,Ice/Ghost,얼음/고스트,70,80,70,140,100,120,580,145,100,90,160,120,140,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+excadrill,base,excadrill,몰드류,ドリュウズ,기본,Excadrill,Ground/Steel,땅/강철,110,135,60,50,65,88,508,185,155,80,70,85,108,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+excadrill,mega,excadrillmega,몰드류,ドリュウズ,메가,Excadrill-Mega,Ground/Steel,땅/강철,110,165,100,65,65,103,608,185,185,120,85,85,123,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+whimsicott,base,whimsicott,엘풍,エルフーン,기본,Whimsicott,Grass/Fairy,풀/페어리,60,67,85,77,75,116,480,135,87,105,97,95,136,3,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+vivillon,base,vivillon,비비용,ビビヨン,기본,Vivillon,Bug/Flying,벌레/비행,80,52,50,90,50,89,411,155,72,70,110,70,109,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+floette,base,floette,플라엣테,フラエッテ,기본,Floette,Fairy,페어리,54,45,47,75,98,52,371,129,65,67,95,118,72,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+floette,eternal,floetteeternal,플라엣테,フラエッテ,영원의 꽃,Floette-Eternal,Fairy,페어리,74,65,67,125,128,92,551,149,85,87,145,148,112,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+floette,mega,floettemega,플라엣테,フラエッテ,메가,Floette-Mega,Fairy,페어리,74,85,87,155,148,102,651,149,105,107,175,168,122,6,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+sylveon,base,sylveon,님피아,ニンフィア,기본,Sylveon,Fairy,페어리,95,65,65,110,130,60,525,170,85,85,130,150,80,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+incineroar,base,incineroar,어흥염,ガオガエン,기본,Incineroar,Fire/Dark,불꽃/악,95,115,90,80,90,60,530,170,135,110,100,110,80,8,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+primarina,base,primarina,누리레느,アシレーヌ,기본,Primarina,Water/Fairy,물/페어리,80,74,74,126,116,60,530,155,94,94,146,136,80,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+toxapex,base,toxapex,더시마사리,ドヒドイデ,기본,Toxapex,Poison/Water,독/물,50,63,152,53,142,35,495,125,83,172,73,162,55,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+mudsdale,base,mudsdale,만마드,バンバドロ,기본,Mudsdale,Ground,땅,100,125,100,55,85,35,500,175,145,120,75,105,55,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+kommoo,base,kommoo,짜랑고우거,ジャラランガ,기본,Kommo-o,Dragon/Fighting,드래곤/격투,75,110,125,100,105,85,600,150,130,145,120,125,105,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+rillaboom,base,rillaboom,고릴타,ゴリランダー,기본,Rillaboom,Grass,풀,100,125,90,60,70,85,530,175,145,110,80,90,105,9,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+rillaboom,gmax,rillaboomgmax,고릴타,ゴリランダー,거다이맥스,Rillaboom-Gmax,Grass,풀,100,125,90,60,70,85,530,175,145,110,80,90,105,0,reference-only: Gigantamax,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+indeedee,base,indeedee,에써르,イエッサン,수컷,Indeedee,Psychic/Normal,에스퍼/노말,60,65,55,105,95,95,475,135,85,75,125,115,115,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+indeedee,female,indeedeef,에써르,イエッサン,암컷,Indeedee-F,Psychic/Normal,에스퍼/노말,70,55,65,95,105,85,475,145,75,85,115,125,105,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+basculegion,base,basculegion,대쓰여너,イダイトウ,수컷,Basculegion,Water/Ghost,물/고스트,120,112,65,80,75,78,530,195,132,85,100,95,98,7,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+basculegion,female,basculegionf,대쓰여너,イダイトウ,암컷,Basculegion-F,Water/Ghost,물/고스트,120,92,65,100,75,78,530,195,112,85,120,95,98,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+sneasler,base,sneasler,포푸니크,オオニューラ,기본,Sneasler,Fighting/Poison,격투/독,80,130,60,40,80,120,510,155,150,80,60,100,140,9,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+espathra,base,espathra,클레스퍼트라,クエスパトラ,기본,Espathra,Psychic,에스퍼,95,60,60,101,60,105,481,170,80,80,121,80,125,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+glimmora,base,glimmora,킬라플로르,キラフロル,기본,Glimmora,Rock/Poison,바위/독,83,55,90,130,81,86,525,158,75,110,150,101,106,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+glimmora,mega,glimmoramega,킬라플로르,キラフロル,메가,Glimmora-Mega,Rock/Poison,바위/독,83,90,105,150,96,101,625,158,110,125,170,116,121,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+houndstone,base,houndstone,묘두기,ハカドッグ,기본,Houndstone,Ghost,고스트,72,101,100,50,97,68,488,147,121,120,70,117,88,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+farigiraf,base,farigiraf,키키링,リキキリン,기본,Farigiraf,Normal/Psychic,노말/에스퍼,120,90,70,110,70,60,520,195,110,90,130,90,80,2,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+kingambit,base,kingambit,대도각참,ドドゲザン,기본,Kingambit,Dark/Steel,악/강철,100,135,120,60,85,50,550,175,155,140,80,105,70,8,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+baxcalibur,base,baxcalibur,드닐레이브,セグレイブ,기본,Baxcalibur,Dragon/Ice,드래곤/얼음,115,145,92,75,86,87,600,190,165,112,95,106,107,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+baxcalibur,mega,baxcaliburmega,드닐레이브,セグレイブ,메가,Baxcalibur-Mega,Dragon/Ice,드래곤/얼음,115,175,117,105,101,87,700,190,195,137,125,121,107,0,dex form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+gholdengo,base,gholdengo,타부자고,サーフゴー,기본,Gholdengo,Steel/Ghost,강철/고스트,87,60,95,133,91,84,550,162,80,115,153,111,104,3,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts
+sinistcha,base,sinistcha,그우린차,ヤバソチャ,기본,Sinistcha,Grass/Ghost,풀/고스트,71,60,106,121,80,70,508,146,80,126,141,100,90,1,team form,https://github.com/smogon/pokemon-showdown/blob/master/data/pokedex.ts

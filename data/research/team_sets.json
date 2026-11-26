@@ -1,0 +1,1150 @@
+{
+  "sources": [
+    {
+      "url": "https://victoryroad.pro/vr-nov26-2/",
+      "what": "VR November Challenge #2 results page (ranks, rosters, VR Pastes links)"
+    },
+    {
+      "url": "https://victoryroad.pro/vr-nov26/",
+      "what": "VR November Challenge #1 results page (ranks, rosters, VR Pastes links; Marcus Koh roster)"
+    },
+    {
+      "url": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "what": "VR Circuit standings for Challenge #2: held item per Pokemon"
+    },
+    {
+      "url": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "what": "VR Circuit standings for Challenge #1: held item per Pokemon"
+    },
+    {
+      "url": "https://www.vrpastes.com/",
+      "what": "VR Pastes open team lists (one per team, see sourceUrl). Pages opened but set text is loaded client-side; ability/moves NOT retrieved"
+    }
+  ],
+  "teams": [
+    {
+      "event": "VRNC2",
+      "rank": 1,
+      "player": "Ko Tsukide",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/IlBcWMyr",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Charizard",
+          "form": "Mega Y",
+          "item": "Charizardite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Chople Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Whimsicott",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 2,
+      "player": "Matteo Boschmans",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/rrWIhPgV",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Froslass",
+          "form": "Mega",
+          "item": "Froslassite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Black Glasses",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Toxapex",
+          "form": null,
+          "item": "Leftovers",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Garchomp",
+          "form": null,
+          "item": "Choice Scarf",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 3,
+      "player": "Kandai Nagatome",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/VspydWhf",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 4,
+      "player": "Adam Cherfaoui",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/OBHSQsnY",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Raichu",
+          "form": "Mega Y",
+          "item": "Raichunite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Gholdengo",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Arcanine",
+          "form": "Hisui",
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Milotic",
+          "form": null,
+          "item": "Leftovers",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Miracle Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 5,
+      "player": "Brady Smith",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/a6te004F",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Gengar",
+          "form": "Mega",
+          "item": "Gengarite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Vivillon",
+          "form": "High Plains",
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kommo-o",
+          "form": null,
+          "item": "Leftovers",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Miracle Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 6,
+      "player": "Hippolyte Bernard",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/CAwXXJEc",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Gengar",
+          "form": "Mega",
+          "item": "Gengarite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Chople Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "Grassy Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Hippowdon",
+          "form": null,
+          "item": "Leftovers",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Occa Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 7,
+      "player": "Michael Kelsch",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/3oxJ6cLr",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Raichu",
+          "form": "Mega Y",
+          "item": "Raichunite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Staraptor",
+          "form": "Mega",
+          "item": "Staraptite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Primarina",
+          "form": null,
+          "item": "Grassy Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Gholdengo",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Arcanine",
+          "form": "Hisui",
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Miracle Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC2",
+      "rank": 8,
+      "player": "Théotime Massaut",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/wtX1o2nL",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26-2",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Tyranitar",
+          "form": "Mega",
+          "item": "Tyranitarite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Staraptor",
+          "form": "Mega",
+          "item": "Staraptite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Gholdengo",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Milotic",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sinistcha",
+          "form": null,
+          "item": "Rocky Helmet",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Excadrill",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 1,
+      "player": "Federico Camporesi",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/RkLnn8be",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 2,
+      "player": "Ryan Klemick",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/Cql8Z4sh",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Staraptor",
+          "form": "Mega",
+          "item": "Staraptite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Glimmora",
+          "form": "Mega",
+          "item": "Glimmoranite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Chople Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Whimsicott",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Hippowdon",
+          "form": null,
+          "item": "Leftovers",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Houndstone",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 3,
+      "player": "Luca Gesualdo",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/0kmpg1ls",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Charizard",
+          "form": "Mega Y",
+          "item": "Charizardite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Mystic Water",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Chople Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Whimsicott",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Garchomp",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 4,
+      "player": "Théotime Massaut",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/Qkyygwyh",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Miracle Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 5,
+      "player": "Jonathan Zuniga",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/0LHEgdwS",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Dragonite",
+          "form": "Mega",
+          "item": "Dragoninite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Mystic Water",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Miracle Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 6,
+      "player": "Jongseo Lee",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/nK8kvegH",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Charizard",
+          "form": "Mega Y",
+          "item": "Charizardite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Chople Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Farigiraf",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sylveon",
+          "form": null,
+          "item": "Fairy Feather",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Venusaur",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Garchomp",
+          "form": null,
+          "item": "Choice Scarf",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 7,
+      "player": "Du Shaoqing",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/IEW2u6Bd",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Charizard",
+          "form": "Mega Y",
+          "item": "Charizardite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Staraptor",
+          "form": "Mega",
+          "item": "Staraptite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sylveon",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Espathra",
+          "form": null,
+          "item": "Psychic Seed",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Garchomp",
+          "form": null,
+          "item": "Choice Scarf",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Indeedee",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 8,
+      "player": "Emanuele Briganti",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/b6UqzpQi",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Floette",
+          "form": "Mega",
+          "item": "Floettite",
+          "ability": null,
+          "moves": [],
+          "notes": "Base form listed as Floette-Eternal"
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Basculegion",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Incineroar",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "White Herb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Rillaboom",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    },
+    {
+      "event": "VRNC1",
+      "rank": 10,
+      "player": "Marcus Koh",
+      "public": true,
+      "setsRetrieved": "items-only",
+      "sourceUrl": "https://www.vrpastes.com/KlYd9juC",
+      "itemSourceUrl": "https://circuit.victoryroad.pro/tournament/vr-nov26",
+      "notes": "Item taken from the VR Circuit standings page. Ability and moves are in the linked VR Pastes open team list, which could not be retrieved (loaded client-side from a backend API).",
+      "members": [
+        {
+          "species": "Charizard",
+          "form": "Mega Y",
+          "item": "Charizardite Y",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Salamence",
+          "form": "Mega",
+          "item": "Salamencite",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Kingambit",
+          "form": null,
+          "item": "Black Glasses",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Sneasler",
+          "form": null,
+          "item": "Focus Sash",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Farigiraf",
+          "form": null,
+          "item": "Sitrus Berry",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        },
+        {
+          "species": "Mudsdale",
+          "form": null,
+          "item": "Life Orb",
+          "ability": null,
+          "moves": [],
+          "notes": null
+        }
+      ]
+    }
+  ],
+  "moves": {},
+  "items": {
+    "Black Glasses": {
+      "ko": "검은안경",
+      "desc": "지닌 포켓몬의 악 타입 기술 위력이 올라간다."
+    },
+    "Charizardite Y": {
+      "ko": "리자몽나이트Y",
+      "desc": "리자몽이 지니면 배틀 중 메가리자몽Y로 메가진화할 수 있다."
+    },
+    "Choice Scarf": {
+      "ko": "구애스카프",
+      "desc": "스피드가 1.5배가 되지만 처음 고른 기술 하나만 쓸 수 있다."
+    },
+    "Chople Berry": {
+      "ko": "로플열매",
+      "desc": "효과가 굉장한 격투 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Dragoninite": {
+      "ko": null,
+      "desc": "망나뇽이 지니면 배틀 중 메가망나뇽으로 메가진화할 수 있다."
+    },
+    "Fairy Feather": {
+      "ko": "요정의깃털",
+      "desc": "지닌 포켓몬의 페어리 타입 기술 위력이 올라간다."
+    },
+    "Floettite": {
+      "ko": null,
+      "desc": "플라엣테(영원의 꽃)가 지니면 배틀 중 메가진화할 수 있다."
+    },
+    "Focus Sash": {
+      "ko": "기합의띠",
+      "desc": "HP가 가득일 때 일격에 쓰러질 공격을 받아도 HP 1로 버틴다(1회용)."
+    },
+    "Froslassite": {
+      "ko": null,
+      "desc": "눈여아가 지니면 배틀 중 메가눈여아로 메가진화할 수 있다."
+    },
+    "Gengarite": {
+      "ko": "팬텀나이트",
+      "desc": "팬텀이 지니면 배틀 중 메가팬텀으로 메가진화할 수 있다."
+    },
+    "Glimmoranite": {
+      "ko": null,
+      "desc": "킬라플로르가 지니면 배틀 중 메가진화할 수 있다."
+    },
+    "Grassy Seed": {
+      "ko": "그래스시드",
+      "desc": "그래스필드일 때 지닌 포켓몬의 방어가 1랭크 올라간다(1회용)."
+    },
+    "Leftovers": {
+      "ko": "먹다남은음식",
+      "desc": "매 턴 종료 시 HP를 조금씩 회복한다."
+    },
+    "Life Orb": {
+      "ko": "생명의구슬",
+      "desc": "기술 위력이 올라가지만 공격할 때마다 HP가 조금 줄어든다."
+    },
+    "Miracle Seed": {
+      "ko": "기적의씨",
+      "desc": "지닌 포켓몬의 풀 타입 기술 위력이 올라간다."
+    },
+    "Mystic Water": {
+      "ko": "신비의물방울",
+      "desc": "지닌 포켓몬의 물 타입 기술 위력이 올라간다."
+    },
+    "Occa Berry": {
+      "ko": "오카열매",
+      "desc": "효과가 굉장한 불꽃 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Psychic Seed": {
+      "ko": "사이코시드",
+      "desc": "사이코필드일 때 지닌 포켓몬의 특수방어가 1랭크 올라간다(1회용)."
+    },
+    "Raichunite Y": {
+      "ko": null,
+      "desc": "라이츄가 지니면 배틀 중 메가라이츄Y로 메가진화할 수 있다."
+    },
+    "Rocky Helmet": {
+      "ko": "울퉁불퉁멧",
+      "desc": "접촉 기술로 공격해 온 상대에게 데미지를 준다."
+    },
+    "Salamencite": {
+      "ko": "보만다나이트",
+      "desc": "보만다가 지니면 배틀 중 메가보만다로 메가진화할 수 있다."
+    },
+    "Sitrus Berry": {
+      "ko": "자뭉열매",
+      "desc": "HP가 절반 이하가 되면 HP를 조금 회복한다(1회용)."
+    },
+    "Staraptite": {
+      "ko": null,
+      "desc": "찌르호크가 지니면 배틀 중 메가찌르호크로 메가진화할 수 있다."
+    },
+    "Tyranitarite": {
+      "ko": "마기라스나이트",
+      "desc": "마기라스가 지니면 배틀 중 메가마기라스로 메가진화할 수 있다."
+    },
+    "White Herb": {
+      "ko": "하양허브",
+      "desc": "능력 랭크가 내려갔을 때 한 번 원래대로 되돌린다(1회용)."
+    }
+  },
+  "abilities": {}
+}

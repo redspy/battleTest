@@ -1,0 +1,794 @@
+{
+  "_comment": "pokemon_gifs/README.md 의 대회 팀. members 의 item/ability/moves 는 조사로 확인된 팀만 채운다(없으면 미공개). summary/tags 는 구성만 보고 쓴 추론이다.",
+  "set": "monsters",
+  "title": "몬스터 대전",
+  "subtitle": "Pokémon Champions · 규정 M-C (더블)",
+  "pick": 3,
+  "events": [
+    {
+      "id": "VRNC2",
+      "name": "VR November Challenge #2",
+      "date": "2026-11-14~15",
+      "note": "온라인, 189명"
+    },
+    {
+      "id": "VRNC1",
+      "name": "VR November Challenge #1",
+      "date": "2026-11-07~08",
+      "note": "온라인"
+    }
+  ],
+  "teams": [
+    {
+      "id": "vrnc2-1",
+      "event": "VRNC2",
+      "rank": 1,
+      "player": "Ko Tsukide (JPN)",
+      "name": "리자몽Y 쾌청 순풍",
+      "tags": [
+        "쾌청",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "엘풍의 순풍 아래에서 메가리자몽Y 의 쾌청 광역기와 메가보만다로 빠르게 밀어붙이고, 대쓰여너와 대도각참이 후반을 정리하는 공격형 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/IlBcWMyr"
+    },
+    {
+      "id": "vrnc2-2",
+      "event": "VRNC2",
+      "rank": 2,
+      "player": "Matteo Boschmans (BEL)",
+      "name": "눈여아 밸런스",
+      "tags": [
+        "밸런스",
+        "위협 순환"
+      ],
+      "summary": "메가눈여아의 빠른 방해와 화력을 어흥염·더시마사리의 수비 순환이 받치고, 대도각참이 후반을 마무리하는 밸런스 구성.",
+      "members": [
+        {
+          "species": "froslass",
+          "form": "mega",
+          "item": "Froslassite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Black Glasses"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "toxapex",
+          "form": "base",
+          "item": "Leftovers"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/rrWIhPgV"
+    },
+    {
+      "id": "vrnc2-3",
+      "event": "VRNC2",
+      "rank": 3,
+      "player": "Kandai Nagatome (JPN)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "메가플라엣테와 메가보만다 두 에이스를 어흥염·포푸니크·고릴타의 속이기 3장이 받쳐 주는, 두 대회에서 가장 많이 쓰인 구성.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/VspydWhf"
+    },
+    {
+      "id": "vrnc2-4",
+      "event": "VRNC2",
+      "rank": 4,
+      "player": "Adam Cherfaoui (FRA)",
+      "name": "라이츄Y 보만다",
+      "tags": [
+        "더블 메가",
+        "위협 견제"
+      ],
+      "summary": "메가라이츄Y 와 메가보만다의 고속 화력에 타부자고·히스이 윈디를 더하고, 밀로틱으로 상대 위협을 견제하는 구성.",
+      "members": [
+        {
+          "species": "raichu",
+          "form": "megay",
+          "item": "Raichunite Y"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "arcanine",
+          "form": "hisui",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "milotic",
+          "form": "base",
+          "item": "Leftovers"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/OBHSQsnY"
+    },
+    {
+      "id": "vrnc2-5",
+      "event": "VRNC2",
+      "rank": 5,
+      "player": "Brady Smith (USA)",
+      "name": "팬텀 봉쇄 + 비비용",
+      "tags": [
+        "교체 봉쇄",
+        "수면",
+        "능력 상승"
+      ],
+      "summary": "메가팬텀이 교체를 막은 사이 비비용의 수면과 분노가루로 시간을 벌고, 짜랑고우거가 능력을 올려 에이스가 되는 구성.",
+      "members": [
+        {
+          "species": "gengar",
+          "form": "mega",
+          "item": "Gengarite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "vivillon",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "kommoo",
+          "form": "base",
+          "item": "Leftovers"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/a6te004F"
+    },
+    {
+      "id": "vrnc2-6",
+      "event": "VRNC2",
+      "rank": 6,
+      "player": "Hippolyte Bernard (FRA)",
+      "name": "팬텀 봉쇄 + 하마돈",
+      "tags": [
+        "교체 봉쇄",
+        "모래바람"
+      ],
+      "summary": "메가팬텀의 교체 봉쇄에 하마돈의 모래바람과 높은 내구를 더해 천천히 유리한 대면을 굳히는 구성.",
+      "members": [
+        {
+          "species": "gengar",
+          "form": "mega",
+          "item": "Gengarite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Chople Berry"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Grassy Seed"
+        },
+        {
+          "species": "hippowdon",
+          "form": "base",
+          "item": "Leftovers"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Occa Berry"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/CAwXXJEc"
+    },
+    {
+      "id": "vrnc2-7",
+      "event": "VRNC2",
+      "rank": 7,
+      "player": "Michael Kelsch (DEU)",
+      "name": "라이츄Y 찌르호크",
+      "tags": [
+        "더블 메가",
+        "위협"
+      ],
+      "summary": "메가라이츄Y 와 메가찌르호크의 빠른 화력에 누리레느·타부자고의 특수 화력을 더한 공격형 구성.",
+      "members": [
+        {
+          "species": "raichu",
+          "form": "megay",
+          "item": "Raichunite Y"
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite"
+        },
+        {
+          "species": "primarina",
+          "form": "base",
+          "item": "Grassy Seed"
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "arcanine",
+          "form": "hisui",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/3oxJ6cLr"
+    },
+    {
+      "id": "vrnc2-8",
+      "event": "VRNC2",
+      "rank": 8,
+      "player": "Théotime Massaut (FRA)",
+      "name": "마기라스 모래 + 트릭룸",
+      "tags": [
+        "모래바람",
+        "더블 메가"
+      ],
+      "summary": "메가마기라스의 모래바람 아래에서 몰드류가 먼저 움직이고, 그우린차와 밀로틱이 뒤를 받치는 모래 구성.",
+      "members": [
+        {
+          "species": "tyranitar",
+          "form": "mega",
+          "item": "Tyranitarite"
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite"
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "milotic",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "item": "Rocky Helmet"
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "item": "Focus Sash"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/wtX1o2nL"
+    },
+    {
+      "id": "vrnc1-1",
+      "event": "VRNC1",
+      "rank": 1,
+      "player": "Federico Camporesi (ITA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "메가플라엣테와 메가보만다 두 에이스를 어흥염·포푸니크·고릴타의 속이기 3장이 받쳐 주는 구성. #1 대회 1·4·8위가 같은 6마리다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/RkLnn8be"
+    },
+    {
+      "id": "vrnc1-2",
+      "event": "VRNC1",
+      "rank": 2,
+      "player": "Ryan Klemick (USA)",
+      "name": "킬라플로르 모래",
+      "tags": [
+        "모래바람",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "하마돈의 모래바람 아래에서 묘두기가 먼저 움직이고, 메가킬라플로르와 메가찌르호크가 화력을 내는 모래 구성. 엘풍의 순풍도 겸한다.",
+      "members": [
+        {
+          "species": "glimmora",
+          "form": "mega",
+          "item": "Glimmoranite"
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite"
+        },
+        {
+          "species": "houndstone",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry"
+        },
+        {
+          "species": "hippowdon",
+          "form": "base",
+          "item": "Leftovers"
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/Cql8Z4sh"
+    },
+    {
+      "id": "vrnc1-3",
+      "event": "VRNC1",
+      "rank": 3,
+      "player": "Luca Gesualdo (ITA)",
+      "name": "리자몽Y 플라엣테",
+      "tags": [
+        "쾌청",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "엘풍의 순풍 아래에서 메가리자몽Y 또는 메가플라엣테를 상대에 맞춰 골라 내보내는 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Mystic Water"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry"
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/0kmpg1ls"
+    },
+    {
+      "id": "vrnc1-4",
+      "event": "VRNC1",
+      "rank": 4,
+      "player": "Théotime Massaut (FRA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "1위 팀과 같은 6마리. 메가플라엣테와 메가보만다를 속이기 3장이 받친다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/Qkyygwyh"
+    },
+    {
+      "id": "vrnc1-5",
+      "event": "VRNC1",
+      "rank": 5,
+      "player": "Jonathan Zuniga (DOM)",
+      "name": "플라엣테 망나뇽",
+      "tags": [
+        "더블 메가",
+        "속이기"
+      ],
+      "summary": "스탠다드 구성에서 메가보만다 자리를 메가망나뇽으로, 어흥염 자리를 대도각참으로 바꾼 변형.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "dragonite",
+          "form": "mega",
+          "item": "Dragoninite"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Mystic Water"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/0LHEgdwS"
+    },
+    {
+      "id": "vrnc1-6",
+      "event": "VRNC1",
+      "rank": 6,
+      "player": "Jongseo Lee (KOR)",
+      "name": "리자몽Y 쾌청 + 트릭룸",
+      "tags": [
+        "쾌청",
+        "트릭룸"
+      ],
+      "summary": "메가리자몽Y 의 쾌청으로 이상해꽃이 빨라지는 쾌청 축과, 키키링의 트릭룸으로 님피아가 먼저 움직이는 축을 함께 가진 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Chople Berry"
+        },
+        {
+          "species": "farigiraf",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "sylveon",
+          "form": "base",
+          "item": "Fairy Feather"
+        },
+        {
+          "species": "venusaur",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/nK8kvegH"
+    },
+    {
+      "id": "vrnc1-7",
+      "event": "VRNC1",
+      "rank": 7,
+      "player": "Du Shaoqing (CHN)",
+      "name": "사이코필드 클레스퍼트라",
+      "tags": [
+        "사이코필드",
+        "쾌청",
+        "더블 메가"
+      ],
+      "summary": "에써르의 사이코필드와 날따름으로 클레스퍼트라를 지켜 가속시키고, 메가리자몽Y·메가찌르호크가 화력을 더하는 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite"
+        },
+        {
+          "species": "indeedee",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "espathra",
+          "form": "base",
+          "item": "Psychic Seed"
+        },
+        {
+          "species": "sylveon",
+          "form": "base",
+          "item": "Life Orb"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/IEW2u6Bd"
+    },
+    {
+      "id": "vrnc1-8",
+      "event": "VRNC1",
+      "rank": 8,
+      "player": "Emanuele Briganti (ITA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "1위 팀과 같은 6마리. 메가플라엣테와 메가보만다를 속이기 3장이 받친다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/b6UqzpQi"
+    },
+    {
+      "id": "vrnc1-10",
+      "event": "VRNC1",
+      "rank": 10,
+      "player": "Marcus Koh",
+      "name": "리자몽Y 보만다 + 트릭룸",
+      "tags": [],
+      "summary": "메가리자몽Y 와 메가보만다 두 에이스에 키키링의 트릭룸과 느린 만마드를 더해, 빠른 전개와 느린 전개를 모두 쓸 수 있게 한 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Black Glasses"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Focus Sash"
+        },
+        {
+          "species": "farigiraf",
+          "form": "base",
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "mudsdale",
+          "form": "base",
+          "item": "Life Orb"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/KlYd9juC"
+    }
+  ]
+}

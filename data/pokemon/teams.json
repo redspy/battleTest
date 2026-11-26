@@ -1,0 +1,3344 @@
+{
+  "_comment": "pokemon_gifs/README.md 의 대회 팀. members 의 item/ability/moves 는 조사로 확인된 팀만 채운다(없으면 미공개). summary/tags 는 구성만 보고 쓴 추론이다.",
+  "set": "pokemon",
+  "title": "대회 팀 뷰어",
+  "subtitle": "PTC2026 마스터 TOP 8 · Victory Road 11월 대회",
+  "pick": 4,
+  "events": [
+    {
+      "id": "PTC26",
+      "name": "포켓몬 트레이너스 컵 2026 · 마스터 TOP 8",
+      "date": "2026-05-25",
+      "note": "서울 코엑스 · 레귤레이션 M-A"
+    },
+    {
+      "id": "VRNC2",
+      "name": "VR November Challenge #2",
+      "date": "2026-11-14~15",
+      "note": "온라인, 189명"
+    },
+    {
+      "id": "VRNC1",
+      "name": "VR November Challenge #1",
+      "date": "2026-11-07~08",
+      "note": "온라인"
+    }
+  ],
+  "teams": [
+    {
+      "id": "ptc26-1",
+      "event": "PTC26",
+      "rank": 1,
+      "placement": "우승",
+      "player": "이정소",
+      "name": "이정소 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Protect",
+            "Calm Mind",
+            "Moonblast",
+            "Dazzling Gleam"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 2,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        },
+        {
+          "species": "aegislash",
+          "form": "base",
+          "ability": "Stance Change",
+          "moves": [
+            "Shadow Sneak",
+            "Poltergeist",
+            "King's Shield",
+            "Iron Head"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Focus Sash"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "ability": "Intimidate",
+          "moves": [
+            "Fake Out",
+            "Throat Chop",
+            "Flare Blitz",
+            "Parting Shot"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 1,
+              "spe": 1
+            },
+            "boost": "spd",
+            "reduce": "spa"
+          },
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "charizard",
+          "form": "megay",
+          "ability": "Blaze",
+          "moves": [
+            "Protect",
+            "Weather Ball",
+            "Heat Wave",
+            "Solar Beam"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 1,
+              "spa": 1,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "moves": [
+            "Rock Tomb",
+            "Dragon Claw",
+            "Earthquake",
+            "Stomping Tantrum"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Choice Scarf"
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "ability": "Hospitality",
+          "moves": [
+            "Protect",
+            "Trick Room",
+            "Matcha Gotcha",
+            "Rage Powder"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740b4feb52f191f09662e",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 32,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "spe"
+          },
+          "item": "Kasib Berry"
+        }
+      ],
+      "replicaCode": "CEM5K27S1W"
+    },
+    {
+      "id": "ptc26-2",
+      "event": "PTC26",
+      "rank": 2,
+      "placement": "준우승",
+      "player": "이준희",
+      "name": "이준희 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+      "members": [
+        {
+          "species": "glimmora",
+          "form": "base",
+          "ability": "Toxic Debris",
+          "moves": [
+            "Power Gem",
+            "Sludge Bomb",
+            "Earth Power",
+            "Spiky Shield"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          },
+          "item": "Focus Sash"
+        },
+        {
+          "species": "talonflame",
+          "form": "base",
+          "ability": "Gale Wings",
+          "moves": [
+            "Brave Bird",
+            "Overheat",
+            "Tailwind",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spd"
+          },
+          "item": "Charcoal"
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Moonblast",
+            "Dazzling Gleam",
+            "Light of Ruin",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 2,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "moves": [
+            "Dragon Claw",
+            "Earthquake",
+            "Rock Slide",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 32,
+              "atk": 3,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 31
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "scizor",
+          "form": "mega",
+          "ability": "Technician",
+          "moves": [
+            "Bullet Punch",
+            "Knock Off",
+            "Bug Bite",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Scizorite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "ability": "Defiant",
+          "moves": [
+            "Sucker Punch",
+            "Kowtow Cleave",
+            "Low Kick",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bafeb52f191f096a9c",
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Chople Berry"
+        }
+      ]
+    },
+    {
+      "id": "ptc26-3",
+      "event": "PTC26",
+      "rank": 3,
+      "placement": "TOP 4",
+      "player": "박세준",
+      "name": "박세준 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+      "members": [
+        {
+          "species": "vivillon",
+          "form": "base",
+          "ability": "Shield Dust",
+          "moves": [
+            "Sleep Powder",
+            "Hurricane",
+            "Rage Powder",
+            "Tailwind"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 0,
+              "atk": 0,
+              "def": 32,
+              "spa": 1,
+              "spd": 1,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          },
+          "item": "Choice Scarf"
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "ability": "Hospitality",
+          "moves": [
+            "Matcha Gotcha",
+            "Rage Powder",
+            "Life Dew",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "atk"
+          },
+          "item": "Kasib Berry"
+        },
+        {
+          "species": "maushold",
+          "form": "base",
+          "ability": "Friend Guard",
+          "moves": [
+            "Super Fang",
+            "Feint",
+            "Follow Me",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "spa"
+          },
+          "item": "Chople Berry"
+        },
+        {
+          "species": "delphox",
+          "form": "mega",
+          "ability": "Blaze",
+          "moves": [
+            "Heat Wave",
+            "Psychic",
+            "Nasty Plot",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 2,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          },
+          "item": "Delphoxite"
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Moonblast",
+            "Calm Mind",
+            "Protect"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 1,
+              "atk": 0,
+              "def": 32,
+              "spa": 1,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "ability": "Intimidate",
+          "moves": [
+            "Flare Blitz",
+            "Throat Chop",
+            "Parting Shot",
+            "Fake Out"
+          ],
+          "training": {
+            "source": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096bf4",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 1,
+              "spa": 0,
+              "spd": 32,
+              "spe": 1
+            },
+            "boost": "spd",
+            "reduce": "spa"
+          },
+          "item": "Passho Berry"
+        }
+      ],
+      "replicaCode": "T7157CHUVJ"
+    },
+    {
+      "id": "ptc26-4",
+      "event": "PTC26",
+      "rank": 4,
+      "placement": "TOP 4",
+      "player": "이찬민",
+      "name": "이찬민 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740befeb52f191f096c4e",
+      "members": [
+        {
+          "species": "talonflame",
+          "form": "base",
+          "ability": "Gale Wings",
+          "moves": [
+            "Acrobatics",
+            "Flare Blitz",
+            "Tailwind",
+            "Quick Guard"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Moonblast",
+            "Dazzling Gleam",
+            "Light of Ruin",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "ability": "Mold Breaker",
+          "moves": [
+            "Earthquake",
+            "Iron Head",
+            "Rock Slide",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Focus Sash"
+        },
+        {
+          "species": "pelipper",
+          "form": "base",
+          "ability": "Drizzle",
+          "moves": [
+            "Weather Ball",
+            "Hurricane",
+            "Wide Guard",
+            "Tailwind"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 32,
+              "spe": 2
+            },
+            "boost": "spd",
+            "reduce": "atk"
+          },
+          "item": "Sharp Beak"
+        },
+        {
+          "species": "archaludon",
+          "form": "base",
+          "ability": "Stamina",
+          "moves": [
+            "Electro Shot",
+            "Flash Cannon",
+            "Draco Meteor",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "atk"
+          },
+          "item": "Leftovers"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "ability": "Adaptability",
+          "moves": [
+            "Last Respects",
+            "Wave Crash",
+            "Flip Turn",
+            "Aqua Jet"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Choice Scarf"
+        }
+      ]
+    },
+    {
+      "id": "ptc26-5",
+      "event": "PTC26",
+      "rank": 5,
+      "placement": "TOP 8",
+      "player": "나상현",
+      "name": "나상현 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740bffeb52f191f096cac",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Dazzling Gleam",
+            "Calm Mind",
+            "Moonblast",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "ability": "Intimidate",
+          "moves": [
+            "Fake Out",
+            "Flare Blitz",
+            "Parting Shot",
+            "Throat Chop"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "spa"
+          },
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "scizor",
+          "form": "mega",
+          "ability": "Technician",
+          "moves": [
+            "Bullet Punch",
+            "Swords Dance",
+            "Bug Bite",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Scizorite"
+        },
+        {
+          "species": "rotom",
+          "form": "wash",
+          "ability": "Levitate",
+          "moves": [
+            "Hydro Pump",
+            "Will-O-Wisp",
+            "Volt Switch",
+            "Electroweb"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          },
+          "item": "Choice Scarf"
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "ability": "Hospitality",
+          "moves": [
+            "Matcha Gotcha",
+            "Rage Powder",
+            "Protect",
+            "Trick Room"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "spe"
+          },
+          "item": "Occa Berry"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "moves": [
+            "Dragon Claw",
+            "Earthquake",
+            "Rock Slide",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Haban Berry"
+        }
+      ]
+    },
+    {
+      "id": "ptc26-6",
+      "event": "PTC26",
+      "rank": 6,
+      "placement": "TOP 8",
+      "player": "최정규",
+      "name": "최정규 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096cfb",
+      "members": [
+        {
+          "species": "tyranitar",
+          "form": "mega",
+          "ability": "Sand Stream",
+          "moves": [
+            "Protect",
+            "Knock Off",
+            "Rock Slide",
+            "Low Kick"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Tyranitarite"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "ability": "Intimidate",
+          "moves": [
+            "Fake Out",
+            "Darkest Lariat",
+            "Flare Blitz",
+            "Parting Shot"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 32,
+              "spe": 2
+            },
+            "boost": "spd",
+            "reduce": "spa"
+          },
+          "item": "Chople Berry"
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "ability": "Sand Rush",
+          "moves": [
+            "Protect",
+            "Rock Slide",
+            "High Horsepower",
+            "Iron Head"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Focus Sash"
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "ability": "Hospitality",
+          "moves": [
+            "Protect",
+            "Trick Room",
+            "Rage Powder",
+            "Matcha Gotcha"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "atk"
+          },
+          "item": "Sitrus Berry"
+        },
+        {
+          "species": "rotom",
+          "form": "wash",
+          "ability": "Levitate",
+          "moves": [
+            "Volt Switch",
+            "Thunderbolt",
+            "Hydro Pump",
+            "Will-O-Wisp"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          },
+          "item": "Magnet"
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "ability": "Flower Veil",
+          "moves": [
+            "Protect",
+            "Calm Mind",
+            "Dazzling Gleam",
+            "Moonblast"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Floettite"
+        }
+      ]
+    },
+    {
+      "id": "ptc26-7",
+      "event": "PTC26",
+      "rank": 7,
+      "placement": "TOP 8",
+      "player": "문수현",
+      "name": "문수현 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c0feb52f191f096d4a",
+      "members": [
+        {
+          "species": "tyranitar",
+          "form": "mega",
+          "ability": "Sand Stream",
+          "moves": [
+            "Rock Slide",
+            "Knock Off",
+            "Low Kick",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Tyranitarite"
+        },
+        {
+          "species": "scovillain",
+          "form": "mega",
+          "ability": "Moody",
+          "moves": [
+            "Overheat",
+            "Leech Seed",
+            "Rage Powder",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "atk"
+          },
+          "item": "Scovillainite"
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "ability": "Sand Rush",
+          "moves": [
+            "High Horsepower",
+            "Iron Head",
+            "Rock Slide",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Focus Sash"
+        },
+        {
+          "species": "corviknight",
+          "form": "base",
+          "ability": "Mirror Armor",
+          "moves": [
+            "Brave Bird",
+            "Iron Head",
+            "Bulk Up",
+            "Tailwind"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "def",
+            "reduce": "spa"
+          },
+          "item": "Leftovers"
+        },
+        {
+          "species": "sylveon",
+          "form": "base",
+          "ability": "Pixilate",
+          "moves": [
+            "Hyper Voice",
+            "Hyper Beam",
+            "Quick Attack",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Fairy Feather"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "ability": "Adaptability",
+          "moves": [
+            "Wave Crash",
+            "Last Respects",
+            "Aqua Jet",
+            "Flip Turn"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Choice Scarf"
+        }
+      ]
+    },
+    {
+      "id": "ptc26-8",
+      "event": "PTC26",
+      "rank": 8,
+      "placement": "TOP 8",
+      "player": "이지석",
+      "name": "이지석 팀",
+      "tags": [
+        "M-A",
+        "PTC2026"
+      ],
+      "summary": "공개 팀 자료에 기록된 구성입니다. 싱글에서 아군이 필요한 기술에는 사용 제한이 적용됩니다.",
+      "sourceUrl": "https://pokebase.app/pokemon-champions/team-builder?team=6a1740c1feb52f191f096d99",
+      "members": [
+        {
+          "species": "sylveon",
+          "form": "base",
+          "ability": "Pixilate",
+          "moves": [
+            "Hyper Voice",
+            "Hyper Beam",
+            "Quick Attack",
+            "Detect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Fairy Feather"
+        },
+        {
+          "species": "charizard",
+          "form": "megay",
+          "ability": "Solar Power",
+          "moves": [
+            "Weather Ball",
+            "Heat Wave",
+            "Solar Beam",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "item": "Charizardite Y"
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "moves": [
+            "Dragon Claw",
+            "Earthquake",
+            "Stomping Tantrum",
+            "Rock Slide"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Choice Scarf"
+        },
+        {
+          "species": "aerodactyl",
+          "form": "mega",
+          "ability": "Unnerve",
+          "moves": [
+            "Rock Slide",
+            "Wide Guard",
+            "Tailwind",
+            "Dual Wingbeat"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Aerodactylite"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "ability": "Defiant",
+          "moves": [
+            "Kowtow Cleave",
+            "Iron Head",
+            "Sucker Punch",
+            "Low Kick"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 2
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "item": "Chople Berry"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "ability": "Adaptability",
+          "moves": [
+            "Liquidation",
+            "Last Respects",
+            "Aqua Jet",
+            "Protect"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          },
+          "item": "Focus Sash"
+        }
+      ]
+    },
+    {
+      "id": "vrnc2-1",
+      "event": "VRNC2",
+      "rank": 1,
+      "player": "Ko Tsukide (JPN)",
+      "name": "리자몽Y 쾌청 순풍",
+      "tags": [
+        "쾌청",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "엘풍의 순풍 아래에서 메가리자몽Y 의 쾌청 광역기와 메가보만다로 빠르게 밀어붙이고, 대쓰여너와 대도각참이 후반을 정리하는 공격형 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/IlBcWMyr"
+    },
+    {
+      "id": "vrnc2-2",
+      "event": "VRNC2",
+      "rank": 2,
+      "player": "Matteo Boschmans (BEL)",
+      "name": "눈여아 밸런스",
+      "tags": [
+        "밸런스",
+        "위협 순환"
+      ],
+      "summary": "메가눈여아의 빠른 방해와 화력을 어흥염·더시마사리의 수비 순환이 받치고, 대도각참이 후반을 마무리하는 밸런스 구성.",
+      "members": [
+        {
+          "species": "froslass",
+          "form": "mega",
+          "item": "Froslassite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Black Glasses",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "toxapex",
+          "form": "base",
+          "item": "Leftovers",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 2,
+              "def": 0,
+              "spa": 0,
+              "spd": 32,
+              "spe": 0
+            },
+            "boost": "spd",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/rrWIhPgV"
+    },
+    {
+      "id": "vrnc2-3",
+      "event": "VRNC2",
+      "rank": 3,
+      "player": "Kandai Nagatome (JPN)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "메가플라엣테와 메가보만다 두 에이스를 어흥염·포푸니크·고릴타의 속이기 3장이 받쳐 주는, 두 대회에서 가장 많이 쓰인 구성.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/VspydWhf"
+    },
+    {
+      "id": "vrnc2-4",
+      "event": "VRNC2",
+      "rank": 4,
+      "player": "Adam Cherfaoui (FRA)",
+      "name": "라이츄Y 보만다",
+      "tags": [
+        "더블 메가",
+        "위협 견제"
+      ],
+      "summary": "메가라이츄Y 와 메가보만다의 고속 화력에 타부자고·히스이 윈디를 더하고, 밀로틱으로 상대 위협을 견제하는 구성.",
+      "members": [
+        {
+          "species": "raichu",
+          "form": "megay",
+          "item": "Raichunite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "arcanine",
+          "form": "hisui",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "milotic",
+          "form": "base",
+          "item": "Leftovers",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/OBHSQsnY"
+    },
+    {
+      "id": "vrnc2-5",
+      "event": "VRNC2",
+      "rank": 5,
+      "player": "Brady Smith (USA)",
+      "name": "팬텀 봉쇄 + 비비용",
+      "tags": [
+        "교체 봉쇄",
+        "수면",
+        "능력 상승"
+      ],
+      "summary": "메가팬텀이 교체를 막은 사이 비비용의 수면과 분노가루로 시간을 벌고, 짜랑고우거가 능력을 올려 에이스가 되는 구성.",
+      "members": [
+        {
+          "species": "gengar",
+          "form": "mega",
+          "item": "Gengarite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "vivillon",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 2,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "kommoo",
+          "form": "base",
+          "item": "Leftovers",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/a6te004F"
+    },
+    {
+      "id": "vrnc2-6",
+      "event": "VRNC2",
+      "rank": 6,
+      "player": "Hippolyte Bernard (FRA)",
+      "name": "팬텀 봉쇄 + 하마돈",
+      "tags": [
+        "교체 봉쇄",
+        "모래바람"
+      ],
+      "summary": "메가팬텀의 교체 봉쇄에 하마돈의 모래바람과 높은 내구를 더해 천천히 유리한 대면을 굳히는 구성.",
+      "members": [
+        {
+          "species": "gengar",
+          "form": "mega",
+          "item": "Gengarite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Chople Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Grassy Seed",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "hippowdon",
+          "form": "base",
+          "item": "Leftovers",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Occa Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/CAwXXJEc"
+    },
+    {
+      "id": "vrnc2-7",
+      "event": "VRNC2",
+      "rank": 7,
+      "player": "Michael Kelsch (DEU)",
+      "name": "라이츄Y 찌르호크",
+      "tags": [
+        "더블 메가",
+        "위협"
+      ],
+      "summary": "메가라이츄Y 와 메가찌르호크의 빠른 화력에 누리레느·타부자고의 특수 화력을 더한 공격형 구성.",
+      "members": [
+        {
+          "species": "raichu",
+          "form": "megay",
+          "item": "Raichunite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "primarina",
+          "form": "base",
+          "item": "Grassy Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "arcanine",
+          "form": "hisui",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/3oxJ6cLr"
+    },
+    {
+      "id": "vrnc2-8",
+      "event": "VRNC2",
+      "rank": 8,
+      "player": "Théotime Massaut (FRA)",
+      "name": "마기라스 모래 + 트릭룸",
+      "tags": [
+        "모래바람",
+        "더블 메가"
+      ],
+      "summary": "메가마기라스의 모래바람 아래에서 몰드류가 먼저 움직이고, 그우린차와 밀로틱이 뒤를 받치는 모래 구성.",
+      "members": [
+        {
+          "species": "tyranitar",
+          "form": "mega",
+          "item": "Tyranitarite",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "gholdengo",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "milotic",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "sinistcha",
+          "form": "base",
+          "item": "Rocky Helmet",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/wtX1o2nL"
+    },
+    {
+      "id": "vrnc1-1",
+      "event": "VRNC1",
+      "rank": 1,
+      "player": "Federico Camporesi (ITA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "메가플라엣테와 메가보만다 두 에이스를 어흥염·포푸니크·고릴타의 속이기 3장이 받쳐 주는 구성. #1 대회 1·4·8위가 같은 6마리다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 28,
+              "atk": 0,
+              "def": 14,
+              "spa": 15,
+              "spd": 0,
+              "spe": 9
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Flower Veil"
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 21,
+              "atk": 0,
+              "def": 0,
+              "spa": 20,
+              "spd": 2,
+              "spe": 23
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Intimidate"
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 30,
+              "atk": 0,
+              "def": 13,
+              "spa": 0,
+              "spd": 21,
+              "spe": 2
+            },
+            "boost": "spd",
+            "reduce": "spa",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Intimidate"
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Adaptability"
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 28,
+              "atk": 14,
+              "def": 1,
+              "spa": 0,
+              "spd": 15,
+              "spe": 8
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Unburden"
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 24,
+              "atk": 32,
+              "def": 1,
+              "spa": 0,
+              "spd": 1,
+              "spe": 8
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "source": "https://pokepast.es/f4196edc9ac3f376"
+          },
+          "ability": "Grassy Surge"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/RkLnn8be"
+    },
+    {
+      "id": "vrnc1-2",
+      "event": "VRNC1",
+      "rank": 2,
+      "player": "Ryan Klemick (USA)",
+      "name": "킬라플로르 모래",
+      "tags": [
+        "모래바람",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "하마돈의 모래바람 아래에서 묘두기가 먼저 움직이고, 메가킬라플로르와 메가찌르호크가 화력을 내는 모래 구성. 엘풍의 순풍도 겸한다.",
+      "members": [
+        {
+          "species": "glimmora",
+          "form": "mega",
+          "item": "Glimmoranite",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 10,
+              "spd": 6,
+              "spe": 18
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          }
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 2,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          }
+        },
+        {
+          "species": "houndstone",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 29,
+              "def": 7,
+              "spa": 0,
+              "spd": 0,
+              "spe": 28
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Sand Rush"
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 25,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 9
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Defiant"
+        },
+        {
+          "species": "hippowdon",
+          "form": "base",
+          "item": "Leftovers",
+          "training": {
+            "points": {
+              "hp": 25,
+              "atk": 8,
+              "def": 1,
+              "spa": 0,
+              "spd": 32,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Sand Stream"
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "source": "https://pokepast.es/30495c7204e09ea2"
+          },
+          "ability": "Prankster"
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/Cql8Z4sh"
+    },
+    {
+      "id": "vrnc1-3",
+      "event": "VRNC1",
+      "rank": 3,
+      "player": "Luca Gesualdo (ITA)",
+      "name": "리자몽Y 플라엣테",
+      "tags": [
+        "쾌청",
+        "순풍",
+        "더블 메가"
+      ],
+      "summary": "엘풍의 순풍 아래에서 메가리자몽Y 또는 메가플라엣테를 상대에 맞춰 골라 내보내는 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Mystic Water",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Chople Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "whimsicott",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/0kmpg1ls"
+    },
+    {
+      "id": "vrnc1-4",
+      "event": "VRNC1",
+      "rank": 4,
+      "player": "Théotime Massaut (FRA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "1위 팀과 같은 6마리. 메가플라엣테와 메가보만다를 속이기 3장이 받친다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/Qkyygwyh"
+    },
+    {
+      "id": "vrnc1-5",
+      "event": "VRNC1",
+      "rank": 5,
+      "player": "Jonathan Zuniga (DOM)",
+      "name": "플라엣테 망나뇽",
+      "tags": [
+        "더블 메가",
+        "속이기"
+      ],
+      "summary": "스탠다드 구성에서 메가보만다 자리를 메가망나뇽으로, 어흥염 자리를 대도각참으로 바꾼 변형.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "dragonite",
+          "form": "mega",
+          "item": "Dragoninite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Mystic Water",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Miracle Seed",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/0LHEgdwS"
+    },
+    {
+      "id": "vrnc1-6",
+      "event": "VRNC1",
+      "rank": 6,
+      "player": "Jongseo Lee (KOR)",
+      "name": "리자몽Y 쾌청 + 트릭룸",
+      "tags": [
+        "쾌청",
+        "트릭룸"
+      ],
+      "summary": "메가리자몽Y 의 쾌청으로 이상해꽃이 빨라지는 쾌청 축과, 키키링의 트릭룸으로 님피아가 먼저 움직이는 축을 함께 가진 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Chople Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "farigiraf",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "sylveon",
+          "form": "base",
+          "item": "Fairy Feather",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "venusaur",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/nK8kvegH"
+    },
+    {
+      "id": "vrnc1-7",
+      "event": "VRNC1",
+      "rank": 7,
+      "player": "Du Shaoqing (CHN)",
+      "name": "사이코필드 클레스퍼트라",
+      "tags": [
+        "사이코필드",
+        "쾌청",
+        "더블 메가"
+      ],
+      "summary": "에써르의 사이코필드와 날따름으로 클레스퍼트라를 지켜 가속시키고, 메가리자몽Y·메가찌르호크가 화력을 더하는 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "staraptor",
+          "form": "mega",
+          "item": "Staraptite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "indeedee",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "espathra",
+          "form": "base",
+          "item": "Psychic Seed",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "sylveon",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "item": "Choice Scarf",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/IEW2u6Bd"
+    },
+    {
+      "id": "vrnc1-8",
+      "event": "VRNC1",
+      "rank": 8,
+      "player": "Emanuele Briganti (ITA)",
+      "name": "플라엣테 보만다 스탠다드",
+      "tags": [
+        "더블 메가",
+        "속이기",
+        "그래스필드"
+      ],
+      "summary": "1위 팀과 같은 6마리. 메가플라엣테와 메가보만다를 속이기 3장이 받친다.",
+      "members": [
+        {
+          "species": "floette",
+          "form": "mega",
+          "item": "Floettite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "incineroar",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "basculegion",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "White Herb",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "rillaboom",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/b6UqzpQi"
+    },
+    {
+      "id": "vrnc1-10",
+      "event": "VRNC1",
+      "rank": 10,
+      "player": "Marcus Koh",
+      "name": "리자몽Y 보만다 + 트릭룸",
+      "tags": [],
+      "summary": "메가리자몽Y 와 메가보만다 두 에이스에 키키링의 트릭룸과 느린 만마드를 더해, 빠른 전개와 느린 전개를 모두 쓸 수 있게 한 구성.",
+      "members": [
+        {
+          "species": "charizard",
+          "form": "megay",
+          "item": "Charizardite Y",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "salamence",
+          "form": "mega",
+          "item": "Salamencite",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "kingambit",
+          "form": "base",
+          "item": "Black Glasses",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "sneasler",
+          "form": "base",
+          "item": "Focus Sash",
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "farigiraf",
+          "form": "base",
+          "item": "Sitrus Berry",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "mudsdale",
+          "form": "base",
+          "item": "Life Orb",
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        }
+      ],
+      "sourceUrl": "https://www.vrpastes.com/KlYd9juC"
+    }
+  ]
+}

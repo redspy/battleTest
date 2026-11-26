@@ -1,0 +1,30 @@
+{
+  "_comment": "오리지널 몬스터 세트의 기본 팀. 형식은 data/pokemon/teams.json 과 같다.",
+  "set": "monsters",
+  "title": "몬스터 대전",
+  "subtitle": "오리지널 규칙 · 6마리 중 3마리 선출 (싱글)",
+  "pick": 3,
+  "events": [
+    { "id": "PRESET", "name": "기본 팀", "date": "", "note": "앱에 들어 있는 연습용 팀" }
+  ],
+  "teams": [
+    { "id": "rush", "event": "PRESET", "rank": 1, "player": "속공", "name": "번개불 속공", "tags": ["속공", "선공기"],
+      "summary": "스피드가 높은 몬스터와 선공 기술로 상대가 기력을 모으기 전에 끝내는 팀. 내구가 낮아 길어지면 불리하다.",
+      "members": [ { "species": "zapple", "form": "base" }, { "species": "embercub", "form": "base" }, { "species": "voltusk", "form": "base" }, { "species": "frostel", "form": "base" }, { "species": "thornap", "form": "base" }, { "species": "tidalon", "form": "base" } ] },
+    { "id": "wall", "event": "PRESET", "rank": 2, "player": "버티기", "name": "돌이끼 버티기", "tags": ["내구", "회복"],
+      "summary": "방어와 회복으로 버티며 40턴 판정이나 상대의 기력 낭비를 노리는 팀. 방어를 깎는 상대에게 약하다.",
+      "members": [ { "species": "pebblet", "form": "base" }, { "species": "mossle", "form": "base" }, { "species": "glacub", "form": "base" }, { "species": "ripplet", "form": "base" }, { "species": "tidalon", "form": "base" }, { "species": "cragon", "form": "base" } ] },
+    { "id": "burst", "event": "PRESET", "rank": 3, "player": "한 방", "name": "기력 폭발", "tags": ["기력 가속", "대형 기술"],
+      "summary": "물방울이의 밀물로 기력을 빨리 채워 대형 기술을 연달아 쓰는 팀. 기력을 깎는 번개 속성이 천적이다.",
+      "members": [ { "species": "ripplet", "form": "base" }, { "species": "blazorn", "form": "base" }, { "species": "cragon", "form": "base" }, { "species": "tidalon", "form": "base" }, { "species": "glacub", "form": "base" }, { "species": "voltusk", "form": "base" } ] },
+    { "id": "slow", "event": "PRESET", "rank": 4, "player": "둔화", "name": "서리 둔화", "tags": ["둔화", "순서 뒤집기"],
+      "summary": "상대를 둔화시켜 느린 화력 몬스터가 먼저 움직이게 만드는 팀. 선공 기술에는 둔화가 통하지 않는다.",
+      "members": [ { "species": "frostel", "form": "base" }, { "species": "glacub", "form": "base" }, { "species": "blazorn", "form": "base" }, { "species": "cragon", "form": "base" }, { "species": "mossle", "form": "base" }, { "species": "zapple", "form": "base" } ] },
+    { "id": "shred", "event": "PRESET", "rank": 5, "player": "약화", "name": "가시 그을음", "tags": ["방어 약화", "그을음"],
+      "summary": "방어를 깎고 그을음을 남겨 벽을 무너뜨리는 팀. 버티는 팀에 강하고 속공에 약하다.",
+      "members": [ { "species": "thornap", "form": "base" }, { "species": "embercub", "form": "base" }, { "species": "blazorn", "form": "base" }, { "species": "mossle", "form": "base" }, { "species": "voltusk", "form": "base" }, { "species": "pebblet", "form": "base" } ] },
+    { "id": "mix", "event": "PRESET", "rank": 6, "player": "균형", "name": "여섯 속성 균형", "tags": ["균형", "상성 대응"],
+      "summary": "여섯 속성을 하나씩 넣어 어떤 상대에게도 유리한 3마리를 고를 수 있는 팀. 선출 판단이 승패를 가른다.",
+      "members": [ { "species": "embercub", "form": "base" }, { "species": "thornap", "form": "base" }, { "species": "cragon", "form": "base" }, { "species": "zapple", "form": "base" }, { "species": "tidalon", "form": "base" }, { "species": "frostel", "form": "base" } ] }
+  ]
+}

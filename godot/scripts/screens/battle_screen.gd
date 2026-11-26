@@ -1,0 +1,556 @@
+class_name BattleScreen
+extends Control
+## 대회 팀 1:1 대전 화면. 위 = 상대, 아래 = 나. 상태는 Net.view["battle"], 연출은 Net.view["events"] 를 순서대로 재생한다.
+
+var _set_id: String
+const STAT_KO := Data.STAT_LABELS
+
+var _b := {}                  # 지금 화면에 보이는 상태 (사건을 재생하며 따라간다)
+var _me := 0
+var _gimmick := ""
+var _playing := false
+var _pending := []            # 재생을 기다리는 보기
+var _leave_armed := 0.0
+
+var _turn: Label
+var _conditions: Label
+var _log: Label
+var _info := [null, null]     # 자리별 정보 칸 (VBoxContainer)
+var _spr := [null, null]      # 자리별 그림
+var _actions: VBoxContainer
+var _status_layer: Control
+var _status_content: VBoxContainer
+
+func _ready() -> void:
+	_set_id = str(Net.view["set"])
+	var bg := ColorRect.new()
+	bg.color = UI.BG
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(bg)
+	var root := VBoxContainer.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.add_theme_constant_override("separation", 10)
+	add_child(root)
+	var m := UI.margin(20)
+	m.add_theme_constant_override("margin_top", int(UI.safe_top(self)) + 16)
+	m.add_theme_constant_override("margin_bottom", int(UI.safe_bottom(self)) + 16)
+	m.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	root.add_child(m)
+	var fit_columns := func():
+		var side_margin := maxi(20, int((root.size.x - 1024.0) * 0.5))
+		m.add_theme_constant_override("margin_left", side_margin)
+		m.add_theme_constant_override("margin_right", side_margin)
+	root.resized.connect(fit_columns)
+	fit_columns.call()
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 10)
+	m.add_child(col)
+
+	var head := HBoxContainer.new()
+	_turn = UI.label("턴 1", 30, UI.ACCENT)
+	_turn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.add_child(_turn)
+	var details := UI.button("상태 보기", 22)
+	details.tapped.connect(_show_status)
+	head.add_child(details)
+	var quit := UI.button("나가기", 22)
+	quit.tapped.connect(_ask_leave)
+	head.add_child(quit)
+	col.add_child(head)
+	_conditions = Lay.wrap("", 21, UI.TEXT_DIM)
+	_conditions.visible = false
+	col.add_child(_conditions)
+
+	# 위: 상대 (정보 왼쪽, 그림 오른쪽) / 아래: 나 (그림 왼쪽, 정보 오른쪽)
+	for who in ["foe", "me"]:
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		row.size_flags_vertical = Control.SIZE_FILL
+		var card := Lay.card(UI.PANEL, 14)
+		(card[0] as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		(card[0] as Control).size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		var spr := SpriteAnim.new()
+		spr.custom_minimum_size = Vector2(274, 212)
+		spr.bottom = true
+		var i := 0 if who == "foe" else 1
+		_info[i] = card[1]
+		_spr[i] = spr
+		if who == "foe":
+			row.add_child(card[0])
+			row.add_child(spr)
+		else:
+			row.add_child(spr)
+			row.add_child(card[0])
+		col.add_child(row)
+
+	var logp := UI.panel(UI.BG_DEEP, 14)
+	var lm := UI.margin(12)
+	_log = Lay.wrap("", 24, UI.TEXT)
+	_log.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_log.custom_minimum_size = Vector2(0, 48)
+	_log.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lm.add_child(_log)
+	logp.add_child(lm)
+	col.add_child(logp)
+
+	var action_scroll := ScrollContainer.new()
+	action_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	action_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	action_scroll.scroll_deadzone = 10
+	action_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	col.add_child(action_scroll)
+	_actions = VBoxContainer.new()
+	_actions.add_theme_constant_override("separation", 8)
+	_actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	action_scroll.add_child(_actions)
+
+	Net.changed.connect(_on_changed)
+	_me = int(Net.view.get("seat", 0))
+	_b = Net.view.get("battle", {})
+	_log.text = "대전 시작! 기술이나 교체를 고르세요."
+	_draw_all()
+
+func _process(delta: float) -> void:
+	_leave_armed = maxf(0.0, _leave_armed - delta)
+
+func on_back() -> bool:
+	if is_instance_valid(_status_layer):
+		_status_layer.hide()
+		_status_layer.queue_free()
+		_status_layer = null
+		_status_content = null
+		return true
+	_ask_leave()
+	return true
+
+func _ask_leave() -> void:
+	if _leave_armed > 0.0 or _b.get("over", false):
+		Net.leave()
+		Nav.pop_to_root()
+	else:
+		_leave_armed = 2.5
+		_log.text = "한 번 더 누르면 대전에서 나갑니다."
+
+func _on_changed() -> void:
+	var v: Dictionary = Net.view
+	if str(v.get("phase", "")) != "battle":
+		if Nav.current() == self:
+			Nav.pop()
+		return
+	_pending.append(v)
+	if not _playing:
+		_drain()
+
+func _drain() -> void:
+	_playing = true
+	while not _pending.is_empty():
+		var v: Dictionary = _pending.pop_front()
+		var events: Array = v.get("events", [])
+		if not events.is_empty():
+			_actions_message("…")
+			for e in events:
+				if not is_inside_tree():
+					return
+				await _play(e, v["battle"])
+		_b = v["battle"]
+		if is_inside_tree():
+			_draw_all()
+	_playing = false
+
+# ───────────── 그리기 ─────────────
+
+## 자리(0/1) → 화면 칸(0 위 = 상대, 1 아래 = 나)
+func _slot(seat: int) -> int:
+	return 1 if seat == _me else 0
+
+func _active(seat: int) -> Dictionary:
+	var side: Dictionary = _b["sides"][seat]
+	return side["mons"][int(side["active"])]
+
+func _name(seat: int) -> String:
+	var mon := _active(seat)
+	return Data.display_name(_set_id, mon["id"], mon["form"])
+
+func _draw_all() -> void:
+	if _b.is_empty():
+		return
+	var conditions := []
+	for key in ["weather", "terrain"]:
+		if _b.get(key, "") != "":
+			conditions.append(_b[key])
+	if _b.get("trickRoom", 0) > 0:
+		conditions.append("트릭룸")
+	_turn.text = "턴 %d" % int(_b["turn"])
+	_conditions.text = " · ".join(conditions)
+	_conditions.visible = not conditions.is_empty()
+	for seat in 2:
+		_draw_side(seat)
+	_draw_actions()
+	if is_instance_valid(_status_content):
+		_draw_status()
+
+func _show_status() -> void:
+	if _b.is_empty() or is_instance_valid(_status_layer):
+		return
+	_leave_armed = 0.0
+	_status_layer = Control.new()
+	_status_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(_status_layer)
+	_status_content = Lay.page(_status_layer, "상태 보기")
+	_draw_status()
+
+func _draw_status() -> void:
+	for child in _status_content.get_children():
+		_status_content.remove_child(child)
+		child.queue_free()
+	var field := _status_card("필드 · 턴 %d" % int(_b["turn"]))
+	field.add_child(Lay.wrap("날씨  " + _timed_effect(str(_b.get("weather", "")), int(_b.get("weatherTurns", 0))), 24))
+	field.add_child(Lay.wrap("필드 효과  " + _timed_effect(str(_b.get("terrain", "")), int(_b.get("terrainTurns", 0))), 24))
+	var room := int(_b.get("trickRoom", 0))
+	field.add_child(Lay.wrap("트릭룸  " + _timed_effect("적용 중" if room > 0 else "", room), 24))
+	for seat in [_me, 1 - _me]:
+		var side: Dictionary = _b["sides"][seat]
+		var roster := _status_card("내 포켓몬" if seat == _me else "상대 포켓몬")
+		var tailwind := int(side.get("tailwind", 0))
+		if tailwind > 0:
+			roster.add_child(Lay.wrap(_timed_effect("순풍", tailwind), 22, UI.ACCENT))
+		var residual_turns := int(side.get("gmaxResidualTurns", 0))
+		if residual_turns > 0:
+			roster.add_child(Lay.wrap(_timed_effect(str(side["gmaxResidual"]) + " 지속 피해", residual_turns), 22, UI.ACCENT))
+		for index in side["mons"].size():
+			var mon: Dictionary = side["mons"][index]
+			if mon.get("hidden", false):
+				roster.add_child(Lay.wrap("아직 등장하지 않은 포켓몬", 22, UI.TEXT_DIM))
+				continue
+			var deployed: bool = int(side["active"]) == index and int(mon["hp"]) > 0
+			var name := Data.display_name(_set_id, str(mon["id"]), str(mon["form"]))
+			roster.add_child(Lay.wrap(name + (" · 출전 중" if deployed else ""), 25, UI.ACCENT if deployed else UI.TEXT))
+			var hp := "%d/%d" % [int(mon["hp"]), int(mon["max"])] if seat == _me else "%d%%" % ceili(100.0 * float(mon["hp"]) / float(mon["max"]))
+			roster.add_child(Lay.wrap("HP %s  ·  %s" % [hp, _pokemon_status(mon)], 22, UI.TEXT_DIM))
+			if deployed:
+				var stages := PackedStringArray()
+				for key in Data.RANK_STATS:
+					if int(mon.get(key, 0)) != 0:
+						stages.append("%s %+d" % [STAT_KO[key], int(mon[key])])
+				roster.add_child(Lay.wrap("능력 변화  " + ("없음" if stages.is_empty() else " · ".join(stages)), 22, UI.TEXT_DIM))
+
+func _status_card(title: String) -> VBoxContainer:
+	var card := Lay.card()
+	_status_content.add_child(card[0])
+	var content: VBoxContainer = card[1]
+	content.add_child(Lay.wrap(title, 27, UI.ACCENT))
+	return content
+
+func _timed_effect(name: String, turns: int) -> String:
+	if name.is_empty():
+		return "없음"
+	return "%s · %d턴 남음" % [name, turns] if turns > 0 else name
+
+func _pokemon_status(mon: Dictionary) -> String:
+	if int(mon["hp"]) <= 0:
+		return "기절"
+	var effects := PackedStringArray()
+	if int(mon.get("sleep", 0)) > 0:
+		effects.append("잠듦")
+	elif str(mon.get("status", "")) != "":
+		effects.append(str(mon["status"]))
+	var volatile := {"confusion": "혼란", "leechSeed": "씨뿌리기", "trapped": "교체 제한", "throatChop": "소리 기술 제한", "charge": "충전 중", "recharge": "반동으로 휴식", "dot": "그을음", "slow": "둔화"}
+	for flag in volatile:
+		if mon.get(flag):
+			effects.append(volatile[flag])
+	if int(mon.get("gmaxTurns", 0)) > 0:
+		effects.append(_timed_effect("거다이맥스", int(mon["gmaxTurns"])))
+	return "정상" if effects.is_empty() else " · ".join(effects)
+
+func _draw_side(seat: int) -> void:
+	var slot := _slot(seat)
+	var side: Dictionary = _b["sides"][seat]
+	var mon := _active(seat)
+	var spr: SpriteAnim = _spr[slot]
+	var down := int(mon.get("hp", 0)) <= 0
+	spr.show_sprite(_set_id, str(Data.form(_set_id, str(mon["id"]), mon["form"]).get("file", "")), false)
+	spr.modulate.a = 0.0 if down else 1.0
+	var col: VBoxContainer = _info[slot]
+	for c in col.get_children():
+		c.queue_free()
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 8)
+	head.add_child(Lay.wrap(("나 · " if seat == _me else "상대 · ") + _name(seat), 26, UI.TEXT))
+	col.add_child(head)
+	col.add_child(Lay.type_chips(mon["types"]))
+	var bar := ProgressBar.new()
+	bar.max_value = float(mon["max"])
+	bar.value = float(mon["hp"])
+	bar.show_percentage = false
+	bar.custom_minimum_size = Vector2(0, 22)
+	var ratio := float(mon["hp"]) / float(mon["max"])
+	bar.add_theme_stylebox_override("background", UI.box(UI.BG_DEEP, 11))
+	bar.add_theme_stylebox_override("fill", UI.box(Color(0.36, 0.82, 0.52) if ratio > 0.5 else (Color(0.98, 0.78, 0.30) if ratio > 0.2 else Color(0.96, 0.45, 0.42)), 11))
+	col.add_child(bar)
+	col.add_child(UI.label("체력 %d / %d" % [int(mon["hp"]), int(mon["max"])], 21, UI.TEXT_DIM))
+	if seat == _me:
+		col.add_child(Lay.wrap("도구 " + _item_text(mon), 21, UI.TEXT_DIM if _item_spent(mon) else UI.ACCENT))
+	var st := []
+	if int(mon.get("dot", 0)) > 0: st.append("그을음 %d" % int(mon["dot"]))
+	if int(mon.get("slow", 0)) > 0: st.append("둔화 %d" % int(mon["slow"]))
+	if mon.get("guard", false): st.append("수비 태세")
+	if mon.get("status", "") != "": st.append(mon["status"])
+	if mon.get("sleep", 0) > 0: st.append("잠듦")
+	if mon.get("gmaxTurns", 0) > 0: st.append("거다이맥스 %d" % int(mon["gmaxTurns"]))
+	for k in Data.RANK_STATS:
+		if int(mon.get(k, 0)) != 0:
+			st.append("%s %+d" % [STAT_KO[k], int(mon[k])])
+	if not st.is_empty():
+		col.add_child(Lay.chips(st, func(_x): return Color(0.62, 0.82, 1.0)))
+	# 팀: ● 남음 ✕ 쓰러짐 ？ 아직 안 나옴
+	var team := ""
+	for m in side["mons"]:
+		team += "？ " if m.get("hidden", false) else ("✕ " if int(m["hp"]) <= 0 else "● ")
+
+## 지닌 도구가 없거나 이미 써 버렸는지 (엔진: 소모·떨어뜨리기 모두 itemUsed)
+func _item_spent(mon: Dictionary) -> bool:
+	return str(mon.get("item", "")) == "" or mon.get("itemUsed", false)
+
+## 우리 편 몬스터가 지닌 도구 이름. 한글 이름이 없으면 영문 이름을 쓴다.
+func _item_text(mon: Dictionary) -> String:
+	var item := str(mon.get("item", ""))
+	if item == "":
+		return "없음"
+	var ko = Data.sets[_set_id]["items"].get(item, {}).get("ko")
+	var text := str(ko) if ko != null and str(ko) != "" else item
+	return text + " (사용함)" if mon.get("itemUsed", false) else text
+
+func _actions_message(text: String) -> void:
+	for c in _actions.get_children():
+		c.queue_free()
+	var l := UI.label(text, 26, UI.TEXT_DIM, HORIZONTAL_ALIGNMENT_CENTER)
+	l.custom_minimum_size = Vector2(0, 120)
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_actions.add_child(l)
+
+func _draw_actions() -> void:
+	for c in _actions.get_children():
+		c.queue_free()
+	if _b["over"]:
+		var w := int(_b["winner"])
+		var text := "무승부" if w < 0 else ("승리!" if w == _me else "패배")
+		_log.text = "대전이 끝났습니다."
+		_actions.add_child(UI.label(text, 56, UI.ACCENT, HORIZONTAL_ALIGNMENT_CENTER))
+		var again := UI.button("다시 하기 (팀 고르기로)", 28, true)
+		again.tapped.connect(func(): Net.send({ "t": "again" }))
+		_actions.add_child(again)
+		return
+	if not _b["waiting"]:
+		_actions_message("상대를 기다리는 중…")
+		return
+	var need: bool = _b["sides"][_me]["need"]
+	if need:
+		_log.text = "다음에 내보낼 몬스터를 고르세요."
+	var foe := _active(1 - _me)
+	var me := _active(_me)
+	var options: Array = _b.get("gimmicks", [])
+	if _gimmick not in options:
+		_gimmick = ""
+	if not options.is_empty():
+		var row := HBoxContainer.new()
+		for option in options:
+			var kind := str(option)
+			var text := "메가진화" if kind == "mega" else "거다이맥스"
+			var button := UI.button(text + (" ✓" if kind == _gimmick else ""), 24, kind == _gimmick)
+			button.tapped.connect(func():
+				_gimmick = "" if _gimmick == kind else kind
+				_draw_actions())
+			row.add_child(button)
+		_actions.add_child(row)
+	var bench := GridContainer.new()
+	bench.columns = 2
+	bench.add_theme_constant_override("h_separation", 8)
+	bench.add_theme_constant_override("v_separation", 8)
+	for a in _b["legal"]:
+		if a["k"] == "move":
+			_actions.add_child(_move_button(a, me, foe))
+		else:
+			bench.add_child(_swap_button(a))
+	if bench.get_child_count() > 0:
+		_actions.add_child(UI.label("교체" if not need else "내보낼 몬스터", 22, UI.TEXT_DIM))
+		_actions.add_child(bench)
+	else:
+		bench.free()
+
+func _move_button(a: Dictionary, me: Dictionary, foe: Dictionary) -> Control:
+	var preview := BEngine.preview_combatant(me, _gimmick)
+	var field := _b
+	if _gimmick == "mega":
+		var weather: String = { "Drought": "쾌청", "Drizzle": "비", "Sand Stream": "모래바람", "Snow Warning": "눈" }.get(preview["ability"], "")
+		if weather != "":
+			field = _b.duplicate()
+			field["weather"] = weather
+	var mv := BEngine.preview_move(field, preview, str(a["id"]), "")
+	var c := Lay.tap_card(UI.PANEL_HI, 12)
+	var tap: TapArea = c[0]
+	var col: VBoxContainer = c[1]
+	col.add_theme_constant_override("separation", 2)
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 8)
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(UI.chip(str(mv["type"]), Data.type_color(str(mv["type"]))))
+	var name := Lay.wrap(str(mv["ko"]), 25, UI.TEXT)
+	head.add_child(name)
+	if mv.get("power") != null and not foe.get("hidden", false):
+		var eff := str(BEngine.effectiveness(str(mv["type"]), foe, preview)[1])
+		if eff != "":
+			var label: String = { "strong": "▲ 유리", "weak": "▼ 불리", "immune": "효과 없음" }[eff]
+			head.add_child(UI.label(label, 21, Color(0.36, 0.82, 0.52) if eff == "strong" else Color(0.96, 0.45, 0.42)))
+		if eff != "immune":
+			head.add_child(UI.label("%d–%d" % [BEngine.damage(preview, foe, mv, 85, field), BEngine.damage(preview, foe, mv, 100, field)], 21, UI.TEXT_DIM))
+	var move_id := str(a["id"])
+	var max_pp := BEngine.max_pp(_set_id, move_id)
+	if max_pp > 0:
+		var remaining := int(me.get("pp", {}).get(move_id, 0))
+		head.add_child(UI.chip("PP %d/%d" % [remaining, max_pp], Color(0.62, 0.82, 1.0)))
+	col.add_child(head)
+	col.add_child(Lay.wrap(str(mv.get("desc", "")) if a["ok"] else "사용 불가: %s" % a["why"], 19, UI.TEXT_DIM))
+	if a["ok"]:
+		var id := str(a["id"])
+		tap.tapped.connect(func():
+			var action := { "k": "move", "id": id }
+			if _gimmick != "":
+				action["gimmick"] = _gimmick
+			_gimmick = ""
+			_act(action))
+	else:
+		tap.modulate.a = 0.4
+	return tap
+
+func _swap_button(a: Dictionary) -> Control:
+	var mon: Dictionary = _b["sides"][_me]["mons"][int(a["to"])]
+	var c := Lay.tap_card(UI.PANEL_HI, 8)
+	var tap: TapArea = c[0]
+	tap.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 8)
+	var spr := SpriteAnim.new(_set_id, str(Data.form(_set_id, str(mon["id"]), mon["form"]).get("file", "")), true)
+	spr.custom_minimum_size = Vector2(76, 76)
+	spr.playing = false
+	row.add_child(spr)
+	var info := VBoxContainer.new()
+	info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	info.add_child(Lay.wrap(Data.display_name(_set_id, mon["id"], mon["form"]), 21, UI.TEXT))
+	info.add_child(UI.label("%d / %d" % [int(mon["hp"]), int(mon["max"])], 19, UI.TEXT_DIM))
+	var item := UI.label(_item_text(mon), 18, UI.TEXT_DIM if _item_spent(mon) else UI.ACCENT)
+	item.clip_text = true
+	info.add_child(item)
+	row.add_child(info)
+	(c[1] as VBoxContainer).add_child(row)
+	var to := int(a["to"])
+	tap.tapped.connect(func(): _act({ "k": "swap", "to": to }))
+	return tap
+
+func _act(a: Dictionary) -> void:
+	if _playing:
+		return
+	_actions_message("상대를 기다리는 중…")
+	Net.send({ "t": "act", "a": a })
+
+# ───────────── 사건 재생 ─────────────
+
+func _wait(t: float) -> void:
+	await get_tree().create_timer(t).timeout
+
+func _who(seat: int) -> String:
+	return "나의 " if seat == _me else "상대 "
+
+func _float_text(slot: int, text: String, color: Color) -> void:
+	var spr: Control = _spr[slot]
+	var l := UI.label(text, 52, color, HORIZONTAL_ALIGNMENT_CENTER)
+	l.add_theme_color_override("font_outline_color", Color.BLACK)
+	l.add_theme_constant_override("outline_size", 10)
+	l.size = Vector2(spr.size.x, 70)
+	l.position = spr.global_position + Vector2(0, spr.size.y * 0.3)
+	add_child(l)
+	var tw := l.create_tween()
+	tw.tween_property(l, "position:y", l.position.y - 80, 0.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(l, "modulate:a", 0.0, 0.3).set_delay(0.4)
+	tw.tween_callback(l.queue_free)
+
+func _play(e: Dictionary, final: Dictionary) -> void:
+	var seat := int(e.get("seat", 0))
+	var slot := _slot(seat)
+	var spr: SpriteAnim = _spr[slot]
+	match str(e["e"]):
+		"turn":
+			_turn.text = "턴 %d" % int(e["n"])
+		"swap":
+			var side: Dictionary = _b["sides"][seat]
+			var to := int(e["to"])
+			if side["mons"][to].get("hidden", false):
+				var fresh: Dictionary = (final["sides"][seat]["mons"][to] as Dictionary).duplicate()
+				fresh["hp"] = fresh["max"]
+				for k in ["dot", "slow"] + Data.RANK_STATS:
+					fresh[k] = 0
+				side["mons"][to] = fresh
+			var tw := spr.create_tween()
+			tw.tween_property(spr, "modulate:a", 0.0, 0.15)
+			await tw.finished
+			side["active"] = to
+			_draw_side(seat)
+			spr.modulate.a = 0.0
+			spr.create_tween().tween_property(spr, "modulate:a", 1.0, 0.2)
+			_log.text = "%s%s 등장!" % [_who(seat), _name(seat)]
+			await _wait(0.55)
+		"use":
+			var move_name := str(e.get("name", BEngine.move(_set_id, str(e["move"])).get("ko", "")))
+			_log.text = "%s%s의 [%s]!" % [_who(seat), _name(seat), move_name]
+			var dir := -1.0 if slot == 1 else 1.0
+			var tw := spr.create_tween().set_trans(Tween.TRANS_QUAD)
+			tw.tween_property(spr, "position", spr.position + Vector2(-50 * dir, 40 * dir), 0.12)
+			tw.tween_property(spr, "position", spr.position, 0.18)
+			await _wait(0.55)
+		"dmg":
+			_active(seat)["hp"] = int(e["hp"])
+			_draw_side(seat)
+			spr.modulate.a = 1.0
+			var big := str(e.get("eff", "")) == "strong"
+			_float_text(slot, "-%d" % int(e["amount"]), Color(1.0, 0.35, 0.3) if not big else Color(1.0, 0.8, 0.2))
+			var note: String = { "strong": "효과가 좋다!", "weak": "효과가 별로다…", "immune": "효과가 없다!" }.get(str(e.get("eff", "")), "")
+			if str(e.get("src", "")) == "dot": note = "그을음 피해"
+			if str(e.get("src", "")) == "recoil": note = "반동 피해"
+			if e.get("guard", false): note = "수비 태세로 막았다! " + note
+			if note != "":
+				_log.text = note
+			var amp := 16.0 if big else 9.0
+			var tw := spr.create_tween()
+			for i in 4:
+				tw.tween_property(spr, "position:x", spr.position.x + (amp if i % 2 == 0 else -amp), 0.04)
+			tw.tween_property(spr, "position:x", spr.position.x, 0.04)
+			Input.vibrate_handheld(30 if big else 15)
+			await _wait(0.6)
+		"heal":
+			_active(seat)["hp"] = int(e["hp"])
+			_draw_side(seat)
+			_float_text(slot, "+%d" % int(e["amount"]), Color(0.4, 0.9, 0.55))
+			await _wait(0.5)
+		"transform":
+			_b["sides"][seat]["mons"][int(_b["sides"][seat]["active"])] = e["mon"].duplicate(true)
+			_draw_side(seat)
+			_log.text = "%s%s · %s" % [_who(seat), _name(seat), e["what"]]
+			await _wait(0.6)
+		"field":
+			_log.text = str(e["what"])
+			await _wait(0.35)
+		"status":
+			_log.text = "%s%s: %s" % [_who(seat), _name(seat), e["what"]]
+			await _wait(0.45)
+		"stage":
+			_log.text = "%s%s의 %s %s" % [_who(seat), _name(seat), STAT_KO.get(str(e["stat"]), ""), "상승 ▲" if int(e["delta"]) > 0 else "하락 ▼"]
+			await _wait(0.45)
+		"faint":
+			_log.text = "%s%s 쓰러졌다!" % [_who(seat), _name(seat)]
+			var tw := spr.create_tween()
+			tw.tween_property(spr, "modulate:a", 0.0, 0.35)
+			Input.vibrate_handheld(40)
+			await _wait(0.7)
+		"over":
+			await _wait(0.3)

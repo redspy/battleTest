@@ -1,0 +1,2756 @@
+{
+  "_comment": "기술·도구·특성 설명. 조사 결과(data/research/team_sets.json)를 scripts/apply-research.mjs 로 반영한다.",
+  "set": "pokemon",
+  "moves": {
+    "Acid Armor": {
+      "ko": "녹기",
+      "en": "Acid Armor",
+      "type": "독",
+      "category": "support",
+      "desc": "자신의 방어 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "def",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Aerial Ace": {
+      "ko": "제비반환",
+      "en": "Aerial Ace",
+      "type": "비행",
+      "category": "attack",
+      "desc": "위력 60.",
+      "power": 60,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Air Slash": {
+      "ko": "에어슬래시",
+      "en": "Air Slash",
+      "type": "비행",
+      "category": "attack",
+      "desc": "위력 75.",
+      "power": 75,
+      "damageClass": "special",
+      "accuracy": 95,
+      "target": "any",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Aqua Jet": {
+      "ko": "아쿠아제트",
+      "en": "Aqua Jet",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 40.",
+      "power": 40,
+      "priority": 1,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Brave Bird": {
+      "ko": "브레이브버드",
+      "en": "Brave Bird",
+      "type": "비행",
+      "category": "attack",
+      "desc": "위력 120 · 준 피해의 25%만큼 반동.",
+      "power": 120,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 33
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Brick Break": {
+      "ko": "깨뜨리다",
+      "en": "Brick Break",
+      "type": "격투",
+      "category": "attack",
+      "desc": "위력 75.",
+      "power": 75,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Bug Buzz": {
+      "ko": "벌레의야단법석",
+      "en": "Bug Buzz",
+      "type": "벌레",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 12
+    },
+    "Calm Mind": {
+      "ko": "명상",
+      "en": "Calm Mind",
+      "type": "에스퍼",
+      "category": "support",
+      "desc": "자신의 특수공격·특수방어 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "spd",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Chilling Water": {
+      "ko": "찬물끼얹기",
+      "en": "Chilling Water",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 50 · 상대의 공격 하락.",
+      "power": 50,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "atk",
+          "stages": 1
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Clanging Scales": {
+      "ko": "스케일노이즈",
+      "en": "Clanging Scales",
+      "type": "드래곤",
+      "category": "attack",
+      "desc": "위력 110.",
+      "power": 110,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 8
+    },
+    "Clangorous Soul": {
+      "ko": "소울비트",
+      "en": "Clangorous Soul",
+      "type": "드래곤",
+      "category": "support",
+      "desc": "자신의 공격·방어·스피드 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "atk",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "def",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 8
+    },
+    "Close Combat": {
+      "ko": "인파이트",
+      "en": "Close Combat",
+      "type": "격투",
+      "category": "attack",
+      "desc": "위력 120.",
+      "power": 120,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "selfStages",
+          "stats": {
+            "def": -1,
+            "spd": -1
+          }
+        }
+      ],
+      "pp": 8
+    },
+    "Crunch": {
+      "ko": "깨물어부수기",
+      "en": "Crunch",
+      "type": "악",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Darkest Lariat": {
+      "ko": "DD래리어트",
+      "en": "Darkest Lariat",
+      "type": "악",
+      "category": "attack",
+      "desc": "위력 85.",
+      "power": 85,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Dazzling Gleam": {
+      "ko": "매지컬샤인",
+      "en": "Dazzling Gleam",
+      "type": "페어리",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Dire Claw": {
+      "ko": "페이탈클로",
+      "en": "Dire Claw",
+      "type": "독",
+      "category": "attack",
+      "desc": "30% 확률로 독·마비·잠듦 중 하나를 부여합니다.",
+      "power": 80,
+      "effects": [
+        {
+          "kind": "randomStatus",
+          "chance": 30
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Double-Edge": {
+      "ko": "이판사판태클",
+      "en": "Double-Edge",
+      "type": "노말",
+      "category": "attack",
+      "desc": "위력 120 · 준 피해의 25%만큼 반동.",
+      "power": 120,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 25
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Dragon Claw": {
+      "ko": "드래곤클로",
+      "en": "Dragon Claw",
+      "type": "드래곤",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Dragon Dance": {
+      "ko": "용의춤",
+      "en": "Dragon Dance",
+      "type": "드래곤",
+      "category": "support",
+      "desc": "자신의 공격·스피드 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "atk",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Dragon Pulse": {
+      "ko": "용의파동",
+      "en": "Dragon Pulse",
+      "type": "드래곤",
+      "category": "attack",
+      "desc": "위력 85.",
+      "power": 85,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Draining Kiss": {
+      "ko": "드레인키스",
+      "en": "Draining Kiss",
+      "type": "페어리",
+      "category": "attack",
+      "desc": "위력 50 · 준 피해의 50%만큼 회복.",
+      "power": 50,
+      "effects": [
+        {
+          "kind": "lifesteal",
+          "pct": 50
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Drain Punch": {
+      "ko": "드레인펀치",
+      "en": "Drain Punch",
+      "type": "격투",
+      "category": "attack",
+      "desc": "위력 75 · 준 피해의 50%만큼 회복.",
+      "power": 75,
+      "effects": [
+        {
+          "kind": "lifesteal",
+          "pct": 50
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Earth Power": {
+      "ko": "대지의힘",
+      "en": "Earth Power",
+      "type": "땅",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spd",
+          "stages": 1,
+          "chance": 10
+        }
+      ],
+      "pp": 12
+    },
+    "Earthquake": {
+      "ko": "지진",
+      "en": "Earthquake",
+      "type": "땅",
+      "category": "attack",
+      "desc": "위력 100.",
+      "power": 100,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "allAdjacent",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Extreme Speed": {
+      "ko": "신속",
+      "en": "Extreme Speed",
+      "type": "노말",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "priority": 2,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "contact": true,
+      "sound": false,
+      "pp": 8
+    },
+    "Flare Blitz": {
+      "ko": "플레어드라이브",
+      "en": "Flare Blitz",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "위력 120 · 준 피해의 25%만큼 반동.",
+      "power": 120,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 33
+        },
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 10
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Giga Drain": {
+      "ko": "기가드레인",
+      "en": "Giga Drain",
+      "type": "풀",
+      "category": "attack",
+      "desc": "위력 75 · 준 피해의 50%만큼 회복.",
+      "power": 75,
+      "effects": [
+        {
+          "kind": "lifesteal",
+          "pct": 50
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Glaive Rush": {
+      "ko": "대검돌격",
+      "en": "Glaive Rush",
+      "type": "드래곤",
+      "category": "attack",
+      "desc": "위력 120.",
+      "power": 120,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 8
+    },
+    "Grass Knot": {
+      "ko": "풀묶기",
+      "en": "Grass Knot",
+      "type": "풀",
+      "category": "attack",
+      "desc": "위력 75.",
+      "power": 75,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Grassy Glide": {
+      "ko": "그래스슬라이더",
+      "en": "Grassy Glide",
+      "type": "풀",
+      "category": "attack",
+      "desc": "위력 55.",
+      "power": 55,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Heat Wave": {
+      "ko": "열풍",
+      "en": "Heat Wave",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "위력 95.",
+      "power": 95,
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 10
+        }
+      ],
+      "pp": 12
+    },
+    "Heavy Slam": {
+      "ko": "헤비봄버",
+      "en": "Heavy Slam",
+      "type": "강철",
+      "category": "attack",
+      "desc": "위력 75.",
+      "power": 75,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Hex": {
+      "ko": "병상첨병",
+      "en": "Hex",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "위력 65.",
+      "power": 65,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "High Horsepower": {
+      "ko": "10만마력",
+      "en": "High Horsepower",
+      "type": "땅",
+      "category": "attack",
+      "desc": "위력 95.",
+      "power": 95,
+      "damageClass": "physical",
+      "accuracy": 95,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Hurricane": {
+      "ko": "폭풍",
+      "en": "Hurricane",
+      "type": "비행",
+      "category": "attack",
+      "desc": "위력 110.",
+      "power": 110,
+      "damageClass": "special",
+      "accuracy": 70,
+      "target": "any",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "confuse",
+          "chance": 30
+        }
+      ],
+      "pp": 12
+    },
+    "Hyper Voice": {
+      "ko": "하이퍼보이스",
+      "en": "Hyper Voice",
+      "type": "노말",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 12
+    },
+    "Ice Beam": {
+      "ko": "냉동빔",
+      "en": "Ice Beam",
+      "type": "얼음",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Ice Shard": {
+      "ko": "얼음뭉치",
+      "en": "Ice Shard",
+      "type": "얼음",
+      "category": "attack",
+      "desc": "위력 40.",
+      "power": 40,
+      "priority": 1,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Icicle Crash": {
+      "ko": "고드름떨구기",
+      "en": "Icicle Crash",
+      "type": "얼음",
+      "category": "attack",
+      "desc": "위력 85.",
+      "power": 85,
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Icy Wind": {
+      "ko": "얼어붙은바람",
+      "en": "Icy Wind",
+      "type": "얼음",
+      "category": "attack",
+      "desc": "위력 55 · 상대의 스피드 하락.",
+      "power": 55,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 95,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Iron Defense": {
+      "ko": "철벽",
+      "en": "Iron Defense",
+      "type": "강철",
+      "category": "support",
+      "desc": "자신의 방어 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "def",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Iron Head": {
+      "ko": "아이언헤드",
+      "en": "Iron Head",
+      "type": "강철",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "flinch",
+          "chance": 20
+        }
+      ],
+      "pp": 16
+    },
+    "Kowtow Cleave": {
+      "ko": "도각참",
+      "en": "Kowtow Cleave",
+      "type": "악",
+      "category": "attack",
+      "desc": "위력 85.",
+      "power": 85,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Light of Ruin": {
+      "ko": "파멸의빛",
+      "en": "Light of Ruin",
+      "type": "페어리",
+      "category": "attack",
+      "desc": "위력 140 · 준 피해의 25%만큼 반동.",
+      "power": 140,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 50
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Liquidation": {
+      "ko": "아쿠아브레이크",
+      "en": "Liquidation",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 85.",
+      "power": 85,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "def",
+          "stages": 1,
+          "chance": 20
+        }
+      ],
+      "pp": 12
+    },
+    "Lumina Crash": {
+      "ko": "루미나콜리전",
+      "en": "Lumina Crash",
+      "type": "에스퍼",
+      "category": "attack",
+      "desc": "위력 80 · 상대의 방어 하락.",
+      "power": 80,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "def",
+          "stages": 1
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Make It Rain": {
+      "ko": "골드러시",
+      "en": "Make It Rain",
+      "type": "강철",
+      "category": "attack",
+      "desc": "위력 120.",
+      "power": 120,
+      "damageClass": "special",
+      "accuracy": 95,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Matcha Gotcha": {
+      "ko": "휘적휘적포",
+      "en": "Matcha Gotcha",
+      "type": "풀",
+      "category": "attack",
+      "desc": "위력 80 · 준 피해의 50%만큼 회복.",
+      "power": 80,
+      "effects": [
+        {
+          "kind": "lifesteal",
+          "pct": 50
+        },
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 20
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Moonblast": {
+      "ko": "문포스",
+      "en": "Moonblast",
+      "type": "페어리",
+      "category": "attack",
+      "desc": "위력 95.",
+      "power": 95,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spa",
+          "stages": 1,
+          "chance": 10
+        }
+      ],
+      "pp": 16
+    },
+    "Muddy Water": {
+      "ko": "탁류",
+      "en": "Muddy Water",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 85,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Nasty Plot": {
+      "ko": "나쁜음모",
+      "en": "Nasty Plot",
+      "type": "악",
+      "category": "support",
+      "desc": "자신의 특수공격 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": 2
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Nuzzle": {
+      "ko": "볼부비부비",
+      "en": "Nuzzle",
+      "type": "전기",
+      "category": "attack",
+      "desc": "위력 20 · 둔화.",
+      "power": 20,
+      "effects": [
+        {
+          "kind": "slow",
+          "turns": 2
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Phantom Force": {
+      "ko": "고스트다이브",
+      "en": "Phantom Force",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Play Rough": {
+      "ko": "치근거리기",
+      "en": "Play Rough",
+      "type": "페어리",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Power Gem": {
+      "ko": "파워젬",
+      "en": "Power Gem",
+      "type": "바위",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Protect": {
+      "ko": "방어",
+      "en": "Protect",
+      "type": "노말",
+      "category": "support",
+      "desc": "이번 턴 일반 기술을 막습니다.",
+      "priority": 4,
+      "effects": [
+        {
+          "kind": "guard"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Psychic": {
+      "ko": "사이코키네시스",
+      "en": "Psychic",
+      "type": "에스퍼",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spd",
+          "stages": 1,
+          "chance": 10
+        }
+      ],
+      "pp": 12
+    },
+    "Quiver Dance": {
+      "ko": "나비춤",
+      "en": "Quiver Dance",
+      "type": "벌레",
+      "category": "support",
+      "desc": "자신의 특수공격·특수방어·스피드 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "spd",
+          "stages": 1
+        },
+        {
+          "kind": "buff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Recover": {
+      "ko": "HP회복",
+      "en": "Recover",
+      "type": "노말",
+      "category": "support",
+      "desc": "최대 체력 30% 회복.",
+      "effects": [
+        {
+          "kind": "heal",
+          "pct": 30
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Rock Slide": {
+      "ko": "스톤샤워",
+      "en": "Rock Slide",
+      "type": "바위",
+      "category": "attack",
+      "desc": "위력 75.",
+      "power": 75,
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "flinch",
+          "chance": 30
+        }
+      ],
+      "pp": 12
+    },
+    "Rock Tomb": {
+      "ko": "암석봉인",
+      "en": "Rock Tomb",
+      "type": "바위",
+      "category": "attack",
+      "desc": "위력 60 · 상대의 스피드 하락.",
+      "power": 60,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 95,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Scald": {
+      "ko": "열탕",
+      "en": "Scald",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Shadow Ball": {
+      "ko": "섀도볼",
+      "en": "Shadow Ball",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "위력 80.",
+      "power": 80,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Shadow Sneak": {
+      "ko": "야습",
+      "en": "Shadow Sneak",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "위력 40.",
+      "power": 40,
+      "priority": 1,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "contact": true,
+      "sound": false,
+      "pp": 20
+    },
+    "Slack Off": {
+      "ko": "게으름피우기",
+      "en": "Slack Off",
+      "type": "노말",
+      "category": "support",
+      "desc": "최대 체력 30% 회복.",
+      "effects": [
+        {
+          "kind": "heal",
+          "pct": 30
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Sludge Bomb": {
+      "ko": "오물폭탄",
+      "en": "Sludge Bomb",
+      "type": "독",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "독",
+          "chance": 30
+        }
+      ],
+      "pp": 12
+    },
+    "Snarl": {
+      "ko": "바크아웃",
+      "en": "Snarl",
+      "type": "악",
+      "category": "attack",
+      "desc": "위력 55 · 상대의 특수공격 하락.",
+      "power": 55,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spa",
+          "stages": 1
+        }
+      ],
+      "damageClass": "special",
+      "accuracy": 95,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 16
+    },
+    "Sparkling Aria": {
+      "ko": "물거품아리아",
+      "en": "Sparkling Aria",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "allAdjacent",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "pp": 12
+    },
+    "Stored Power": {
+      "ko": "어시스트파워",
+      "en": "Stored Power",
+      "type": "에스퍼",
+      "category": "attack",
+      "desc": "위력 20.",
+      "power": 20,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Sucker Punch": {
+      "ko": "기습",
+      "en": "Sucker Punch",
+      "type": "악",
+      "category": "attack",
+      "desc": "위력 70.",
+      "power": 70,
+      "priority": 1,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "contact": true,
+      "sound": false,
+      "pp": 8
+    },
+    "Swords Dance": {
+      "ko": "칼춤",
+      "en": "Swords Dance",
+      "type": "노말",
+      "category": "support",
+      "desc": "자신의 공격 상승.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "atk",
+          "stages": 2
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 20
+    },
+    "Synthesis": {
+      "ko": "광합성",
+      "en": "Synthesis",
+      "type": "풀",
+      "category": "support",
+      "desc": "최대 체력 30% 회복.",
+      "effects": [
+        {
+          "kind": "heal",
+          "pct": 30
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Tailwind": {
+      "ko": "순풍",
+      "en": "Tailwind",
+      "type": "비행",
+      "category": "support",
+      "desc": "아군 쪽의 스피드를 4턴 동안 2배로 올립니다.",
+      "effects": [
+        {
+          "kind": "tailwind"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "allySide",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Thunderbolt": {
+      "ko": "10만볼트",
+      "en": "Thunderbolt",
+      "type": "전기",
+      "category": "attack",
+      "desc": "위력 90.",
+      "power": 90,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "마비",
+          "chance": 10
+        }
+      ],
+      "pp": 16
+    },
+    "Trick Room": {
+      "ko": "트릭룸",
+      "en": "Trick Room",
+      "type": "에스퍼",
+      "category": "support",
+      "desc": "5턴 동안 같은 우선도의 행동에서 느린 쪽이 먼저 움직입니다.",
+      "priority": -7,
+      "effects": [
+        {
+          "kind": "trickRoom"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "all",
+      "contact": false,
+      "sound": false,
+      "pp": 8
+    },
+    "Twin Beam": {
+      "ko": "트윈빔",
+      "en": "Twin Beam",
+      "type": "에스퍼",
+      "category": "attack",
+      "desc": "위력 40.",
+      "power": 40,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Venoshock": {
+      "ko": "베놈쇼크",
+      "en": "Venoshock",
+      "type": "독",
+      "category": "attack",
+      "desc": "위력 65.",
+      "power": 65,
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 12
+    },
+    "Wave Crash": {
+      "ko": "웨이브태클",
+      "en": "Wave Crash",
+      "type": "물",
+      "category": "attack",
+      "desc": "위력 120 · 준 피해의 25%만큼 반동.",
+      "power": 120,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 33
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 12
+    },
+    "Will-O-Wisp": {
+      "ko": "도깨비불",
+      "en": "Will-O-Wisp",
+      "type": "불꽃",
+      "category": "support",
+      "desc": "지속 피해.",
+      "effects": [
+        {
+          "kind": "status",
+          "status": "화상"
+        }
+      ],
+      "damageClass": "status",
+      "accuracy": 85,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "pp": 16
+    },
+    "Wood Hammer": {
+      "ko": "우드해머",
+      "en": "Wood Hammer",
+      "type": "풀",
+      "category": "attack",
+      "desc": "위력 120 · 준 피해의 25%만큼 반동.",
+      "power": 120,
+      "effects": [
+        {
+          "kind": "recoil",
+          "pct": 25
+        }
+      ],
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 16
+    },
+    "Acrobatics": {
+      "ko": "애크러뱃",
+      "en": "Acrobatics",
+      "type": "비행",
+      "category": "attack",
+      "desc": "기본 위력 55.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "any",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 55,
+      "pp": 16
+    },
+    "Bug Bite": {
+      "ko": "벌레먹기",
+      "en": "Bug Bite",
+      "type": "벌레",
+      "category": "attack",
+      "desc": "기본 위력 60.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 60,
+      "effects": [
+        {
+          "kind": "bugBite"
+        }
+      ],
+      "pp": 20
+    },
+    "Bulk Up": {
+      "ko": "벌크업",
+      "en": "Bulk Up",
+      "type": "격투",
+      "category": "support",
+      "desc": "상태 기술입니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "selfStages",
+          "stats": {
+            "atk": 1,
+            "def": 1
+          }
+        }
+      ],
+      "pp": 20
+    },
+    "Bullet Punch": {
+      "ko": "불릿펀치",
+      "en": "Bullet Punch",
+      "type": "강철",
+      "category": "attack",
+      "desc": "기본 위력 40.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 1,
+      "contact": true,
+      "sound": false,
+      "power": 40,
+      "pp": 20
+    },
+    "Detect": {
+      "ko": "판별",
+      "en": "Detect",
+      "type": "격투",
+      "category": "support",
+      "desc": "이번 턴 일반 기술을 막습니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 4,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "guard"
+        }
+      ],
+      "pp": 8
+    },
+    "Draco Meteor": {
+      "ko": "용성군",
+      "en": "Draco Meteor",
+      "type": "드래곤",
+      "category": "attack",
+      "desc": "기본 위력 130.",
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 130,
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": -2
+        }
+      ],
+      "pp": 8
+    },
+    "Dual Wingbeat": {
+      "ko": "더블윙",
+      "en": "Dual Wingbeat",
+      "type": "비행",
+      "category": "attack",
+      "desc": "기본 위력 40.",
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 40,
+      "pp": 12
+    },
+    "Electro Shot": {
+      "ko": "일렉트로빔",
+      "en": "Electro Shot",
+      "type": "전기",
+      "category": "attack",
+      "desc": "기본 위력 130.",
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 130,
+      "effects": [
+        {
+          "kind": "charge"
+        }
+      ],
+      "pp": 12
+    },
+    "Electroweb": {
+      "ko": "일렉트릭네트",
+      "en": "Electroweb",
+      "type": "전기",
+      "category": "attack",
+      "desc": "기본 위력 55.",
+      "damageClass": "special",
+      "accuracy": 95,
+      "target": "allAdjacentFoes",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 55,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spe",
+          "stages": 1
+        }
+      ],
+      "pp": 16
+    },
+    "Fake Out": {
+      "ko": "속이기",
+      "en": "Fake Out",
+      "type": "노말",
+      "category": "attack",
+      "desc": "기본 위력 40.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 3,
+      "contact": true,
+      "sound": false,
+      "power": 40,
+      "effects": [
+        {
+          "kind": "flinch",
+          "firstTurn": true
+        }
+      ],
+      "pp": 12
+    },
+    "Feint": {
+      "ko": "페인트",
+      "en": "Feint",
+      "type": "노말",
+      "category": "attack",
+      "desc": "기본 위력 30.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 2,
+      "contact": false,
+      "sound": false,
+      "power": 30,
+      "pp": 12
+    },
+    "Flash Cannon": {
+      "ko": "러스터캐논",
+      "en": "Flash Cannon",
+      "type": "강철",
+      "category": "attack",
+      "desc": "기본 위력 80.",
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 80,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "spd",
+          "stages": 1,
+          "chance": 10
+        }
+      ],
+      "pp": 12
+    },
+    "Flip Turn": {
+      "ko": "퀵턴",
+      "en": "Flip Turn",
+      "type": "물",
+      "category": "attack",
+      "desc": "공격한 뒤 교체합니다.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 60,
+      "effects": [
+        {
+          "kind": "pivot"
+        }
+      ],
+      "pp": 20
+    },
+    "Follow Me": {
+      "ko": "날따름",
+      "en": "Follow Me",
+      "type": "노말",
+      "category": "support",
+      "desc": "더블에서 아군을 향한 기술을 끌어옵니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 2,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "doublesOnly"
+        }
+      ],
+      "singlesUnavailable": true,
+      "pp": 20
+    },
+    "Hydro Pump": {
+      "ko": "하이드로펌프",
+      "en": "Hydro Pump",
+      "type": "물",
+      "category": "attack",
+      "desc": "기본 위력 110.",
+      "damageClass": "special",
+      "accuracy": 80,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 110,
+      "pp": 8
+    },
+    "Hyper Beam": {
+      "ko": "파괴광선",
+      "en": "Hyper Beam",
+      "type": "노말",
+      "category": "attack",
+      "desc": "기본 위력 150.",
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 150,
+      "effects": [
+        {
+          "kind": "recharge"
+        }
+      ],
+      "pp": 8
+    },
+    "King's Shield": {
+      "ko": "킹실드",
+      "en": "King's Shield",
+      "type": "강철",
+      "category": "support",
+      "desc": "공격 기술을 막고 접촉한 상대의 공격을 낮춥니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 4,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "guard"
+        }
+      ],
+      "pp": 8
+    },
+    "Knock Off": {
+      "ko": "탁쳐서떨구기",
+      "en": "Knock Off",
+      "type": "악",
+      "category": "attack",
+      "desc": "기본 위력 65.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 65,
+      "effects": [
+        {
+          "kind": "knockOff"
+        }
+      ],
+      "pp": 20
+    },
+    "Last Respects": {
+      "ko": "성묘",
+      "en": "Last Respects",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "기본 위력 50.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 50,
+      "pp": 12
+    },
+    "Leech Seed": {
+      "ko": "씨뿌리기",
+      "en": "Leech Seed",
+      "type": "풀",
+      "category": "support",
+      "desc": "상태 기술입니다.",
+      "damageClass": "status",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "leechSeed"
+        }
+      ],
+      "pp": 12
+    },
+    "Life Dew": {
+      "ko": "생명의물방울",
+      "en": "Life Dew",
+      "type": "물",
+      "category": "support",
+      "desc": "상태 기술입니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "allies",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "heal",
+          "pct": 25
+        }
+      ],
+      "pp": 12
+    },
+    "Low Kick": {
+      "ko": "안다리걸기",
+      "en": "Low Kick",
+      "type": "격투",
+      "category": "attack",
+      "desc": "조건에 따라 위력이 달라집니다.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 75,
+      "pp": 20
+    },
+    "Overheat": {
+      "ko": "오버히트",
+      "en": "Overheat",
+      "type": "불꽃",
+      "category": "attack",
+      "desc": "기본 위력 130.",
+      "damageClass": "special",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 130,
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "spa",
+          "stages": -2
+        }
+      ],
+      "pp": 8
+    },
+    "Parting Shot": {
+      "ko": "막말내뱉기",
+      "en": "Parting Shot",
+      "type": "악",
+      "category": "support",
+      "desc": "상대의 공격과 특수공격을 낮추고 교체합니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": true,
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "atk",
+          "stages": 1
+        },
+        {
+          "kind": "debuff",
+          "stat": "spa",
+          "stages": 1
+        },
+        {
+          "kind": "pivot"
+        }
+      ],
+      "pp": 20
+    },
+    "Poltergeist": {
+      "ko": "폴터가이스트",
+      "en": "Poltergeist",
+      "type": "고스트",
+      "category": "attack",
+      "desc": "기본 위력 110.",
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 110,
+      "pp": 8
+    },
+    "Quick Attack": {
+      "ko": "전광석화",
+      "en": "Quick Attack",
+      "type": "노말",
+      "category": "attack",
+      "desc": "기본 위력 40.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 1,
+      "contact": true,
+      "sound": false,
+      "power": 40,
+      "pp": 20
+    },
+    "Quick Guard": {
+      "ko": "패스트가드",
+      "en": "Quick Guard",
+      "type": "격투",
+      "category": "support",
+      "desc": "상대의 우선도 기술을 막습니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "allySide",
+      "priority": 3,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "priorityGuard"
+        }
+      ],
+      "pp": 16
+    },
+    "Rage Powder": {
+      "ko": "분노가루",
+      "en": "Rage Powder",
+      "type": "벌레",
+      "category": "support",
+      "desc": "더블에서 아군을 향한 기술을 끌어옵니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 2,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "doublesOnly"
+        }
+      ],
+      "singlesUnavailable": true,
+      "pp": 20
+    },
+    "Sleep Powder": {
+      "ko": "수면가루",
+      "en": "Sleep Powder",
+      "type": "풀",
+      "category": "support",
+      "desc": "상태 기술입니다.",
+      "damageClass": "status",
+      "accuracy": 75,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "잠듦"
+        }
+      ],
+      "pp": 16
+    },
+    "Solar Beam": {
+      "ko": "솔라빔",
+      "en": "Solar Beam",
+      "type": "풀",
+      "category": "attack",
+      "desc": "기본 위력 120.",
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 120,
+      "effects": [
+        {
+          "kind": "charge"
+        }
+      ],
+      "pp": 12
+    },
+    "Spiky Shield": {
+      "ko": "니들가드",
+      "en": "Spiky Shield",
+      "type": "풀",
+      "category": "support",
+      "desc": "일반 기술을 막고 접촉한 상대에게 피해를 줍니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "self",
+      "priority": 4,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "guard"
+        }
+      ],
+      "pp": 8
+    },
+    "Stomping Tantrum": {
+      "ko": "분함의발구르기",
+      "en": "Stomping Tantrum",
+      "type": "땅",
+      "category": "attack",
+      "desc": "기본 위력 75.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 75,
+      "pp": 12
+    },
+    "Super Fang": {
+      "ko": "분노의앞니",
+      "en": "Super Fang",
+      "type": "노말",
+      "category": "attack",
+      "desc": "조건에 따라 위력이 달라집니다.",
+      "damageClass": "physical",
+      "accuracy": 90,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 75,
+      "pp": 12
+    },
+    "Throat Chop": {
+      "ko": "지옥찌르기",
+      "en": "Throat Chop",
+      "type": "악",
+      "category": "attack",
+      "desc": "기본 위력 80.",
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "power": 80,
+      "effects": [
+        {
+          "kind": "throatChop"
+        }
+      ],
+      "pp": 16
+    },
+    "Volt Switch": {
+      "ko": "볼트체인지",
+      "en": "Volt Switch",
+      "type": "전기",
+      "category": "attack",
+      "desc": "공격한 뒤 교체합니다.",
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 70,
+      "effects": [
+        {
+          "kind": "pivot"
+        }
+      ],
+      "pp": 20
+    },
+    "Weather Ball": {
+      "ko": "웨더볼",
+      "en": "Weather Ball",
+      "type": "노말",
+      "category": "attack",
+      "desc": "날씨에 따라 타입과 위력이 달라집니다.",
+      "damageClass": "special",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": false,
+      "sound": false,
+      "power": 50,
+      "pp": 12
+    },
+    "Wide Guard": {
+      "ko": "와이드가드",
+      "en": "Wide Guard",
+      "type": "바위",
+      "category": "support",
+      "desc": "복수 대상 공격을 막는 더블 기술입니다.",
+      "damageClass": "status",
+      "accuracy": 100,
+      "target": "allySide",
+      "priority": 3,
+      "contact": false,
+      "sound": false,
+      "effects": [
+        {
+          "kind": "spreadGuard"
+        }
+      ],
+      "singlesUnavailable": true,
+      "pp": 12
+    }
+  },
+  "items": {
+    "Aerodactylite": {
+      "ko": "프테라나이트",
+      "desc": "프테라가 지니면 배틀 중 메가프테라로 메가진화할 수 있다."
+    },
+    "Black Glasses": {
+      "ko": "검은안경",
+      "desc": "지닌 포켓몬의 악 타입 기술 위력이 올라간다."
+    },
+    "Charcoal": {
+      "ko": "목탄",
+      "desc": "지닌 포켓몬의 불꽃 타입 기술 위력이 올라간다."
+    },
+    "Charizardite Y": {
+      "ko": "리자몽나이트Y",
+      "desc": "리자몽이 지니면 배틀 중 메가리자몽Y로 메가진화할 수 있다."
+    },
+    "Choice Scarf": {
+      "ko": "구애스카프",
+      "desc": "스피드가 1.5배가 되지만 처음 고른 기술 하나만 쓸 수 있다."
+    },
+    "Chople Berry": {
+      "ko": "로플열매",
+      "desc": "효과가 굉장한 격투 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Delphoxite": {
+      "ko": null,
+      "desc": "마폭시가 지니면 배틀 중 메가마폭시로 메가진화할 수 있다."
+    },
+    "Dragoninite": {
+      "ko": null,
+      "desc": "망나뇽이 지니면 배틀 중 메가망나뇽으로 메가진화할 수 있다."
+    },
+    "Fairy Feather": {
+      "ko": "요정의깃털",
+      "desc": "지닌 포켓몬의 페어리 타입 기술 위력이 올라간다."
+    },
+    "Floettite": {
+      "ko": null,
+      "desc": "플라엣테(영원의 꽃)가 지니면 배틀 중 메가진화할 수 있다."
+    },
+    "Focus Sash": {
+      "ko": "기합의띠",
+      "desc": "HP가 가득일 때 일격에 쓰러질 공격을 받아도 HP 1로 버틴다(1회용)."
+    },
+    "Froslassite": {
+      "ko": null,
+      "desc": "눈여아가 지니면 배틀 중 메가눈여아로 메가진화할 수 있다."
+    },
+    "Gengarite": {
+      "ko": "팬텀나이트",
+      "desc": "팬텀이 지니면 배틀 중 메가팬텀으로 메가진화할 수 있다."
+    },
+    "Glimmoranite": {
+      "ko": null,
+      "desc": "킬라플로르가 지니면 배틀 중 메가진화할 수 있다."
+    },
+    "Grassy Seed": {
+      "ko": "그래스시드",
+      "desc": "그래스필드일 때 지닌 포켓몬의 방어가 1랭크 올라간다(1회용)."
+    },
+    "Haban Berry": {
+      "ko": "하반열매",
+      "desc": "효과가 굉장한 드래곤 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Kasib Berry": {
+      "ko": "수불열매",
+      "desc": "효과가 굉장한 고스트 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Leftovers": {
+      "ko": "먹다남은음식",
+      "desc": "매 턴 종료 시 HP를 조금씩 회복한다."
+    },
+    "Life Orb": {
+      "ko": "생명의구슬",
+      "desc": "기술 위력이 올라가지만 공격할 때마다 HP가 조금 줄어든다."
+    },
+    "Magnet": {
+      "ko": "자석",
+      "desc": "지닌 포켓몬의 전기 타입 기술 위력이 올라간다."
+    },
+    "Miracle Seed": {
+      "ko": "기적의씨",
+      "desc": "지닌 포켓몬의 풀 타입 기술 위력이 올라간다."
+    },
+    "Mystic Water": {
+      "ko": "신비의물방울",
+      "desc": "지닌 포켓몬의 물 타입 기술 위력이 올라간다."
+    },
+    "Occa Berry": {
+      "ko": "오카열매",
+      "desc": "효과가 굉장한 불꽃 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Passho Berry": {
+      "ko": "꼬시개열매",
+      "desc": "효과가 굉장한 물 타입 기술을 받을 때 한 번 데미지를 줄인다."
+    },
+    "Psychic Seed": {
+      "ko": "사이코시드",
+      "desc": "사이코필드일 때 지닌 포켓몬의 특수방어가 1랭크 올라간다(1회용)."
+    },
+    "Raichunite Y": {
+      "ko": null,
+      "desc": "라이츄가 지니면 배틀 중 메가라이츄Y로 메가진화할 수 있다."
+    },
+    "Rocky Helmet": {
+      "ko": "울퉁불퉁멧",
+      "desc": "접촉 기술로 공격해 온 상대에게 데미지를 준다."
+    },
+    "Salamencite": {
+      "ko": "보만다나이트",
+      "desc": "보만다가 지니면 배틀 중 메가보만다로 메가진화할 수 있다."
+    },
+    "Scizorite": {
+      "ko": "핫삼나이트",
+      "desc": "핫삼이 지니면 배틀 중 메가핫삼으로 메가진화할 수 있다."
+    },
+    "Scovillainite": {
+      "ko": null,
+      "desc": "스코빌런이 지니면 배틀 중 메가스코빌런으로 메가진화할 수 있다."
+    },
+    "Sharp Beak": {
+      "ko": "예리한부리",
+      "desc": "지닌 포켓몬의 비행 타입 기술 위력이 올라간다."
+    },
+    "Sitrus Berry": {
+      "ko": "자뭉열매",
+      "desc": "HP가 절반 이하가 되면 HP를 조금 회복한다(1회용)."
+    },
+    "Staraptite": {
+      "ko": null,
+      "desc": "찌르호크가 지니면 배틀 중 메가찌르호크로 메가진화할 수 있다."
+    },
+    "Tyranitarite": {
+      "ko": "마기라스나이트",
+      "desc": "마기라스가 지니면 배틀 중 메가마기라스로 메가진화할 수 있다."
+    },
+    "White Herb": {
+      "ko": "하양허브",
+      "desc": "능력 랭크가 내려갔을 때 한 번 원래대로 되돌린다(1회용)."
+    }
+  },
+  "abilities": {
+    "Stance Change": {
+      "ko": "배틀스위치"
+    },
+    "Flower Veil": {
+      "ko": "플라워베일"
+    },
+    "Intimidate": {
+      "ko": "위협"
+    },
+    "Blaze": {
+      "ko": "맹화"
+    },
+    "Rough Skin": {
+      "ko": "까칠한피부"
+    },
+    "Hospitality": {
+      "ko": "대접"
+    },
+    "Toxic Debris": {
+      "ko": "독치장"
+    },
+    "Gale Wings": {
+      "ko": "질풍날개"
+    },
+    "Technician": {
+      "ko": "테크니션"
+    },
+    "Defiant": {
+      "ko": "오기"
+    },
+    "Shield Dust": {
+      "ko": "인분"
+    },
+    "Friend Guard": {
+      "ko": "프렌드가드"
+    },
+    "Levitate": {
+      "ko": "부유"
+    },
+    "Mold Breaker": {
+      "ko": "틀깨기"
+    },
+    "Drizzle": {
+      "ko": "잔비"
+    },
+    "Stamina": {
+      "ko": "지구력"
+    },
+    "Adaptability": {
+      "ko": "적응력"
+    },
+    "Sand Stream": {
+      "ko": "모래날림"
+    },
+    "Sand Rush": {
+      "ko": "모래헤치기"
+    },
+    "Moody": {
+      "ko": "변덕쟁이"
+    },
+    "Mirror Armor": {
+      "ko": "미러아머"
+    },
+    "Pixilate": {
+      "ko": "페어리스킨"
+    },
+    "Solar Power": {
+      "ko": "선파워"
+    },
+    "Unnerve": {
+      "ko": "긴장감"
+    },
+    "Drought": {
+      "ko": "가뭄"
+    },
+    "Snow Warning": {
+      "ko": "눈퍼뜨리기"
+    },
+    "Unburden": {
+      "ko": "곡예"
+    },
+    "Prankster": {
+      "ko": "짓궂은마음"
+    },
+    "Grassy Surge": {
+      "ko": "그래스메이커"
+    }
+  },
+  "practiceSets": {
+    "venusaur": [
+      "Giga Drain",
+      "Sludge Bomb",
+      "Earth Power",
+      "Synthesis"
+    ],
+    "charizard": [
+      "Air Slash",
+      "Heat Wave",
+      "Dragon Pulse",
+      "Protect"
+    ],
+    "raichu": [
+      "Nuzzle",
+      "Thunderbolt",
+      "Grass Knot",
+      "Protect"
+    ],
+    "arcanine": [
+      "Snarl",
+      "Flare Blitz",
+      "Extreme Speed",
+      "Will-O-Wisp"
+    ],
+    "gengar": [
+      "Hex",
+      "Shadow Ball",
+      "Sludge Bomb",
+      "Will-O-Wisp"
+    ],
+    "dragonite": [
+      "Extreme Speed",
+      "Dragon Claw",
+      "Hurricane",
+      "Dragon Dance"
+    ],
+    "tyranitar": [
+      "Rock Slide",
+      "Crunch",
+      "Earthquake",
+      "Dragon Dance"
+    ],
+    "milotic": [
+      "Icy Wind",
+      "Scald",
+      "Muddy Water",
+      "Recover"
+    ],
+    "salamence": [
+      "Dragon Claw",
+      "Air Slash",
+      "Double-Edge",
+      "Dragon Dance"
+    ],
+    "staraptor": [
+      "Aerial Ace",
+      "Brave Bird",
+      "Close Combat",
+      "Protect"
+    ],
+    "garchomp": [
+      "Dragon Claw",
+      "Earthquake",
+      "Rock Slide",
+      "Swords Dance"
+    ],
+    "hippowdon": [
+      "Rock Tomb",
+      "Earthquake",
+      "Crunch",
+      "Slack Off"
+    ],
+    "froslass": [
+      "Icy Wind",
+      "Shadow Ball",
+      "Ice Beam",
+      "Will-O-Wisp"
+    ],
+    "excadrill": [
+      "Iron Head",
+      "Earthquake",
+      "Rock Slide",
+      "Swords Dance"
+    ],
+    "whimsicott": [
+      "Giga Drain",
+      "Moonblast",
+      "Dazzling Gleam",
+      "Tailwind"
+    ],
+    "vivillon": [
+      "Air Slash",
+      "Bug Buzz",
+      "Hurricane",
+      "Quiver Dance"
+    ],
+    "floette": [
+      "Draining Kiss",
+      "Dazzling Gleam",
+      "Moonblast",
+      "Synthesis"
+    ],
+    "sylveon": [
+      "Draining Kiss",
+      "Hyper Voice",
+      "Moonblast",
+      "Calm Mind"
+    ],
+    "incineroar": [
+      "Snarl",
+      "Flare Blitz",
+      "Darkest Lariat",
+      "Will-O-Wisp"
+    ],
+    "primarina": [
+      "Icy Wind",
+      "Sparkling Aria",
+      "Moonblast",
+      "Protect"
+    ],
+    "toxapex": [
+      "Chilling Water",
+      "Sludge Bomb",
+      "Liquidation",
+      "Recover"
+    ],
+    "mudsdale": [
+      "Rock Tomb",
+      "High Horsepower",
+      "Heavy Slam",
+      "Iron Defense"
+    ],
+    "kommoo": [
+      "Drain Punch",
+      "Dragon Claw",
+      "Clanging Scales",
+      "Clangorous Soul"
+    ],
+    "rillaboom": [
+      "Grassy Glide",
+      "Wood Hammer",
+      "Drain Punch",
+      "Swords Dance"
+    ],
+    "indeedee": [
+      "Stored Power",
+      "Psychic",
+      "Hyper Voice",
+      "Calm Mind"
+    ],
+    "basculegion": [
+      "Aqua Jet",
+      "Wave Crash",
+      "Shadow Ball",
+      "Protect"
+    ],
+    "sneasler": [
+      "Brick Break",
+      "Dire Claw",
+      "Close Combat",
+      "Swords Dance"
+    ],
+    "espathra": [
+      "Lumina Crash",
+      "Psychic",
+      "Dazzling Gleam",
+      "Calm Mind"
+    ],
+    "glimmora": [
+      "Venoshock",
+      "Power Gem",
+      "Sludge Bomb",
+      "Acid Armor"
+    ],
+    "houndstone": [
+      "Shadow Sneak",
+      "Phantom Force",
+      "Play Rough",
+      "Will-O-Wisp"
+    ],
+    "farigiraf": [
+      "Twin Beam",
+      "Psychic",
+      "Hyper Voice",
+      "Trick Room"
+    ],
+    "kingambit": [
+      "Sucker Punch",
+      "Kowtow Cleave",
+      "Iron Head",
+      "Swords Dance"
+    ],
+    "baxcalibur": [
+      "Ice Shard",
+      "Glaive Rush",
+      "Icicle Crash",
+      "Dragon Dance"
+    ],
+    "gholdengo": [
+      "Hex",
+      "Shadow Ball",
+      "Make It Rain",
+      "Nasty Plot"
+    ],
+    "sinistcha": [
+      "Hex",
+      "Matcha Gotcha",
+      "Shadow Ball",
+      "Calm Mind"
+    ],
+    "arcanine:hisui": [
+      "Rock Slide",
+      "Flare Blitz",
+      "Extreme Speed",
+      "Will-O-Wisp"
+    ],
+    "raichu:alola": [
+      "Nuzzle",
+      "Thunderbolt",
+      "Psychic",
+      "Protect"
+    ],
+    "indeedee:female": [
+      "Stored Power",
+      "Psychic",
+      "Hyper Voice",
+      "Calm Mind"
+    ],
+    "basculegion:female": [
+      "Aqua Jet",
+      "Wave Crash",
+      "Shadow Ball",
+      "Protect"
+    ],
+    "floette:eternal": [
+      "Draining Kiss",
+      "Dazzling Gleam",
+      "Light of Ruin",
+      "Synthesis"
+    ],
+    "floette:mega": [
+      "Draining Kiss",
+      "Dazzling Gleam",
+      "Light of Ruin",
+      "Synthesis"
+    ],
+    "aegislash": [
+      "Shadow Sneak",
+      "Poltergeist",
+      "King's Shield",
+      "Iron Head"
+    ],
+    "talonflame": [
+      "Brave Bird",
+      "Overheat",
+      "Tailwind",
+      "Protect"
+    ],
+    "scizor": [
+      "Bullet Punch",
+      "Knock Off",
+      "Bug Bite",
+      "Protect"
+    ],
+    "maushold": [
+      "Super Fang",
+      "Feint",
+      "Follow Me",
+      "Protect"
+    ],
+    "delphox": [
+      "Heat Wave",
+      "Psychic",
+      "Nasty Plot",
+      "Protect"
+    ],
+    "pelipper": [
+      "Weather Ball",
+      "Hurricane",
+      "Wide Guard",
+      "Tailwind"
+    ],
+    "archaludon": [
+      "Electro Shot",
+      "Flash Cannon",
+      "Draco Meteor",
+      "Protect"
+    ],
+    "rotom": [
+      "Hydro Pump",
+      "Will-O-Wisp",
+      "Volt Switch",
+      "Electroweb"
+    ],
+    "scovillain": [
+      "Overheat",
+      "Leech Seed",
+      "Rage Powder",
+      "Protect"
+    ],
+    "corviknight": [
+      "Brave Bird",
+      "Iron Head",
+      "Bulk Up",
+      "Tailwind"
+    ],
+    "aerodactyl": [
+      "Rock Slide",
+      "Wide Guard",
+      "Tailwind",
+      "Dual Wingbeat"
+    ]
+  },
+  "_ppSource": "https://github.com/smogon/pokemon-showdown/tree/master/data/mods/champions"
+}

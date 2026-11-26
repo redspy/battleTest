@@ -1,0 +1,1969 @@
+{
+  "_comment": "화면 표시용 종 데이터. forms[].file 은 pokemon_gifs 안의 GIF 파일 이름(확장자 제외). role/roleText 는 일반적인 더블 배틀 운용을 바탕으로 한 추론이며 대회 팀의 실제 기술 구성과 다를 수 있다. unverified=true 는 폼 구분이나 타입을 확인하지 못한 항목.",
+  "set": "pokemon",
+  "gifRoot": "pokemon_gifs",
+  "species": [
+    {
+      "id": "venusaur",
+      "no": 3,
+      "en": "Venusaur",
+      "ko": "이상해꽃",
+      "types": [
+        "풀",
+        "독"
+      ],
+      "role": "쾌청 스위퍼",
+      "roleText": "쾌청 아래에서 스피드가 올라가는 특성으로 먼저 움직이며 수면·풀 기술로 압박하는 역할로 쓰이는 일이 많다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0003_Venusaur_01_Venusaur",
+          "baseStats": {
+            "hp": 80,
+            "atk": 82,
+            "def": 83,
+            "spa": 100,
+            "spd": 100,
+            "spe": 80
+          },
+          "battleAbility": "Overgrow",
+          "weightKg": 100.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0003_Venusaur_02_Mega-Venu",
+          "baseStats": {
+            "hp": 80,
+            "atk": 100,
+            "def": 123,
+            "spa": 122,
+            "spd": 120,
+            "spe": 80
+          },
+          "battleAbility": "Thick Fat",
+          "weightKg": 155.5,
+          "requiresItem": "Venusaurite"
+        },
+        {
+          "id": "gmax",
+          "label": "거다이맥스",
+          "file": "0003_Venusaur_03_Venusaur",
+          "baseStats": {
+            "hp": 80,
+            "atk": 82,
+            "def": 83,
+            "spa": 100,
+            "spd": 100,
+            "spe": 80
+          },
+          "battleAbility": "Overgrow",
+          "weightKg": 0.0
+        }
+      ]
+    },
+    {
+      "id": "charizard",
+      "no": 6,
+      "en": "Charizard",
+      "ko": "리자몽",
+      "types": [
+        "불꽃",
+        "비행"
+      ],
+      "role": "날씨 에이스",
+      "roleText": "메가리자몽Y 는 등장과 함께 쾌청을 만들고 강한 불꽃 광역기로 양쪽을 동시에 압박한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0006_Charizard_01_Charizard",
+          "baseStats": {
+            "hp": 78,
+            "atk": 84,
+            "def": 78,
+            "spa": 109,
+            "spd": 85,
+            "spe": 100
+          },
+          "battleAbility": "Blaze",
+          "weightKg": 90.5
+        },
+        {
+          "id": "megax",
+          "label": "메가 X",
+          "file": "0006_Charizard_02_Mega-Char",
+          "types": [
+            "불꽃",
+            "드래곤"
+          ],
+          "baseStats": {
+            "hp": 78,
+            "atk": 130,
+            "def": 111,
+            "spa": 130,
+            "spd": 85,
+            "spe": 100
+          },
+          "battleAbility": "Tough Claws",
+          "weightKg": 110.5,
+          "requiresItem": "Charizardite X"
+        },
+        {
+          "id": "megay",
+          "label": "메가 Y",
+          "file": "0006_Charizard_03_Mega-Char",
+          "baseStats": {
+            "hp": 78,
+            "atk": 104,
+            "def": 78,
+            "spa": 159,
+            "spd": 115,
+            "spe": 100
+          },
+          "battleAbility": "Drought",
+          "weightKg": 100.5,
+          "requiresItem": "Charizardite Y"
+        },
+        {
+          "id": "gmax",
+          "label": "거다이맥스",
+          "file": "0006_Charizard_04_Charizard",
+          "baseStats": {
+            "hp": 78,
+            "atk": 84,
+            "def": 78,
+            "spa": 109,
+            "spd": 85,
+            "spe": 100
+          },
+          "battleAbility": "Blaze",
+          "weightKg": 0.0
+        }
+      ]
+    },
+    {
+      "id": "raichu",
+      "no": 26,
+      "en": "Raichu",
+      "ko": "라이츄",
+      "types": [
+        "전기"
+      ],
+      "role": "고속 어태커",
+      "roleText": "빠른 스피드로 먼저 움직이는 전기 어태커. 속이기 등 보조 기술도 겸하는 일이 많다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0026_Raichu_01_Raichu-ho",
+          "baseStats": {
+            "hp": 60,
+            "atk": 90,
+            "def": 55,
+            "spa": 90,
+            "spd": 80,
+            "spe": 110
+          },
+          "battleAbility": "Static",
+          "weightKg": 30.0
+        },
+        {
+          "id": "alola",
+          "label": "알로라",
+          "file": "0026_Raichu_02_Raichu-A",
+          "types": [
+            "전기",
+            "에스퍼"
+          ],
+          "baseStats": {
+            "hp": 60,
+            "atk": 85,
+            "def": 50,
+            "spa": 95,
+            "spd": 85,
+            "spe": 110
+          },
+          "battleAbility": "Surge Surfer",
+          "weightKg": 21.0
+        },
+        {
+          "id": "megax",
+          "label": "메가 X",
+          "file": "0026_Raichu_03_Mega-Raic",
+          "baseStats": {
+            "hp": 60,
+            "atk": 135,
+            "def": 95,
+            "spa": 90,
+            "spd": 95,
+            "spe": 110
+          },
+          "battleAbility": "Electric Surge",
+          "weightKg": 38.0,
+          "requiresItem": "Raichunite X"
+        },
+        {
+          "id": "megay",
+          "label": "메가 Y",
+          "file": "0026_Raichu_04_Mega-Raic",
+          "baseStats": {
+            "hp": 60,
+            "atk": 100,
+            "def": 55,
+            "spa": 160,
+            "spd": 80,
+            "spe": 130
+          },
+          "battleAbility": "No Guard",
+          "weightKg": 26.0,
+          "requiresItem": "Raichunite Y"
+        }
+      ]
+    },
+    {
+      "id": "arcanine",
+      "no": 59,
+      "en": "Arcanine",
+      "ko": "윈디",
+      "types": [
+        "불꽃"
+      ],
+      "role": "물리 어태커",
+      "roleText": "히스이 윈디는 반동 없는 강한 바위·불꽃 물리기와 신속으로 화력을 내는 역할이 많다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0059_Arcanine_01_Arcanine",
+          "baseStats": {
+            "hp": 90,
+            "atk": 110,
+            "def": 80,
+            "spa": 100,
+            "spd": 80,
+            "spe": 95
+          },
+          "battleAbility": "Intimidate",
+          "weightKg": 155.0
+        },
+        {
+          "id": "hisui",
+          "label": "히스이",
+          "file": "0059_Arcanine_02_Hisuian-Arcanine",
+          "types": [
+            "불꽃",
+            "바위"
+          ],
+          "baseStats": {
+            "hp": 95,
+            "atk": 115,
+            "def": 80,
+            "spa": 95,
+            "spd": 80,
+            "spe": 90
+          },
+          "battleAbility": "Intimidate",
+          "weightKg": 168.0
+        }
+      ]
+    },
+    {
+      "id": "gengar",
+      "no": 94,
+      "en": "Gengar",
+      "ko": "팬텀",
+      "types": [
+        "고스트",
+        "독"
+      ],
+      "role": "교체 봉쇄",
+      "roleText": "메가팬텀은 상대의 교체를 막는 특성으로 유리한 대면을 고정하고 멸망의노래·방해 기술로 판을 묶는다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0094_Gengar_01_Gengar-ho",
+          "baseStats": {
+            "hp": 60,
+            "atk": 65,
+            "def": 60,
+            "spa": 130,
+            "spd": 75,
+            "spe": 110
+          },
+          "battleAbility": "Cursed Body",
+          "weightKg": 40.5
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0094_Gengar_02_Mega-Geng",
+          "baseStats": {
+            "hp": 60,
+            "atk": 65,
+            "def": 80,
+            "spa": 170,
+            "spd": 95,
+            "spe": 130
+          },
+          "battleAbility": "Shadow Tag",
+          "weightKg": 40.5,
+          "requiresItem": "Gengarite"
+        },
+        {
+          "id": "gmax",
+          "label": "거다이맥스",
+          "file": "0094_Gengar_03_Gengar-G",
+          "baseStats": {
+            "hp": 60,
+            "atk": 65,
+            "def": 60,
+            "spa": 130,
+            "spd": 75,
+            "spe": 110
+          },
+          "battleAbility": "Cursed Body",
+          "weightKg": 0.0
+        }
+      ]
+    },
+    {
+      "id": "aerodactyl",
+      "no": 142,
+      "en": "Aerodactyl",
+      "ko": "프테라",
+      "types": [
+        "바위",
+        "비행"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0142_aerodactyl_base",
+          "baseStats": {
+            "hp": 80,
+            "atk": 105,
+            "def": 65,
+            "spa": 60,
+            "spd": 75,
+            "spe": 130
+          },
+          "types": [
+            "바위",
+            "비행"
+          ],
+          "battleAbility": "Rock Head",
+          "weightKg": 59.0,
+          "assetSource": "https://namu.wiki/w/%ED%94%84%ED%85%8C%EB%9D%BC"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0142_aerodactyl_mega",
+          "baseStats": {
+            "hp": 80,
+            "atk": 135,
+            "def": 85,
+            "spa": 70,
+            "spd": 95,
+            "spe": 150
+          },
+          "types": [
+            "바위",
+            "비행"
+          ],
+          "battleAbility": "Tough Claws",
+          "weightKg": 79.0,
+          "requiresItem": "Aerodactylite",
+          "assetSource": "https://namu.wiki/w/%ED%94%84%ED%85%8C%EB%9D%BC"
+        }
+      ]
+    },
+    {
+      "id": "dragonite",
+      "no": 149,
+      "en": "Dragonite",
+      "ko": "망나뇽",
+      "types": [
+        "드래곤",
+        "비행"
+      ],
+      "role": "내구형 에이스",
+      "roleText": "높은 내구와 신속 같은 선공기로 버티면서 화력을 내는 에이스.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0149_Dragonite_01_Dragonite",
+          "baseStats": {
+            "hp": 91,
+            "atk": 134,
+            "def": 95,
+            "spa": 100,
+            "spd": 100,
+            "spe": 80
+          },
+          "battleAbility": "Inner Focus",
+          "weightKg": 210.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0149_Dragonite_02_Mega-Drag",
+          "baseStats": {
+            "hp": 91,
+            "atk": 124,
+            "def": 115,
+            "spa": 145,
+            "spd": 125,
+            "spe": 100
+          },
+          "battleAbility": "Multiscale",
+          "weightKg": 290.0,
+          "requiresItem": "Dragoninite"
+        }
+      ]
+    },
+    {
+      "id": "scizor",
+      "no": 212,
+      "en": "Scizor",
+      "ko": "핫삼",
+      "types": [
+        "벌레",
+        "강철"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0212_scizor_base",
+          "baseStats": {
+            "hp": 70,
+            "atk": 130,
+            "def": 100,
+            "spa": 55,
+            "spd": 80,
+            "spe": 65
+          },
+          "types": [
+            "벌레",
+            "강철"
+          ],
+          "battleAbility": "Swarm",
+          "weightKg": 118.0,
+          "assetSource": "https://namu.wiki/w/%ED%95%AB%EC%82%BC"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0212_scizor_mega",
+          "baseStats": {
+            "hp": 70,
+            "atk": 150,
+            "def": 140,
+            "spa": 65,
+            "spd": 100,
+            "spe": 75
+          },
+          "types": [
+            "벌레",
+            "강철"
+          ],
+          "battleAbility": "Technician",
+          "weightKg": 125.0,
+          "requiresItem": "Scizorite",
+          "assetSource": "https://namu.wiki/w/%ED%95%AB%EC%82%BC"
+        }
+      ]
+    },
+    {
+      "id": "tyranitar",
+      "no": 248,
+      "en": "Tyranitar",
+      "ko": "마기라스",
+      "types": [
+        "바위",
+        "악"
+      ],
+      "role": "모래바람 에이스",
+      "roleText": "등장과 함께 모래바람을 일으켜 날씨를 덮어쓰고, 모래 아래에서 특수 내구가 오른다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0248_Tyranitar_01_Tyranitar",
+          "baseStats": {
+            "hp": 100,
+            "atk": 134,
+            "def": 110,
+            "spa": 95,
+            "spd": 100,
+            "spe": 61
+          },
+          "battleAbility": "Sand Stream",
+          "weightKg": 202.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0248_Tyranitar_02_Mega-Tyra",
+          "baseStats": {
+            "hp": 100,
+            "atk": 164,
+            "def": 150,
+            "spa": 95,
+            "spd": 120,
+            "spe": 71
+          },
+          "battleAbility": "Sand Stream",
+          "weightKg": 255.0,
+          "requiresItem": "Tyranitarite"
+        }
+      ]
+    },
+    {
+      "id": "pelipper",
+      "no": 279,
+      "en": "Pelipper",
+      "ko": "패리퍼",
+      "types": [
+        "물",
+        "비행"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0279_pelipper_base",
+          "baseStats": {
+            "hp": 60,
+            "atk": 50,
+            "def": 100,
+            "spa": 95,
+            "spd": 70,
+            "spe": 65
+          },
+          "types": [
+            "물",
+            "비행"
+          ],
+          "battleAbility": "Keen Eye",
+          "weightKg": 28.0,
+          "assetSource": "https://namu.wiki/w/%ED%8C%A8%EB%A6%AC%ED%8D%BC"
+        }
+      ]
+    },
+    {
+      "id": "milotic",
+      "no": 350,
+      "en": "Milotic",
+      "ko": "밀로틱",
+      "types": [
+        "물"
+      ],
+      "role": "위협 견제",
+      "roleText": "능력이 내려가면 특공이 크게 오르는 특성으로 위협을 견제하는 내구형 특수 어태커.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0350_Milotic_01_Milotic",
+          "baseStats": {
+            "hp": 95,
+            "atk": 60,
+            "def": 79,
+            "spa": 100,
+            "spd": 125,
+            "spe": 81
+          },
+          "battleAbility": "Marvel Scale",
+          "weightKg": 162.0
+        }
+      ]
+    },
+    {
+      "id": "salamence",
+      "no": 373,
+      "en": "Salamence",
+      "ko": "보만다",
+      "types": [
+        "드래곤",
+        "비행"
+      ],
+      "role": "위협 + 광역 에이스",
+      "roleText": "메가진화 전에는 위협으로 상대 공격을 낮추고, 메가보만다가 되면 노말 기술이 강한 비행 기술로 바뀌어 광역기로 압박한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0373_Salamence_01_Salamence",
+          "baseStats": {
+            "hp": 95,
+            "atk": 135,
+            "def": 80,
+            "spa": 110,
+            "spd": 80,
+            "spe": 100
+          },
+          "battleAbility": "Intimidate",
+          "weightKg": 102.6
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0373_Salamence_02_Mega-Sala",
+          "baseStats": {
+            "hp": 95,
+            "atk": 145,
+            "def": 130,
+            "spa": 120,
+            "spd": 90,
+            "spe": 120
+          },
+          "battleAbility": "Aerilate",
+          "weightKg": 112.6,
+          "requiresItem": "Salamencite"
+        }
+      ]
+    },
+    {
+      "id": "staraptor",
+      "no": 398,
+      "en": "Staraptor",
+      "ko": "찌르호크",
+      "types": [
+        "노말",
+        "비행"
+      ],
+      "role": "위협 + 물리 화력",
+      "roleText": "위협으로 상대 공격을 낮추고 강한 비행·격투 물리기로 화력을 낸다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0398_Staraptor_01_Staraptor",
+          "baseStats": {
+            "hp": 85,
+            "atk": 120,
+            "def": 70,
+            "spa": 50,
+            "spd": 60,
+            "spe": 100
+          },
+          "battleAbility": "Intimidate",
+          "weightKg": 24.9
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0398_Staraptor_02_Mega-Star",
+          "baseStats": {
+            "hp": 85,
+            "atk": 140,
+            "def": 100,
+            "spa": 60,
+            "spd": 90,
+            "spe": 110
+          },
+          "types": [
+            "격투",
+            "비행"
+          ],
+          "battleAbility": "Contrary",
+          "weightKg": 50.0,
+          "requiresItem": "Staraptite"
+        }
+      ]
+    },
+    {
+      "id": "garchomp",
+      "no": 445,
+      "en": "Garchomp",
+      "ko": "한카리아스",
+      "types": [
+        "드래곤",
+        "땅"
+      ],
+      "role": "범용 물리 어태커",
+      "roleText": "빠른 스피드와 지진·암석봉인 등으로 어느 구축에나 들어가는 범용 어태커.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0445_Garchomp_01_Garchomp",
+          "baseStats": {
+            "hp": 108,
+            "atk": 130,
+            "def": 95,
+            "spa": 80,
+            "spd": 85,
+            "spe": 102
+          },
+          "battleAbility": "Sand Veil",
+          "weightKg": 95.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0445_Garchomp_02_Mega-Garc",
+          "baseStats": {
+            "hp": 108,
+            "atk": 170,
+            "def": 115,
+            "spa": 120,
+            "spd": 95,
+            "spe": 92
+          },
+          "battleAbility": "Sand Force",
+          "weightKg": 95.0,
+          "requiresItem": "Garchompite"
+        },
+        {
+          "id": "megaz",
+          "label": "메가 Z",
+          "file": "0445_Garchomp_03_Mega-Garc",
+          "baseStats": {
+            "hp": 108,
+            "atk": 130,
+            "def": 85,
+            "spa": 141,
+            "spd": 85,
+            "spe": 151
+          },
+          "types": [
+            "드래곤"
+          ],
+          "battleAbility": "Levitate",
+          "weightKg": 99.0,
+          "requiresItem": "Garchompite Z"
+        }
+      ]
+    },
+    {
+      "id": "hippowdon",
+      "no": 450,
+      "en": "Hippowdon",
+      "ko": "하마돈",
+      "types": [
+        "땅"
+      ],
+      "role": "모래바람 기점",
+      "roleText": "등장과 함께 모래바람을 일으키는 고내구 기점. 하품·스텔스록 등으로 판을 만든다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "수컷",
+          "file": "0450_Hippowdon_01_Hippowdon",
+          "baseStats": {
+            "hp": 108,
+            "atk": 112,
+            "def": 118,
+            "spa": 68,
+            "spd": 72,
+            "spe": 47
+          },
+          "battleAbility": "Sand Stream",
+          "weightKg": 300.0
+        },
+        {
+          "id": "female",
+          "label": "암컷",
+          "file": "0450_Hippowdon_02_Hippowdon",
+          "baseStats": {
+            "hp": 108,
+            "atk": 112,
+            "def": 118,
+            "spa": 68,
+            "spd": 72,
+            "spe": 47
+          },
+          "battleAbility": "Sand Stream",
+          "weightKg": 300.0
+        }
+      ]
+    },
+    {
+      "id": "froslass",
+      "no": 478,
+      "en": "Froslass",
+      "ko": "눈여아",
+      "types": [
+        "얼음",
+        "고스트"
+      ],
+      "role": "고속 방해",
+      "roleText": "빠른 스피드로 얼음 광역기와 방해 기술을 먼저 쓰는 역할.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0478_Froslass_01_Froslass",
+          "baseStats": {
+            "hp": 70,
+            "atk": 80,
+            "def": 70,
+            "spa": 80,
+            "spd": 70,
+            "spe": 110
+          },
+          "battleAbility": "Snow Cloak",
+          "weightKg": 26.6
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0478_Froslass_02_Mega-Fros",
+          "baseStats": {
+            "hp": 70,
+            "atk": 80,
+            "def": 70,
+            "spa": 140,
+            "spd": 100,
+            "spe": 120
+          },
+          "battleAbility": "Snow Warning",
+          "weightKg": 29.6,
+          "requiresItem": "Froslassite"
+        }
+      ]
+    },
+    {
+      "id": "rotom",
+      "no": 479,
+      "en": "Rotom",
+      "ko": "로토무",
+      "types": [
+        "전기",
+        "고스트"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0479_rotom_base",
+          "baseStats": {
+            "hp": 50,
+            "atk": 50,
+            "def": 77,
+            "spa": 95,
+            "spd": 77,
+            "spe": 91
+          },
+          "types": [
+            "전기",
+            "고스트"
+          ],
+          "battleAbility": "Levitate",
+          "weightKg": 0.3,
+          "assetSource": "https://namu.wiki/w/%EB%A1%9C%ED%86%A0%EB%AC%B4"
+        },
+        {
+          "id": "wash",
+          "label": "워시",
+          "file": "0479_rotom_wash",
+          "baseStats": {
+            "hp": 50,
+            "atk": 65,
+            "def": 107,
+            "spa": 105,
+            "spd": 107,
+            "spe": 86
+          },
+          "types": [
+            "전기",
+            "물"
+          ],
+          "battleAbility": "Levitate",
+          "weightKg": 0.3,
+          "assetSource": "https://namu.wiki/w/%EB%A1%9C%ED%86%A0%EB%AC%B4"
+        }
+      ]
+    },
+    {
+      "id": "excadrill",
+      "no": 530,
+      "en": "Excadrill",
+      "ko": "몰드류",
+      "types": [
+        "땅",
+        "강철"
+      ],
+      "role": "모래 스위퍼",
+      "roleText": "모래바람 아래에서 스피드가 두 배가 되어 먼저 움직이는 물리 스위퍼.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0530_Excadrill_01_Excadrill",
+          "baseStats": {
+            "hp": 110,
+            "atk": 135,
+            "def": 60,
+            "spa": 50,
+            "spd": 65,
+            "spe": 88
+          },
+          "battleAbility": "Sand Rush",
+          "weightKg": 40.4
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0530_Excadrill_02_Mega-Exca",
+          "baseStats": {
+            "hp": 110,
+            "atk": 165,
+            "def": 100,
+            "spa": 65,
+            "spd": 65,
+            "spe": 103
+          },
+          "battleAbility": "Piercing Drill",
+          "weightKg": 60.0,
+          "requiresItem": "Excadrite"
+        }
+      ]
+    },
+    {
+      "id": "whimsicott",
+      "no": 547,
+      "en": "Whimsicott",
+      "ko": "엘풍",
+      "types": [
+        "풀",
+        "페어리"
+      ],
+      "role": "순풍 서포터",
+      "roleText": "변화기를 먼저 쓰는 특성으로 순풍·앵콜·달빛폭발 보조를 가장 먼저 펼친다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0547_Whimsicott_01_Whimsicot",
+          "baseStats": {
+            "hp": 60,
+            "atk": 67,
+            "def": 85,
+            "spa": 77,
+            "spd": 75,
+            "spe": 116
+          },
+          "battleAbility": "Prankster",
+          "weightKg": 6.6
+        }
+      ]
+    },
+    {
+      "id": "delphox",
+      "no": 655,
+      "en": "Delphox",
+      "ko": "마폭시",
+      "types": [
+        "불꽃",
+        "에스퍼"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0655_delphox_base",
+          "baseStats": {
+            "hp": 75,
+            "atk": 69,
+            "def": 72,
+            "spa": 114,
+            "spd": 100,
+            "spe": 104
+          },
+          "types": [
+            "불꽃",
+            "에스퍼"
+          ],
+          "battleAbility": "Blaze",
+          "weightKg": 39.0,
+          "assetSource": "https://namu.wiki/w/%EB%A7%88%ED%8F%AD%EC%8B%9C"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0655_delphox_mega",
+          "baseStats": {
+            "hp": 75,
+            "atk": 69,
+            "def": 72,
+            "spa": 159,
+            "spd": 125,
+            "spe": 134
+          },
+          "types": [
+            "불꽃",
+            "에스퍼"
+          ],
+          "battleAbility": "Levitate",
+          "weightKg": 39.0,
+          "requiresItem": "Delphoxite",
+          "assetSource": "https://namu.wiki/w/%EB%A7%88%ED%8F%AD%EC%8B%9C"
+        }
+      ]
+    },
+    {
+      "id": "talonflame",
+      "no": 663,
+      "en": "Talonflame",
+      "ko": "파이어로",
+      "types": [
+        "불꽃",
+        "비행"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0663_talonflame_base",
+          "baseStats": {
+            "hp": 78,
+            "atk": 81,
+            "def": 71,
+            "spa": 74,
+            "spd": 69,
+            "spe": 126
+          },
+          "types": [
+            "불꽃",
+            "비행"
+          ],
+          "battleAbility": "Flame Body",
+          "weightKg": 24.5,
+          "assetSource": "https://namu.wiki/w/%ED%8C%8C%EC%9D%B4%EC%96%B4%EB%A1%9C"
+        }
+      ]
+    },
+    {
+      "id": "vivillon",
+      "no": 666,
+      "en": "Vivillon",
+      "ko": "비비용",
+      "types": [
+        "벌레",
+        "비행"
+      ],
+      "role": "수면 살포",
+      "roleText": "명중률이 오르는 특성으로 수면가루를 안정적으로 맞히고 분노가루로 아군을 지킨다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0666_Vivillon_01_Vivillon",
+          "baseStats": {
+            "hp": 80,
+            "atk": 52,
+            "def": 50,
+            "spa": 90,
+            "spd": 50,
+            "spe": 89
+          },
+          "battleAbility": "Shield Dust",
+          "weightKg": 17.0
+        }
+      ]
+    },
+    {
+      "id": "floette",
+      "no": 670,
+      "en": "Floette",
+      "ko": "플라엣테",
+      "types": [
+        "페어리"
+      ],
+      "role": "메가 에이스",
+      "roleText": "영원의 꽃 플라엣테가 메가진화해 강한 페어리 특수기로 화력을 내는 에이스.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0670_Floette_01_Floette",
+          "baseStats": {
+            "hp": 54,
+            "atk": 45,
+            "def": 47,
+            "spa": 75,
+            "spd": 98,
+            "spe": 52
+          },
+          "battleAbility": "Flower Veil",
+          "weightKg": 0.9
+        },
+        {
+          "id": "eternal",
+          "label": "영원의 꽃",
+          "file": "0670_Floette_02_Eternal-Flower-Floette",
+          "baseStats": {
+            "hp": 74,
+            "atk": 65,
+            "def": 67,
+            "spa": 125,
+            "spd": 128,
+            "spe": 92
+          },
+          "battleAbility": "Flower Veil",
+          "weightKg": 0.9
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": null,
+          "fallback": "eternal",
+          "baseStats": {
+            "hp": 74,
+            "atk": 85,
+            "def": 87,
+            "spa": 155,
+            "spd": 148,
+            "spe": 102
+          },
+          "battleAbility": "Fairy Aura",
+          "weightKg": 100.8,
+          "requiresItem": "Floettite"
+        }
+      ]
+    },
+    {
+      "id": "aegislash",
+      "no": 681,
+      "en": "Aegislash",
+      "ko": "킬가르도",
+      "types": [
+        "강철",
+        "고스트"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0681_aegislash_base",
+          "baseStats": {
+            "hp": 60,
+            "atk": 50,
+            "def": 140,
+            "spa": 50,
+            "spd": 140,
+            "spe": 60
+          },
+          "types": [
+            "강철",
+            "고스트"
+          ],
+          "battleAbility": "Stance Change",
+          "weightKg": 53.0,
+          "assetSource": "https://namu.wiki/w/%ED%82%AC%EA%B0%80%EB%A5%B4%EB%8F%84"
+        },
+        {
+          "id": "blade",
+          "label": "블레이드",
+          "file": "0681_aegislash_blade",
+          "baseStats": {
+            "hp": 60,
+            "atk": 140,
+            "def": 50,
+            "spa": 140,
+            "spd": 50,
+            "spe": 60
+          },
+          "types": [
+            "강철",
+            "고스트"
+          ],
+          "battleAbility": "Stance Change",
+          "weightKg": 53.0,
+          "assetSource": "https://namu.wiki/w/%ED%82%AC%EA%B0%80%EB%A5%B4%EB%8F%84"
+        }
+      ]
+    },
+    {
+      "id": "sylveon",
+      "no": 700,
+      "en": "Sylveon",
+      "ko": "님피아",
+      "types": [
+        "페어리"
+      ],
+      "role": "광역 특수 어태커",
+      "roleText": "노말 기술이 페어리로 바뀌는 특성의 하이퍼보이스로 양쪽을 동시에 때린다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0700_Sylveon_01_Sylveon-h",
+          "baseStats": {
+            "hp": 95,
+            "atk": 65,
+            "def": 65,
+            "spa": 110,
+            "spd": 130,
+            "spe": 60
+          },
+          "battleAbility": "Cute Charm",
+          "weightKg": 23.5
+        }
+      ]
+    },
+    {
+      "id": "incineroar",
+      "no": 727,
+      "en": "Incineroar",
+      "ko": "어흥염",
+      "types": [
+        "불꽃",
+        "악"
+      ],
+      "role": "위협 + 속이기 서포터",
+      "roleText": "위협, 속이기, 막말내뱉기로 상대 화력을 깎고 교체를 반복하며 판을 조절하는 대표 서포터.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0727_Incineroar_01_Incineroa",
+          "baseStats": {
+            "hp": 95,
+            "atk": 115,
+            "def": 90,
+            "spa": 80,
+            "spd": 90,
+            "spe": 60
+          },
+          "battleAbility": "Blaze",
+          "weightKg": 83.0
+        }
+      ]
+    },
+    {
+      "id": "primarina",
+      "no": 730,
+      "en": "Primarina",
+      "ko": "누리레느",
+      "types": [
+        "물",
+        "페어리"
+      ],
+      "role": "특수 어태커",
+      "roleText": "물·페어리 광역 특수기로 화력을 내는 내구형 어태커.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0730_Primarina_01_Primarina",
+          "baseStats": {
+            "hp": 80,
+            "atk": 74,
+            "def": 74,
+            "spa": 126,
+            "spd": 116,
+            "spe": 60
+          },
+          "battleAbility": "Torrent",
+          "weightKg": 44.0
+        }
+      ]
+    },
+    {
+      "id": "toxapex",
+      "no": 748,
+      "en": "Toxapex",
+      "ko": "더시마사리",
+      "types": [
+        "독",
+        "물"
+      ],
+      "role": "고내구 벽",
+      "roleText": "매우 높은 내구와 교체 시 회복하는 특성으로 버티며 독·흑안개로 상대를 방해한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0748_Toxapex_01_Toxapex-h",
+          "baseStats": {
+            "hp": 50,
+            "atk": 63,
+            "def": 152,
+            "spa": 53,
+            "spd": 142,
+            "spe": 35
+          },
+          "battleAbility": "Merciless",
+          "weightKg": 14.5
+        }
+      ]
+    },
+    {
+      "id": "mudsdale",
+      "no": 750,
+      "en": "Mudsdale",
+      "ko": "만마드",
+      "types": [
+        "땅"
+      ],
+      "role": "물리 벽",
+      "roleText": "공격을 받을 때마다 방어가 오르는 특성으로 물리 공격을 받아내는 벽.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0750_Mudsdale_01_Mudsdale",
+          "baseStats": {
+            "hp": 100,
+            "atk": 125,
+            "def": 100,
+            "spa": 55,
+            "spd": 85,
+            "spe": 35
+          },
+          "battleAbility": "Own Tempo",
+          "weightKg": 920.0
+        }
+      ]
+    },
+    {
+      "id": "kommoo",
+      "no": 784,
+      "en": "Kommo-o",
+      "ko": "짜랑고우거",
+      "types": [
+        "드래곤",
+        "격투"
+      ],
+      "role": "능력 상승 에이스",
+      "roleText": "모든 능력을 올리는 전용기로 한 턴에 에이스가 되는 드래곤.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0784_Kommo-o_01_Kommo-o-h",
+          "baseStats": {
+            "hp": 75,
+            "atk": 110,
+            "def": 125,
+            "spa": 100,
+            "spd": 105,
+            "spe": 85
+          },
+          "battleAbility": "Bulletproof",
+          "weightKg": 78.2
+        }
+      ]
+    },
+    {
+      "id": "rillaboom",
+      "no": 812,
+      "en": "Rillaboom",
+      "ko": "고릴타",
+      "types": [
+        "풀"
+      ],
+      "role": "필드 + 선공 화력",
+      "roleText": "등장과 함께 그래스필드를 깔고, 필드 위에서 먼저 나가는 그래스슬라이더와 속이기로 압박한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0812_Rillaboom_01_Rillaboom",
+          "baseStats": {
+            "hp": 100,
+            "atk": 125,
+            "def": 90,
+            "spa": 60,
+            "spd": 70,
+            "spe": 85
+          },
+          "battleAbility": "Overgrow",
+          "weightKg": 90.0
+        },
+        {
+          "id": "gmax",
+          "label": "거다이맥스",
+          "file": "0812_Rillaboom_02_Rillaboom",
+          "baseStats": {
+            "hp": 100,
+            "atk": 125,
+            "def": 90,
+            "spa": 60,
+            "spd": 70,
+            "spe": 85
+          },
+          "battleAbility": "Overgrow",
+          "weightKg": 0.0
+        }
+      ]
+    },
+    {
+      "id": "corviknight",
+      "no": 823,
+      "en": "Corviknight",
+      "ko": "아머까오",
+      "types": [
+        "비행",
+        "강철"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0823_corviknight_base",
+          "baseStats": {
+            "hp": 98,
+            "atk": 87,
+            "def": 105,
+            "spa": 53,
+            "spd": 85,
+            "spe": 67
+          },
+          "types": [
+            "비행",
+            "강철"
+          ],
+          "battleAbility": "Pressure",
+          "weightKg": 75.0,
+          "assetSource": "https://namu.wiki/w/%EC%95%84%EB%A8%B8%EA%B9%8C%EC%98%A4"
+        }
+      ]
+    },
+    {
+      "id": "indeedee",
+      "no": 876,
+      "en": "Indeedee",
+      "ko": "에써르",
+      "types": [
+        "에스퍼",
+        "노말"
+      ],
+      "role": "필드 + 날따름",
+      "roleText": "사이코필드로 상대의 선공기를 막고 날따름으로 아군에게 오는 공격을 대신 받는다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "수컷",
+          "file": "0876_Indeedee_01_Indeedee",
+          "baseStats": {
+            "hp": 60,
+            "atk": 65,
+            "def": 55,
+            "spa": 105,
+            "spd": 95,
+            "spe": 95
+          },
+          "battleAbility": "Inner Focus",
+          "weightKg": 28.0
+        },
+        {
+          "id": "female",
+          "label": "암컷",
+          "file": "0876_Indeedee_02_Indeedee",
+          "baseStats": {
+            "hp": 70,
+            "atk": 55,
+            "def": 65,
+            "spa": 95,
+            "spd": 105,
+            "spe": 85
+          },
+          "battleAbility": "Own Tempo",
+          "weightKg": 28.0
+        }
+      ]
+    },
+    {
+      "id": "basculegion",
+      "no": 902,
+      "en": "Basculegion",
+      "ko": "대쓰여너",
+      "types": [
+        "물",
+        "고스트"
+      ],
+      "role": "후반 피니셔",
+      "roleText": "쓰러진 아군이 많을수록 강해지는 성묘와 강한 물 기술로 후반을 정리한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "수컷",
+          "file": "0902_Basculegion_01_Basculegi",
+          "baseStats": {
+            "hp": 120,
+            "atk": 112,
+            "def": 65,
+            "spa": 80,
+            "spd": 75,
+            "spe": 78
+          },
+          "battleAbility": "Swift Swim",
+          "weightKg": 110.0
+        },
+        {
+          "id": "female",
+          "label": "암컷",
+          "file": "0902_Basculegion_02_Basculegi",
+          "baseStats": {
+            "hp": 120,
+            "atk": 92,
+            "def": 65,
+            "spa": 100,
+            "spd": 75,
+            "spe": 78
+          },
+          "battleAbility": "Swift Swim",
+          "weightKg": 110.0
+        }
+      ]
+    },
+    {
+      "id": "sneasler",
+      "no": 903,
+      "en": "Sneasler",
+      "ko": "포푸니크",
+      "types": [
+        "격투",
+        "독"
+      ],
+      "role": "고속 물리 + 속이기",
+      "roleText": "속이기와 높은 스피드, 상태이상을 거는 전용기로 초반부터 압박하는 물리 어태커.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0903_Sneasler_01_Sneasler",
+          "baseStats": {
+            "hp": 80,
+            "atk": 130,
+            "def": 60,
+            "spa": 40,
+            "spd": 80,
+            "spe": 120
+          },
+          "battleAbility": "Pressure",
+          "weightKg": 43.0
+        }
+      ]
+    },
+    {
+      "id": "maushold",
+      "no": 925,
+      "en": "Maushold",
+      "ko": "파밀리쥐",
+      "types": [
+        "노말"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0925_maushold_base",
+          "baseStats": {
+            "hp": 74,
+            "atk": 75,
+            "def": 70,
+            "spa": 65,
+            "spd": 75,
+            "spe": 111
+          },
+          "types": [
+            "노말"
+          ],
+          "battleAbility": "Friend Guard",
+          "weightKg": 2.3,
+          "assetSource": "https://namu.wiki/w/%ED%8C%8C%EB%B0%80%EB%A6%AC%EC%A5%90"
+        },
+        {
+          "id": "four",
+          "label": "네 식구",
+          "file": "0925_maushold_base",
+          "baseStats": {
+            "hp": 74,
+            "atk": 75,
+            "def": 70,
+            "spa": 65,
+            "spd": 75,
+            "spe": 111
+          },
+          "types": [
+            "노말"
+          ],
+          "battleAbility": "Friend Guard",
+          "weightKg": 2.8,
+          "assetSource": "https://namu.wiki/w/%ED%8C%8C%EB%B0%80%EB%A6%AC%EC%A5%90"
+        }
+      ]
+    },
+    {
+      "id": "scovillain",
+      "no": 952,
+      "en": "Scovillain",
+      "ko": "스코빌런",
+      "types": [
+        "풀",
+        "불꽃"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0952_scovillain_base",
+          "baseStats": {
+            "hp": 65,
+            "atk": 108,
+            "def": 65,
+            "spa": 108,
+            "spd": 65,
+            "spe": 75
+          },
+          "types": [
+            "풀",
+            "불꽃"
+          ],
+          "battleAbility": "Chlorophyll",
+          "weightKg": 15.0,
+          "assetSource": "https://namu.wiki/w/%EC%8A%A4%EC%BD%94%EB%B9%8C%EB%9F%B0"
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0952_scovillain_mega",
+          "baseStats": {
+            "hp": 65,
+            "atk": 138,
+            "def": 85,
+            "spa": 138,
+            "spd": 85,
+            "spe": 75
+          },
+          "types": [
+            "풀",
+            "불꽃"
+          ],
+          "battleAbility": "Spicy Spray",
+          "weightKg": 22.0,
+          "requiresItem": "Scovillainite",
+          "assetSource": "https://namu.wiki/w/%EC%8A%A4%EC%BD%94%EB%B9%8C%EB%9F%B0"
+        }
+      ]
+    },
+    {
+      "id": "espathra",
+      "no": 956,
+      "en": "Espathra",
+      "ko": "클레스퍼트라",
+      "types": [
+        "에스퍼"
+      ],
+      "role": "가속 에이스",
+      "roleText": "매 턴 스피드가 오르는 특성과 능력 변화에 비례해 강해지는 기술로 턴이 갈수록 강해진다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0956_Espathra_01_Espathra",
+          "baseStats": {
+            "hp": 95,
+            "atk": 60,
+            "def": 60,
+            "spa": 101,
+            "spd": 60,
+            "spe": 105
+          },
+          "battleAbility": "Opportunist",
+          "weightKg": 90.0
+        }
+      ]
+    },
+    {
+      "id": "glimmora",
+      "no": 970,
+      "en": "Glimmora",
+      "ko": "킬라플로르",
+      "types": [
+        "바위",
+        "독"
+      ],
+      "role": "특수 화력",
+      "roleText": "물리 공격을 받으면 독압정을 뿌리고 강한 바위·독·땅 특수기로 화력을 낸다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0970_Glimmora_01_Glimmora",
+          "baseStats": {
+            "hp": 83,
+            "atk": 55,
+            "def": 90,
+            "spa": 130,
+            "spd": 81,
+            "spe": 86
+          },
+          "battleAbility": "Toxic Debris",
+          "weightKg": 45.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0970_Glimmora_02_Mega-Glim",
+          "baseStats": {
+            "hp": 83,
+            "atk": 90,
+            "def": 105,
+            "spa": 150,
+            "spd": 96,
+            "spe": 101
+          },
+          "battleAbility": "Adaptability",
+          "weightKg": 77.0,
+          "requiresItem": "Glimmoranite"
+        }
+      ]
+    },
+    {
+      "id": "houndstone",
+      "no": 972,
+      "en": "Houndstone",
+      "ko": "묘두기",
+      "types": [
+        "고스트"
+      ],
+      "role": "모래 피니셔",
+      "roleText": "모래바람 아래에서 스피드가 오르고, 쓰러진 아군이 많을수록 강해지는 성묘로 마무리한다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0972_Houndstone_01_Houndston",
+          "baseStats": {
+            "hp": 72,
+            "atk": 101,
+            "def": 100,
+            "spa": 50,
+            "spd": 97,
+            "spe": 68
+          },
+          "battleAbility": "Sand Rush",
+          "weightKg": 15.0
+        }
+      ]
+    },
+    {
+      "id": "farigiraf",
+      "no": 981,
+      "en": "Farigiraf",
+      "ko": "키키링",
+      "types": [
+        "노말",
+        "에스퍼"
+      ],
+      "role": "트릭룸 기점",
+      "roleText": "상대의 선공기를 막는 특성으로 아군을 지키며 트릭룸을 펼치는 기점.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0981_Farigiraf_01_Farigiraf",
+          "baseStats": {
+            "hp": 120,
+            "atk": 90,
+            "def": 70,
+            "spa": 110,
+            "spd": 70,
+            "spe": 60
+          },
+          "battleAbility": "Cud Chew",
+          "weightKg": 160.0
+        }
+      ]
+    },
+    {
+      "id": "kingambit",
+      "no": 983,
+      "en": "Kingambit",
+      "ko": "대도각참",
+      "types": [
+        "악",
+        "강철"
+      ],
+      "role": "후반 에이스",
+      "roleText": "쓰러진 아군이 많을수록 화력이 오르는 특성과 기습으로 마지막에 남아 판을 끝낸다. 위협을 받으면 공격이 오르는 특성도 쓴다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0983_Kingambit_01_Kingambit",
+          "baseStats": {
+            "hp": 100,
+            "atk": 135,
+            "def": 120,
+            "spa": 60,
+            "spd": 85,
+            "spe": 50
+          },
+          "battleAbility": "Defiant",
+          "weightKg": 120.0
+        }
+      ]
+    },
+    {
+      "id": "baxcalibur",
+      "no": 998,
+      "en": "Baxcalibur",
+      "ko": "드닐레이브",
+      "types": [
+        "드래곤",
+        "얼음"
+      ],
+      "role": "물리 에이스",
+      "roleText": "높은 공격과 얼음·드래곤 물리기로 화력을 내는 에이스.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0998_Baxcalibur_01_Baxcalibu",
+          "baseStats": {
+            "hp": 115,
+            "atk": 145,
+            "def": 92,
+            "spa": 75,
+            "spd": 86,
+            "spe": 87
+          },
+          "battleAbility": "Thermal Exchange",
+          "weightKg": 210.0
+        },
+        {
+          "id": "mega",
+          "label": "메가",
+          "file": "0998_Baxcalibur_02_Mega-Baxc",
+          "baseStats": {
+            "hp": 115,
+            "atk": 175,
+            "def": 117,
+            "spa": 105,
+            "spd": 101,
+            "spe": 87
+          },
+          "battleAbility": "Thermal Exchange",
+          "weightKg": 315.0,
+          "requiresItem": "Baxcalibrite"
+        }
+      ]
+    },
+    {
+      "id": "gholdengo",
+      "no": 1000,
+      "en": "Gholdengo",
+      "ko": "타부자고",
+      "types": [
+        "강철",
+        "고스트"
+      ],
+      "role": "변화기 무효 어태커",
+      "roleText": "상대의 변화기를 받지 않는 특성으로 방해를 무시하고 강한 강철·고스트 특수기를 쓴다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "1000_Gholdengo_01_Gholdengo",
+          "baseStats": {
+            "hp": 87,
+            "atk": 60,
+            "def": 95,
+            "spa": 133,
+            "spd": 91,
+            "spe": 84
+          },
+          "battleAbility": "Good as Gold",
+          "weightKg": 30.0
+        }
+      ]
+    },
+    {
+      "id": "sinistcha",
+      "no": 1013,
+      "en": "Sinistcha",
+      "ko": "그우린차",
+      "types": [
+        "풀",
+        "고스트"
+      ],
+      "role": "회복 서포터",
+      "roleText": "등장 시 아군을 회복시키고 분노가루·트릭룸·회복 기술로 아군을 받쳐 준다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "1013_Sinistcha_01_Sinistcha",
+          "baseStats": {
+            "hp": 71,
+            "atk": 60,
+            "def": 106,
+            "spa": 121,
+            "spd": 80,
+            "spe": 70
+          },
+          "battleAbility": "Hospitality",
+          "weightKg": 2.2
+        }
+      ]
+    },
+    {
+      "id": "archaludon",
+      "no": 1018,
+      "en": "Archaludon",
+      "ko": "브리두라스",
+      "types": [
+        "강철",
+        "드래곤"
+      ],
+      "role": "",
+      "roleText": "",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "1018_archaludon_base",
+          "baseStats": {
+            "hp": 90,
+            "atk": 105,
+            "def": 130,
+            "spa": 125,
+            "spd": 65,
+            "spe": 85
+          },
+          "types": [
+            "강철",
+            "드래곤"
+          ],
+          "battleAbility": "Stamina",
+          "weightKg": 60.0,
+          "assetSource": "https://namu.wiki/w/%EB%B8%8C%EB%A6%AC%EB%91%90%EB%9D%BC%EC%8A%A4"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,389 @@
+extends Control
+## 앱 진입점: 화면 스택을 준비하고 첫 화면을 띄운다.
+## 실행 인자 (PC 확인용, `Godot --headless --path godot -- <인자>`):
+##   --selftest   화면을 차례로 열어 보고, AI 끼리 대전을 여러 판 돌린 뒤 종료
+##   --shots      화면을 차례로 열며 user://shot_*.png 로 저장 (창이 있어야 함)
+
+func _ready() -> void:
+	var stack := Control.new()
+	stack.set_anchors_preset(Control.PRESET_FULL_RECT)
+	stack.clip_contents = true
+	add_child(stack)
+	Nav.setup(stack)
+	Nav.push(HomeScreen.new(), false)
+	var args := OS.get_cmdline_user_args()
+	if "--selftest" in args:
+		_selftest.call_deferred()
+	if "--specialtest" in args:
+		_specialtest_only.call_deferred()
+	if "--shots" in args:
+		_shots.call_deferred()
+	var ni := args.find("--nettest")
+	if ni >= 0 and args.size() > ni + 1:
+		_nettest.call_deferred(args[ni + 1])
+
+## 두 기기 연결 자가 테스트: 한쪽은 `--nettest host`, 다른 쪽은 `--nettest 127.0.0.1`
+## 로비 → 팀·준비 → 선출 → 대전 종료 를 자동으로 진행한다.
+func _nettest(target: String) -> void:
+	var tag := "[nettest %s]" % ("host" if target == "host" else "join")
+	var err := Net.start("host") if target == "host" else Net.join(target)
+	if err != "":
+		print("%s 시작 실패: %s" % [tag, err])
+		get_tree().quit(1)
+		return
+	var sent := ""
+	var acts := 0
+	for i in 600:
+		await _wait(0.05)
+		var v: Dictionary = Net.view
+		if v.is_empty() or not v["players"][1]["here"]:
+			continue
+		var me: Dictionary = v["players"][int(v["seat"])]
+		match str(v["phase"]):
+			"lobby":
+				if me["team"] == "":
+					Net.send({ "t": "team", "id": Data.sets[Net.SET_ID]["teams"][int(v["seat"])]["id"] })
+				elif not me["ready"]:
+					Net.send({ "t": "ready", "v": true })
+			"pick":
+				if not me["picked"] and sent != "picks":
+					sent = "picks"
+					Net.send({ "t": "picks", "picks": range(int(v["count"])) })
+			"battle":
+				if v["battle"]["over"]:
+					print("%s 대전 끝: 승자 자리 %d, 내 자리 %d, 턴 %d, 내 입력 %d번" % [tag, int(v["battle"]["winner"]), int(v["seat"]), int(v["battle"]["turn"]), acts])
+					await _wait(0.5)
+					get_tree().quit(0)
+					return
+				if v["battle"]["waiting"]:
+					var legal: Array = (v["battle"]["legal"] as Array).filter(func(x): return x["ok"])
+					acts += 1
+					Net.send({ "t": "act", "a": legal[randi() % legal.size()] })
+	print("%s 시간 초과 (단계 %s)" % [tag, Net.view.get("phase", "연결 안 됨")])
+	get_tree().quit(1)
+
+func _wait(t: float) -> void:
+	await get_tree().create_timer(t).timeout
+
+func _specialtest_only() -> void:
+	var ok := _specialtest()
+	print("[specialtest] ", ok)
+	get_tree().quit(0 if ok else 1)
+
+func _specialtest() -> bool:
+	var team := Data.team(Net.SET_ID, "ptc26-1")
+	var charizard: Dictionary = team["members"].filter(func(m): return m["species"] == "charizard")[0]
+	var incineroar: Dictionary = team["members"].filter(func(m): return m["species"] == "incineroar")[0]
+	var mega := BEngine.create([charizard], [incineroar], 2)
+	var mon := BEngine.active(mega, 0)
+	if mon["form"] != "base" or BEngine.view(mega, 0)["gimmicks"] != ["mega"]:
+		return false
+	BEngine.submit(mega, 0, { "k": "move", "id": "Protect", "gimmick": "mega" })
+	BEngine.submit(mega, 1, { "k": "move", "id": "Flare Blitz" })
+	if mon["form"] != "megay" or mega["weather"] != "쾌청" or not BEngine.view(mega, 0)["gimmicks"].is_empty():
+		return false
+	var gmax := BEngine.create([charizard], [incineroar], 2, Net.SET_ID, true)
+	var giant := BEngine.active(gmax, 0)
+	var normal_hp := int(giant["hp"])
+	if not ("gmax" in BEngine.view(gmax, 0)["gimmicks"]):
+		return false
+	BEngine._transform(gmax, 0, "gmax", [])
+	if giant["max"] != normal_hp * 2 or BEngine.preview_move(gmax, giant, "Heat Wave", "")["ko"] != "거다이옥염":
+		return false
+	for i in 3:
+		BEngine._end_turn(gmax, 0, [])
+	if giant["form"] != "base" or giant["max"] != normal_hp:
+		return false
+	if Data.sets[Net.SET_ID]["info"]["events"][0]["id"] != "PTC26":
+		return false
+	var members := 0
+	for t in Data.sets[Net.SET_ID]["teams"]:
+		if t["event"] != "PTC26":
+			continue
+		if t["members"].size() != 6:
+			return false
+		for member in t["members"]:
+			members += 1
+			for id in member["moves"]:
+				if BEngine.move(Net.SET_ID, id).is_empty():
+					return false
+	return members == 48
+
+func _pp_test() -> bool:
+	var member := { "species": "charizard", "moves": ["Protect", "Solar Beam"] }
+	var defender := { "species": "charizard", "ability": "Pressure", "moves": ["Protect"] }
+	var state := BEngine.create([member, member], [defender], 13)
+	var actor := BEngine.active(state, 0)
+	var events := []
+	if int(actor["pp"]["Protect"]) != 8:
+		return false
+	BEngine._use(state, 0, "Protect", events)
+	if int(actor["pp"]["Protect"]) != 7:
+		return false
+	var beam_pp := int(actor["pp"]["Solar Beam"])
+	BEngine._use(state, 0, "Solar Beam", events)
+	if actor.get("charge", "") != "Solar Beam" or int(actor["pp"]["Solar Beam"]) != beam_pp - 2:
+		return false
+	BEngine._use(state, 0, "Solar Beam", events)
+	if int(actor["pp"]["Solar Beam"]) != beam_pp - 2:
+		return false
+	BEngine._field(state, "weather", "비", events)
+	var view := BEngine.view(state, 0)
+	if view["weather"] != "비" or view["weatherTurns"] != 5:
+		return false
+	actor["pp"]["Solar Beam"] = 0
+	actor["pp"]["Protect"] = 0
+	if view["sides"][0]["mons"][0]["pp"]["Protect"] != 7:
+		return false
+	var legal := BEngine.legal(state, 0).filter(func(action): return action["ok"] and action["k"] == "move")
+	if legal.size() != 1 or legal[0]["id"] != "practice_struggle":
+		return false
+	BEngine._swap(state, 0, 1, events)
+	BEngine._swap(state, 0, 0, events)
+	return int(actor["pp"]["Protect"]) == 0
+
+func _selftest() -> void:
+	var fails := 0
+	if not _pp_test():
+		print("[selftest] 기술 PP 규칙 오류")
+		fails += 1
+	if not _specialtest():
+		print("[selftest] PTC2026 또는 특수 규칙 오류")
+		fails += 1
+	await _wait(0.3)
+	# 1) 뷰어 화면 열기: 세트마다 팀 선택 → 모든 팀 상세 → 멤버 크게 보기(넘기기·폼 전환) → 도감
+	for set_id in Data.SETS:
+		Nav.push(TeamSelectScreen.new(set_id), false)
+		await _wait(0.1)
+		for t in Data.sets[set_id]["teams"]:
+			for m in t["members"]:
+				var f := Data.form(set_id, m["species"], m.get("form", "base"))
+				if Data.species(set_id, m["species"]).is_empty() or (not str(f.get("file", "")).begins_with("emblem:") and not ResourceLoader.exists(Data.sprite_path(set_id, str(f.get("file", "")), false))):
+					print("[selftest] 그림/종 없음: %s %s" % [t["id"], m])
+					fails += 1
+		var t0: Dictionary = Data.sets[set_id]["teams"][0]
+		Nav.push(TeamDetailScreen.new(set_id, t0), false)
+		await _wait(0.1)
+		var viewer := MemberViewer.new(set_id, t0["members"], 0)
+		Nav.push(viewer, false)
+		await _wait(0.1)
+		for i in 7:
+			viewer.go(1)
+			await _wait(0.05)
+		Nav.push(DexScreen.new(set_id), false)
+		await _wait(0.2)
+		print("[selftest] %s 화면 열기 완료 (팀 %d)" % [set_id, Data.sets[set_id]["teams"].size()])
+		while Nav.depth() > 1:
+			Nav.pop()
+			await _wait(Nav.DURATION + 0.1)
+
+	# 2) 엔진: 모든 대회 팀 조합을 AI끼리 대전한다. 끝까지 가는지, 턴 수·승률 분포
+	var teams: Array = Data.sets[Net.SET_ID]["teams"]
+	var turns := 0
+	var wins := {}
+	var games := 0
+	for a in teams:
+		for b in teams:
+			for rep in 2:
+				var pa := BBot.pick_members(Net.SET_ID, a["id"], b["id"], 3).map(func(i): return a["members"][i])
+				var pb := BBot.pick_members(Net.SET_ID, b["id"], a["id"], 3).map(func(i): return b["members"][i])
+				var s := BEngine.create(pa, pb, randi())
+				var guard := 0
+				while not s["over"] and guard < 2000:
+					guard += 1
+					for seat in 2:
+						if BEngine.waiting_for(s, seat):
+							BEngine.submit(s, seat, BBot.choose(s, seat))
+				if not s["over"]:
+					print("[selftest] 끝나지 않은 대전: %s vs %s" % [a["id"], b["id"]])
+					fails += 1
+				games += 1
+				turns += int(s["turn"])
+				if int(s["winner"]) == 0: wins[a["id"]] = int(wins.get(a["id"], 0)) + 1
+				if int(s["winner"]) == 1: wins[b["id"]] = int(wins.get(b["id"], 0)) + 1
+	print("[selftest] 엔진 %d판, 평균 %.1f턴, 팀별 승수 %s" % [games, float(turns) / games, wins])
+
+	# 대회 팀 구성원마다 선택할 수 있는 기술이 있는지 확인한다.
+	for team in teams:
+		for member in team["members"]:
+			var state := BEngine.create([member], [member], 1)
+			var moves := BEngine.legal(state, 0)
+			if moves.is_empty() or not moves.any(func(action): return action["ok"]):
+				fails += 1
+				print("[selftest] 대회 팀 기술 구성 오류: %s/%s" % [team["id"], member["species"]])
+
+	# 공개 배분으로 계산한 실수치와 물리·특수 피해 경로 검증.
+	var sneasler: Dictionary = Data.team(Net.SET_ID, "vrnc1-1")["members"].filter(func(m): return m["species"] == "sneasler")[0]
+	var hippowdon: Dictionary = Data.team(Net.SET_ID, "vrnc1-2")["members"].filter(func(m): return m["species"] == "hippowdon")[0]
+	var reference := BEngine.create([sneasler], [hippowdon], 1)
+	var attacker := BEngine.active(reference, 0)
+	var defender := BEngine.active(reference, 1)
+	var physical := { "power": 120, "type": "격투", "damageClass": "physical" }
+	var special := { "power": 120, "type": "격투", "damageClass": "special" }
+	if int(attacker["max"]) != 183 or int(attacker["stats"]["spe"]) != 162 or int(defender["max"]) != 208:
+		fails += 1
+		print("[selftest] 공개 배분 레벨 50 실수치 오류")
+	if BEngine.damage(attacker, defender, physical, 85) != 81 or BEngine.damage(attacker, defender, physical, 100) != 96 or BEngine.damage(attacker, defender, special, 100) != 36:
+		fails += 1
+		print("[selftest] 피해 계산 오류")
+	var electric := { "power": 100, "type": "전기", "damageClass": "special" }
+	if BEngine.damage(attacker, defender, electric, 100) != 0:
+		fails += 1
+		print("[selftest] 타입 면역 오류")
+
+	# 3) 혼자 하기 흐름: 로비 → 선출 → 대전 끝까지 (Net 을 통해)
+	Net.start("solo")
+	if int(Net.view["count"]) != 3:
+		fails += 1
+		print("[selftest] 기본 선출 수 오류")
+	for expected in [4, 3]:
+		Net.send({ "t": "count", "n": expected })
+		if int(Net.view["count"]) != expected:
+			fails += 1
+			print("[selftest] 선출 수 변경 오류: %d" % expected)
+	Net.send({ "t": "team", "id": teams[0]["id"] })
+	Net.send({ "t": "ready", "v": true })
+	Net.send({ "t": "picks", "picks": range(int(Net.view["count"])) })
+	var steps := 0
+	while Net.view["phase"] == "battle" and not Net.view["battle"]["over"] and steps < 500:
+		steps += 1
+		var legal: Array = (Net.view["battle"]["legal"] as Array).filter(func(x): return x["ok"])
+		Net.send({ "t": "act", "a": legal[randi() % legal.size()] })
+	var ok: bool = Net.view["phase"] == "battle" and Net.view["battle"]["over"]
+	print("[selftest] AI와 연습: 단계 %s, %d번 입력, %s" % [Net.view["phase"], steps, "정상" if ok else "실패"])
+	if not ok:
+		fails += 1
+	Net.leave()
+	print("[selftest] 끝: 실패 %d" % fails)
+	get_tree().quit(1 if fails > 0 else 0)
+
+func _audit_visible_controls(screen_name: String) -> void:
+	var current := Nav.current()
+	if current == null:
+		return
+	var viewport := get_viewport_rect()
+	for node in current.find_children("*", "Control", true, false):
+		if not (node is TapArea or node is LineEdit) or not node.is_visible_in_tree():
+			continue
+		var rect: Rect2 = node.get_global_rect()
+		if rect.size.x <= 0.0 or rect.size.y <= 0.0:
+			continue
+		if rect.position.x < viewport.position.x - 2.0 or rect.end.x > viewport.end.x + 2.0:
+			push_error("[ui-overflow] %s %s %s %s" % [screen_name, node.name, rect, viewport])
+
+func _shot(name: String) -> void:
+	await _wait(0.6)
+	await RenderingServer.frame_post_draw
+	_audit_visible_controls(name)
+	var dir := "user://"
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--shots-dir="):
+			dir = arg.trim_prefix("--shots-dir=")
+	var absolute_dir := ProjectSettings.globalize_path(dir)
+	DirAccess.make_dir_recursive_absolute(absolute_dir)
+	var path := absolute_dir.path_join("shot_%s.png" % name)
+	var err := get_viewport().get_texture().get_image().save_png(path)
+	if err != OK:
+		push_error("화면을 저장하지 못했습니다: " + path)
+		get_tree().quit(2)
+	print("[shots] %s" % path)
+
+func _back_to_home() -> void:
+	Nav.pop_to_root()
+	await _wait(Nav.DURATION + 0.16)
+
+func _shots() -> void:
+	var set_id := Net.SET_ID
+	await _shot("home")
+	Nav.push(TeamSelectScreen.new(set_id), false)
+	await _shot("teams")
+	var team := Data.team(set_id, "ptc26-1")
+	Nav.push(TeamDetailScreen.new(set_id, team), false)
+	await _shot("detail")
+	Nav.push(MemberViewer.new(set_id, team["members"], 0), false)
+	await _shot("viewer")
+	var layout: Control = Nav.current().get_meta("layout")
+	var viewer_scroll := layout.get_child(1) as ScrollContainer
+	viewer_scroll.scroll_vertical = 720
+	await _shot("viewer_stats")
+	(Nav.current() as MemberViewer).go(1)
+	viewer_scroll.scroll_vertical = 0
+	await _shot("viewer_new_species")
+	await _back_to_home()
+
+	Nav.push(DexScreen.new(set_id), false)
+	await _shot("dex")
+	await _back_to_home()
+	Nav.push(SessionScreen.new("host"), false)
+	await _shot("host")
+	await _back_to_home()
+	Nav.push(SessionScreen.new("join"), false)
+	await _shot("join")
+	await _back_to_home()
+
+	var battle := SessionScreen.new("solo")
+	Nav.push(battle, false)
+	Net._s["players"][1]["team"] = "ptc26-4"
+	Net.send({ "t": "team", "id": team["id"] })
+	Net.send({ "t": "count", "n": 4 })
+	await _shot("lobby")
+	# The picker is shown from the same lobby entry as a person's team selection.
+	Nav.push(TeamSelectScreen.new(set_id, true), false)
+	await _shot("team_picker")
+	Nav.pop()
+	await _wait(Nav.DURATION + 0.16)
+	Net.send({ "t": "ready", "v": true })
+	await _shot("pick")
+	Net.send({ "t": "picks", "picks": [3, 0, 2, 5] })
+	await _wait(1.0)
+	await _shot("battle")
+	var screen := Nav.current() as BattleScreen
+	screen._show_status()
+	await _shot("battle_status")
+	screen.on_back()
+	screen._gimmick = "mega"
+	screen._draw_actions()
+	await _shot("mega_preview")
+	screen._gimmick = ""
+	Net.send({ "t": "act", "a": { "k": "move", "id": "Protect", "gimmick": "mega" } })
+	for i in 100:
+		await _wait(0.06)
+		if not screen._playing:
+			break
+	await _shot("mega")
+	Engine.time_scale = 10.0
+	for i in 65:
+		if Net.view["battle"]["over"]:
+			break
+		var state: Dictionary = Net._s["battle"]
+		var action := BBot.choose(state, 0)
+		if not action.is_empty():
+			Net.send({ "t": "act", "a": action })
+		await _wait(0.03)
+	for i in 600:
+		await _wait(0.09)
+		if not screen._playing:
+			break
+	Engine.time_scale = 1.0
+	await _shot("result")
+	Net.leave()
+	await _back_to_home()
+	var gmax := SessionScreen.new("solo")
+	Nav.push(gmax, false)
+	Net.send({ "t": "team", "id": team["id"] })
+	Net.send({ "t": "gmax", "enabled": true })
+	Net.send({ "t": "ready", "v": true })
+	Net.send({ "t": "picks", "picks": [3, 0, 2] })
+	await _wait(1.0)
+	var giant := Nav.current() as BattleScreen
+	giant._gimmick = "gmax"
+	giant._draw_actions()
+	await _shot("gmax_preview")
+	giant._gimmick = ""
+	Net.send({ "t": "act", "a": { "k": "move", "id": "Heat Wave", "gimmick": "gmax" } })
+	for i in 100:
+		await _wait(0.07)
+		if not giant._playing:
+			break
+	await _shot("gmax")
+	get_tree().quit()
