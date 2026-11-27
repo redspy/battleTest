@@ -456,6 +456,12 @@ func _shots() -> void:
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
 	var original := screen._b
+	screen._show_roster()
+	var roster := screen._status_content
+	var labels := roster.find_children("*", "Label", true, false)
+	assert(labels.filter(func(label): return label.text == "미공개").size() == 2)
+	await _shot("battle_roster")
+	screen.on_back()
 	var room_demo := BEngine.create(
 		[{ "species": "pelipper", "ability": "Drizzle", "moves": ["Protect"] }],
 		[{ "species": "farigiraf", "moves": ["Trick Room"] }], 7)

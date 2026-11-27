@@ -54,6 +54,7 @@ var _actions: VBoxContainer
 var _bench: VBoxContainer
 var _status_layer: Control
 var _status_content: VBoxContainer
+var _showing_roster := false
 
 func _ready() -> void:
 	_set_id = str(Net.view["set"])
@@ -93,6 +94,9 @@ func _ready() -> void:
 	var details := UI.button("상태 보기", 22)
 	details.tapped.connect(_show_status)
 	head.add_child(details)
+	var roster := UI.button("팀 현황", 22)
+	roster.tapped.connect(_show_roster)
+	head.add_child(roster)
 	var quit := UI.button("나가기", 22)
 	quit.tapped.connect(_ask_leave)
 	head.add_child(quit)
@@ -278,6 +282,12 @@ func _condition_button(name: String, turns: int) -> void:
 	_conditions.add_child(badge)
 
 func _show_status() -> void:
+	_open_status_sheet(false)
+
+func _show_roster() -> void:
+	_open_status_sheet(true)
+
+func _open_status_sheet(roster: bool) -> void:
 	if _b.is_empty() or is_instance_valid(_status_layer):
 		return
 	_leave_armed = 0.0
@@ -292,13 +302,17 @@ func _show_status() -> void:
 	_status_layer.add_child(sheet)
 	sheet.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	sheet.anchor_top = 0.16
-	_status_content = Lay.page(sheet, "상태 보기")
+	_showing_roster = roster
+	_status_content = Lay.page(sheet, "팀 현황" if roster else "상태 보기")
 	_draw_status()
 
 func _draw_status() -> void:
 	for child in _status_content.get_children():
 		_status_content.remove_child(child)
 		child.queue_free()
+	if _showing_roster:
+		_draw_roster()
+		return
 	var field := _status_card("필드 · 턴 %d" % int(_b["turn"]))
 	var field_sources: Dictionary = _b.get("effectSources", {})
 	for entry in [["날씨", "weather"], ["필드 효과", "terrain"]]:
@@ -338,6 +352,40 @@ func _draw_status() -> void:
 						stages.append("%s %+d" % [STAT_KO[key], int(mon[key])])
 				roster.add_child(Lay.wrap("능력 변화  " + ("없음" if stages.is_empty() else " · ".join(stages)), 22, UI.TEXT_DIM))
 				_show_stage_history(roster, mon.get("stageHistory", []))
+
+func _draw_roster() -> void:
+	var teams := HBoxContainer.new()
+	teams.add_theme_constant_override("separation", 12)
+	_status_content.add_child(teams)
+	for seat in [_me, 1 - _me]:
+		var side: Dictionary = _b["sides"][seat]
+		var team := VBoxContainer.new()
+		team.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		team.add_theme_constant_override("separation", 10)
+		teams.add_child(team)
+		team.add_child(UI.label("내 팀" if seat == _me else "상대 팀", 27, UI.ACCENT))
+		for index in side["mons"].size():
+			var mon: Dictionary = side["mons"][index]
+			var active: bool = index == int(side["active"])
+			var card := Lay.card(UI.PANEL_HI if active else UI.PANEL, 14)
+			team.add_child(card[0])
+			var body: VBoxContainer = card[1]
+			if mon.get("hidden", false):
+				body.add_child(Lay.wrap("미공개", 23, UI.TEXT_DIM))
+				continue
+			var name := Data.display_name(_set_id, str(mon["id"]), str(mon["form"]))
+			body.add_child(Lay.wrap(name, 25, UI.TEXT))
+			var sprite := SpriteAnim.new(_set_id, str(Data.form(_set_id, mon["id"], mon["form"]).get("file", "")), true)
+			sprite.custom_minimum_size.y = 84
+			sprite.playing = false
+			body.add_child(sprite)
+			var hp := int(mon["hp"])
+			var max_hp := maxi(1, int(mon["max"]))
+			var health := "%d / %d" % [hp, max_hp] if seat == _me else "%d%%" % ceili(100.0 * hp / max_hp)
+			body.add_child(Lay.wrap("HP " + health, 22))
+			var position_label := "출전 중" if active else "대기 중"
+			var condition := _pokemon_status(mon)
+			body.add_child(Lay.wrap(condition if hp <= 0 else position_label + " · " + condition, 21, UI.TEXT_DIM))
 
 func _show_effect(col: VBoxContainer, title: String, source: String, effect: String) -> void:
 	col.add_child(Lay.wrap(title, 24))
