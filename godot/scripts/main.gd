@@ -209,6 +209,45 @@ func _daeul_test() -> bool:
 	target["atk"] = 2
 	return BEngine.damage(user, target, foul_play, 100, battle) > damage
 
+func _soeul_test() -> bool:
+	var team := Data.team(Net.SET_ID, "soeul")
+	var members: Array = team["members"]
+	if Data.sets[Net.SET_ID]["teams"][0]["id"] != "soeul" or members.size() != 6:
+		return false
+	for member: Dictionary in members:
+		var state := BEngine.create([member], [members[5]], 7)
+		if BEngine.active(state, 0)["moves"].size() != 4:
+			return false
+	var events := []
+	var state := BEngine.create([members[1]], [members[3]], 7)
+	var xerneas := BEngine.active(state, 0)
+	BEngine._use(state, 0, "Geomancy", events)
+	if not xerneas["itemUsed"] or xerneas["spa"] != 2 or xerneas["spd"] != 2 or xerneas["spe"] != 2:
+		return false
+	BEngine._use(state, 0, "Geomancy", events)
+	if xerneas.get("charge") != "Geomancy" or xerneas["spa"] != 2:
+		return false
+	BEngine._use(state, 0, "Geomancy", events)
+	if xerneas.get("charge", "") != "" or xerneas["spa"] != 4 or xerneas["pp"]["Geomancy"] != 8:
+		return false
+	var trace := BEngine.create([members[0], members[2]], [members[5]], 7)
+	if BEngine.active(trace, 0)["ability"] != "Intimidate":
+		return false
+	BEngine._swap(trace, 0, 1, events)
+	BEngine._transform(trace, 0, "mega", events)
+	if BEngine.active(trace, 0)["ability"] != "Thick Fat":
+		return false
+	var sword := BEngine.create([members[4]], [members[3]], 7)
+	var gallade := BEngine.active(sword, 0)
+	var target := BEngine.active(sword, 1)
+	var skill := BEngine.move(Net.SET_ID, "Sacred Sword")
+	var sharp_damage := BEngine.damage(gallade, target, skill, 100, sword)
+	target["def"] = 4
+	if sharp_damage != BEngine.damage(gallade, target, skill, 100, sword):
+		return false
+	gallade["ability"] = ""
+	return sharp_damage > BEngine.damage(gallade, target, skill, 100, sword)
+
 func _advanced_mechanics_test() -> bool:
 	var test_team := Data.team(Net.SET_ID, "mechanics-practice")
 	var members: Array = test_team["members"]
@@ -311,6 +350,9 @@ func _team_profile_test() -> bool:
 
 func _selftest() -> void:
 	var fails := 0
+	if not _soeul_test():
+		print("[selftest] 소을 팀 또는 신규 특성·기술 오류")
+		fails += 1
 	if not _advanced_mechanics_test():
 		print("[selftest] 진영 효과, 급소, 대타 또는 테라스탈 오류")
 		fails += 1

@@ -429,6 +429,37 @@
       ]
     },
     {
+      "id": "gyarados",
+      "no": 130,
+      "en": "Gyarados",
+      "ko": "갸라도스",
+      "types": [
+        "물",
+        "비행"
+      ],
+      "role": "위협·용의춤 물리 에이스",
+      "roleText": "위협·용의춤 물리 에이스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0130_gyarados_base",
+          "baseStats": {
+            "hp": 95,
+            "atk": 125,
+            "def": 79,
+            "spa": 60,
+            "spd": 100,
+            "spe": 81
+          },
+          "battleAbility": "Intimidate",
+          "weightKg": 235,
+          "assetSource": "https://namu.wiki/w/%EA%B0%B8%EB%9D%BC%EB%8F%84%EC%8A%A4",
+          "assetUrl": "https://i.namu.wiki/i/XgE3Ouf2prmjVdOtYtTQbFqOeChJ1VXJEfeVHdJh36zzbdKBrpWiUbvdZwLnBK6URggV2XZQLb1KcdEyggL8PQ.gif"
+        }
+      ]
+    },
+    {
       "id": "aerodactyl",
       "no": 142,
       "en": "Aerodactyl",
@@ -555,6 +586,37 @@
           "weightKg": 27,
           "assetSource": "https://namu.wiki/w/%EB%B8%94%EB%9E%98%ED%82%A4",
           "assetUrl": "https://i.namu.wiki/i/Lzkrl3ZxayW_wtlolItY8YxTY07kfY8AbXMgVp-_CNYaPbpKfisY1WSeXcTyhpwWqvYVX9Hl2HJ8ZD_INOqV7w.gif"
+        }
+      ]
+    },
+    {
+      "id": "steelix",
+      "no": 208,
+      "en": "Steelix",
+      "ko": "강철톤",
+      "types": [
+        "강철",
+        "땅"
+      ],
+      "role": "설치기 선봉",
+      "roleText": "설치기 선봉",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0208_steelix_base",
+          "baseStats": {
+            "hp": 75,
+            "atk": 85,
+            "def": 200,
+            "spa": 55,
+            "spd": 65,
+            "spe": 30
+          },
+          "battleAbility": "Sturdy",
+          "weightKg": 400,
+          "assetSource": "https://namu.wiki/w/%EA%B0%95%EC%B2%A0%ED%86%A4",
+          "assetUrl": "https://i.namu.wiki/i/vxSA-BWkGmW2Te6UBYsTLoIDrHe-Ke5i1AsHZwFCqaj1gYlicGtMUpedJq624HC8Y65amPambqRiN-0lqXllIw.gif"
         }
       ]
     },
@@ -689,6 +751,37 @@
           "battleAbility": "Keen Eye",
           "weightKg": 28.0,
           "assetSource": "https://namu.wiki/w/%ED%8C%A8%EB%A6%AC%ED%8D%BC"
+        }
+      ]
+    },
+    {
+      "id": "gardevoir",
+      "no": 282,
+      "en": "Gardevoir",
+      "ko": "가디안",
+      "types": [
+        "에스퍼",
+        "페어리"
+      ],
+      "role": "구애스카프 특수 어태커",
+      "roleText": "구애스카프 특수 어태커",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0282_gardevoir_base",
+          "baseStats": {
+            "hp": 68,
+            "atk": 65,
+            "def": 65,
+            "spa": 125,
+            "spd": 115,
+            "spe": 80
+          },
+          "battleAbility": "Trace",
+          "weightKg": 48.4,
+          "assetSource": "https://namu.wiki/w/%EA%B0%80%EB%94%94%EC%95%88",
+          "assetUrl": "https://i.namu.wiki/i/WwzmFdhAxj9M2SyKpTb9psRQV1iM4E_OfZID75ke4c-YFULKyuU2NYnu_egaB1g1a3MSllp8EWn6rLKQfPcUHQ.gif"
         }
       ]
     },
@@ -998,6 +1091,37 @@
           },
           "battleAbility": "Sand Stream",
           "weightKg": 300.0
+        }
+      ]
+    },
+    {
+      "id": "gallade",
+      "no": 475,
+      "en": "Gallade",
+      "ko": "엘레이드",
+      "types": [
+        "에스퍼",
+        "격투"
+      ],
+      "role": "강철 견제 물리 에이스",
+      "roleText": "강철 견제 물리 에이스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0475_gallade_base",
+          "baseStats": {
+            "hp": 68,
+            "atk": 125,
+            "def": 65,
+            "spa": 65,
+            "spd": 115,
+            "spe": 80
+          },
+          "battleAbility": "Sharpness",
+          "weightKg": 52,
+          "assetSource": "https://namu.wiki/w/%EC%97%98%EB%A0%88%EC%9D%B4%EB%93%9C",
+          "assetUrl": "https://i.namu.wiki/i/E5NUDXOA6Vbxb8ITtzyVZdDcQyYuAajw3Bx_bLvN1mt2L6HBoUUSmjr5VDE_CuX5z18BFsNro8gucbNCFnyOMQ.gif"
         }
       ]
     },
@@ -1492,6 +1616,36 @@
           },
           "battleAbility": "Cute Charm",
           "weightKg": 23.5
+        }
+      ]
+    },
+    {
+      "id": "xerneas",
+      "no": 716,
+      "en": "Xerneas",
+      "ko": "제르네아스",
+      "types": [
+        "페어리"
+      ],
+      "role": "지오컨트롤 특수 에이스",
+      "roleText": "지오컨트롤 특수 에이스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0716_xerneas_base",
+          "baseStats": {
+            "hp": 126,
+            "atk": 131,
+            "def": 95,
+            "spa": 131,
+            "spd": 98,
+            "spe": 99
+          },
+          "battleAbility": "Fairy Aura",
+          "weightKg": 215,
+          "assetSource": "https://namu.wiki/w/%EC%A0%9C%EB%A5%B4%EB%84%A4%EC%95%84%EC%8A%A4",
+          "assetUrl": "https://i.namu.wiki/i/eW96-mYrGdWtQkY8Y72d7Rv79H9qWLYwnkqoDkn52-bVUwzSPABQPQW-fxW48vnD0ziWFHIbwwLcGj0BY6R54w.gif"
         }
       ]
     },

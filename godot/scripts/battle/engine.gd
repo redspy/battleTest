@@ -141,6 +141,12 @@ static func _enter(s: Dictionary, seat: int, ev: Array, switching := true) -> vo
 				return
 		elif _grounded(mon) and "독" in mon["types"]:
 			_clear_side(side, ["toxicSpikes"])
+	if mon["ability"] == "Trace":
+		var copied := str(active(s, 1 - seat)["ability"])
+		if copied not in ["", "Trace", "Disguise", "Stance Change", "Multitype", "RKS System", "Schooling", "Shields Down", "Comatose", "Ice Face", "Gulp Missile", "Zero to Hero", "Commander", "Imposter", "Illusion", "Power Construct"]:
+			mon["tracedAbility"] = true
+			mon["ability"] = copied
+			ev.append({"e": "status", "seat": seat, "what": "트레이스로 %s 복제" % Data.sets[mon["set"]]["abilities"].get(copied, {}).get("ko", copied)})
 	match str(mon["ability"]):
 		"Drought": _field(s, "weather", "쾌청", ev, 5, _source(mon, "abilities", "Drought"))
 		"Drizzle": _field(s, "weather", "비", ev, 5, _source(mon, "abilities", "Drizzle"))
@@ -314,7 +320,7 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 	var defense_key := "spd" if special else "def"
 	var attack_source := defender if move_name(mv) == "Foul Play" else att
 	var attack := int(attack_source["stats"][attack_key]) if defender.get("ability") == "Unaware" else _stat(attack_source, attack_key)
-	var defense := int(defender["stats"][defense_key]) if att.get("ability") == "Unaware" else _stat(defender, defense_key)
+	var defense := int(defender["stats"][defense_key]) if att.get("ability") == "Unaware" or mv.get("ignoreDefenseBoost", false) else _stat(defender, defense_key)
 	if critical:
 		if int(attack_source.get(attack_key, 0)) < 0:
 			attack = int(attack_source["stats"][attack_key])
@@ -327,6 +333,8 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 	if defender.get("ability") == "Thick Fat" and att.get("ability") != "Mold Breaker" and mv["type"] in ["불꽃", "얼음"]:
 		attack = maxi(1, floori(attack * 0.5))
 	var power := int(mv["power"])
+	if att.get("ability") == "Sharpness" and mv.get("slicing", false) and not mv.get("maxMove", false):
+		power = floori(power * 1.5)
 	if att.get("ability") == "Sand Force" and s.get("weather") == "모래바람" and mv["type"] in ["땅", "바위", "강철"]:
 		power = floori(power * 1.3)
 	if att.get("ability") == "Supreme Overlord" and s.has("sides"):
@@ -527,6 +535,9 @@ static func _swap(s: Dictionary, seat: int, to: int, ev: Array) -> void:
 	old.erase("confusion")
 	if old["ability"] == "Regenerator":
 		old["hp"] = mini(int(old["max"]), int(old["hp"]) + floori(float(old["max"]) / 3.0))
+	if old.get("tracedAbility", false):
+		old.erase("tracedAbility")
+		old["ability"] = "Trace"
 	old["guard"] = false
 	old["guardChain"] = 0
 	side["active"] = to
@@ -835,19 +846,23 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 	mon.erase("charge")
 	ev.append({ "e": "use", "seat": seat, "move": move_id, "name": mv["ko"] })
 	var move_source := "%s의 기술 %s" % [Data.display_name(mon["set"], mon["id"], mon["form"]), mv["ko"]]
-	if not mv.get("maxMove", false) and move_id in ["Solar Beam", "Electro Shot"]:
-		if not charged and move_id == "Electro Shot":
-			_stage(mon, seat, "spa", 1, ev, move_source)
-		var weather_skip: bool = (move_id == "Solar Beam" and s["weather"] == "쾌청") or (move_id == "Electro Shot" and s["weather"] == "비")
-		if not charged and not weather_skip:
-			mon["charge"] = move_id
-			ev.append({ "e": "status", "seat": seat, "what": "힘을 모으고 있다" })
-			return
 	if mon.get("taunt", 0) > 0 and mv.get("power") == null and not mv.get("maxMove", false):
 		ev.append({ "e": "status", "seat": seat, "what": "도발로 변화 기술을 쓸 수 없다" })
 		return
+	if not mv.get("maxMove", false) and not charged and move_id in ["Solar Beam", "Electro Shot", "Geomancy"]:
+		if move_id == "Electro Shot":
+			_stage(mon, seat, "spa", 1, ev, move_source)
+		var weather_skip: bool = (move_id == "Solar Beam" and s["weather"] == "쾌청") or (move_id == "Electro Shot" and s["weather"] == "비")
+		if not weather_skip:
+			if mon["item"] == "Power Herb" and not mon["itemUsed"]:
+				mon["itemUsed"] = true
+				ev.append({"e": "status", "seat": seat, "what": "파워풀허브로 충전을 끝냈다"})
+			else:
+				mon["charge"] = move_id
+				ev.append({ "e": "status", "seat": seat, "what": "힘을 모으고 있다" })
+				return
 	var accuracy := float(mv.get("accuracy", 100))
-	var aim := clampi(int(mon["accuracy"]) - int(foe["evasion"]), -6, 6)
+	var aim := clampi(int(mon["accuracy"]) - (0 if mv.get("ignoreEvasion", false) else int(foe["evasion"])), -6, 6)
 	if str(mv.get("target", "")) in ["normal", "any", "allAdjacentFoes", "allAdjacent"] and not mv.get("maxMove", false) and not mv.get("alwaysHit", false):
 		accuracy *= float(3 + maxi(0, aim)) / float(3 - mini(0, aim))
 	if mon["ability"] == "Compound Eyes":

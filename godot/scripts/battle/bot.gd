@@ -76,6 +76,8 @@ static func choose(s: Dictionary, seat: int) -> Dictionary:
 					"selfStages":
 						if a["id"] == "Shell Smash" and int(me["spa"]) < 2 and int(me["hp"]) * 2 > int(me["max"]):
 							v += 55.0
+						if a["id"] == "Geomancy" and int(me["spa"]) < 2:
+							v += 65.0 if me["item"] == "Power Herb" and not me["itemUsed"] and int(me["hp"]) * 2 > int(me["max"]) else -25.0
 					"heal", "weatherHeal":
 						v += 70.0 if float(me["hp"]) / float(me["max"]) < 0.45 else -20.0
 					"buff":

@@ -36,9 +36,182 @@
   ],
   "teams": [
     {
-      "id": "daeul",
+      "id": "soeul",
       "event": "CUSTOM",
       "rank": 1,
+      "placement": "커스텀",
+      "name": "소을",
+      "tags": [
+        "싱글",
+        "6→3",
+        "랭크업 밸런스"
+      ],
+      "summary": "강철톤의 스텔스록과 암석봉인으로 랭크업할 틈을 만들고, 제르네아스의 지오컨트롤이나 갸라도스의 용의춤으로 마무리합니다. 기본 선출은 강철톤 → 메가이상해꽃 → 제르네아스입니다. 강철·독이 많으면 엘레이드, 불꽃·땅 또는 물리 공격이 많으면 갸라도스, 처음부터 빠른 압박이 필요하면 가디안을 고르세요. 전기 공격을 읽으면 강철톤으로 교체하고, 준비 턴을 끊는 도발이나 날려버리기가 보이면 강화 전에 그 포켓몬부터 압박합니다.",
+      "roles": {
+        "gardevoir": "구애스카프로 처음부터 속도를 확보합니다. 사이코키네시스로 독 타입, 매지컬플레임으로 강철 타입을 견제합니다.",
+        "xerneas": "파워풀허브를 써서 지오컨트롤을 한 턴에 완료합니다. 페어리오라 문포스를 주력으로 쓰고, 기합구슬로 강철 타입을 노립니다.",
+        "venusaur": "메가진화 후 두꺼운지방과 높은 물리 내구로 교체를 받아냅니다. 기가드레인·광합성·씨뿌리기로 시간을 벌고 오물폭탄으로 페어리를 압박합니다.",
+        "steelix": "옹골참으로 선봉에서 스텔스록을 깔 기회를 확보합니다. 암석봉인으로 스피드를 낮추고, 높은 체중의 헤비봄버로 가벼운 페어리를 견제합니다.",
+        "gallade": "칼춤과 예리함으로 물리 공격을 강화합니다. 성스러운칼로 강철과 상대의 방어 랭크업을 견제하고, 사이코커터로 독 타입을 노립니다.",
+        "gyarados": "위협으로 물리 공격을 약화시키고 용의춤을 쓸 틈을 만듭니다. 통굽부츠로 스텔스록을 피하고 폭포오르기·지진·얼음엄니로 마무리합니다."
+      },
+      "members": [
+        {
+          "species": "gardevoir",
+          "form": "base",
+          "ability": "Trace",
+          "item": "Choice Scarf",
+          "moves": [
+            "Moonblast",
+            "Psychic",
+            "Mystical Fire",
+            "Thunderbolt"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        },
+        {
+          "species": "xerneas",
+          "form": "base",
+          "ability": "Fairy Aura",
+          "item": "Power Herb",
+          "moves": [
+            "Geomancy",
+            "Moonblast",
+            "Thunderbolt",
+            "Focus Blast"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spa",
+            "reduce": "atk",
+            "nature": "modest"
+          }
+        },
+        {
+          "species": "venusaur",
+          "form": "mega",
+          "ability": "Overgrow",
+          "item": "Venusaurite",
+          "moves": [
+            "Giga Drain",
+            "Sludge Bomb",
+            "Synthesis",
+            "Leech Seed"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold"
+          }
+        },
+        {
+          "species": "steelix",
+          "form": "base",
+          "ability": "Sturdy",
+          "item": "Rocky Helmet",
+          "moves": [
+            "Stealth Rock",
+            "Earthquake",
+            "Heavy Slam",
+            "Rock Tomb"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 32,
+              "spe": 0
+            },
+            "boost": "spd",
+            "reduce": "spa",
+            "nature": "careful"
+          }
+        },
+        {
+          "species": "gallade",
+          "form": "base",
+          "ability": "Sharpness",
+          "item": "Life Orb",
+          "moves": [
+            "Swords Dance",
+            "Sacred Sword",
+            "Psycho Cut",
+            "Leaf Blade"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        },
+        {
+          "species": "gyarados",
+          "form": "base",
+          "ability": "Intimidate",
+          "item": "Heavy-Duty Boots",
+          "moves": [
+            "Dragon Dance",
+            "Waterfall",
+            "Earthquake",
+            "Ice Fang"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "daeul",
+      "event": "CUSTOM",
+      "rank": 2,
       "placement": "커스텀",
       "name": "다을",
       "tags": [
@@ -211,7 +384,7 @@
     {
       "id": "mechanics-practice",
       "event": "CUSTOM",
-      "rank": 2,
+      "rank": 3,
       "placement": "규칙 실습",
       "name": "전투 규칙 실습",
       "tags": [

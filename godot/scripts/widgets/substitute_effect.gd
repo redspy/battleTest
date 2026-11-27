@@ -1,6 +1,10 @@
 extends Control
 ## 전장 스프라이트 위에서 대타의 등장·피격·파괴를 보여준다.
 
+# 나무위키 대타출동 문서의 포챔스 대타출동 스크린샷.
+# https://namu.wiki/w/대타출동
+const DECOY_IMAGE := preload("res://scripts/widgets/substitute_reference.webp")
+
 var active := false
 var motion := 0.0:
 	set(value):
@@ -30,24 +34,26 @@ func animate(event: String, duration: float) -> void:
 func _draw() -> void:
 	if not active and motion <= 0.0:
 		return
-	var radius := minf(size.x, size.y) * 0.26
-	var center := size * Vector2(0.5, 0.68)
-	var color := Color("#36bba6").lerp(Color.WHITE, motion * 0.68 if phase == "피격" else 0.0)
-	if phase == "파괴":
-		for i in 8:
-			var dir := Vector2.from_angle(TAU * i / 8.0)
-			var distance := radius * (0.6 + 1.3 * (1.0 - motion))
-			draw_circle(center + dir * distance, radius * 0.10 * motion, Color(color, motion), true, -1.0, true)
-		return
+	var image_size := DECOY_IMAGE.get_size()
+	var fit := minf(size.x * 0.92 / image_size.x, size.y * 0.68 / image_size.y)
+	var center := size * Vector2(0.5, 0.62)
+	var tint := Color("#36bba6")
+	var opacity := 1.0
 	if phase == "발동":
-		radius *= 1.0 - motion * 0.52
-		draw_arc(center, radius * (1.2 + motion), 0, TAU, 40, Color(color, motion), 3.0, true)
-	if phase == "피격":
-		center.x += sin(motion * 21.0) * radius * motion * 0.23
-	var corners := PackedVector2Array()
-	for i in 6:
-		corners.append(center + Vector2.from_angle(TAU * i / 6.0 - PI * 0.5) * radius)
-	draw_colored_polygon(corners, Color("#123b43"))
-	corners.append(corners[0])
-	draw_polyline(corners, color, 4.0, true)
-	draw_circle(center, radius * 0.23, color, true, -1.0, true)
+		fit *= 1.0 - motion * 0.40
+		center.y += size.y * 0.14 * motion
+		opacity = 1.0 - motion * 0.7
+	elif phase == "피격":
+		center.x += sin(motion * 24.0) * size.x * 0.065 * motion
+	elif phase == "파괴":
+		fit *= 0.6 + motion * 0.4
+		center.y -= size.y * 0.17 * (1.0 - motion)
+		opacity = motion
+		for i in 8:
+			var direction := Vector2.from_angle(TAU * i / 8.0)
+			var distance := size.y * (0.16 + 0.35 * (1.0 - motion))
+			draw_circle(center + direction * distance, 5.0 * motion, Color(tint, motion), true, -1.0, true)
+	var drawn_size := image_size * fit
+	var frame := Rect2(center - drawn_size * 0.5, drawn_size)
+	draw_texture_rect(DECOY_IMAGE, frame, false, Color(1.0, 1.0, 1.0, opacity))
+	draw_rect(frame.grow(2.0), Color(tint, opacity), false, 3.0, true)
