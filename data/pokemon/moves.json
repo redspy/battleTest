@@ -2207,7 +2207,7 @@
       "pp": 12
     },
     "Encore": {
-      "ko": "앵콜",
+      "ko": "앙코르",
       "en": "Encore",
       "type": "노말",
       "category": "support",
@@ -2343,7 +2343,7 @@
       "power": 80
     },
     "Shadow Claw": {
-      "ko": "섀도크루",
+      "ko": "섀도우크루",
       "en": "Shadow Claw",
       "type": "고스트",
       "category": "attack",
@@ -2561,7 +2561,7 @@
       "power": 110
     },
     "Moonlight": {
-      "ko": "달의빛",
+      "ko": "달의 빛",
       "en": "Moonlight",
       "type": "페어리",
       "category": "support",
@@ -2578,6 +2578,21 @@
       "contact": false,
       "sound": false,
       "pp": 8
+    },
+    "Foul Play": {
+      "ko": "속임수",
+      "en": "Foul Play",
+      "type": "악",
+      "category": "attack",
+      "desc": "상대의 공격 능력치와 공격 랭크를 사용해 피해를 줍니다.",
+      "power": 95,
+      "damageClass": "physical",
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "contact": true,
+      "sound": false,
+      "pp": 15
     }
   },
   "items": {
@@ -2972,6 +2987,10 @@
     "Multiscale": {
       "ko": "멀티스케일",
       "desc": "HP가 최대일 때 받는 공격 피해가 절반으로 줄어듭니다."
+    },
+    "Pressure": {
+      "ko": "프레셔",
+      "desc": "자신을 대상으로 한 상대 기술의 PP를 1 더 소모시킵니다."
     }
   },
   "practiceSets": {

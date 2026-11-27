@@ -48,12 +48,12 @@ func _concept() -> Control:
 		head.add_child(UI.label(Data.display_name(set_id, m["species"], m.get("form", "base")), 23, UI.TEXT))
 		head.add_child(UI.chip(str(sp.get("role", "")), UI.ACCENT))
 		box.add_child(head)
-		box.add_child(Lay.wrap(str(sp.get("roleText", "")), 20, UI.TEXT_DIM))
+		box.add_child(Lay.wrap(str(team.get("roles", {}).get(m["species"], sp.get("roleText", ""))), 20, UI.TEXT_DIM))
 		col.add_child(box)
 	if team.has("replicaCode"):
 		col.add_child(UI.label("레플리카 코드  %s" % team["replicaCode"], 22, UI.ACCENT))
 	if set_id == "pokemon":
-		if team["event"] != "PTC26":
+		if team["event"] not in ["PTC26", "CUSTOM"]:
 			col.add_child(Lay.wrap("※ 컨셉과 역할은 팀 구성을 보고 쓴 추론입니다. 지닌 도구는 대회 공개 자료, 기술·특성은 확인된 팀만 표시합니다.", 19, UI.TEXT_DIM))
 		if team.has("sourceUrl"):
 			var url := str(team["sourceUrl"])

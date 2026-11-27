@@ -282,7 +282,16 @@ func _view_for(who: int, events: Array) -> Dictionary:
 	var v := { "set": SET_ID, "mode": BATTLE_MODE, "phase": _s["phase"], "solo": _s["solo"],
 		"seat": who, "players": players, "events": events }
 	if _s["phase"] == "battle":
-		v["battle"] = BEngine.view(_s["battle"], who)
+		var battle := BEngine.view(_s["battle"], who)
+		for seat in 2:
+			var side: Dictionary = battle["sides"][seat]
+			var picks: Array = _s["players"][seat]["picks"]
+			var known: Array = []
+			for index in side["mons"].size():
+				if not side["mons"][index].get("hidden", false):
+					known.append(picks[index])
+			side["knownRosterSlots"] = known
+		v["battle"] = battle
 	return v
 
 func _push(events: Array) -> void:

@@ -48,6 +48,10 @@ var _turn: Label
 var _conditions: HFlowContainer
 var _backdrop: Control
 var _log: Label
+var _hp_bars: Array[ProgressBar] = [null, null]
+var _hp_tweens: Array[Tween] = [null, null]
+var _hp_occupants := ["", ""]
+var _hp_targets := [-1.0, -1.0]
 var _info := [null, null]     # 자리별 정보 칸 (VBoxContainer)
 var _spr := [null, null]      # 자리별 그림
 var _actions: VBoxContainer
@@ -387,6 +391,45 @@ func _draw_roster() -> void:
 			var condition := _pokemon_status(mon)
 			body.add_child(Lay.wrap(condition if hp <= 0 else position_label + " · " + condition, 21, UI.TEXT_DIM))
 
+	_draw_public_rosters()
+
+func _draw_public_rosters() -> void:
+	var players: Array = Net.view.get("players", [])
+	if players.size() != 2:
+		return
+	_status_content.add_child(Lay.wrap("공개 로스터 · 6마리", 28, UI.ACCENT))
+	for seat in [_me, 1 - _me]:
+		var player: Dictionary = players[seat]
+		var team := Data.team(_set_id, str(player["team"]))
+		if team.is_empty():
+			continue
+		var side: Dictionary = _b["sides"][seat]
+		var known: Array = side.get("knownRosterSlots", player.get("picks", []))
+		_status_content.add_child(UI.label("내 로스터" if seat == _me else "상대 로스터", 25, UI.TEXT))
+		var grid := GridContainer.new()
+		grid.columns = 3
+		grid.add_theme_constant_override("h_separation", 8)
+		grid.add_theme_constant_override("v_separation", 8)
+		_status_content.add_child(grid)
+		for index in team["members"].size():
+			var member: Dictionary = team["members"][index]
+			var selected: bool = index in known
+			var card := Lay.card(UI.PANEL_HI if selected else UI.PANEL, 10)
+			var panel: Control = card[0]
+			panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid.add_child(panel)
+			var body: VBoxContainer = card[1]
+			var form := str(member.get("form", "base"))
+			var sprite := SpriteAnim.new(_set_id, str(Data.form(_set_id, member["species"], form).get("file", "")), true)
+			sprite.custom_minimum_size.y = 72
+			sprite.playing = false
+			if not selected:
+				sprite.modulate.a = 0.57
+			body.add_child(sprite)
+			body.add_child(Lay.wrap(Data.display_name(_set_id, member["species"], form), 20))
+			var mark := "선출 확인" if selected else ("미선출" if seat == _me else "선출 미공개")
+			body.add_child(Lay.wrap(mark, 19, UI.ACCENT if selected else UI.TEXT_DIM))
+
 func _show_effect(col: VBoxContainer, title: String, source: String, effect: String) -> void:
 	col.add_child(Lay.wrap(title, 24))
 	if source != "":
@@ -429,7 +472,7 @@ func _pokemon_status(mon: Dictionary) -> String:
 		effects.append("잠듦")
 	elif str(mon.get("status", "")) != "":
 		effects.append(str(mon["status"]))
-	var volatile := {"confusion": "혼란", "destinyBond": "길동무", "encoreTurns": "앵콜", "taunt": "도발", "disableTurns": "기술 봉쇄", "leechSeed": "씨뿌리기", "trapped": "교체 제한", "throatChop": "소리 기술 제한", "charge": "충전 중", "recharge": "반동으로 휴식", "dot": "그을음", "slow": "둔화"}
+	var volatile := {"confusion": "혼란", "destinyBond": "길동무", "encoreTurns": "앙코르", "taunt": "도발", "disableTurns": "기술 봉쇄", "leechSeed": "씨뿌리기", "trapped": "교체 제한", "throatChop": "소리 기술 제한", "charge": "충전 중", "recharge": "반동으로 휴식", "dot": "그을음", "slow": "둔화"}
 	for flag in volatile:
 		if mon.get(flag):
 			effects.append(volatile[flag])
@@ -446,22 +489,17 @@ func _draw_side(seat: int) -> void:
 	spr.show_sprite(_set_id, str(Data.form(_set_id, str(mon["id"]), mon["form"]).get("file", "")), false)
 	spr.modulate.a = 0.0 if down else 1.0
 	var col: VBoxContainer = _info[slot]
-	for c in col.get_children():
-		c.queue_free()
+	var bar := _hp_bars[slot]
+	for child in col.get_children():
+		if child != bar:
+			col.remove_child(child)
+			child.queue_free()
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 8)
 	head.add_child(Lay.wrap(("나 · " if seat == _me else "상대 · ") + _name(seat), 26, UI.TEXT))
 	col.add_child(head)
 	col.add_child(Lay.type_chips(mon["types"]))
-	var bar := ProgressBar.new()
-	bar.max_value = float(mon["max"])
-	bar.value = float(mon["hp"])
-	bar.show_percentage = false
-	bar.custom_minimum_size = Vector2(0, 22)
-	var ratio := float(mon["hp"]) / float(mon["max"])
-	bar.add_theme_stylebox_override("background", UI.box(UI.BG_DEEP, 11))
-	bar.add_theme_stylebox_override("fill", UI.box(Color(0.36, 0.82, 0.52) if ratio > 0.5 else (Color(0.98, 0.78, 0.30) if ratio > 0.2 else Color(0.96, 0.45, 0.42)), 11))
-	col.add_child(bar)
+	_update_hp_bar(col, slot, int(side["active"]), mon)
 	col.add_child(UI.label("체력 %d / %d" % [int(mon["hp"]), int(mon["max"])], 21, UI.TEXT_DIM))
 	if seat == _me:
 		col.add_child(Lay.wrap("도구 " + _item_text(mon), 21, UI.TEXT_DIM if _item_spent(mon) else UI.ACCENT))
@@ -481,6 +519,41 @@ func _draw_side(seat: int) -> void:
 	var team := ""
 	for m in side["mons"]:
 		team += "？ " if m.get("hidden", false) else ("✕ " if int(m["hp"]) <= 0 else "● ")
+
+func _update_hp_bar(col: VBoxContainer, slot: int, index: int, mon: Dictionary) -> void:
+	var bar := _hp_bars[slot]
+	if not is_instance_valid(bar):
+		bar = ProgressBar.new()
+		bar.max_value = 1.0
+		bar.step = 0.0
+		bar.show_percentage = false
+		bar.custom_minimum_size.y = 22
+		bar.add_theme_stylebox_override("background", UI.box(UI.BG_DEEP, 11))
+		var fill := UI.box(Color("#5acf85"), 11)
+		bar.add_theme_stylebox_override("fill", fill)
+		bar.value_changed.connect(func(value: float):
+			if value <= 0.34:
+				fill.bg_color = Color("#f5736b").lerp(Color("#fac74d"), smoothstep(0.12, 0.34, value))
+			else:
+				fill.bg_color = Color("#fac74d").lerp(Color("#5acf85"), smoothstep(0.34, 0.65, value)))
+		col.add_child(bar)
+		_hp_bars[slot] = bar
+	col.move_child(bar, 2)
+	var occupant := "%d:%s" % [index, mon["id"]]
+	var ratio := clampf(float(mon["hp"]) / maxf(1.0, float(mon["max"])), 0.0, 1.0)
+	var changed_mon: bool = occupant != _hp_occupants[slot]
+	if not changed_mon and is_equal_approx(_hp_targets[slot], ratio):
+		return
+	_hp_occupants[slot] = occupant
+	_hp_targets[slot] = ratio
+	if _hp_tweens[slot] != null:
+		_hp_tweens[slot].kill()
+	if changed_mon:
+		bar.value = ratio
+		return
+	var tween := bar.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(bar, "value", ratio, _animation_time(0.42))
+	_hp_tweens[slot] = tween
 
 ## 지닌 도구가 없거나 이미 써 버렸는지 (엔진: 소모·떨어뜨리기 모두 itemUsed)
 func _item_spent(mon: Dictionary) -> bool:

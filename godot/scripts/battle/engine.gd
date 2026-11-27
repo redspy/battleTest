@@ -270,7 +270,8 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 	var special: bool = mv.get("damageClass") == "special"
 	var attack_key := "spa" if special else "atk"
 	var defense_key := "spd" if special else "def"
-	var attack := int(att["stats"][attack_key]) if defender.get("ability") == "Unaware" else _stat(att, attack_key)
+	var attack_source := defender if move_name(mv) == "Foul Play" else att
+	var attack := int(attack_source["stats"][attack_key]) if defender.get("ability") == "Unaware" else _stat(attack_source, attack_key)
 	var defense := int(defender["stats"][defense_key]) if att.get("ability") == "Unaware" else _stat(defender, defense_key)
 	if att.get("gmaxTurns", 0) == 0 and att.get("item") == ("Choice Specs" if special else "Choice Band"):
 		attack = floori(attack * 1.5)
@@ -365,7 +366,7 @@ static func legal(s: Dictionary, seat: int) -> Array:
 			if int(mon.get("disableTurns", 0)) > 0 and mon.get("disabledMove") == id and mon["gmaxTurns"] == 0:
 				why = "저주받은바디로 봉쇄"
 			if mon.get("encoreTurns", 0) > 0 and mon.get("encoreMove") != id:
-				why = "앵콜로 기술 고정"
+				why = "앙코르로 기술 고정"
 			if id == "Double Shock" and mon.get("lostElectric", false):
 				why = "전기 타입 필요"
 			if id == "Revival Blessing" and why == "":

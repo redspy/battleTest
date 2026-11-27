@@ -94,7 +94,8 @@ func _specialtest() -> bool:
 		BEngine._end_turn(gmax, 0, [])
 	if giant["form"] != "base" or giant["max"] != normal_hp:
 		return false
-	if Data.sets[Net.SET_ID]["info"]["events"].slice(0, 2).map(func(event): return event["id"]) != ["SINGLES", "PTC26"]:
+	var events: Array = Data.sets[Net.SET_ID]["info"]["events"]
+	if events.filter(func(event): return event["id"] != "CUSTOM").slice(0, 2).map(func(event): return event["id"]) != ["SINGLES", "PTC26"]:
 		return false
 	var members := 0
 	for t in Data.sets[Net.SET_ID]["teams"]:
@@ -188,6 +189,26 @@ func _singles_test() -> bool:
 	BEngine._swap(revival, 0, 2, events)
 	return BEngine.preview_move(revival, BEngine.active(revival, 0), "Last Respects", "")["power"] == 150
 
+func _daeul_test() -> bool:
+	var team := Data.team(Net.SET_ID, "daeul")
+	var members: Array = team["members"]
+	if members.size() != 6:
+		return false
+	for member: Dictionary in members:
+		var state := BEngine.create([member], [members[4]], 7)
+		if BEngine.active(state, 0)["moves"].size() != 4:
+			return false
+	var battle := BEngine.create([members[0]], [members[4]], 7)
+	var user := BEngine.active(battle, 0)
+	var target := BEngine.active(battle, 1)
+	var foul_play := BEngine.move(Net.SET_ID, "Foul Play")
+	var damage := BEngine.damage(user, target, foul_play, 100, battle)
+	user["atk"] = 2
+	if BEngine.damage(user, target, foul_play, 100, battle) != damage:
+		return false
+	target["atk"] = 2
+	return BEngine.damage(user, target, foul_play, 100, battle) > damage
+
 func _rank_drop_test() -> bool:
 	var espathra := { "species": "espathra", "moves": ["Lumina Crash"] }
 	var target := { "species": "blastoise", "moves": ["Protect"] }
@@ -201,11 +222,12 @@ func _rank_drop_test() -> bool:
 func _team_profile_test() -> bool:
 	for team in Data.sets[Net.SET_ID]["teams"]:
 		for member in team["members"]:
-			if str(member.get("ability", "")).is_empty() or str(member.get("abilitySource", "")).is_empty():
-				return false
 			var training: Dictionary = member.get("training", {})
-			if str(training.get("nature", "")).is_empty() or str(training.get("natureSource", "")).is_empty():
+			if str(member.get("ability", "")).is_empty() or str(training.get("nature", "")).is_empty():
 				return false
+			if team["event"] != "CUSTOM":
+				if str(member.get("abilitySource", "")).is_empty() or str(training.get("natureSource", "")).is_empty():
+					return false
 	var raichu := { "species": "raichu", "ability": "Lightning Rod", "moves": ["Thunderbolt", "Protect"] }
 	var farigiraf := { "species": "farigiraf", "ability": "Armor Tail", "moves": ["Protect"] }
 	var scizor := { "species": "scizor", "ability": "Technician", "moves": ["Bullet Punch"] }
@@ -227,6 +249,9 @@ func _team_profile_test() -> bool:
 
 func _selftest() -> void:
 	var fails := 0
+	if not _daeul_test():
+		print("[selftest] 다을 팀 또는 속임수 오류")
+		fails += 1
 	if not _rank_drop_test():
 		print("[selftest] 루미나콜리전 랭크 하락 오류")
 		fails += 1
@@ -456,11 +481,33 @@ func _shots() -> void:
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
 	var original := screen._b
+	screen._b = original.duplicate(true)
+	var hp_slot := screen._slot(screen._me)
+	var hp_bar := screen._hp_bars[hp_slot]
+	var lead := screen._active(screen._me)
+	var full := hp_bar.value
+	lead["hp"] = int(lead["max"]) / 2
+	screen._draw_side(screen._me)
+	assert(is_equal_approx(hp_bar.value, full))
+	await _wait(0.24)
+	assert(hp_bar.value < full and hp_bar.value > 0.5)
+	await screen._hp_tweens[hp_slot].finished
+	assert(is_equal_approx(hp_bar.value, float(lead["hp"]) / float(lead["max"])))
+	screen._b = original
+	screen._draw_side(screen._me)
+	await screen._hp_tweens[hp_slot].finished
+	assert(is_equal_approx(hp_bar.value, full))
 	screen._show_roster()
 	var roster := screen._status_content
 	var labels := roster.find_children("*", "Label", true, false)
 	assert(labels.filter(func(label): return label.text == "미공개").size() == 2)
+	assert(labels.filter(func(label): return label.text == "선출 확인").size() == 4)
+	assert(labels.filter(func(label): return label.text == "선출 미공개").size() == 5)
+	assert(labels.filter(func(label): return label.text == "미선출").size() == 3)
 	await _shot("battle_roster")
+	var roster_scroll := roster.get_parent().get_parent() as ScrollContainer
+	roster_scroll.scroll_vertical = int(roster_scroll.get_v_scroll_bar().max_value)
+	await _shot("battle_public_rosters")
 	screen.on_back()
 	var room_demo := BEngine.create(
 		[{ "species": "pelipper", "ability": "Drizzle", "moves": ["Protect"] }],
