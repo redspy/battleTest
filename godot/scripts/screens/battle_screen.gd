@@ -4,6 +4,7 @@ extends Control
 
 var _set_id: String
 const STAT_KO := Data.STAT_LABELS
+const FieldBackdrop := preload("res://scripts/widgets/field_backdrop.gd")
 const RankEffect := preload("res://scripts/widgets/rank_effect.gd")
 const RANK_STYLES := {
 	"Parting Shot": "voice", "Snarl": "voice", "Icy Wind": "wind", "Lumina Crash": "prism",
@@ -44,11 +45,13 @@ var _pending := []            # 재생을 기다리는 보기
 var _leave_armed := 0.0
 
 var _turn: Label
-var _conditions: Label
+var _conditions: HFlowContainer
+var _backdrop: Control
 var _log: Label
 var _info := [null, null]     # 자리별 정보 칸 (VBoxContainer)
 var _spr := [null, null]      # 자리별 그림
 var _actions: VBoxContainer
+var _bench: VBoxContainer
 var _status_layer: Control
 var _status_content: VBoxContainer
 
@@ -94,21 +97,34 @@ func _ready() -> void:
 	quit.tapped.connect(_ask_leave)
 	head.add_child(quit)
 	col.add_child(head)
-	_conditions = Lay.wrap("", 21, UI.TEXT_DIM)
-	_conditions.visible = false
+	_conditions = HFlowContainer.new()
+	_conditions.add_theme_constant_override("h_separation", 8)
+	_conditions.add_theme_constant_override("v_separation", 4)
 	col.add_child(_conditions)
+
+	var arena := PanelContainer.new()
+	arena.add_theme_stylebox_override("panel", UI.box(Color("#e0eee7"), 26))
+	arena.clip_contents = true
+	arena.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	col.add_child(arena)
+	_backdrop = FieldBackdrop.new()
+	arena.add_child(_backdrop)
+	var positions := VBoxContainer.new()
+	positions.add_theme_constant_override("separation", 10)
+	arena.add_child(positions)
 
 	# 위: 상대 (정보 왼쪽, 그림 오른쪽) / 아래: 나 (그림 왼쪽, 정보 오른쪽)
 	for who in ["foe", "me"]:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
-		row.size_flags_vertical = Control.SIZE_FILL
+		row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		var card := Lay.card(UI.PANEL, 14)
 		(card[0] as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		(card[0] as Control).size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		var spr := SpriteAnim.new()
-		spr.custom_minimum_size = Vector2(274, 212)
+		spr.custom_minimum_size = Vector2(252, 188)
 		spr.bottom = true
+		spr.size_flags_vertical = Control.SIZE_SHRINK_END
 		var i := 0 if who == "foe" else 1
 		_info[i] = card[1]
 		_spr[i] = spr
@@ -118,7 +134,7 @@ func _ready() -> void:
 		else:
 			row.add_child(spr)
 			row.add_child(card[0])
-		col.add_child(row)
+		positions.add_child(row)
 
 	var logp := UI.panel(UI.BG_DEEP, 14)
 	var lm := UI.margin(12)
@@ -134,12 +150,15 @@ func _ready() -> void:
 	action_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	action_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	action_scroll.scroll_deadzone = 10
-	action_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	action_scroll.custom_minimum_size.y = 510
 	col.add_child(action_scroll)
 	_actions = VBoxContainer.new()
 	_actions.add_theme_constant_override("separation", 8)
 	_actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_scroll.add_child(_actions)
+	_bench = VBoxContainer.new()
+	_bench.add_theme_constant_override("separation", 4)
+	col.add_child(_bench)
 
 	Net.changed.connect(_on_changed)
 	_me = int(Net.view.get("seat", 0))
@@ -226,20 +245,37 @@ func _name(seat: int) -> String:
 func _draw_all() -> void:
 	if _b.is_empty():
 		return
-	var conditions := []
-	for key in ["weather", "terrain"]:
-		if _b.get(key, "") != "":
-			conditions.append(_b[key])
-	if _b.get("trickRoom", 0) > 0:
-		conditions.append("트릭룸")
 	_turn.text = "턴 %d" % int(_b["turn"])
-	_conditions.text = " · ".join(conditions)
-	_conditions.visible = not conditions.is_empty()
+	_draw_conditions()
 	for seat in 2:
 		_draw_side(seat)
 	_draw_actions()
 	if is_instance_valid(_status_content):
 		_draw_status()
+
+func _draw_conditions() -> void:
+	var weather := str(_b.get("weather", ""))
+	var terrain := str(_b.get("terrain", ""))
+	var room := int(_b.get("trickRoom", 0))
+	_backdrop.show_field(weather, terrain, room > 0, _animation_time(0.38))
+	for child in _conditions.get_children():
+		_conditions.remove_child(child)
+		child.queue_free()
+	if weather != "":
+		_condition_button(weather, int(_b.get("weatherTurns", 0)))
+	if terrain != "":
+		_condition_button(terrain, int(_b.get("terrainTurns", 0)))
+	if room > 0:
+		_condition_button("트릭룸", room)
+	_conditions.visible = _conditions.get_child_count() > 0
+
+func _condition_button(name: String, turns: int) -> void:
+	var badge := UI.button("%s · %d턴" % [name, turns], 22)
+	var label: Label = badge.get_meta("label")
+	var tint: Color = FieldBackdrop.TINTS.get(name, UI.TEXT)
+	label.add_theme_color_override("font_color", tint.lerp(UI.TEXT, 0.74))
+	badge.tapped.connect(_show_status)
+	_conditions.add_child(badge)
 
 func _show_status() -> void:
 	if _b.is_empty() or is_instance_valid(_status_layer):
@@ -248,7 +284,15 @@ func _show_status() -> void:
 	_status_layer = Control.new()
 	_status_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(_status_layer)
-	_status_content = Lay.page(_status_layer, "상태 보기")
+	var veil := ColorRect.new()
+	veil.color = Color("#182b3b66")
+	veil.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_status_layer.add_child(veil)
+	var sheet := Control.new()
+	_status_layer.add_child(sheet)
+	sheet.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	sheet.anchor_top = 0.16
+	_status_content = Lay.page(sheet, "상태 보기")
 	_draw_status()
 
 func _draw_status() -> void:
@@ -403,23 +447,39 @@ func _item_text(mon: Dictionary) -> String:
 	var text := str(ko) if ko != null and str(ko) != "" else item
 	return text + " (사용함)" if mon.get("itemUsed", false) else text
 
+func _clear_actions() -> void:
+	for container in [_actions, _bench]:
+		for child in container.get_children():
+			container.remove_child(child)
+			child.queue_free()
+	_bench.hide()
+
 func _actions_message(text: String) -> void:
-	for c in _actions.get_children():
-		c.queue_free()
+	_clear_actions()
 	var l := UI.label(text, 26, UI.TEXT_DIM, HORIZONTAL_ALIGNMENT_CENTER)
 	l.custom_minimum_size = Vector2(0, 120)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_actions.add_child(l)
 
 func _draw_actions() -> void:
-	for c in _actions.get_children():
-		c.queue_free()
+	_clear_actions()
 	if _b["over"]:
 		var w := int(_b["winner"])
 		var text := "무승부" if w < 0 else ("승리!" if w == _me else "패배")
+		var surviving := [0, 0]
+		for seat in 2:
+			for mon: Dictionary in _b["sides"][seat]["mons"]:
+				if int(mon.get("hp", 1)) > 0:
+					surviving[seat] += 1
 		_log.text = "대전이 끝났습니다."
 		_actions.add_child(UI.label(text, 56, UI.ACCENT, HORIZONTAL_ALIGNMENT_CENTER))
-		var again := UI.button("다시 하기 (팀 고르기로)", 28, true)
+		_actions.add_child(UI.label("%d턴 · 남은 포켓몬  나 %d / 상대 %d" % [int(_b["turn"]), surviving[_me], surviving[1 - _me]], 24, UI.TEXT_DIM, HORIZONTAL_ALIGNMENT_CENTER))
+		var solo := bool(Net.view.get("solo", false))
+		if solo:
+			var replay := UI.button("다시 연습", 28, true, true)
+			replay.tapped.connect(func(): Net.send({ "t": "again", "rematch": true }))
+			_actions.add_child(replay)
+		var again := UI.button("팀 변경", 28, not solo)
 		again.tapped.connect(func(): Net.send({ "t": "again" }))
 		_actions.add_child(again)
 		return
@@ -455,8 +515,9 @@ func _draw_actions() -> void:
 		else:
 			bench.add_child(_swap_button(a))
 	if bench.get_child_count() > 0:
-		_actions.add_child(UI.label("교체" if not need else "내보낼 몬스터", 22, UI.TEXT_DIM))
-		_actions.add_child(bench)
+		_bench.add_child(UI.label("교체" if not need else "내보낼 몬스터", 22, UI.TEXT_DIM))
+		_bench.add_child(bench)
+		_bench.show()
 	else:
 		bench.free()
 
@@ -483,7 +544,7 @@ func _move_button(a: Dictionary, me: Dictionary, foe: Dictionary) -> Control:
 		var eff := str(BEngine.effectiveness(str(mv["type"]), foe, preview)[1])
 		if eff != "":
 			var label: String = { "strong": "▲ 유리", "weak": "▼ 불리", "immune": "효과 없음" }[eff]
-			head.add_child(UI.label(label, 21, Color(0.36, 0.82, 0.52) if eff == "strong" else Color(0.96, 0.45, 0.42)))
+			head.add_child(UI.label(label, 21, Color("#14664d") if eff == "strong" else Color("#9d3937")))
 		if eff != "immune":
 			head.add_child(UI.label("%d–%d" % [BEngine.damage(preview, foe, mv, 85, field), BEngine.damage(preview, foe, mv, 100, field)], 21, UI.TEXT_DIM))
 	var move_id := str(a["id"])
@@ -520,7 +581,7 @@ func _swap_button(a: Dictionary) -> Control:
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_theme_constant_override("separation", 8)
 	var spr := SpriteAnim.new(_set_id, str(Data.form(_set_id, str(mon["id"]), mon["form"]).get("file", "")), true)
-	spr.custom_minimum_size = Vector2(76, 76)
+	spr.custom_minimum_size = Vector2(67, 67)
 	spr.playing = false
 	row.add_child(spr)
 	var info := VBoxContainer.new()
@@ -663,6 +724,20 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_log.text = "%s%s · %s" % [_who(seat), _name(seat), e["what"]]
 			await _wait(0.6)
 		"field":
+			var key := str(e.get("key", ""))
+			if key in ["weather", "terrain", "trickRoom"]:
+				var turns := int(e["turns"])
+				if key == "trickRoom":
+					_b["trickRoom"] = turns
+				else:
+					_b[key] = e["value"]
+					_b[key + "Turns"] = turns
+				var sources: Dictionary = _b.get("effectSources", {}).duplicate()
+				sources[key] = e.get("source", "")
+				_b["effectSources"] = sources
+				_draw_conditions()
+				if is_instance_valid(_status_content):
+					_draw_status()
 			var source := str(e.get("source", ""))
 			_log.text = str(e["what"]) if source.is_empty() else "%s · %s" % [e["what"], source]
 			await _wait(0.55)

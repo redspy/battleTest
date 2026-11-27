@@ -90,7 +90,7 @@ static func _field(s: Dictionary, key: String, value: String, ev: Array, turns :
 	s[key] = value
 	s[key + "Turns"] = turns
 	s["effectSources"][key] = source
-	ev.append({ "e": "field", "what": value, "source": source })
+	ev.append({ "e": "field", "what": value, "source": source, "key": key, "value": value, "turns": turns })
 	if key == "terrain":
 		for seat in 2:
 			_activate_seed(s, seat, ev)
@@ -896,7 +896,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 			"trickRoom":
 				s["trickRoom"] = 0 if s["trickRoom"] > 0 else 5
 				s["effectSources"]["trickRoom"] = move_source
-				ev.append({ "e": "field", "what": "트릭룸" if s["trickRoom"] > 0 else "트릭룸 해제", "source": move_source })
+				ev.append({ "e": "field", "what": "트릭룸" if s["trickRoom"] > 0 else "트릭룸 해제", "source": move_source, "key": "trickRoom", "turns": s["trickRoom"] })
 			"weather", "terrain":
 				_field(s, str(e["kind"]), str(e["value"]), ev, 5, move_source)
 			"status":

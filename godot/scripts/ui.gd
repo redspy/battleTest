@@ -1,13 +1,13 @@
 class_name UI
 ## 공통 색상/스타일/위젯 헬퍼
 
-const BG := Color(0.075, 0.085, 0.14)
-const BG_DEEP := Color(0.05, 0.055, 0.10)
-const PANEL := Color(0.12, 0.135, 0.21)
-const PANEL_HI := Color(0.17, 0.19, 0.29)
-const ACCENT := Color(0.98, 0.78, 0.30)
-const TEXT := Color(0.95, 0.97, 0.96)
-const TEXT_DIM := Color(1, 1, 1, 0.62)
+const BG := Color("#f8f6f0")
+const BG_DEEP := Color("#edf2ee")
+const PANEL := Color("#ffffff")
+const PANEL_HI := Color("#e7f2ed")
+const ACCENT := Color("#14695d")
+const TEXT := Color("#182b3b")
+const TEXT_DIM := Color("#4b6068")
 const KIND_COLOR := {
 	"pokemon": Color(0.93, 0.42, 0.36),
 	"trainer": Color(0.36, 0.62, 0.95),
@@ -38,7 +38,7 @@ static func box(color: Color, radius := 18, border := 0, border_color := Color.T
 
 static func panel(color: Color, radius := 18) -> PanelContainer:
 	var p := PanelContainer.new()
-	p.add_theme_stylebox_override("panel", box(color, radius))
+	p.add_theme_stylebox_override("panel", box(color, radius, 2, Color("#dce6e0")))
 	return p
 
 static func margin(all: int) -> MarginContainer:
@@ -49,13 +49,13 @@ static func margin(all: int) -> MarginContainer:
 
 static func chip(text: String, color: Color) -> PanelContainer:
 	var p := PanelContainer.new()
-	var sb := box(Color(color, 0.18), 14, 2, Color(color, 0.8))
+	var sb := box(Color.WHITE.lerp(color, 0.19), 14)
 	sb.content_margin_left = 12
 	sb.content_margin_right = 12
 	sb.content_margin_top = 4
 	sb.content_margin_bottom = 4
 	p.add_theme_stylebox_override("panel", sb)
-	p.add_child(label(text, 20, color))
+	p.add_child(label(text, 20, TEXT))
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return p
 
@@ -101,9 +101,9 @@ static func top_bar(node: Control, title: String, sub := "") -> PanelContainer:
 	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	titles.alignment = BoxContainer.ALIGNMENT_CENTER
 	titles.add_theme_constant_override("separation", 0)
-	titles.add_child(label(title, 36, ACCENT))
+	titles.add_child(label(title, 36, ACCENT, HORIZONTAL_ALIGNMENT_LEFT, true))
 	if sub != "":
-		titles.add_child(label(sub, 22, TEXT_DIM))
+		titles.add_child(label(sub, 22, TEXT_DIM, HORIZONTAL_ALIGNMENT_LEFT, true))
 	row.add_child(titles)
 	return bar
 
@@ -118,7 +118,8 @@ static func button(text: String, size := 28, primary := false, fill := false) ->
 	sb.content_margin_bottom = 14
 	p.add_theme_stylebox_override("panel", sb)
 	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var l := label(text, size, Color(0.13, 0.13, 0.13) if fill else TEXT, HORIZONTAL_ALIGNMENT_CENTER)
+	p.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var l := label(text, size, Color.WHITE if fill else TEXT, HORIZONTAL_ALIGNMENT_CENTER)
 	p.add_child(l)
 	tap.add_child(p)
 	tap.press_target = p
@@ -139,7 +140,7 @@ static func line_edit(placeholder: String, size := 30) -> LineEdit:
 	var e := LineEdit.new()
 	e.placeholder_text = placeholder
 	e.add_theme_font_size_override("font_size", size)
-	e.add_theme_stylebox_override("normal", box(PANEL, 12, 2, Color(1, 1, 1, 0.25)))
+	e.add_theme_stylebox_override("normal", box(PANEL, 12, 2, Color("#dce6e0")))
 	e.add_theme_stylebox_override("focus", box(PANEL, 12, 2, ACCENT))
 	for s in ["normal", "focus"]:
 		var st: StyleBoxFlat = e.get_theme_stylebox(s)
@@ -148,3 +149,21 @@ static func line_edit(placeholder: String, size := 30) -> LineEdit:
 		st.content_margin_top = 12
 		st.content_margin_bottom = 12
 	return e
+
+static func footer(screen: Control) -> VBoxContainer:
+	var layout: VBoxContainer = screen.get_meta("layout")
+	var surface := panel(PANEL, 24)
+	layout.add_child(surface)
+	var center := CenterContainer.new()
+	surface.add_child(center)
+	var margin_box := margin(14)
+	margin_box.add_theme_constant_override("margin_bottom", 14 + int(safe_bottom(screen)))
+	center.add_child(margin_box)
+	var fit := func(): margin_box.custom_minimum_size.x = minf(screen.get_viewport_rect().size.x - 8.0, 1024.0)
+	screen.resized.connect(fit)
+	fit.call()
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 8)
+	margin_box.add_child(col)
+	screen.set_meta("footer", surface)
+	return col

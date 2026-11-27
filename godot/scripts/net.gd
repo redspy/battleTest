@@ -212,11 +212,7 @@ func _handle(who: int, msg: Dictionary) -> void:
 			if _s["phase"] == "lobby" and p["team"] != "":
 				p["ready"] = bool(msg.get("v", false))
 				if _s["players"][0]["ready"] and _s["players"][1]["ready"] and _s["players"][1]["here"]:
-					_s["phase"] = "pick"
-					for q in _s["players"]:
-						q["picks"] = []
-					if _s["solo"]:
-						_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], PICK_COUNT)
+					_open_selection()
 		"picks":
 			var picks: Array = msg.get("picks", [])
 			if _s["phase"] == "pick" and (p["picks"] as Array).is_empty() and _valid_picks(picks):
@@ -234,7 +230,17 @@ func _handle(who: int, msg: Dictionary) -> void:
 				for i in 2:
 					_s["players"][i]["ready"] = _s["solo"] and i == 1
 					_s["players"][i]["picks"] = []
+				if _s["solo"] and bool(msg.get("rematch", false)):
+					_s["players"][0]["ready"] = true
+					_open_selection()
 	_push(events)
+
+func _open_selection() -> void:
+	_s["phase"] = "pick"
+	for player in _s["players"]:
+		player["picks"] = []
+	if _s["solo"]:
+		_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], PICK_COUNT)
 
 func _valid_picks(picks: Array) -> bool:
 	if picks.size() != PICK_COUNT:

@@ -405,7 +405,7 @@ func _back_to_home() -> void:
 func _shots() -> void:
 	var set_id := Net.SET_ID
 	await _shot("home")
-	Nav.push(TeamSelectScreen.new(set_id), false)
+	Nav.open_tab(TeamSelectScreen.new(set_id, false, "", true))
 	await _shot("teams")
 	for id in ["singles-1", "singles-2"]:
 		Nav.push(TeamDetailScreen.new(set_id, Data.team(set_id, id)), false)
@@ -426,8 +426,10 @@ func _shots() -> void:
 	await _shot("viewer_new_species")
 	await _back_to_home()
 
-	Nav.push(DexScreen.new(set_id), false)
+	Nav.open_tab(DexScreen.new(set_id, true))
 	await _shot("dex")
+	Nav.open_tab(HomeScreen.new(true))
+	await _shot("battle_tab")
 	await _back_to_home()
 	Nav.push(SessionScreen.new("host"), false)
 	await _shot("host")
@@ -454,6 +456,25 @@ func _shots() -> void:
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
 	var original := screen._b
+	var room_demo := BEngine.create(
+		[{ "species": "pelipper", "ability": "Drizzle", "moves": ["Protect"] }],
+		[{ "species": "farigiraf", "moves": ["Trick Room"] }], 7)
+	screen._b = BEngine.view(room_demo, 0)
+	screen._draw_all()
+	var room_events := []
+	BEngine._use(room_demo, 1, "Trick Room", room_events)
+	for event in room_events:
+		if event["e"] == "field":
+			await screen._play(event, BEngine.view(room_demo, 0))
+	assert(screen._b["trickRoom"] == 5 and screen._b["weather"] == room_demo["weather"])
+	assert(screen._conditions.get_child_count() == 2)
+	await _shot("trick_room_rain")
+	room_events.clear()
+	BEngine._use(room_demo, 1, "Trick Room", room_events)
+	for event in room_events:
+		if event["e"] == "field":
+			await screen._play(event, BEngine.view(room_demo, 0))
+	assert(screen._b["trickRoom"] == 0 and screen._conditions.get_child_count() == 1)
 	var caster := { "species": "espathra", "moves": ["Lumina Crash"] }
 	var target := { "species": "pelipper", "moves": ["Protect"] }
 	var rank_demo := BEngine.create([caster], [target], 7)
@@ -526,6 +547,11 @@ func _shots() -> void:
 			break
 	Engine.time_scale = 1.0
 	await _shot("result")
+	assert(Net.view["battle"]["over"])
+	Net.send({ "t": "again", "rematch": true })
+	await _wait(Nav.DURATION + 0.16)
+	assert(Net.view["phase"] == "pick" and Net.view["players"][1]["picked"])
+	await _shot("rematch_pick")
 	Net.leave()
 	await _back_to_home()
 	var gmax := SessionScreen.new("solo")

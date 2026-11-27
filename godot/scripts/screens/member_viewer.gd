@@ -40,6 +40,7 @@ func go(dir: int) -> void:
 
 func _build() -> void:
 	for c in _col.get_children():
+		_col.remove_child(c)
 		c.queue_free()
 	var m: Dictionary = list[index]
 	var sp := Data.species(set_id, m["species"])
@@ -67,7 +68,7 @@ func _build() -> void:
 	tap.swiped.connect(func(d: Vector2): if absf(d.x) > absf(d.y): go(-1 if d.x > 0 else 1))
 	_col.add_child(tap)
 	if f.get("noArt", false):
-		_col.add_child(Lay.wrap("이 폼의 그림이 없어 다른 폼의 그림을 보여 줍니다.", 20, Color(0.98, 0.78, 0.48)))
+		_col.add_child(Lay.wrap("이 폼의 그림이 없어 다른 폼의 그림을 보여 줍니다.", 20, Color("#795524")))
 
 	# 폼 전환
 	var forms: Array = sp.get("forms", [])
@@ -87,7 +88,7 @@ func _build() -> void:
 	var types := Lay.type_chips(Data.types(set_id, m["species"], _form))
 	_col.add_child(types)
 	if f.get("unverified", false):
-		_col.add_child(Lay.wrap("※ 이 폼의 타입·구분은 확인하지 못했습니다 (기본 폼 기준으로 표시).", 19, Color(0.98, 0.78, 0.48)))
+		_col.add_child(Lay.wrap("※ 이 폼의 타입·구분은 확인하지 못했습니다 (기본 폼 기준으로 표시).", 19, Color("#795524")))
 
 	if sp.get("role", "") != "":
 		var role := Lay.card(UI.PANEL, 18)

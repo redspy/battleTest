@@ -11,8 +11,7 @@ func _init(p_set: String, p_team: Dictionary) -> void:
 
 func _ready() -> void:
 	var col := Lay.page(self, str(team["name"]), str(team.get("placement", team.get("player", ""))))
-	col.add_child(_concept())
-	col.add_child(UI.label("멤버 (탭하면 크게 보기)", 26, UI.TEXT))
+	col.add_child(UI.label("팀 로스터", 26, UI.ACCENT))
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.add_theme_constant_override("h_separation", 12)
@@ -27,6 +26,7 @@ func _ready() -> void:
 		var cell := Lay.member_cell(set_id, m, w, str(ko) if ko != null else item)
 		cell.tapped.connect(func(): Nav.push(MemberViewer.new(set_id, members, i)))
 		grid.add_child(cell)
+	col.add_child(_concept())
 
 func _concept() -> Control:
 	var c := Lay.card(UI.PANEL, 22)
@@ -54,7 +54,7 @@ func _concept() -> Control:
 		col.add_child(UI.label("레플리카 코드  %s" % team["replicaCode"], 22, UI.ACCENT))
 	if set_id == "pokemon":
 		if team["event"] != "PTC26":
-			col.add_child(Lay.wrap("※ 컨셉과 역할은 팀 구성을 보고 쓴 추론입니다. 지닌 도구는 대회 공개 자료, 기술·특성은 확인된 팀만 표시합니다.", 19, Color(0.98, 0.78, 0.48)))
+			col.add_child(Lay.wrap("※ 컨셉과 역할은 팀 구성을 보고 쓴 추론입니다. 지닌 도구는 대회 공개 자료, 기술·특성은 확인된 팀만 표시합니다.", 19, UI.TEXT_DIM))
 		if team.has("sourceUrl"):
 			var url := str(team["sourceUrl"])
 			var link := UI.button("🔗 공개 팀 시트 열기", 22)

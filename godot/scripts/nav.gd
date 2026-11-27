@@ -106,3 +106,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	# PC 테스트용: Esc / Backspace = 뒤로
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ESCAPE, KEY_BACKSPACE]:
 		back()
+
+func open_tab(screen: Control) -> void:
+	if _busy:
+		if screen:
+			screen.free()
+		return
+	while _stack.size() > 1:
+		var old: Control = _stack.pop_back()
+		old.hide()
+		old.queue_free()
+	var home := current()
+	home.position.x = 0.0
+	home.modulate = Color.WHITE
+	home.visible = screen == null
+	if screen:
+		push(screen, false)

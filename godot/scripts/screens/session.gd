@@ -8,6 +8,8 @@ const EDGE_COLOR := { "good": Color(0.36, 0.82, 0.52), "bad": Color(0.96, 0.45, 
 const SET_ID := Net.SET_ID
 var role: String        # host / join / solo
 var _col: VBoxContainer
+var _footer: VBoxContainer
+var _footer_surface: Control
 var _sel: Array = []    # 선출에서 고른 번호 (순서대로)
 var _phase := ""
 var _error := ""
@@ -19,6 +21,8 @@ func _init(p_role: String) -> void:
 func _ready() -> void:
 	var title := "AI와 연습" if role == "solo" else "1:1 대전"
 	_col = Lay.page(self, title, { "host": "방 만들기", "join": "참가", "solo": "혼자 하기" }[role])
+	_footer = UI.footer(self)
+	_footer_surface = get_meta("footer")
 	Net.changed.connect(_refresh)
 	Net.closed.connect(_on_closed)
 	Net.hosts_changed.connect(_refresh)
@@ -53,10 +57,13 @@ func _refresh() -> void:
 		_sel = []
 	if phase == "battle" and Nav.current() == self:
 		Nav.push(BattleScreen.new())
-	for c in _col.get_children():
-		c.queue_free()
+	for container in [_col, _footer]:
+		for child in container.get_children():
+			container.remove_child(child)
+			child.queue_free()
+	_footer_surface.hide()
 	if _error != "":
-		_col.add_child(Lay.wrap(_error, 24, Color(1, 0.55, 0.5)))
+		_col.add_child(Lay.wrap(_error, 24, Color("#9d3937")))
 	match phase:
 		"": _build_join()
 		"lobby": _build_lobby(v)
@@ -101,8 +108,6 @@ func _join(address: String) -> void:
 func _build_lobby(v: Dictionary) -> void:
 	var me := int(v["seat"])
 	var players: Array = v["players"]
-	if role == "solo":
-		_col.add_child(Lay.wrap("대회 팀에서 %d마리를 선출해 AI와 싱글 대전을 합니다. 레벨 50 능력치와 기술마다 정해진 PP를 사용합니다." % Net.PICK_COUNT, 22, UI.TEXT_DIM))
 	if role == "host":
 		var info := Lay.card(UI.PANEL, 18)
 		(info[1] as VBoxContainer).add_child(UI.label(Net.status, 24, UI.TEXT))
@@ -116,7 +121,7 @@ func _build_lobby(v: Dictionary) -> void:
 		var col: VBoxContainer = c[1]
 		var head := HBoxContainer.new()
 		head.add_theme_constant_override("separation", 10)
-		head.add_child(UI.label("나" if i == me else ("상대" if p["here"] else "빈 자리"), 28, UI.ACCENT))
+		head.add_child(UI.label("내 팀" if i == me else ("상대 팀" if p["here"] else "빈 자리"), 28, UI.ACCENT))
 		if p["here"]:
 			head.add_child(UI.chip("준비 완료" if p["ready"] else "준비 중", EDGE_COLOR["good"] if p["ready"] else EDGE_COLOR["even"]))
 		col.add_child(head)
@@ -130,20 +135,17 @@ func _build_lobby(v: Dictionary) -> void:
 				team_name += " — " + player
 			col.add_child(Lay.wrap(team_name, 24, UI.TEXT))
 			col.add_child(_mini_row(t["members"]))
+		if i == me or role == "solo":
+			var choose := UI.button("팀 고르기" if t.is_empty() else "팀 바꾸기", 25, t.is_empty())
+			choose.tapped.connect(_open_team_picker.bind(i != me))
+			col.add_child(choose)
 		_col.add_child(c[0])
 	var my: Dictionary = players[me]
-	var choose_text := "내 팀 고르기" if my["team"] == "" else "내 팀 바꾸기"
-	var choose := UI.button(choose_text, 28, my["team"] == "")
-	choose.tapped.connect(func(): _open_team_picker(false))
-	_col.add_child(choose)
-	if role == "solo":
-		var opponent := UI.button("상대 팀 바꾸기", 28)
-		opponent.tapped.connect(func(): _open_team_picker(true))
-		_col.add_child(opponent)
 	if my["team"] != "":
 		var ready := UI.button("준비 취소" if my["ready"] else "준비 완료", 32, true, not my["ready"])
 		ready.tapped.connect(func(): Net.send({ "t": "ready", "v": not my["ready"] }))
-		_col.add_child(ready)
+		_footer_surface.show()
+		_footer.add_child(ready)
 
 func _open_team_picker(opponent: bool) -> void:
 	var title := "상대 팀 고르기" if opponent else "내 팀 고르기"
@@ -201,7 +203,21 @@ func _build_pick(v: Dictionary) -> void:
 	ok.tapped.connect(func():
 		if _sel.size() == n:
 			Net.send({ "t": "picks", "picks": _sel.duplicate() }))
-	_col.add_child(ok)
+	_footer_surface.show()
+	var slots := HBoxContainer.new()
+	slots.add_theme_constant_override("separation", 8)
+	for i in n:
+		var slot := Lay.card(UI.PANEL_HI if i < _sel.size() else UI.BG_DEEP, 8)
+		var title := "선봉" if i == 0 else "%d번" % (i + 1)
+		var name := "미선택"
+		if i < _sel.size():
+			var member: Dictionary = mine[_sel[i]]
+			name = Data.display_name(SET_ID, member["species"], member.get("form", "base"))
+		(slot[1] as VBoxContainer).add_child(Lay.wrap(title + " · " + name, 20))
+		(slot[0] as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slots.add_child(slot[0])
+	_footer.add_child(slots)
+	_footer.add_child(ok)
 
 ## 멤버 격자. picks 에 든 번호에는 순서 배지를 붙이고 나머지는 흐리게 한다.
 func _grid(members: Array, w: float, picks: Array, on_tap: Callable, on_long := Callable()) -> GridContainer:

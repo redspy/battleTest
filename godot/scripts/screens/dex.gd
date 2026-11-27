@@ -4,12 +4,17 @@ extends Control
 
 var set_id: String
 
-func _init(p_set: String) -> void:
+var tab: bool
+
+func _init(p_set: String, p_tab := false) -> void:
 	set_id = p_set
+	tab = p_tab
 
 func _ready() -> void:
 	var order: Array = Data.sets[set_id]["order"]
 	var col := Lay.page(self, "도감", "%d종" % order.size())
+	if tab:
+		Lay.tabs(self, "도감")
 	var list := []
 	for sp in order:
 		list.append({ "species": sp["id"], "form": "base" })

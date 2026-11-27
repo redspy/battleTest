@@ -4,7 +4,7 @@ class_name Lay
 const MAX_CONTENT_WIDTH := 1024.0
 
 ## 화면에 배경·상단 바·스크롤을 넣고, 내용을 담을 세로 칸을 돌려준다. title 이 비면 상단 바 없음.
-static func page(screen: Control, title := "", sub := "") -> VBoxContainer:
+static func page(screen: Control, title := "", sub := "", aside: Control = null) -> VBoxContainer:
 	var bg := ColorRect.new()
 	bg.color = UI.BG
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -21,7 +21,29 @@ static func page(screen: Control, title := "", sub := "") -> VBoxContainer:
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 	scroll.scroll_deadzone = 12
-	layout.add_child(scroll)
+	if aside:
+		var frame := UI.margin(0)
+		frame.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		layout.add_child(frame)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 18)
+		frame.add_child(row)
+		scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(scroll)
+		var sidebar := UI.margin(0)
+		sidebar.add_theme_constant_override("margin_top", 24)
+		row.add_child(sidebar)
+		sidebar.add_child(aside)
+		var fit_frame := func():
+			var width := screen.get_viewport_rect().size.x
+			var side_margin := maxi(24, int((width - MAX_CONTENT_WIDTH) * 0.5))
+			frame.add_theme_constant_override("margin_left", side_margin)
+			frame.add_theme_constant_override("margin_right", side_margin)
+			sidebar.visible = width >= 940
+		screen.resized.connect(fit_frame)
+		fit_frame.call()
+	else:
+		layout.add_child(scroll)
 	var m := UI.margin(24)
 	m.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if title == "":
@@ -29,7 +51,7 @@ static func page(screen: Control, title := "", sub := "") -> VBoxContainer:
 	m.add_theme_constant_override("margin_bottom", int(UI.safe_bottom(screen)) + 36)
 	scroll.add_child(m)
 	var fit_content := func():
-		var side := maxi(24, int((scroll.size.x - MAX_CONTENT_WIDTH) * 0.5))
+		var side := 0 if aside else maxi(24, int((scroll.size.x - MAX_CONTENT_WIDTH) * 0.5))
 		m.add_theme_constant_override("margin_left", side)
 		m.add_theme_constant_override("margin_right", side)
 	scroll.resized.connect(fit_content)
@@ -108,3 +130,21 @@ static func member_cell(set_id: String, member: Dictionary, width: float, extra 
 		col.add_child(e)
 	tap.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return tap
+
+static func tabs(screen: Control, selected: String) -> void:
+	var bar := HBoxContainer.new()
+	bar.add_theme_constant_override("separation", 8)
+	UI.footer(screen).add_child(bar)
+	for tab: String in ["홈", "팀", "도감", "대전"]:
+		var button := UI.button(tab, 24, tab == selected, tab == selected)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if tab != selected:
+			button.tapped.connect(_open_tab.bind(tab))
+		bar.add_child(button)
+
+static func _open_tab(tab: String) -> void:
+	match tab:
+		"홈": Nav.open_tab(null)
+		"팀": Nav.open_tab(TeamSelectScreen.new("pokemon", false, "", true))
+		"도감": Nav.open_tab(DexScreen.new("pokemon", true))
+		"대전": Nav.open_tab(HomeScreen.new(true))
