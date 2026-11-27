@@ -188,6 +188,16 @@ func _singles_test() -> bool:
 	BEngine._swap(revival, 0, 2, events)
 	return BEngine.preview_move(revival, BEngine.active(revival, 0), "Last Respects", "")["power"] == 150
 
+func _rank_drop_test() -> bool:
+	var espathra := { "species": "espathra", "moves": ["Lumina Crash"] }
+	var target := { "species": "blastoise", "moves": ["Protect"] }
+	var state := BEngine.create([espathra], [target], 7)
+	var events := []
+	BEngine._use(state, 0, "Lumina Crash", events)
+	var defender := BEngine.active(state, 1)
+	var drops := events.filter(func(event): return event["e"] == "stage")
+	return defender["spd"] == -2 and defender["def"] == 0 and drops.size() == 1 and drops[0]["delta"] == -2 and drops[0]["seat"] == 1
+
 func _team_profile_test() -> bool:
 	for team in Data.sets[Net.SET_ID]["teams"]:
 		for member in team["members"]:
@@ -217,6 +227,9 @@ func _team_profile_test() -> bool:
 
 func _selftest() -> void:
 	var fails := 0
+	if not _rank_drop_test():
+		print("[selftest] 루미나콜리전 랭크 하락 오류")
+		fails += 1
 	if not _team_profile_test():
 		print("[selftest] 대회 팀 특성·성격 자료 오류")
 		fails += 1
@@ -422,6 +435,40 @@ func _shots() -> void:
 	await _wait(1.0)
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
+	var original := screen._b
+	var caster := { "species": "espathra", "moves": ["Lumina Crash"] }
+	var target := { "species": "pelipper", "moves": ["Protect"] }
+	var rank_demo := BEngine.create([caster], [target], 7)
+	screen._b = BEngine.view(rank_demo, 0)
+	screen._draw_all()
+	await _wait(0.1)
+	var events := []
+	BEngine._use(rank_demo, 0, "Lumina Crash", events)
+	screen._play(events[0], BEngine.view(rank_demo, 0))
+	await _shot("rank_cast")
+	await _wait(0.40)
+	var stages := events.filter(func(event): return event["e"] == "stage")
+	screen._play(stages[0], BEngine.view(rank_demo, 0))
+	await _shot("rank_drop")
+	await _wait(0.40)
+	var boost_examples := {
+		"Nasty Plot": "gholdengo", "Calm Mind": "floette", "Swords Dance": "sneasler",
+		"Dragon Dance": "salamence", "Quiver Dance": "volcarona", "Shell Smash": "blastoise",
+		"Iron Defense": "archaludon", "Bulk Up": "corviknight", "Acid Armor": "toxapex",
+		"Clangorous Soul": "kommoo",
+	}
+	for move: String in boost_examples:
+		var boost_demo := BEngine.create([{ "species": boost_examples[move], "moves": [move] }], [target], 7)
+		screen._b = BEngine.view(boost_demo, 0)
+		screen._draw_all()
+		await _wait(0.08)
+		var cast_events := []
+		BEngine._use(boost_demo, 0, move, cast_events)
+		screen._play(cast_events[0], BEngine.view(boost_demo, 0))
+		await _shot("rank_up_" + move.to_snake_case())
+		await _wait(0.78)
+	screen._b = original
+	screen._draw_all()
 	screen._show_status()
 	await _shot("battle_status")
 	screen.on_back()

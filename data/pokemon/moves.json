@@ -843,13 +843,13 @@
       "en": "Lumina Crash",
       "type": "에스퍼",
       "category": "attack",
-      "desc": "위력 80 · 상대의 방어 하락.",
+      "desc": "위력 80 · 상대의 특수방어가 2랭크 내려갑니다.",
       "power": 80,
       "effects": [
         {
           "kind": "debuff",
-          "stat": "def",
-          "stages": 1
+          "stat": "spd",
+          "stages": 2
         }
       ],
       "damageClass": "special",

@@ -4,6 +4,24 @@ extends Control
 
 var _set_id: String
 const STAT_KO := Data.STAT_LABELS
+const RankEffect := preload("res://scripts/widgets/rank_effect.gd")
+const RANK_STYLES := {
+	"Parting Shot": "voice", "Snarl": "voice", "Icy Wind": "wind", "Lumina Crash": "prism",
+	"Chilling Water": "water", "Liquidation": "water", "Rock Tomb": "stones",
+	"Earth Power": "stones", "Electroweb": "net", "Mystical Fire": "flame",
+}
+const SELF_RANK_STYLES := {
+	"Nasty Plot": ["self_ideas", Color("#c18cff")],
+	"Calm Mind": ["self_ripple", Color("#7ce9f7")],
+	"Swords Dance": ["self_swords", Color("#d9f2ff")],
+	"Dragon Dance": ["self_spiral", Color("#6ca6ff")],
+	"Quiver Dance": ["self_wings", Color("#f7a5d7")],
+	"Shell Smash": ["self_shell", Color("#ffbe7c")],
+	"Iron Defense": ["self_plates", Color("#a6c5eb")],
+	"Bulk Up": ["self_power", Color("#ff906c")],
+	"Acid Armor": ["self_acid", Color("#a2e9b3")],
+	"Clangorous Soul": ["self_beat", Color("#d8acff")],
+}
 const ANIMATION_PACE := 1.45
 const PLAYBACK_RATES := [1.0, 1.5, 2.0]
 const FIELD_EFFECTS := {
@@ -167,7 +185,7 @@ func _drain() -> void:
 		var events: Array = v.get("events", [])
 		if not events.is_empty():
 			_actions_message("…")
-			for e in events:
+			for e in _group_stage_events(events):
 				if not is_inside_tree():
 					return
 				await _play(e, v["battle"])
@@ -175,6 +193,21 @@ func _drain() -> void:
 		if is_inside_tree():
 			_draw_all()
 	_playing = false
+
+func _group_stage_events(events: Array) -> Array:
+	var grouped := []
+	for event: Dictionary in events:
+		if event["e"] != "stage":
+			grouped.append(event)
+			continue
+		var previous: Dictionary = grouped.back() if not grouped.is_empty() else {}
+		if previous.get("e") == "stage" and previous["seat"] == event["seat"] and previous.get("source", "") == event.get("source", "") and signi(previous["delta"]) == signi(event["delta"]):
+			previous["changes"].append(event)
+		else:
+			var entry := event.duplicate()
+			entry["changes"] = [event]
+			grouped.append(entry)
+	return grouped
 
 # ───────────── 그리기 ─────────────
 
@@ -521,9 +554,29 @@ func _wait(t: float) -> void:
 func _who(seat: int) -> String:
 	return "나의 " if seat == _me else "상대 "
 
-func _float_text(slot: int, text: String, color: Color) -> void:
+func _rank_effect(slot: int, style: String, tint: Color) -> Control:
+	var effect := RankEffect.new()
+	var from: Control = _spr[slot]
+	var to: Control = _spr[1 - slot]
+	var local := get_global_transform().affine_inverse()
+	effect.start = local * from.get_global_rect().get_center()
+	effect.finish = effect.start if style in ["drop", "rise"] or style.begins_with("self_") else local * to.get_global_rect().get_center()
+	effect.style = style
+	effect.tint = tint
+	add_child(effect)
+	if is_instance_valid(_status_layer):
+		move_child(_status_layer, -1)
+	return effect
+
+func _animate_rank_effect(slot: int, style: String, tint: Color, duration: float) -> void:
+	var effect := _rank_effect(slot, style, tint)
+	var tween := effect.create_tween()
+	tween.tween_property(effect, "progress", 1.0, _animation_time(duration))
+	tween.tween_callback(effect.queue_free)
+
+func _float_text(slot: int, text: String, color: Color, font_size := 52) -> void:
 	var spr: Control = _spr[slot]
-	var l := UI.label(text, 52, color, HORIZONTAL_ALIGNMENT_CENTER)
+	var l := UI.label(text, font_size, color, HORIZONTAL_ALIGNMENT_CENTER)
 	l.add_theme_color_override("font_outline_color", Color.BLACK)
 	l.add_theme_constant_override("outline_size", 10)
 	l.size = Vector2(spr.size.x, 70)
@@ -562,8 +615,19 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_log.text = "%s%s 등장!" % [_who(seat), _name(seat)]
 			await _wait(0.55)
 		"use":
-			var move_name := str(e.get("name", BEngine.move(_set_id, str(e["move"])).get("ko", "")))
+			var move_id := str(e["move"])
+			var move := BEngine.move(_set_id, move_id)
+			var move_name := str(e.get("name", move.get("ko", "")))
 			_log.text = "%s%s의 [%s]!" % [_who(seat), _name(seat), move_name]
+			if move_name == move.get("ko", "") and SELF_RANK_STYLES.has(move_id):
+				var visual: Array = SELF_RANK_STYLES[move_id]
+				_animate_rank_effect(slot, visual[0], visual[1], 0.86)
+				await _wait(0.90)
+				return
+			if move_name == move.get("ko", "") and move.get("effects", []).any(func(effect): return effect["kind"] == "debuff"):
+				_animate_rank_effect(slot, RANK_STYLES.get(move_id, "pulse"), Data.type_color(str(move["type"])), 0.62)
+				await _wait(0.66)
+				return
 			var dir := -1.0 if slot == 1 else 1.0
 			var tw := spr.create_tween().set_trans(Tween.TRANS_QUAD)
 			tw.tween_property(spr, "position", spr.position + Vector2(-50 * dir, 40 * dir), _animation_time(0.12))
@@ -607,9 +671,17 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			await _wait(0.45)
 		"stage":
 			var source := str(e.get("source", ""))
-			var change := "%s%s · %s %+d" % [_who(seat), _name(seat), STAT_KO.get(str(e["stat"]), ""), int(e["delta"])]
+			var delta := int(e["delta"])
+			var changes := PackedStringArray()
+			for entry: Dictionary in e.get("changes", [e]):
+				changes.append("%s %+d" % [STAT_KO.get(str(entry["stat"]), ""), int(entry["delta"])])
+			var change := "%s%s · %s" % [_who(seat), _name(seat), " · ".join(changes)]
 			_log.text = change if source.is_empty() else "%s\n%s" % [change, source]
-			await _wait(0.55)
+			var tint := Color(0.71, 0.74, 1.0) if delta < 0 else Color(0.49, 0.93, 0.69)
+			var float_label := changes[0] if changes.size() == 1 else "%d개 능력 %s" % [changes.size(), "↓" if delta < 0 else "↑"]
+			_animate_rank_effect(slot, "drop" if delta < 0 else "rise", tint, 0.60)
+			_float_text(slot, float_label, tint, 31)
+			await _wait(0.70)
 		"faint":
 			_log.text = "%s%s 쓰러졌다!" % [_who(seat), _name(seat)]
 			var tw := spr.create_tween()
