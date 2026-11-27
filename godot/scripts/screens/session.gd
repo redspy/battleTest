@@ -219,6 +219,12 @@ func _build_pick(v: Dictionary) -> void:
 	_footer.add_child(slots)
 	_footer.add_child(ok)
 
+## 지닌 도구 이름 (한국어 이름이 있으면 그것, 없으면 원래 이름, 없으면 "")
+func _item_name(member: Dictionary) -> String:
+	var item := str(member.get("item", ""))
+	var ko = Data.sets[SET_ID]["items"].get(item, {}).get("ko")
+	return str(ko) if ko != null else item
+
 ## 멤버 격자. picks 에 든 번호에는 순서 배지를 붙이고 나머지는 흐리게 한다.
 func _grid(members: Array, w: float, picks: Array, on_tap: Callable, on_long := Callable()) -> GridContainer:
 	var grid := GridContainer.new()
@@ -226,7 +232,7 @@ func _grid(members: Array, w: float, picks: Array, on_tap: Callable, on_long := 
 	grid.add_theme_constant_override("h_separation", 12)
 	grid.add_theme_constant_override("v_separation", 12)
 	for i in members.size():
-		var cell := Lay.member_cell(SET_ID, members[i], w)
+		var cell := Lay.member_cell(SET_ID, members[i], w, _item_name(members[i]))
 		var at := picks.find(i)
 		if at >= 0:
 			var frame := Panel.new()
