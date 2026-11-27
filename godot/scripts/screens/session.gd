@@ -102,7 +102,7 @@ func _build_lobby(v: Dictionary) -> void:
 	var me := int(v["seat"])
 	var players: Array = v["players"]
 	if role == "solo":
-		_col.add_child(Lay.wrap("대회 팀에서 %d마리를 선출해 AI와 싱글 대전을 합니다. 레벨 50 능력치와 기술마다 정해진 PP를 사용합니다." % int(v["count"]), 22, UI.TEXT_DIM))
+		_col.add_child(Lay.wrap("대회 팀에서 %d마리를 선출해 AI와 싱글 대전을 합니다. 레벨 50 능력치와 기술마다 정해진 PP를 사용합니다." % Net.PICK_COUNT, 22, UI.TEXT_DIM))
 	if role == "host":
 		var info := Lay.card(UI.PANEL, 18)
 		(info[1] as VBoxContainer).add_child(UI.label(Net.status, 24, UI.TEXT))
@@ -132,34 +132,25 @@ func _build_lobby(v: Dictionary) -> void:
 			col.add_child(_mini_row(t["members"]))
 		_col.add_child(c[0])
 	var my: Dictionary = players[me]
-	var choose := UI.button("팀 고르기" if my["team"] == "" else "팀 바꾸기", 28, my["team"] == "")
-	choose.tapped.connect(func():
-		var s := TeamSelectScreen.new(SET_ID, true)
-		s.picked.connect(func(id: String): Net.send({ "t": "team", "id": id }))
-		Nav.push(s))
+	var choose_text := "내 팀 고르기" if my["team"] == "" else "내 팀 바꾸기"
+	var choose := UI.button(choose_text, 28, my["team"] == "")
+	choose.tapped.connect(func(): _open_team_picker(false))
 	_col.add_child(choose)
-	if me == 0:
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 10)
-		row.add_child(UI.label("선출 수", 24, UI.TEXT_DIM))
-		for n in [3, 4]:
-			var b := UI.button("%d마리" % n, 24, int(v["count"]) == n)
-			b.tapped.connect(func(): Net.send({ "t": "count", "n": n }))
-			row.add_child(b)
-		_col.add_child(row)
-	else:
-		_col.add_child(UI.label("선출 수: %d마리" % int(v["count"]), 24, UI.TEXT_DIM))
-	if me == 0:
-		var enabled: bool = v.get("allowGmax", false)
-		var mode_button := UI.button("거다이맥스 연습 · " + ("켬" if enabled else "끔"), 23)
-		mode_button.tapped.connect(func(): Net.send({ "t": "gmax", "enabled": not enabled }))
-		_col.add_child(mode_button)
-	elif v.get("allowGmax", false):
-		_col.add_child(UI.label("거다이맥스 연습 규칙", 22, UI.TEXT_DIM))
+	if role == "solo":
+		var opponent := UI.button("상대 팀 바꾸기", 28)
+		opponent.tapped.connect(func(): _open_team_picker(true))
+		_col.add_child(opponent)
 	if my["team"] != "":
 		var ready := UI.button("준비 취소" if my["ready"] else "준비 완료", 32, true, not my["ready"])
 		ready.tapped.connect(func(): Net.send({ "t": "ready", "v": not my["ready"] }))
 		_col.add_child(ready)
+
+func _open_team_picker(opponent: bool) -> void:
+	var title := "상대 팀 고르기" if opponent else "내 팀 고르기"
+	var picker := TeamSelectScreen.new(SET_ID, true, title)
+	var message := "ai_team" if opponent else "team"
+	picker.picked.connect(func(id: String): Net.send({ "t": message, "id": id }))
+	Nav.push(picker)
 
 func _mini_row(members: Array) -> Control:
 	var row := HBoxContainer.new()
@@ -178,7 +169,7 @@ func _mini_row(members: Array) -> Control:
 
 func _build_pick(v: Dictionary) -> void:
 	var me := int(v["seat"])
-	var n := int(v["count"])
+	var n := Net.PICK_COUNT
 	var players: Array = v["players"]
 	var mine: Array = Data.team(SET_ID, str(players[me]["team"]))["members"]
 	var theirs: Array = Data.team(SET_ID, str(players[1 - me]["team"]))["members"]

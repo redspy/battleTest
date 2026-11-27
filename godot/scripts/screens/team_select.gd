@@ -7,15 +7,17 @@ signal picked(team_id: String)
 
 var set_id: String
 var pick_mode := false
+var pick_title: String
 
-func _init(p_set: String, p_pick := false) -> void:
+func _init(p_set: String, p_pick := false, p_title := "팀 고르기") -> void:
 	set_id = p_set
 	pick_mode = p_pick
+	pick_title = p_title
 
 func _ready() -> void:
 	var s: Dictionary = Data.sets[set_id]
 	var info: Dictionary = s["info"]
-	var col := Lay.page(self, "팀 고르기" if pick_mode else str(info["title"]), str(info["subtitle"]))
+	var col := Lay.page(self, pick_title if pick_mode else str(info["title"]), str(info["subtitle"]))
 	if not pick_mode:
 		var dex := UI.button("📖  도감 (%d종)" % s["order"].size(), 26, true)
 		dex.tapped.connect(func(): Nav.push(DexScreen.new(set_id)))

@@ -48,7 +48,7 @@ func _nettest(target: String) -> void:
 			"pick":
 				if not me["picked"] and sent != "picks":
 					sent = "picks"
-					Net.send({ "t": "picks", "picks": range(int(v["count"])) })
+					Net.send({ "t": "picks", "picks": range(Net.PICK_COUNT) })
 			"battle":
 				if v["battle"]["over"]:
 					print("%s 대전 끝: 승자 자리 %d, 내 자리 %d, 턴 %d, 내 입력 %d번" % [tag, int(v["battle"]["winner"]), int(v["seat"]), int(v["battle"]["turn"]), acts])
@@ -325,17 +325,30 @@ func _selftest() -> void:
 
 	# 3) 혼자 하기 흐름: 로비 → 선출 → 대전 끝까지 (Net 을 통해)
 	Net.start("solo")
-	if int(Net.view["count"]) != 3:
+	Net.send({ "t": "ai_team", "id": "singles-2" })
+	Net.send({ "t": "ai_team", "id": "missing" })
+	if Net.view["players"][1]["team"] != "singles-2":
 		fails += 1
-		print("[selftest] 기본 선출 수 오류")
-	for expected in [4, 3]:
-		Net.send({ "t": "count", "n": expected })
-		if int(Net.view["count"]) != expected:
-			fails += 1
-			print("[selftest] 선출 수 변경 오류: %d" % expected)
-	Net.send({ "t": "team", "id": teams[0]["id"] })
+		print("[selftest] AI 상대 팀 선택 오류")
+	var gmax_team := Data.team(Net.SET_ID, "ptc26-1")
+	var lead := (gmax_team["members"] as Array).find_custom(func(member): return member["species"] == "charizard")
+	Net.send({ "t": "team", "id": gmax_team["id"] })
 	Net.send({ "t": "ready", "v": true })
-	Net.send({ "t": "picks", "picks": range(int(Net.view["count"])) })
+	Net.send({ "t": "picks", "picks": [0, 1, 2, 3] })
+	if Net.view["phase"] != "pick" or not Net.view["players"][0]["picks"].is_empty():
+		fails += 1
+		print("[selftest] 4마리 선출을 허용함")
+	var picks := [lead]
+	for i in 3:
+		if i != lead and picks.size() < Net.PICK_COUNT:
+			picks.append(i)
+	Net.send({ "t": "picks", "picks": picks })
+	if Net.view.get("phase") == "battle":
+		var battle_view: Dictionary = Net.view["battle"]
+		var ai_members: Array = Net._s["battle"]["sides"][1]["mons"]
+		if not "gmax" in battle_view["gimmicks"] or ai_members.map(func(m): return m["id"]) != ["banette", "pawmot", "basculegion"]:
+			fails += 1
+			print("[selftest] 거다이맥스 또는 AI 팀 적용 오류")
 	var steps := 0
 	while Net.view["phase"] == "battle" and not Net.view["battle"]["over"] and steps < 500:
 		steps += 1
@@ -345,6 +358,11 @@ func _selftest() -> void:
 	print("[selftest] AI와 연습: 단계 %s, %d번 입력, %s" % [Net.view["phase"], steps, "정상" if ok else "실패"])
 	if not ok:
 		fails += 1
+	else:
+		Net.send({ "t": "again" })
+		if Net.view["phase"] != "lobby" or Net.view["players"][1]["team"] != "singles-2":
+			fails += 1
+			print("[selftest] 재대전에서 AI 팀 유지 오류")
 	Net.leave()
 	print("[selftest] 끝: 실패 %d" % fails)
 	get_tree().quit(1 if fails > 0 else 0)
@@ -420,18 +438,18 @@ func _shots() -> void:
 
 	var battle := SessionScreen.new("solo")
 	Nav.push(battle, false)
-	Net._s["players"][1]["team"] = "ptc26-4"
+	Net.send({ "t": "ai_team", "id": "ptc26-4" })
 	Net.send({ "t": "team", "id": team["id"] })
-	Net.send({ "t": "count", "n": 4 })
 	await _shot("lobby")
-	# The picker is shown from the same lobby entry as a person's team selection.
-	Nav.push(TeamSelectScreen.new(set_id, true), false)
-	await _shot("team_picker")
+	battle._open_team_picker(true)
+	await _wait(Nav.DURATION + 0.16)
+	await _shot("opponent_team_picker")
+	(Nav.current() as TeamSelectScreen).picked.emit("ptc26-4")
 	Nav.pop()
 	await _wait(Nav.DURATION + 0.16)
 	Net.send({ "t": "ready", "v": true })
 	await _shot("pick")
-	Net.send({ "t": "picks", "picks": [3, 0, 2, 5] })
+	Net.send({ "t": "picks", "picks": [3, 0, 2] })
 	await _wait(1.0)
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
@@ -513,7 +531,7 @@ func _shots() -> void:
 	var gmax := SessionScreen.new("solo")
 	Nav.push(gmax, false)
 	Net.send({ "t": "team", "id": team["id"] })
-	Net.send({ "t": "gmax", "enabled": true })
+	Net.send({ "t": "ai_team", "id": "ptc26-4" })
 	Net.send({ "t": "ready", "v": true })
 	Net.send({ "t": "picks", "picks": [3, 0, 2] })
 	await _wait(1.0)

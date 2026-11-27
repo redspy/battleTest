@@ -3,9 +3,9 @@ extends Node
 ## 같은 Wi-Fi 에서 ENet 으로 연결한다. 호스트는 UDP 방송으로 자기를 알리고, 참가 쪽은 목록에서 고르거나 주소를 직접 넣는다.
 ## 혼자 하기(solo) 는 연결 없이 자리 1 을 AI 가 맡는다.
 ##
-## 흐름: lobby(팀 고르기·준비) → pick(n 마리 비공개 선출) → battle(1:1 대전)
+## 흐름: lobby(팀 고르기·준비) → pick(3 마리 비공개 선출) → battle(1:1 대전)
 ## 화면은 view 와 changed 신호만 본다. 입력은 send(msg).
-##   msg: {t:"team", id} {t:"ready", v} {t:"count", n} {t:"picks", picks:[번호]} {t:"act", a} {t:"again"}
+##   msg: {t:"team", id} {t:"ready", v} {t:"ai_team", id} {t:"picks", picks:[번호]} {t:"act", a} {t:"again"}
 
 signal changed
 signal closed(reason: String)
@@ -13,9 +13,10 @@ signal hosts_changed
 
 const SET_ID := "pokemon"
 const BATTLE_MODE := "battle"
-const BEACON := "BT5|pokemon|battle"
+const BEACON := "BT6|pokemon|battle"
+const PICK_COUNT := 3
 
-const PORT := 47316
+const PORT := 47317
 const BEACON_PORT := 47311
 
 var view := {}             # 내 자리에서 본 상태 (화면이 읽는다)
@@ -72,7 +73,7 @@ func start(p_role: String) -> String:
 			_beacon.set_dest_address("255.255.255.255", BEACON_PORT)
 		status = "상대를 기다리는 중"
 	if is_host():
-		_s = { "phase": "lobby", "count": 3, "solo": role == "solo", "allowGmax": false,
+		_s = { "phase": "lobby", "solo": role == "solo",
 			"players": [_new_player("나" if role == "solo" else "방장"), _new_player("AI" if role == "solo" else "")], "battle": {}, "events": [] }
 		_s["players"][0]["here"] = true
 		if role == "solo":
@@ -201,12 +202,12 @@ func _handle(who: int, msg: Dictionary) -> void:
 			if _s["phase"] == "lobby" and not Data.team(SET_ID, str(msg.get("id", ""))).is_empty():
 				p["team"] = str(msg["id"])
 				p["ready"] = false
-		"count":
-			if _s["phase"] == "lobby" and who == 0 and int(msg.get("n", 0)) in [3, 4]:
-				_s["count"] = int(msg["n"])
-		"gmax":
-			if _s["phase"] == "lobby" and who == 0:
-				_s["allowGmax"] = msg.get("enabled") == true
+		"ai_team":
+			if _s["phase"] == "lobby" and _s["solo"] and who == 0:
+				var team_id := str(msg.get("id", ""))
+				if not Data.team(SET_ID, team_id).is_empty():
+					_s["players"][1]["team"] = team_id
+					p["ready"] = false
 		"ready":
 			if _s["phase"] == "lobby" and p["team"] != "":
 				p["ready"] = bool(msg.get("v", false))
@@ -215,7 +216,7 @@ func _handle(who: int, msg: Dictionary) -> void:
 					for q in _s["players"]:
 						q["picks"] = []
 					if _s["solo"]:
-						_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], int(_s["count"]))
+						_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], PICK_COUNT)
 		"picks":
 			var picks: Array = msg.get("picks", [])
 			if _s["phase"] == "pick" and (p["picks"] as Array).is_empty() and _valid_picks(picks):
@@ -236,7 +237,7 @@ func _handle(who: int, msg: Dictionary) -> void:
 	_push(events)
 
 func _valid_picks(picks: Array) -> bool:
-	if picks.size() != int(_s["count"]):
+	if picks.size() != PICK_COUNT:
 		return false
 	var seen := {}
 	for x in picks:
@@ -250,7 +251,7 @@ func _begin() -> void:
 	for i in 2:
 		var members: Array = Data.team(SET_ID, _s["players"][i]["team"])["members"]
 		ids.append((_s["players"][i]["picks"] as Array).map(func(x): return members[x]))
-	_s["battle"] = BEngine.create(ids[0], ids[1], randi(), SET_ID, _s["allowGmax"])
+	_s["battle"] = BEngine.create(ids[0], ids[1], randi(), SET_ID, true)
 	_s["phase"] = "battle"
 
 ## 혼자 하기: AI 가 고를 차례면 고른다 (연쇄 처리)
@@ -272,7 +273,7 @@ func _view_for(who: int, events: Array) -> Dictionary:
 		var p: Dictionary = _s["players"][i]
 		players.append({ "name": p["name"], "here": p["here"], "team": p["team"], "ready": p["ready"],
 			"picked": not (p["picks"] as Array).is_empty(), "picks": p["picks"] if i == who else [] })
-	var v := { "set": SET_ID, "mode": BATTLE_MODE, "phase": _s["phase"], "count": _s["count"], "solo": _s["solo"], "allowGmax": _s["allowGmax"],
+	var v := { "set": SET_ID, "mode": BATTLE_MODE, "phase": _s["phase"], "solo": _s["solo"],
 		"seat": who, "players": players, "events": events }
 	if _s["phase"] == "battle":
 		v["battle"] = BEngine.view(_s["battle"], who)
