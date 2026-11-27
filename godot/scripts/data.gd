@@ -10,6 +10,7 @@ const STAT_LABELS := {
 	"spa": "특수공격", "spd": "특수방어", "spe": "스피드",
 }
 const RANK_STATS := ["atk", "def", "spa", "spd", "spe"]
+const BATTLE_RANKS := ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"]
 
 const TYPE_COLOR := {
 	"노말": Color(0.66, 0.66, 0.58), "불꽃": Color(0.95, 0.50, 0.26), "물": Color(0.38, 0.58, 0.95), "전기": Color(0.97, 0.82, 0.25),

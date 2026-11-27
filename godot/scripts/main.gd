@@ -209,6 +209,68 @@ func _daeul_test() -> bool:
 	target["atk"] = 2
 	return BEngine.damage(user, target, foul_play, 100, battle) > damage
 
+func _advanced_mechanics_test() -> bool:
+	var test_team := Data.team(Net.SET_ID, "mechanics-practice")
+	var members: Array = test_team["members"]
+	var events := []
+	var state := BEngine.create([members[0]], [members[1], members[5]], 7)
+	var attacker := BEngine.active(state, 0)
+	var defender := BEngine.active(state, 1)
+	var quake := BEngine.move(Net.SET_ID, "Earthquake")
+	var regular := BEngine.damage(attacker, defender, quake, 100, state)
+	state["sides"][1]["reflect"] = 5
+	if BEngine.damage(attacker, defender, quake, 100, state) != floori(regular / 2.0):
+		return false
+	attacker["atk"] = -3
+	defender["def"] = 3
+	var protected_crit := BEngine.damage(attacker, defender, quake, 100, state, true)
+	state["sides"][1].erase("reflect")
+	attacker["atk"] = 0
+	defender["def"] = 0
+	if BEngine.damage(attacker, defender, quake, 100, state, true) != protected_crit:
+		return false
+	BEngine._use(state, 0, "Spikes", events)
+	BEngine._use(state, 0, "Toxic Spikes", events)
+	BEngine._use(state, 0, "Toxic Spikes", events)
+	BEngine._use(state, 0, "Sticky Web", events)
+	BEngine._enter(state, 1, events)
+	if defender["hp"] != defender["max"] or defender["status"] != "" or defender["spe"] != 0:
+		return false
+	defender["item"] = ""
+	BEngine._enter(state, 1, events)
+	if defender["hp"] >= defender["max"] or defender["status"] != "맹독" or defender["spe"] != -1:
+		return false
+	BEngine._end_turn(state, 1, events)
+	BEngine._end_turn(state, 1, events)
+	if defender.get("toxicStage") != 2:
+		return false
+	BEngine._use(state, 0, "Defog", events)
+	if state["sides"][1].has("spikes") or state["sides"][1].has("toxicSpikes") or defender["evasion"] != -1:
+		return false
+	defender["status"] = ""
+	state["terrain"] = "미스트필드"
+	BEngine._apply_status(defender, 1, "화상", events, state)
+	if defender["status"] != "":
+		return false
+	BEngine._use(state, 1, "Substitute", events)
+	var remaining := int(defender["hp"])
+	if defender.get("substitute", 0) <= 0:
+		return false
+	BEngine._use(state, 0, "Thunder Wave", events)
+	if defender["status"] != "":
+		return false
+	attacker["ability"] = "No Guard"
+	attacker["stats"]["atk"] = 999
+	BEngine._use(state, 0, "Dual Wingbeat", events)
+	if defender.get("substitute", -1) != 0 or int(defender["hp"]) >= remaining:
+		return false
+	BEngine._swap(state, 1, 1, events)
+	if BEngine.view(state, 0)["sides"][1]["mons"][1].has("teraType"):
+		return false
+	BEngine._transform(state, 1, "tera", events)
+	var transformed := BEngine.active(state, 1)
+	return transformed["types"] == ["강철"] and BEngine.preview_move(state, transformed, "Tera Blast", "")["type"] == "강철"
+
 func _rank_drop_test() -> bool:
 	var espathra := { "species": "espathra", "moves": ["Lumina Crash"] }
 	var target := { "species": "blastoise", "moves": ["Protect"] }
@@ -249,6 +311,9 @@ func _team_profile_test() -> bool:
 
 func _selftest() -> void:
 	var fails := 0
+	if not _advanced_mechanics_test():
+		print("[selftest] 진영 효과, 급소, 대타 또는 테라스탈 오류")
+		fails += 1
 	if not _daeul_test():
 		print("[selftest] 다을 팀 또는 속임수 오류")
 		fails += 1
@@ -481,6 +546,19 @@ func _shots() -> void:
 	await _shot("battle")
 	var screen := Nav.current() as BattleScreen
 	var original := screen._b
+	var decoy_demo := BEngine.create(
+		[{ "species": "blastoise", "moves": ["Substitute"] }],
+		[{ "species": "garchomp", "moves": ["Earthquake"] }], 7)
+	screen._b = BEngine.view(decoy_demo, 0)
+	screen._draw_all()
+	var decoy_events := []
+	BEngine._use(decoy_demo, 0, "Substitute", decoy_events)
+	for event in decoy_events:
+		if event["e"] == "substitute":
+			await screen._play(event, BEngine.view(decoy_demo, 0))
+	await _shot("substitute")
+	screen._b = original
+	screen._draw_all()
 	screen._b = original.duplicate(true)
 	var hp_slot := screen._slot(screen._me)
 	var hp_bar := screen._hp_bars[hp_slot]

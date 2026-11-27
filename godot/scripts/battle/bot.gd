@@ -56,6 +56,18 @@ static func choose(s: Dictionary, seat: int) -> Dictionary:
 				v += 60.0
 			for e in mv.get("effects", []):
 				match str(e["kind"]):
+					"hazard":
+						var opponent: Dictionary = s["sides"][1 - seat]
+						v += 24.0 if int(opponent.get(e["key"], 0)) == 0 else -15.0
+					"screen":
+						var useful: bool = int(side.get(e["key"], 0)) == 0 and (e["key"] != "auroraVeil" or s["weather"] == "눈")
+						v += 28.0 if useful else -30.0
+					"substitute":
+						v += 19.0 if int(me.get("substitute", 0)) == 0 and int(me["hp"]) * 2 > int(me["max"]) else -30.0
+					"defog", "rapidSpin":
+						var clear := BEngine.HAZARDS.keys().any(func(key): return int(side.get(key, 0)) > 0)
+						if clear:
+							v += 35.0
 					"revival":
 						var target: Dictionary = side["mons"][int(a["target"])]
 						v += 100.0 if target["id"] == "banette" else 70.0

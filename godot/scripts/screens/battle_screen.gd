@@ -3,8 +3,19 @@ extends Control
 ## 대회 팀 1:1 대전 화면. 위 = 상대, 아래 = 나. 상태는 Net.view["battle"], 연출은 Net.view["events"] 를 순서대로 재생한다.
 
 var _set_id: String
-const STAT_KO := Data.STAT_LABELS
+const STAT_KO := {
+	"atk": "공격", "def": "방어", "spa": "특수공격", "spd": "특수방어", "spe": "스피드",
+	"accuracy": "명중률", "evasion": "회피율",
+}
 const FieldBackdrop := preload("res://scripts/widgets/field_backdrop.gd")
+const SubstituteEffect := preload("res://scripts/widgets/substitute_effect.gd")
+const FIELD_CASTS := {
+	"Stealth Rock": ["stones", Color("#a8805b")], "Spikes": ["stones", Color("#bd885e")],
+	"Toxic Spikes": ["stones", Color("#bd76c4")], "Sticky Web": ["net", Color("#a6ad56")],
+	"Rapid Spin": ["wind", Color("#88a0b1")], "Defog": ["wind", Color("#a5bcce")],
+	"Reflect": ["prism", Color("#f6aa72")], "Light Screen": ["prism", Color("#7caaff")],
+	"Aurora Veil": ["prism", Color("#b287e6")], "Misty Terrain": ["pulse", Color("#df9fc8")],
+}
 const RankEffect := preload("res://scripts/widgets/rank_effect.gd")
 const RANK_STYLES := {
 	"Parting Shot": "voice", "Snarl": "voice", "Icy Wind": "wind", "Lumina Crash": "prism",
@@ -31,7 +42,8 @@ const FIELD_EFFECTS := {
 	"모래바람": "일부 포켓몬이 턴 끝에 피해를 받고 바위 타입의 특수방어가 오릅니다.",
 	"눈": "얼음 타입의 방어가 오릅니다.",
 	"그래스필드": "지면에 있는 포켓몬의 풀 기술이 강해지고 턴 끝에 HP가 회복됩니다.",
-	"일렉트릭필드": "지면에 있는 포켓몬의 전기 기술이 강해집니다.",
+	"일렉트릭필드": "지면에 있는 포켓몬의 전기 기술이 강해지고 잠들지 않습니다.",
+	"미스트필드": "지면에 있는 포켓몬이 상태이상과 혼란에 걸리지 않고 드래곤 기술 피해를 절반만 받습니다.",
 	"사이코필드": "지면에 있는 포켓몬의 에스퍼 기술이 강해지고 상대의 선공기를 막습니다.",
 	"트릭룸": "같은 우선도에서는 스피드가 느린 포켓몬부터 행동합니다.",
 }
@@ -48,6 +60,7 @@ var _turn: Label
 var _conditions: HFlowContainer
 var _backdrop: Control
 var _log: Label
+var _decoys: Array[Control] = [null, null]
 var _hp_bars: Array[ProgressBar] = [null, null]
 var _hp_tweens: Array[Tween] = [null, null]
 var _hp_occupants := ["", ""]
@@ -136,6 +149,11 @@ func _ready() -> void:
 		var i := 0 if who == "foe" else 1
 		_info[i] = card[1]
 		_spr[i] = spr
+		var decoy := SubstituteEffect.new()
+		decoy.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		decoy.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		spr.add_child(decoy)
+		_decoys[i] = decoy
 		if who == "foe":
 			row.add_child(card[0])
 			row.add_child(spr)
@@ -333,6 +351,14 @@ func _draw_status() -> void:
 			_show_effect(roster, "스텔스록", side_sources.get("stealthRock", ""), "교체로 나온 포켓몬이 바위 타입 상성에 따라 피해를 받습니다.")
 		if int(side.get("toxicSpikes", 0)) > 0:
 			_show_effect(roster, "독압정 · %d겹" % int(side["toxicSpikes"]), side_sources.get("toxicSpikes", ""), "지면에 있는 포켓몬이 교체로 등장할 때 독에 걸릴 수 있습니다.")
+		for key in ["spikes", "stickyWeb"]:
+			var count := int(side.get(key, 0))
+			if count > 0:
+				var name: String = BEngine.HAZARDS[key]
+				_show_effect(roster, "%s · %d겹" % [name, count] if key == "spikes" else name, side_sources.get(key, ""), "교체로 나온 지상 포켓몬에게 영향을 줍니다.")
+		for key in BEngine.SCREENS:
+			if int(side.get(key, 0)) > 0:
+				_show_effect(roster, _timed_effect(BEngine.SCREENS[key], int(side[key])), side_sources.get(key, ""), "해당 기술로 받는 피해가 줄어듭니다.")
 		var tailwind := int(side.get("tailwind", 0))
 		if tailwind > 0:
 			_show_effect(roster, _timed_effect("순풍", tailwind), side_sources.get("tailwind", ""), "이 진영 포켓몬의 스피드가 두 배가 됩니다.")
@@ -351,7 +377,7 @@ func _draw_status() -> void:
 			roster.add_child(Lay.wrap("HP %s  ·  %s" % [hp, _pokemon_status(mon)], 22, UI.TEXT_DIM))
 			if deployed:
 				var stages := PackedStringArray()
-				for key in Data.RANK_STATS:
+				for key in Data.BATTLE_RANKS:
 					if int(mon.get(key, 0)) != 0:
 						stages.append("%s %+d" % [STAT_KO[key], int(mon[key])])
 				roster.add_child(Lay.wrap("능력 변화  " + ("없음" if stages.is_empty() else " · ".join(stages)), 22, UI.TEXT_DIM))
@@ -476,6 +502,8 @@ func _pokemon_status(mon: Dictionary) -> String:
 	for flag in volatile:
 		if mon.get(flag):
 			effects.append(volatile[flag])
+	if int(mon.get("substitute", 0)) > 0:
+		effects.append("대타출동")
 	if int(mon.get("gmaxTurns", 0)) > 0:
 		effects.append(_timed_effect("거다이맥스", int(mon["gmaxTurns"])))
 	return "정상" if effects.is_empty() else " · ".join(effects)
@@ -488,6 +516,9 @@ func _draw_side(seat: int) -> void:
 	var down := int(mon.get("hp", 0)) <= 0
 	spr.show_sprite(_set_id, str(Data.form(_set_id, str(mon["id"]), mon["form"]).get("file", "")), false)
 	spr.modulate.a = 0.0 if down else 1.0
+	var has_decoy := int(mon.get("substitute", 0)) > 0
+	_decoys[slot].present(has_decoy)
+	spr.self_modulate.a = 0.28 if has_decoy else 1.0
 	var col: VBoxContainer = _info[slot]
 	var bar := _hp_bars[slot]
 	for child in col.get_children():
@@ -508,9 +539,11 @@ func _draw_side(seat: int) -> void:
 	if int(mon.get("slow", 0)) > 0: st.append("둔화 %d" % int(mon["slow"]))
 	if mon.get("guard", false): st.append("수비 태세")
 	if mon.get("status", "") != "": st.append(mon["status"])
+	if has_decoy: st.append("대타출동")
+	if mon.get("terastallized", false): st.append("테라스탈 · " + str(mon["teraType"]))
 	if mon.get("sleep", 0) > 0: st.append("잠듦")
 	if mon.get("gmaxTurns", 0) > 0: st.append("거다이맥스 %d" % int(mon["gmaxTurns"]))
-	for k in Data.RANK_STATS:
+	for k in Data.BATTLE_RANKS:
 		if int(mon.get(k, 0)) != 0:
 			st.append("%s %+d" % [STAT_KO[k], int(mon[k])])
 	if not st.is_empty():
@@ -619,7 +652,7 @@ func _draw_actions() -> void:
 		var row := HBoxContainer.new()
 		for option in options:
 			var kind := str(option)
-			var text := "메가진화" if kind == "mega" else "거다이맥스"
+			var text: String = {"mega": "메가진화", "gmax": "거다이맥스", "tera": "테라스탈"}[kind]
 			var button := UI.button(text + (" ✓" if kind == _gimmick else ""), 24, kind == _gimmick)
 			button.tapped.connect(func():
 				_gimmick = "" if _gimmick == kind else kind
@@ -784,6 +817,7 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			if side["mons"][to].get("hidden", false):
 				var fresh: Dictionary = (final["sides"][seat]["mons"][to] as Dictionary).duplicate()
 				fresh["hp"] = fresh["max"]
+				fresh.erase("substitute")
 				for k in ["dot", "slow"] + Data.RANK_STATS:
 					fresh[k] = 0
 				side["mons"][to] = fresh
@@ -801,6 +835,12 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			var move := BEngine.move(_set_id, move_id)
 			var move_name := str(e.get("name", move.get("ko", "")))
 			_log.text = "%s%s의 [%s]!" % [_who(seat), _name(seat), move_name]
+			if move_name == move.get("ko", "") and FIELD_CASTS.has(move_id):
+				var visual: Array = FIELD_CASTS[move_id]
+				var target_slot := 1 - slot if move_id in ["Stealth Rock", "Spikes", "Toxic Spikes", "Sticky Web", "Defog"] else slot
+				_animate_rank_effect(target_slot, visual[0], visual[1], 0.62)
+				await _wait(0.65)
+				return
 			if move_name == move.get("ko", "") and SELF_RANK_STYLES.has(move_id):
 				var visual: Array = SELF_RANK_STYLES[move_id]
 				_animate_rank_effect(slot, visual[0], visual[1], 0.86)
@@ -815,6 +855,15 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			tw.tween_property(spr, "position", spr.position + Vector2(-50 * dir, 40 * dir), _animation_time(0.12))
 			tw.tween_property(spr, "position", spr.position, _animation_time(0.18))
 			await _wait(0.55)
+		"substitute":
+			var mon := _active(seat)
+			mon["substitute"] = int(e["hp"])
+			if e.has("userHp"):
+				mon["hp"] = int(e["userHp"])
+			_draw_side(seat)
+			_decoys[slot].animate(str(e["what"]), _animation_time(0.33))
+			_log.text = "대타출동!" if e["what"] == "발동" else ("대타가 사라졌다!" if e["what"] == "파괴" else "대타가 공격을 막았다!")
+			await _wait(0.36)
 		"dmg":
 			_active(seat)["hp"] = int(e["hp"])
 			_draw_side(seat)
@@ -825,6 +874,8 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			if str(e.get("src", "")) == "dot": note = "그을음 피해"
 			if str(e.get("src", "")) == "recoil": note = "반동 피해"
 			if e.get("guard", false): note = "수비 태세로 막았다! " + note
+			if e.get("critical", false):
+				note = ("급소에 맞았다! " + note).strip_edges()
 			if note != "":
 				_log.text = note
 			var amp := 16.0 if big else 9.0
@@ -843,6 +894,8 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_b["sides"][seat]["mons"][int(_b["sides"][seat]["active"])] = e["mon"].duplicate(true)
 			_draw_side(seat)
 			_log.text = "%s%s · %s" % [_who(seat), _name(seat), e["what"]]
+			if e["what"] == "테라스탈":
+				_animate_rank_effect(slot, "prism", Data.type_color(str(e["mon"]["teraType"])), 0.55)
 			await _wait(0.6)
 		"field":
 			var key := str(e.get("key", ""))

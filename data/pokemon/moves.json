@@ -36,7 +36,8 @@
       "priority": 0,
       "contact": true,
       "sound": false,
-      "pp": 20
+      "pp": 20,
+      "alwaysHit": true
     },
     "Air Slash": {
       "ko": "에어슬래시",
@@ -93,16 +94,15 @@
       "ko": "깨뜨리다",
       "en": "Brick Break",
       "type": "격투",
+      "pp": 15,
       "category": "attack",
-      "desc": "위력 75.",
-      "power": 75,
       "damageClass": "physical",
-      "accuracy": 100,
       "target": "normal",
+      "accuracy": 100,
       "priority": 0,
-      "contact": true,
-      "sound": false,
-      "pp": 16
+      "desc": "피해를 주기 전에 상대 장막을 없앱니다.",
+      "power": 75,
+      "contact": true
     },
     "Bug Buzz": {
       "ko": "벌레의야단법석",
@@ -1636,7 +1636,8 @@
       "contact": true,
       "sound": false,
       "power": 40,
-      "pp": 12
+      "pp": 12,
+      "hits": 2
     },
     "Electro Shot": {
       "ko": "일렉트로빔",
@@ -2340,7 +2341,8 @@
       "contact": false,
       "sound": false,
       "pp": 20,
-      "power": 80
+      "power": 80,
+      "alwaysHit": true
     },
     "Shadow Claw": {
       "ko": "섀도우크루",
@@ -2356,7 +2358,8 @@
       "contact": true,
       "sound": false,
       "pp": 16,
-      "power": 70
+      "power": 70,
+      "critRatio": 1
     },
     "Morning Sun": {
       "ko": "아침햇살",
@@ -2593,6 +2596,330 @@
       "contact": true,
       "sound": false,
       "pp": 15
+    },
+    "Spikes": {
+      "ko": "압정뿌리기",
+      "en": "Spikes",
+      "type": "땅",
+      "pp": 20,
+      "category": "support",
+      "damageClass": "status",
+      "target": "foeSide",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "상대 진영에 교체 설치기를 놓습니다.",
+      "effects": [
+        {
+          "kind": "hazard",
+          "key": "spikes"
+        }
+      ]
+    },
+    "Toxic Spikes": {
+      "ko": "독압정",
+      "en": "Toxic Spikes",
+      "type": "독",
+      "pp": 20,
+      "category": "support",
+      "damageClass": "status",
+      "target": "foeSide",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "상대 진영에 교체 설치기를 놓습니다.",
+      "effects": [
+        {
+          "kind": "hazard",
+          "key": "toxicSpikes"
+        }
+      ]
+    },
+    "Sticky Web": {
+      "ko": "끈적끈적네트",
+      "en": "Sticky Web",
+      "type": "벌레",
+      "pp": 20,
+      "category": "support",
+      "damageClass": "status",
+      "target": "foeSide",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "상대 진영에 교체 설치기를 놓습니다.",
+      "effects": [
+        {
+          "kind": "hazard",
+          "key": "stickyWeb"
+        }
+      ]
+    },
+    "Reflect": {
+      "ko": "리플렉터",
+      "en": "Reflect",
+      "type": "에스퍼",
+      "pp": 20,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "아군 진영이 받는 피해를 줄입니다.",
+      "effects": [
+        {
+          "kind": "screen",
+          "key": "reflect"
+        }
+      ]
+    },
+    "Light Screen": {
+      "ko": "빛의장막",
+      "en": "Light Screen",
+      "type": "에스퍼",
+      "pp": 30,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "아군 진영이 받는 피해를 줄입니다.",
+      "effects": [
+        {
+          "kind": "screen",
+          "key": "lightScreen"
+        }
+      ]
+    },
+    "Aurora Veil": {
+      "ko": "오로라베일",
+      "en": "Aurora Veil",
+      "type": "얼음",
+      "pp": 20,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "눈이 올 때만 물리·특수 피해를 줄이는 장막을 설치합니다.",
+      "effects": [
+        {
+          "kind": "screen",
+          "key": "auroraVeil"
+        }
+      ]
+    },
+    "Substitute": {
+      "ko": "대타출동",
+      "en": "Substitute",
+      "type": "노말",
+      "pp": 10,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "최대 HP의 ¼을 써서 공격을 대신 받는 대타를 만듭니다.",
+      "effects": [
+        {
+          "kind": "substitute"
+        }
+      ],
+      "alwaysHit": true
+    },
+    "Defog": {
+      "ko": "안개제거",
+      "en": "Defog",
+      "type": "비행",
+      "pp": 15,
+      "category": "support",
+      "damageClass": "status",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "상대 회피율을 내리고 양쪽 설치기와 상대 장막, 필드를 제거합니다.",
+      "effects": [
+        {
+          "kind": "defog"
+        }
+      ]
+    },
+    "Rapid Spin": {
+      "ko": "고속스핀",
+      "en": "Rapid Spin",
+      "type": "노말",
+      "pp": 40,
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "명중하면 아군 설치기와 씨뿌리기·조이기 상태를 제거하고 스피드를 올립니다.",
+      "effects": [
+        {
+          "kind": "rapidSpin"
+        }
+      ],
+      "power": 50,
+      "contact": true
+    },
+    "Misty Terrain": {
+      "ko": "미스트필드",
+      "en": "Misty Terrain",
+      "type": "페어리",
+      "pp": 10,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "지면에 있는 포켓몬의 상태이상을 막고 받는 드래곤 기술 피해를 줄입니다.",
+      "effects": [
+        {
+          "kind": "terrain",
+          "value": "미스트필드"
+        }
+      ]
+    },
+    "Focus Energy": {
+      "ko": "기충전",
+      "en": "Focus Energy",
+      "type": "노말",
+      "pp": 30,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "급소에 맞힐 확률을 높입니다.",
+      "effects": [
+        {
+          "kind": "focusEnergy"
+        }
+      ],
+      "alwaysHit": true
+    },
+    "Sand Attack": {
+      "ko": "모래뿌리기",
+      "en": "Sand Attack",
+      "type": "땅",
+      "pp": 15,
+      "category": "support",
+      "damageClass": "status",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "상대의 명중률을 낮춥니다.",
+      "effects": [
+        {
+          "kind": "debuff",
+          "stat": "accuracy",
+          "stages": 1
+        }
+      ]
+    },
+    "Double Team": {
+      "ko": "그림자분신",
+      "en": "Double Team",
+      "type": "노말",
+      "pp": 15,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "자신의 회피율을 높입니다.",
+      "effects": [
+        {
+          "kind": "buff",
+          "stat": "evasion",
+          "stages": 1
+        }
+      ],
+      "alwaysHit": true
+    },
+    "Snowscape": {
+      "ko": "설경",
+      "en": "Snowscape",
+      "type": "얼음",
+      "pp": 10,
+      "category": "support",
+      "damageClass": "status",
+      "target": "self",
+      "accuracy": 100,
+      "priority": 0,
+      "desc": "5턴 동안 눈을 내리게 합니다.",
+      "effects": [
+        {
+          "kind": "weather",
+          "value": "눈"
+        }
+      ],
+      "alwaysHit": true
+    },
+    "Bullet Seed": {
+      "ko": "씨기관총",
+      "en": "Bullet Seed",
+      "type": "풀",
+      "pp": 30,
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "power": 25,
+      "contact": false,
+      "hits": [
+        2,
+        5
+      ],
+      "desc": "한 번 명중하면 2~5회 연속 공격합니다."
+    },
+    "Rock Blast": {
+      "ko": "록블라스트",
+      "en": "Rock Blast",
+      "type": "바위",
+      "pp": 10,
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "accuracy": 90,
+      "priority": 0,
+      "power": 25,
+      "contact": false,
+      "hits": [
+        2,
+        5
+      ],
+      "desc": "한 번 명중하면 2~5회 연속 공격합니다."
+    },
+    "Icicle Spear": {
+      "ko": "고드름침",
+      "en": "Icicle Spear",
+      "type": "얼음",
+      "pp": 30,
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "power": 25,
+      "contact": false,
+      "hits": [
+        2,
+        5
+      ],
+      "desc": "한 번 명중하면 2~5회 연속 공격합니다."
+    },
+    "Tera Blast": {
+      "ko": "테라버스트",
+      "en": "Tera Blast",
+      "type": "노말",
+      "pp": 10,
+      "category": "attack",
+      "damageClass": "special",
+      "target": "normal",
+      "accuracy": 100,
+      "priority": 0,
+      "power": 80,
+      "contact": false,
+      "desc": "테라스탈 중에는 테라스탈 타입이 되며 공격과 특수공격 중 높은 능력치에 맞춰 분류가 바뀝니다."
     }
   },
   "items": {
@@ -2755,6 +3082,26 @@
     "Air Balloon": {
       "ko": "풍선",
       "desc": "공격에 맞기 전까지 땅 기술을 피합니다."
+    },
+    "Heavy-Duty Boots": {
+      "ko": "통굽부츠",
+      "desc": "교체 시 설치기 효과를 받지 않습니다."
+    },
+    "Light Clay": {
+      "ko": "빛의점토",
+      "desc": "장막을 8턴 유지합니다."
+    },
+    "Scope Lens": {
+      "ko": "초점렌즈",
+      "desc": "급소율이 1랭크 상승합니다."
+    },
+    "Razor Claw": {
+      "ko": "예리한손톱",
+      "desc": "급소율이 1랭크 상승합니다."
+    },
+    "Loaded Dice": {
+      "ko": "속임수주사위",
+      "desc": "일반 2~5회 연속 공격이 4회 또는 5회 명중합니다."
     }
   },
   "abilities": {
@@ -2991,6 +3338,30 @@
     "Pressure": {
       "ko": "프레셔",
       "desc": "자신을 대상으로 한 상대 기술의 PP를 1 더 소모시킵니다."
+    },
+    "Battle Armor": {
+      "ko": "전투무장",
+      "desc": "급소에 맞지 않습니다."
+    },
+    "Shell Armor": {
+      "ko": "조가비갑옷",
+      "desc": "급소에 맞지 않습니다."
+    },
+    "Sniper": {
+      "ko": "스나이퍼",
+      "desc": "급소 피해가 증가합니다."
+    },
+    "Super Luck": {
+      "ko": "대운",
+      "desc": "급소에 맞힐 확률이 증가합니다."
+    },
+    "Infiltrator": {
+      "ko": "틈새포착",
+      "desc": "상대의 장막과 대타를 무시합니다."
+    },
+    "Skill Link": {
+      "ko": "스킬링크",
+      "desc": "횟수가 변하는 연속기를 최대로 공격합니다."
     }
   },
   "practiceSets": {

@@ -209,6 +209,159 @@
       ]
     },
     {
+      "id": "mechanics-practice",
+      "event": "CUSTOM",
+      "rank": 2,
+      "placement": "규칙 실습",
+      "name": "전투 규칙 실습",
+      "tags": [
+        "싱글",
+        "연습"
+      ],
+      "summary": "한카리아스의 설치기와 눈여아의 오로라베일, 거북왕의 고속스핀과 대타출동, 아머까오의 장막과 안개제거를 실습하는 팀입니다. 블래키는 필드와 명중·회피, 루카리오는 급소와 강철 테라스탈을 연습합니다.",
+      "members": [
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "item": "Rocky Helmet",
+          "moves": [
+            "Spikes",
+            "Stealth Rock",
+            "Earthquake",
+            "Brick Break"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "blastoise",
+          "form": "base",
+          "ability": "Torrent",
+          "item": "Heavy-Duty Boots",
+          "moves": [
+            "Rapid Spin",
+            "Substitute",
+            "Hydro Pump",
+            "Ice Beam"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "corviknight",
+          "form": "base",
+          "ability": "Pressure",
+          "item": "Leftovers",
+          "moves": [
+            "Defog",
+            "Reflect",
+            "Light Screen",
+            "Iron Head"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "froslass",
+          "form": "base",
+          "ability": "Cursed Body",
+          "item": "Light Clay",
+          "moves": [
+            "Snowscape",
+            "Aurora Veil",
+            "Shadow Ball",
+            "Ice Beam"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "umbreon",
+          "form": "base",
+          "ability": "Inner Focus",
+          "item": "Sitrus Berry",
+          "moves": [
+            "Misty Terrain",
+            "Foul Play",
+            "Sand Attack",
+            "Double Team"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "lucario",
+          "form": "base",
+          "ability": "Inner Focus",
+          "item": "Scope Lens",
+          "moves": [
+            "Focus Energy",
+            "Shadow Claw",
+            "Close Combat",
+            "Tera Blast"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          },
+          "teraType": "강철"
+        }
+      ]
+    },
+    {
       "id": "singles-1",
       "event": "SINGLES",
       "rank": 1,
