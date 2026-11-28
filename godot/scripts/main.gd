@@ -216,10 +216,132 @@ func _daeul_test() -> bool:
 	target["atk"] = 2
 	return BEngine.damage(user, target, foul_play, 100, battle) > damage
 
+func _pivot_test() -> bool:
+	var pivot := {"species": "scizor", "moves": ["U-turn"]}
+	var flyer := {"species": "charizard", "moves": ["Protect"]}
+	var ground := {"species": "garchomp", "moves": ["Earthquake", "Protect"]}
+	var state := BEngine.create([pivot, flyer], [ground], 7)
+	var outgoing := BEngine.active(state, 0)
+	var opponent := BEngine.active(state, 1)
+	outgoing["stats"]["spe"] = 999
+	var original_hp := int(outgoing["hp"])
+	var earthquake_pp := int(opponent["pp"]["Earthquake"])
+	BEngine.submit(state, 0, {"k": "move", "id": "U-turn"})
+	var first := BEngine.submit(state, 1, {"k": "move", "id": "Earthquake"})
+	if not first.any(func(event): return event.get("pivot", false)) or not BEngine.waiting_for(state, 0) or BEngine.waiting_for(state, 1):
+		return false
+	if state["turn"] != 1 or opponent["pp"]["Earthquake"] != earthquake_pp or outgoing["hp"] != original_hp:
+		return false
+	var resumed := BEngine.submit(state, 0, {"k": "swap", "to": 1})
+	var swap_at := resumed.find_custom(func(event): return event["e"] == "swap")
+	var earth_at := resumed.find_custom(func(event): return event["e"] == "use" and event["move"] == "Earthquake")
+	if swap_at < 0 or earth_at <= swap_at or state["turn"] != 2 or opponent["pp"]["Earthquake"] != earthquake_pp - 1:
+		return false
+	if BEngine.active(state, 0)["hp"] != BEngine.active(state, 0)["max"]:
+		return false
+	var slow := BEngine.create([pivot, flyer], [ground], 7)
+	var slow_user := BEngine.active(slow, 0)
+	slow_user["stats"]["spe"] = 1
+	BEngine.submit(slow, 0, {"k": "move", "id": "U-turn"})
+	BEngine.submit(slow, 1, {"k": "move", "id": "Earthquake"})
+	if not BEngine.view(slow, 0)["pivotSwitch"] or slow_user["hp"] >= slow_user["max"] or slow["turn"] != 1:
+		return false
+	BEngine.submit(slow, 0, {"k": "swap", "to": 1})
+	var blocked := BEngine.create([pivot, flyer], [ground], 7)
+	BEngine.submit(blocked, 0, {"k": "move", "id": "U-turn"})
+	BEngine.submit(blocked, 1, {"k": "move", "id": "Protect"})
+	if BEngine.view(blocked, 0)["pivotSwitch"] or blocked["turn"] != 2:
+		return false
+	var alone := BEngine.create([pivot], [ground], 7)
+	BEngine.submit(alone, 0, {"k": "move", "id": "U-turn"})
+	BEngine.submit(alone, 1, {"k": "move", "id": "Earthquake"})
+	return alone["turn"] == 2 and not BEngine.view(alone, 0)["pivotSwitch"]
+
+func _pivot_variants_test() -> bool:
+	var bench := {"species": "charizard", "moves": ["Protect"]}
+	var defender := {"species": "garchomp", "moves": ["Earthquake"]}
+	for skill in ["Volt Switch", "Flip Turn"]:
+		var user := {"species": "raichu", "moves": [skill]}
+		var foe := defender if skill == "Flip Turn" else {"species": "scizor", "moves": ["Iron Head"]}
+		var state := BEngine.create([user, bench], [foe], 7)
+		BEngine.active(state, 0)["stats"]["spe"] = 999
+		BEngine.submit(state, 0, {"k": "move", "id": skill})
+		BEngine.submit(state, 1, {"k": "move", "id": foe["moves"][0]})
+		if not BEngine.view(state, 0)["pivotSwitch"]:
+			return false
+		BEngine.submit(state, 0, {"k": "swap", "to": 1})
+		if int(state["turn"]) != 2:
+			return false
+	var grounded := BEngine.create([{"species": "raichu", "moves": ["Volt Switch"]}, bench], [defender], 7)
+	BEngine.submit(grounded, 0, {"k": "move", "id": "Volt Switch"})
+	BEngine.submit(grounded, 1, {"k": "move", "id": "Earthquake"})
+	if BEngine.view(grounded, 0)["pivotSwitch"]:
+		return false
+	var absorber := {"species": "pawmot", "ability": "Volt Absorb", "moves": ["Iron Head"]}
+	var absorbed := BEngine.create([{"species": "raichu", "moves": ["Volt Switch"]}, bench], [absorber], 7)
+	var absorbing_mon := BEngine.active(absorbed, 1)
+	var recovery := floori(float(absorbing_mon["max"]) / 4.0)
+	absorbing_mon["hp"] -= recovery + 1
+	BEngine.submit(absorbed, 0, {"k": "move", "id": "Volt Switch"})
+	BEngine.submit(absorbed, 1, {"k": "move", "id": "Iron Head"})
+	if BEngine.view(absorbed, 0)["pivotSwitch"] or int(absorbing_mon["hp"]) != int(absorbing_mon["max"]) - 1:
+		return false
+	var taunt := {"species": "incineroar", "moves": ["Parting Shot"]}
+	for ability in ["Clear Body", "Soundproof"]:
+		var receiver := {"species": "garchomp", "ability": ability, "moves": ["Earthquake"]}
+		var blocked := BEngine.create([taunt, bench], [receiver], 7)
+		BEngine.active(blocked, 0)["stats"]["spe"] = 999
+		BEngine.submit(blocked, 0, {"k": "move", "id": "Parting Shot"})
+		BEngine.submit(blocked, 1, {"k": "move", "id": "Earthquake"})
+		if BEngine.view(blocked, 0)["pivotSwitch"] or BEngine.active(blocked, 1)["atk"] != 0:
+			return false
+	var bounce := {"species": "garchomp", "ability": "Magic Bounce", "moves": ["Earthquake"]}
+	var reflected := BEngine.create([taunt, bench], [bounce, bench], 7)
+	var actor := BEngine.active(reflected, 0)
+	var bouncer := BEngine.active(reflected, 1)
+	actor["stats"]["spe"] = 999
+	BEngine.submit(reflected, 0, {"k": "move", "id": "Parting Shot"})
+	BEngine.submit(reflected, 1, {"k": "move", "id": "Earthquake"})
+	if not BEngine.view(reflected, 1)["pivotSwitch"] or actor["atk"] != -1 or actor["spa"] != -1:
+		return false
+	BEngine.submit(reflected, 1, {"k": "swap", "to": 1})
+	return int(reflected["turn"]) == 2 and bouncer["pp"]["Earthquake"] == BEngine.max_pp(Net.SET_ID, "Earthquake")
+
+func _daeul_two_test() -> bool:
+	var team := Data.team(Net.SET_ID, "daeul-2")
+	if team.is_empty():
+		return false
+	var members: Array = team["members"]
+	if members.size() != 6:
+		return false
+	var state := BEngine.create(members, members, 7)
+	for mon: Dictionary in state["sides"][0]["mons"]:
+		if mon["moves"].size() != 4:
+			return false
+	var events := []
+	var closer := BEngine.active(state, 0)
+	for fainted in [0, 2, 5]:
+		state["sides"][0]["faints"] = fainted
+		if BEngine.preview_move(state, closer, "Last Respects", "")["power"] != 50 * (fainted + 1):
+			return false
+	BEngine._swap(state, 0, 5, events)
+	BEngine._use(state, 0, "Reflect", events)
+	BEngine._use(state, 0, "Light Screen", events)
+	var side: Dictionary = state["sides"][0]
+	if int(side.get("reflect", 0)) != 8 or int(side.get("lightScreen", 0)) != 8:
+		return false
+	BEngine._swap(state, 0, 1, events)
+	BEngine._transform(state, 0, "mega", events)
+	var charizard := BEngine.active(state, 0)
+	if state["weather"] != "쾌청" or charizard["ability"] != "Drought":
+		return false
+	BEngine._use(state, 0, "Solar Beam", events)
+	return not charizard.has("charge") and charizard["pp"]["Solar Beam"] == BEngine.max_pp(Net.SET_ID, "Solar Beam") - 1
+
 func _nangman_test() -> bool:
 	var team := Data.team(Net.SET_ID, "nangman")
 	var members: Array = team["members"]
-	if Data.sets[Net.SET_ID]["teams"][0]["id"] != "nangman" or members.size() != 6:
+	if members.size() != 6:
 		return false
 	for member: Dictionary in members:
 		var match_state := BEngine.create([member], [members[0]], 7)
@@ -401,8 +523,231 @@ func _team_profile_test() -> bool:
 	BEngine._end_turn(speed, 0, events)
 	return BEngine.active(speed, 0)["spe"] == 1
 
+func _late_substitute_test() -> bool:
+	var defender := {"species": "blastoise", "moves": ["Substitute"]}
+	for scenario in ["success", "low_hp", "flinch"]:
+		var skill := "Fake Out" if scenario == "flinch" else "Earthquake"
+		var attacker := {"species": "garchomp", "moves": [skill]}
+		var state := BEngine.create([attacker], [defender], 7)
+		var mon := BEngine.active(state, 1)
+		var cost := floori(float(mon["max"]) / 4.0)
+		var initial_pp := int(mon["pp"]["Substitute"])
+		BEngine.active(state, 0)["stats"]["atk"] = 35
+		if scenario == "low_hp":
+			mon["hp"] = cost + 1
+		BEngine.submit(state, 0, {"k": "move", "id": skill})
+		var events := BEngine.submit(state, 1, {"k": "move", "id": "Substitute"})
+		var hp_after_hit := -1
+		var expected_status := "풀죽어서 움직이지 못했다" if scenario == "flinch" else "대타출동에 필요한 HP가 부족하다"
+		var outcome_seen := false
+		for event in events:
+			if event.get("seat", -1) != 1:
+				continue
+			if event["e"] == "dmg":
+				hp_after_hit = int(event["hp"])
+			if scenario == "success" and event["e"] == "substitute":
+				outcome_seen = hp_after_hit > cost and int(event["userHp"]) == hp_after_hit - cost
+			if scenario != "success" and event["e"] == "status" and event["what"] == expected_status:
+				outcome_seen = hp_after_hit > 0
+		var expected_pp := initial_pp if scenario == "flinch" else initial_pp - 1
+		if not outcome_seen or int(mon.get("substitute", 0)) != (cost if scenario == "success" else 0) or int(mon["pp"]["Substitute"]) != expected_pp:
+			print("[selftest] 후공 대타출동 오류 (%s)" % scenario)
+			return false
+	return true
+
+func _move_order_test() -> bool:
+	for scenario in ["normal", "trick_room", "prankster", "higher_priority"]:
+		var opponent_move := "Fake Out" if scenario == "higher_priority" else "Earthquake"
+		var caster := {"species": "blastoise", "moves": ["Will-O-Wisp"]}
+		var attacker := {"species": "garchomp", "moves": [opponent_move]}
+		var state := BEngine.create([caster], [attacker], 7)
+		BEngine.active(state, 0)["stats"]["spe"] = 50
+		BEngine.active(state, 1)["stats"]["spe"] = 150
+		if scenario == "prankster" or scenario == "higher_priority":
+			BEngine.active(state, 0)["ability"] = "Prankster"
+		if scenario == "trick_room":
+			state["trickRoom"] = 2
+		BEngine.submit(state, 0, {"k": "move", "id": "Will-O-Wisp"})
+		var events := BEngine.submit(state, 1, {"k": "move", "id": opponent_move})
+		var expected := ["Will-O-Wisp", opponent_move]
+		if scenario == "normal":
+			expected.reverse()
+		elif scenario == "higher_priority":
+			expected = [opponent_move]
+		var move_order: Array = []
+		for event in events:
+			if event["e"] == "use":
+				move_order.append(event["move"])
+		if move_order != expected:
+			print("[selftest] 도깨비불 행동 순서 오류 (%s): %s" % [scenario, str(move_order)])
+			return false
+	return true
+
+func _priority_guard_test() -> bool:
+	var attacker := {"species": "raichu", "moves": ["Feint", "Quick Attack"]}
+	var defender := {"species": "blastoise", "moves": ["Protect", "Quick Guard"]}
+	for scenario in ["Protect", "Quick Guard", "Max Guard", "Psychic Terrain"]:
+		var state := BEngine.create([attacker], [defender], 7)
+		var foe := BEngine.active(state, 1)
+		var initial_hp := int(foe["hp"])
+		var events := []
+		match scenario:
+			"Max Guard":
+				foe["guard"] = true
+				foe["guardMove"] = "max"
+			"Psychic Terrain":
+				state["terrain"] = "사이코필드"
+			_:
+				BEngine._use(state, 1, scenario, events)
+		if scenario == "Quick Guard":
+			BEngine._use(state, 0, "Quick Attack", events)
+			if int(foe["hp"]) != initial_hp:
+				return false
+		BEngine._use(state, 0, "Feint", events)
+		if (int(foe["hp"]) < initial_hp) != (scenario != "Psychic Terrain"):
+			return false
+		if foe["guard"] != (scenario == "Max Guard") or foe.get("quickGuard", false):
+			return false
+	return true
+
+func _trick_room_team_test() -> bool:
+	var team := Data.team(Net.SET_ID, "trick-room")
+	if team.is_empty() or Data.sets[Net.SET_ID]["teams"][0]["id"] != "trick-room":
+		return false
+	var members: Array = team["members"]
+	var target := {"species": "garchomp", "moves": ["Earthquake"]}
+	var state := BEngine.create(members.slice(0, 3), [target], 7, Net.SET_ID, true)
+	var lead := BEngine.active(state, 0)
+	var air := BEngine.preview_move(state, lead, "Air Slash", "gmax")
+	if "gmax" not in BEngine.view(state, 0)["gimmicks"] or air["ko"] != "다이제트" or air["power"] != 130:
+		return false
+	BEngine._transform(state, 0, "gmax", [])
+	if lead["form"] != "base" or lead["max"] != lead["stats"]["hp"] * 2:
+		return false
+	var lapras := BEngine.create([members[3]], [target], 7, Net.SET_ID, true)
+	BEngine._transform(lapras, 0, "gmax", [])
+	BEngine._use(lapras, 0, "Freeze-Dry", [])
+	if lapras["sides"][0].get("auroraVeil", 0) != 5 or lapras["weather"] != "":
+		return false
+	var trap := BEngine.create([members[1], members[2]], [target], 7)
+	BEngine._use(trap, 0, "Trick Room", [])
+	if trap["trickRoom"] != 5:
+		return false
+	var mimic := BEngine.active(trap, 0)
+	BEngine._use(trap, 0, "Curse", [])
+	if mimic["hp"] >= mimic["max"] or not BEngine.active(trap, 1).get("cursed", false):
+		return false
+	var rend_damage: Array = []
+	for already_acted in [false, true]:
+		var rend := BEngine.create([members[2]], [target], 7)
+		var attacker := BEngine.active(rend, 0)
+		var foe := BEngine.active(rend, 1)
+		foe["acted"] = already_acted
+		foe["max"] = 1000
+		foe["hp"] = 1000
+		BEngine._use(rend, 0, "Fishious Rend", [])
+		if attacker["choiceMove"] != "Fishious Rend":
+			return false
+		rend_damage.append(1000 - foe["hp"])
+	return rend_damage[0] > rend_damage[1] and rend_damage[1] > 0
+
+func _trick_room_duration_test() -> bool:
+	var slow := {"species": "mimikyu", "moves": ["Trick Room", "Swords Dance"]}
+	var fast := {"species": "raichu", "moves": ["Nasty Plot", "Quick Attack"]}
+	var state := BEngine.create([slow], [fast], 7)
+	BEngine.active(state, 0)["stats"]["spe"] = 70
+	BEngine.active(state, 1)["stats"]["spe"] = 180
+	for round_index in 6:
+		var slow_move := "Trick Room" if round_index == 0 else "Swords Dance"
+		var fast_move := "Quick Attack" if round_index == 2 else "Nasty Plot"
+		BEngine.submit(state, 0, {"k": "move", "id": slow_move})
+		var events := BEngine.submit(state, 1, {"k": "move", "id": fast_move})
+		var moves := events.filter(func(event): return event["e"] == "use")
+		var first := 1 if round_index in [0, 2, 5] else 0
+		if moves.size() != 2 or moves[0]["seat"] != first or state["trickRoom"] != maxi(0, 4 - round_index):
+			return false
+		if round_index == 4 and not events.any(func(event): return event.get("key") == "trickRoom" and event["turns"] == 0):
+			return false
+	BEngine._use(state, 0, "Trick Room", [])
+	BEngine._use(state, 0, "Trick Room", [])
+	return state["trickRoom"] == 0 and not state["effectSources"].has("trickRoom")
+
+func _face_forms_test() -> bool:
+	var attacker := {"species": "garchomp", "moves": ["Earthquake", "Flamethrower"]}
+	var mimic := {"species": "mimikyu", "moves": ["Trick Room"]}
+	var ice := {"species": "eiscue", "moves": ["Snowscape"]}
+	var team := Data.team(Net.SET_ID, "form-practice")
+	if team.is_empty() or team["members"].size() != 6:
+		return false
+	for species_form in [["mimikyu", "busted"], ["eiscue", "base"], ["eiscue", "noice"]]:
+		var file := str(Data.form(Net.SET_ID, species_form[0], species_form[1]).get("file", ""))
+		if int(Data.sprite_meta(Net.SET_ID, file, false).get("frames", 0)) < 2:
+			return false
+	var state := BEngine.create([attacker], [mimic, ice], 7)
+	var target := BEngine.active(state, 1)
+	var hp := int(target["hp"])
+	var events := []
+	BEngine._use(state, 0, "Flamethrower", events)
+	if target["form"] != "busted" or target["hp"] != hp - floori(hp / 8.0) or not events.any(func(event): return event.get("effect") == "disguise_break"):
+		return false
+	BEngine._swap(state, 1, 1, [])
+	BEngine._swap(state, 1, 0, [])
+	if target["form"] != "busted":
+		return false
+	BEngine._swap(state, 1, 1, [])
+	target = BEngine.active(state, 1)
+	var ice_speed := int(target["stats"]["spe"])
+	BEngine._use(state, 0, "Flamethrower", [])
+	if target["form"] != "base" or target["hp"] >= target["max"]:
+		return false
+	hp = int(target["hp"])
+	BEngine._use(state, 0, "Earthquake", events)
+	if target["form"] != "noice" or target["hp"] != hp or target["stats"]["spe"] <= ice_speed or not events.any(func(event): return event.get("effect") == "ice_break"):
+		return false
+	BEngine._use(state, 1, "Snowscape", events)
+	if target["form"] != "base" or target["stats"]["spe"] != ice_speed or not events.any(func(event): return event.get("effect") == "ice_restore"):
+		return false
+	BEngine._use(state, 0, "Earthquake", [])
+	BEngine._end_turn(state, 1, [])
+	if target["form"] != "noice":
+		return false
+	BEngine._swap(state, 1, 0, [])
+	BEngine._swap(state, 1, 1, [])
+	if target["form"] != "base":
+		return false
+	attacker["ability"] = "Mold Breaker"
+	for member in [mimic, ice]:
+		var bypass := BEngine.create([attacker], [member], 7)
+		var defender := BEngine.active(bypass, 1)
+		BEngine._use(bypass, 0, "Earthquake", [])
+		if defender["form"] != "base" or defender["hp"] >= defender["max"]:
+			return false
+	return true
+
 func _selftest() -> void:
 	var fails := 0
+	if not _trick_room_duration_test():
+		print("[selftest] 트릭룸 순서 또는 종료 오류")
+		fails += 1
+	if not _face_forms_test():
+		print("[selftest] 탈 또는 아이스페이스 폼 전환 오류")
+		fails += 1
+	if not _trick_room_team_test():
+		print("[selftest] 트릭룸 덱 또는 다이맥스 판정 오류")
+		fails += 1
+	if not _priority_guard_test():
+		print("[selftest] 선공기 및 방어 기술 상호작용 오류")
+		fails += 1
+	if not _move_order_test():
+		fails += 1
+	if not _late_substitute_test():
+		fails += 1
+	if not _pivot_test() or not _pivot_variants_test():
+		print("[selftest] 유턴 및 같은 턴 교체 판정 오류")
+		fails += 1
+	if not _daeul_two_test():
+		print("[selftest] 다을 2 팀 또는 후반 운영 오류")
+		fails += 1
 	if not _nangman_test():
 		print("[selftest] 낭만 팀 또는 신규 효과 오류")
 		fails += 1
@@ -589,8 +934,9 @@ func _audit_visible_controls(screen_name: String) -> void:
 		if rect.position.x < viewport.position.x - 2.0 or rect.end.x > viewport.end.x + 2.0:
 			push_error("[ui-overflow] %s %s %s %s" % [screen_name, node.name, rect, viewport])
 
-func _shot(name: String) -> void:
-	await _wait(0.6)
+func _shot(name: String, delay := 0.6) -> void:
+	if delay > 0.0:
+		await _wait(delay)
 	await RenderingServer.frame_post_draw
 	_audit_visible_controls(name)
 	var dir := "user://"
@@ -724,6 +1070,32 @@ func _shots() -> void:
 		if event["e"] == "field":
 			await screen._play(event, BEngine.view(room_demo, 0))
 	assert(screen._b["trickRoom"] == 0 and screen._conditions.get_child_count() == 1)
+	var face_attacker := {"species": "garchomp", "moves": ["Earthquake"]}
+	for face_species in ["mimikyu", "eiscue"]:
+		var face_demo := BEngine.create([face_attacker], [{"species": face_species, "moves": ["Snowscape"]}], 7)
+		screen._b = BEngine.view(face_demo, 0)
+		screen._draw_all()
+		var face_events := []
+		BEngine._use(face_demo, 0, "Earthquake", face_events)
+		for event in face_events:
+			if event.get("effect") in ["disguise_break", "ice_break"]:
+				screen._play(event, BEngine.view(face_demo, 0))
+				await _wait(0.44)
+				await _shot(face_species + "_face_break", 0.0)
+				await _wait(0.46)
+				assert(screen._active(1)["form"] == event["mon"]["form"])
+			elif event["e"] == "dmg":
+				await screen._play(event, BEngine.view(face_demo, 0))
+		if face_species == "eiscue":
+			face_events.clear()
+			BEngine._use(face_demo, 1, "Snowscape", face_events)
+			for event in face_events:
+				if event.get("effect") == "ice_restore":
+					screen._play(event, BEngine.view(face_demo, 0))
+					await _wait(0.44)
+					assert(screen._active(1)["form"] == "base")
+					await _shot("eiscue_face_restored", 0.0)
+					await _wait(0.46)
 	var caster := { "species": "espathra", "moves": ["Lumina Crash"] }
 	var target := { "species": "pelipper", "moves": ["Protect"] }
 	var rank_demo := BEngine.create([caster], [target], 7)

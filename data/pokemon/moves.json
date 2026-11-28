@@ -3179,6 +3179,137 @@
         }
       ],
       "power": 90
+    },
+    "Fishious Rend": {
+      "ko": "아가미물기",
+      "en": "Fishious Rend",
+      "type": "물",
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "power": 85,
+      "accuracy": 100,
+      "priority": 0,
+      "pp": 10,
+      "desc": "상대보다 먼저 공격하거나 교체로 나오는 상대를 공격하면 위력이 두 배가 됩니다.",
+      "contact": true,
+      "bite": true,
+      "doublesBeforeTarget": true
+    },
+    "Bolt Beak": {
+      "ko": "전격부리",
+      "en": "Bolt Beak",
+      "type": "전기",
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "power": 85,
+      "accuracy": 100,
+      "priority": 0,
+      "pp": 10,
+      "desc": "상대보다 먼저 공격하거나 교체로 나오는 상대를 공격하면 위력이 두 배가 됩니다.",
+      "contact": true,
+      "doublesBeforeTarget": true
+    },
+    "Freeze-Dry": {
+      "ko": "프리즈드라이",
+      "en": "Freeze-Dry",
+      "type": "얼음",
+      "category": "attack",
+      "damageClass": "special",
+      "target": "normal",
+      "power": 70,
+      "accuracy": 100,
+      "priority": 0,
+      "pp": 20,
+      "desc": "물 타입에 효과가 굉장하며 얼릴 수 있습니다.",
+      "freezeDry": true,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "얼음",
+          "chance": 10
+        }
+      ]
+    },
+    "Fire Fang": {
+      "ko": "불꽃엄니",
+      "en": "Fire Fang",
+      "type": "불꽃",
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "power": 65,
+      "accuracy": 95,
+      "priority": 0,
+      "pp": 15,
+      "desc": "상대를 화상에 걸리게 하거나 풀죽게 할 수 있습니다.",
+      "contact": true,
+      "bite": true,
+      "effects": [
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 10
+        },
+        {
+          "kind": "flinch",
+          "chance": 10
+        }
+      ]
+    },
+    "Psychic Fangs": {
+      "ko": "사이코팽",
+      "en": "Psychic Fangs",
+      "type": "에스퍼",
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "power": 85,
+      "accuracy": 100,
+      "priority": 0,
+      "pp": 10,
+      "desc": "상대 진영의 장막을 걷어냅니다.",
+      "contact": true,
+      "bite": true
+    },
+    "Curse": {
+      "ko": "저주",
+      "en": "Curse",
+      "type": "고스트",
+      "category": "support",
+      "damageClass": "status",
+      "target": "normal",
+      "alwaysHit": true,
+      "accuracy": 100,
+      "priority": 0,
+      "pp": 10,
+      "desc": "고스트 타입 사용자는 HP를 절반 잃고, 상대에게 매 턴 피해를 주는 저주를 겁니다.",
+      "effects": [
+        {
+          "kind": "curse"
+        }
+      ]
+    },
+    "Dragon Rush": {
+      "ko": "드래곤다이브",
+      "en": "Dragon Rush",
+      "type": "드래곤",
+      "category": "attack",
+      "damageClass": "physical",
+      "target": "normal",
+      "power": 100,
+      "accuracy": 75,
+      "priority": 0,
+      "pp": 10,
+      "desc": "상대를 풀죽게 할 수 있습니다.",
+      "contact": true,
+      "effects": [
+        {
+          "kind": "flinch",
+          "chance": 20
+        }
+      ]
     }
   },
   "items": {
@@ -3377,6 +3508,22 @@
     "Eviolite": {
       "ko": "진화의휘석",
       "desc": "진화할 수 있는 포켓몬의 방어와 특수방어를 1.5배로 높입니다."
+    },
+    "Throat Spray": {
+      "ko": "목스프레이",
+      "desc": "소리 기술 사용 시 특수공격이 1랭크 오릅니다."
+    },
+    "Kee Berry": {
+      "ko": "악키열매",
+      "desc": "물리 공격에 맞으면 방어가 1랭크 오릅니다."
+    },
+    "Weakness Policy": {
+      "ko": "약점보험",
+      "desc": "효과가 굉장한 기술에 맞으면 공격과 특수공격이 2랭크씩 오릅니다."
+    },
+    "Choice Band": {
+      "ko": "구애머리띠",
+      "desc": "공격이 1.5배가 되고 처음 쓴 기술로 고정됩니다."
     }
   },
   "abilities": {
@@ -3649,6 +3796,22 @@
     "Cheek Pouch": {
       "ko": "볼주머니",
       "desc": "나무열매를 먹으면 열매 효과에 더해 최대 HP의 ⅓을 회복합니다."
+    },
+    "Strong Jaw": {
+      "ko": "옹골찬턱",
+      "desc": "무는 기술의 위력이 1.5배가 됩니다."
+    },
+    "Hustle": {
+      "ko": "의욕",
+      "desc": "물리 공격력이 1.5배가 되고 물리 기술의 명중률은 0.8배가 됩니다."
+    },
+    "Water Absorb": {
+      "ko": "저수",
+      "desc": "물 기술을 받으면 무효로 하고 HP를 회복합니다."
+    },
+    "Ice Face": {
+      "ko": "아이스페이스",
+      "desc": "아이스페이스로 첫 물리 피해를 막습니다. 눈이 시작되거나 눈이 내릴 때 교체로 들어오면 얼음이 복구됩니다."
     }
   },
   "practiceSets": {

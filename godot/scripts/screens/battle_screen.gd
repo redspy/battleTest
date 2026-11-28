@@ -506,7 +506,7 @@ func _pokemon_status(mon: Dictionary) -> String:
 	if int(mon.get("substitute", 0)) > 0:
 		effects.append("대타출동")
 	if int(mon.get("gmaxTurns", 0)) > 0:
-		effects.append(_timed_effect("거다이맥스", int(mon["gmaxTurns"])))
+		effects.append(_timed_effect("거다이맥스" if mon.get("gmax", false) else "다이맥스", int(mon["gmaxTurns"])))
 	return "정상" if effects.is_empty() else " · ".join(effects)
 
 func _draw_side(seat: int) -> void:
@@ -541,9 +541,11 @@ func _draw_side(seat: int) -> void:
 	if mon.get("guard", false): st.append("수비 태세")
 	if mon.get("status", "") != "": st.append(mon["status"])
 	if has_decoy: st.append("대타출동")
+	if mon.get("cursed", false): st.append("저주")
 	if mon.get("terastallized", false): st.append("테라스탈 · " + str(mon["teraType"]))
 	if mon.get("sleep", 0) > 0: st.append("잠듦")
-	if mon.get("gmaxTurns", 0) > 0: st.append("거다이맥스 %d" % int(mon["gmaxTurns"]))
+	if mon.get("gmaxTurns", 0) > 0:
+		st.append("%s %d" % ["거다이맥스" if mon.get("gmax", false) else "다이맥스", int(mon["gmaxTurns"])])
 	for k in Data.BATTLE_RANKS:
 		if int(mon.get(k, 0)) != 0:
 			st.append("%s %+d" % [STAT_KO[k], int(mon[k])])
@@ -643,7 +645,7 @@ func _draw_actions() -> void:
 		return
 	var need: bool = _b["sides"][_me]["need"]
 	if need:
-		_log.text = "다음에 내보낼 몬스터를 고르세요."
+		_log.text = "기술 사용 후 교체할 포켓몬을 고르세요." if _b.get("pivotSwitch", false) else "다음에 내보낼 몬스터를 고르세요."
 	var foe := _active(1 - _me)
 	var me := _active(_me)
 	var options: Array = _b.get("gimmicks", [])
@@ -653,7 +655,7 @@ func _draw_actions() -> void:
 		var row := HBoxContainer.new()
 		for option in options:
 			var kind := str(option)
-			var text: String = {"mega": "메가진화", "gmax": "거다이맥스", "tera": "테라스탈"}[kind]
+			var text: String = {"mega": "메가진화", "gmax": "거다이맥스" if me.get("gmax", false) else "다이맥스", "tera": "테라스탈"}[kind]
 			var button := UI.button(text + (" ✓" if kind == _gimmick else ""), 24, kind == _gimmick)
 			button.tapped.connect(func():
 				_gimmick = "" if _gimmick == kind else kind
@@ -895,6 +897,15 @@ func _play(e: Dictionary, final: Dictionary) -> void:
 			_float_text(slot, "+%d" % int(e["amount"]), Color(0.4, 0.9, 0.55))
 			await _wait(0.5)
 		"transform":
+			var effect := str(e.get("effect", ""))
+			match effect:
+				"disguise_break", "ice_break":
+					var tint := Color(0.94, 0.74, 0.98) if effect == "disguise_break" else Color(0.58, 0.88, 1.0)
+					_animate_rank_effect(slot, "self_shell", tint, 0.62)
+					await _wait(0.28)
+				"ice_restore":
+					_animate_rank_effect(slot, "self_ice_restore", Color(0.58, 0.88, 1.0), 0.62)
+					await _wait(0.28)
 			_b["sides"][seat]["mons"][int(_b["sides"][seat]["active"])] = e["mon"].duplicate(true)
 			_draw_side(seat)
 			_log.text = "%s%s · %s" % [_who(seat), _name(seat), e["what"]]

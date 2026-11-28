@@ -14,7 +14,7 @@ const requestedSet = process.argv.find((arg) => arg.startsWith('--set='))?.slice
 const SIZES = { big: { long: 384, maxFrames: 30 }, thumb: { long: 160, maxFrames: 12 } };
 
 async function sheet(src, dst, { long, maxFrames }) {
-  const meta = await sharp(src, { animated: true }).metadata();
+  const meta = await sharp(src).metadata();
   const pages = meta.pages ?? 1, w = meta.width, h = meta.pageHeight ?? meta.height;
   const step = Math.max(1, Math.ceil(pages / maxFrames));
   const idx = []; for (let i = 0; i < pages; i += step) idx.push(i);

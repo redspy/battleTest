@@ -522,6 +522,52 @@
       ]
     },
     {
+      "id": "lapras",
+      "no": 131,
+      "en": "Lapras",
+      "ko": "라프라스",
+      "types": [
+        "물",
+        "얼음"
+      ],
+      "role": "거다이선율과 대타출동",
+      "roleText": "거다이선율과 대타출동",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0131_lapras",
+          "baseStats": {
+            "hp": 130,
+            "atk": 85,
+            "def": 80,
+            "spa": 85,
+            "spd": 95,
+            "spe": 60
+          },
+          "battleAbility": "Water Absorb",
+          "weightKg": 220,
+          "assetSource": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/131.gif"
+        },
+        {
+          "id": "gmax",
+          "label": "거다이맥스",
+          "file": "0131_lapras-gmax",
+          "baseStats": {
+            "hp": 130,
+            "atk": 85,
+            "def": 80,
+            "spa": 85,
+            "spd": 95,
+            "spe": 60
+          },
+          "battleAbility": "Water Absorb",
+          "weightKg": 220,
+          "assetSource": "https://raw.githubusercontent.com/dokkanart/swsh-gifs/master/Generation%208/Lapras_Gigantamax.gif"
+        }
+      ]
+    },
+    {
       "id": "aerodactyl",
       "no": 142,
       "en": "Aerodactyl",
@@ -1184,6 +1230,36 @@
           },
           "battleAbility": "Sand Stream",
           "weightKg": 300.0
+        }
+      ]
+    },
+    {
+      "id": "togekiss",
+      "no": 468,
+      "en": "Togekiss",
+      "ko": "토게키스",
+      "types": [
+        "페어리",
+        "비행"
+      ],
+      "role": "선봉 다이맥스",
+      "roleText": "선봉 다이맥스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0468_togekiss",
+          "baseStats": {
+            "hp": 85,
+            "atk": 50,
+            "def": 95,
+            "spa": 120,
+            "spd": 115,
+            "spe": 80
+          },
+          "battleAbility": "Super Luck",
+          "weightKg": 38,
+          "assetSource": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif"
         }
       ]
     },
@@ -1948,6 +2024,22 @@
           "battleAbility": "Disguise",
           "weightKg": 0.7,
           "assetSource": "https://namu.wiki/w/%EB%94%B0%EB%9D%BC%ED%81%90"
+        },
+        {
+          "id": "busted",
+          "label": "들킨 모습",
+          "file": "0778_mimikyu_busted",
+          "baseStats": {
+            "hp": 55,
+            "atk": 90,
+            "def": 80,
+            "spa": 50,
+            "spd": 105,
+            "spe": 96
+          },
+          "battleAbility": "Disguise",
+          "weightKg": 0.7,
+          "assetSource": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/10143.gif"
         }
       ]
     },
@@ -2058,6 +2150,51 @@
       ]
     },
     {
+      "id": "eiscue",
+      "no": 875,
+      "en": "Eiscue",
+      "ko": "빙큐보",
+      "types": [
+        "얼음"
+      ],
+      "role": "물리 피해 차단과 폼 전환",
+      "roleText": "아이스페이스가 깨지면 내구력이 내려가고 스피드가 오릅니다.",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0875_eiscue_ice",
+          "baseStats": {
+            "hp": 75,
+            "atk": 80,
+            "spa": 65,
+            "spd": 90,
+            "spe": 50,
+            "def": 110
+          },
+          "battleAbility": "Ice Face",
+          "weightKg": 89,
+          "assetSource": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/875.gif"
+        },
+        {
+          "id": "noice",
+          "label": "나이스페이스",
+          "file": "0875_eiscue_noice",
+          "baseStats": {
+            "hp": 75,
+            "atk": 80,
+            "spa": 65,
+            "spd": 50,
+            "spe": 130,
+            "def": 70
+          },
+          "battleAbility": "Ice Face",
+          "weightKg": 89,
+          "assetSource": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/10185.gif"
+        }
+      ]
+    },
+    {
       "id": "indeedee",
       "no": 876,
       "en": "Indeedee",
@@ -2098,6 +2235,66 @@
           },
           "battleAbility": "Own Tempo",
           "weightKg": 28.0
+        }
+      ]
+    },
+    {
+      "id": "dracozolt",
+      "no": 880,
+      "en": "Dracozolt",
+      "ko": "파치래곤",
+      "types": [
+        "전기",
+        "드래곤"
+      ],
+      "role": "물리 다이맥스",
+      "roleText": "물리 다이맥스",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0880_dracozolt",
+          "baseStats": {
+            "hp": 90,
+            "atk": 100,
+            "def": 90,
+            "spa": 80,
+            "spd": 70,
+            "spe": 75
+          },
+          "battleAbility": "Hustle",
+          "weightKg": 190,
+          "assetSource": "https://raw.githubusercontent.com/dokkanart/swsh-gifs/master/Generation%208/Dracozolt.gif"
+        }
+      ]
+    },
+    {
+      "id": "dracovish",
+      "no": 882,
+      "en": "Dracovish",
+      "ko": "어래곤",
+      "types": [
+        "물",
+        "드래곤"
+      ],
+      "role": "트릭룸 마무리",
+      "roleText": "트릭룸 마무리",
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0882_dracovish",
+          "baseStats": {
+            "hp": 90,
+            "atk": 90,
+            "def": 100,
+            "spa": 70,
+            "spd": 80,
+            "spe": 75
+          },
+          "battleAbility": "Strong Jaw",
+          "weightKg": 215,
+          "assetSource": "https://raw.githubusercontent.com/dokkanart/swsh-gifs/master/Generation%208/Dracovish.gif"
         }
       ]
     },

@@ -36,9 +36,359 @@
   ],
   "teams": [
     {
-      "id": "nangman",
+      "id": "trick-room",
       "event": "CUSTOM",
       "rank": 1,
+      "placement": "커스텀",
+      "name": "트릭룸",
+      "tags": [
+        "싱글",
+        "다이맥스",
+        "트릭룸"
+      ],
+      "source": "https://note.com/ngthrk27/n/nebb0eb7d066a",
+      "summary": "소드·실드 싱글 시즌 4 최종 165위 구성에서 출발한 덱입니다. 기본 3인 선출은 토게키스 → 따라큐 → 어래곤입니다. 토게키스가 선봉 다이맥스로 상대를 깎고, 따라큐가 탈로 공격을 버티며 트릭룸을 펼칩니다. 저주로 교체 기회를 만들고 어래곤의 구애머리띠 아가미물기로 마무리합니다. 물 타입과 내구 중심 상대에게는 거다이맥스 라프라스, 전기 압박이 필요하면 파치래곤, 강철과 페어리 대응에는 몰드류를 선봉 후보로 둡니다.",
+      "roles": {
+        "togekiss": "대운과 초점렌즈로 급소 확률을 높이고 다이제트로 선봉 주도권을 잡습니다.",
+        "mimikyu": "탈과 악키열매로 버티며 트릭룸을 펼칩니다. 저주로 상대의 교체를 압박하거나 어래곤이 들어올 틈을 만듭니다.",
+        "dracovish": "용감 성격으로 스피드를 낮추고 옹골찬턱·구애머리띠 아가미물기로 정리합니다. 물 기술이 막힐 때는 다른 기술을 고릅니다.",
+        "lapras": "저수로 물 기술을 받고 프리즈드라이로 물 타입을 압박합니다. 거다이선율은 날씨와 관계없이 오로라베일을 설치합니다.",
+        "dracozolt": "의욕과 생명의구슬로 물리 화력을 높입니다. 다이맥스 중에는 의욕의 명중률 감소를 피합니다.",
+        "excadrill": "다이록으로 모래바람을 만들고 모래헤치기로 스피드를 높입니다. 약점보험과 다이맥스 체력으로 역공을 노립니다."
+      },
+      "members": [
+        {
+          "species": "togekiss",
+          "form": "base",
+          "ability": "Super Luck",
+          "item": "Scope Lens",
+          "moves": [
+            "Air Slash",
+            "Dazzling Gleam",
+            "Flamethrower",
+            "Grass Knot"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "nature": "조심",
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "dynamax": true
+        },
+        {
+          "species": "mimikyu",
+          "form": "base",
+          "ability": "Disguise",
+          "item": "Kee Berry",
+          "moves": [
+            "Play Rough",
+            "Shadow Sneak",
+            "Trick Room",
+            "Curse"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "dracovish",
+          "form": "base",
+          "ability": "Strong Jaw",
+          "item": "Choice Band",
+          "moves": [
+            "Fishious Rend",
+            "Crunch",
+            "Psychic Fangs",
+            "Dragon Rush"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "용감",
+            "boost": "atk",
+            "reduce": "spe"
+          }
+        },
+        {
+          "species": "lapras",
+          "form": "base",
+          "ability": "Water Absorb",
+          "item": "Throat Spray",
+          "moves": [
+            "Sparkling Aria",
+            "Freeze-Dry",
+            "Thunderbolt",
+            "Substitute"
+          ],
+          "training": {
+            "points": {
+              "hp": 6,
+              "atk": 0,
+              "def": 12,
+              "spa": 32,
+              "spd": 6,
+              "spe": 10
+            },
+            "nature": "조심",
+            "boost": "spa",
+            "reduce": "atk"
+          }
+        },
+        {
+          "species": "dracozolt",
+          "form": "base",
+          "ability": "Hustle",
+          "item": "Life Orb",
+          "moves": [
+            "Aerial Ace",
+            "Bolt Beak",
+            "Dragon Claw",
+            "Fire Fang"
+          ],
+          "training": {
+            "points": {
+              "hp": 0,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "dynamax": true
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "ability": "Sand Rush",
+          "item": "Weakness Policy",
+          "moves": [
+            "Earthquake",
+            "Iron Head",
+            "Rock Slide",
+            "Brick Break"
+          ],
+          "training": {
+            "points": {
+              "hp": 6,
+              "atk": 23,
+              "def": 18,
+              "spa": 0,
+              "spd": 1,
+              "spe": 18
+            },
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "dynamax": true
+        }
+      ]
+    },
+    {
+      "id": "daeul-2",
+      "event": "CUSTOM",
+      "rank": 1,
+      "placement": "커스텀",
+      "name": "다을 2",
+      "tags": [
+        "싱글",
+        "장막",
+        "후반 정리"
+      ],
+      "summary": "라이츄의 장막이나 한카리아스의 스텔스록으로 판을 만들고, 메가리자몽 Y 또는 강철 어태커로 상대를 깎은 뒤 수컷 대쓰여너의 성묘로 마무리하는 팀입니다. 3인 기본 선출은 한카리아스 → 메가리자몽 Y → 대쓰여너입니다. 랭크업이 통하기 쉬우면 라이츄 → 루카리오 → 대쓰여너를, 빠른 페어리나 물리 상대가 많으면 핫삼을 고려하세요. 6인전에서는 상대에 따라 라이츄나 한카리아스를 선봉으로 두고 대쓰여너를 후반까지 남깁니다. 리자몽의 쾌청이 남아 있으면 대쓰여너의 물 기술은 약해지므로 성묘나 교체를 먼저 고려하세요.",
+      "roles": {
+        "basculegion": "수컷 대쓰여너가 구애스카프와 적응력으로 후반을 정리합니다. 성묘는 아군이 기절할 때마다 위력이 50씩 오릅니다. 구애로 기술이 고정되므로 노말 타입이 남았으면 성묘를 서두르지 않습니다.",
+        "charizard": "메가진화 후 가뭄으로 화염방사를 강화하고 솔라빔을 충전 없이 사용합니다. 에어슬래시와 기합구슬로 견제 범위를 넓힙니다. 쾌청 중에는 대쓰여너의 물 기술도 약해지므로 교체 전에 남은 턴을 확인합니다.",
+        "garchomp": "스텔스록을 깔고 암석봉인으로 상대를 늦춥니다. 까칠한피부와 울퉁불퉁멧으로 접촉 공격을 압박하며 전기 공격을 무효로 받아낼 수 있습니다.",
+        "lucario": "장막 뒤에서 칼춤을 쓰고 인파이트로 노말·강철·악 타입을 압박합니다. 신속으로 약해진 상대를 정리하고 깨물어부수기로 고스트 타입을 노립니다.",
+        "scizor": "테크니션 불릿펀치로 빠른 상대와 페어리를 정리합니다. 느린 유턴으로 후속을 내보내거나 탁쳐서떨구기로 상대 도구를 없앱니다. 불꽃 공격, 특히 쾌청이 남은 상황에서는 교체를 서두르지 않습니다.",
+        "raichu": "피뢰침으로 전기 공격을 받아내고, 빛의점토로 물리·특수 장막을 각각 8턴 유지합니다. 앙코르로 변화기를 고정하고 볼트체인지로 후속에게 넘깁니다."
+      },
+      "members": [
+        {
+          "species": "basculegion",
+          "form": "base",
+          "ability": "Adaptability",
+          "item": "Choice Scarf",
+          "moves": [
+            "Last Respects",
+            "Wave Crash",
+            "Aqua Jet",
+            "Flip Turn"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        },
+        {
+          "species": "charizard",
+          "form": "megay",
+          "ability": "Blaze",
+          "item": "Charizardite Y",
+          "moves": [
+            "Flamethrower",
+            "Solar Beam",
+            "Air Slash",
+            "Focus Blast"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        },
+        {
+          "species": "garchomp",
+          "form": "base",
+          "ability": "Rough Skin",
+          "item": "Rocky Helmet",
+          "moves": [
+            "Stealth Rock",
+            "Earthquake",
+            "Rock Tomb",
+            "Dragon Claw"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 2,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        },
+        {
+          "species": "lucario",
+          "form": "base",
+          "ability": "Inner Focus",
+          "item": "Life Orb",
+          "moves": [
+            "Swords Dance",
+            "Close Combat",
+            "Extreme Speed",
+            "Crunch"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        },
+        {
+          "species": "scizor",
+          "form": "base",
+          "ability": "Technician",
+          "item": "Leftovers",
+          "moves": [
+            "Bullet Punch",
+            "U-turn",
+            "Swords Dance",
+            "Knock Off"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant"
+          }
+        },
+        {
+          "species": "raichu",
+          "form": "base",
+          "ability": "Lightning Rod",
+          "item": "Light Clay",
+          "moves": [
+            "Reflect",
+            "Light Screen",
+            "Encore",
+            "Volt Switch"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nangman",
+      "event": "CUSTOM",
+      "rank": 2,
       "placement": "커스텀",
       "name": "낭만",
       "tags": [
@@ -211,7 +561,7 @@
     {
       "id": "soeul",
       "event": "CUSTOM",
-      "rank": 2,
+      "rank": 3,
       "placement": "커스텀",
       "name": "소을",
       "tags": [
@@ -384,7 +734,7 @@
     {
       "id": "daeul",
       "event": "CUSTOM",
-      "rank": 3,
+      "rank": 4,
       "placement": "커스텀",
       "name": "다을",
       "tags": [
@@ -557,7 +907,7 @@
     {
       "id": "mechanics-practice",
       "event": "CUSTOM",
-      "rank": 4,
+      "rank": 5,
       "placement": "규칙 실습",
       "name": "전투 규칙 실습",
       "tags": [
@@ -704,6 +1054,169 @@
             }
           },
           "teraType": "강철"
+        }
+      ]
+    },
+    {
+      "id": "form-practice",
+      "event": "CUSTOM",
+      "rank": 6,
+      "placement": "규칙 실습",
+      "name": "폼 변화 실습",
+      "tags": [
+        "싱글",
+        "눈",
+        "폼 변화"
+      ],
+      "summary": "빙큐보의 아이스페이스와 따라큐의 탈을 실습합니다. 빙큐보로 물리 공격을 받아 나이스페이스가 된 뒤 설경을 써서 복구하거나, 눈이 내릴 때 교체로 다시 내보내세요. 상대 팀의 몰드류처럼 틀깨기 특성을 가진 포켓몬은 두 보호 효과를 무시합니다.",
+      "members": [
+        {
+          "species": "eiscue",
+          "form": "base",
+          "ability": "Ice Face",
+          "item": "Sitrus Berry",
+          "moves": [
+            "Icicle Crash",
+            "Liquidation",
+            "Snowscape",
+            "Protect"
+          ],
+          "training": {
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa",
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0,
+              "def": 2
+            }
+          }
+        },
+        {
+          "species": "mimikyu",
+          "form": "base",
+          "ability": "Disguise",
+          "item": "Kee Berry",
+          "moves": [
+            "Play Rough",
+            "Shadow Sneak",
+            "Trick Room",
+            "Curse"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa"
+          }
+        },
+        {
+          "species": "froslass",
+          "form": "base",
+          "ability": "Cursed Body",
+          "item": "Light Clay",
+          "moves": [
+            "Snowscape",
+            "Aurora Veil",
+            "Shadow Ball",
+            "Ice Beam"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "excadrill",
+          "form": "base",
+          "ability": "Mold Breaker",
+          "item": "Focus Sash",
+          "moves": [
+            "Earthquake",
+            "Iron Head",
+            "Rock Slide",
+            "Brick Break"
+          ],
+          "training": {
+            "points": {
+              "hp": 6,
+              "atk": 23,
+              "def": 18,
+              "spa": 0,
+              "spd": 1,
+              "spe": 18
+            },
+            "nature": "고집",
+            "boost": "atk",
+            "reduce": "spa"
+          },
+          "dynamax": true
+        },
+        {
+          "species": "blastoise",
+          "form": "base",
+          "ability": "Torrent",
+          "item": "Heavy-Duty Boots",
+          "moves": [
+            "Rapid Spin",
+            "Substitute",
+            "Hydro Pump",
+            "Ice Beam"
+          ],
+          "training": {
+            "nature": "hardy",
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32,
+              "def": 0
+            }
+          }
+        },
+        {
+          "species": "togekiss",
+          "form": "base",
+          "ability": "Super Luck",
+          "item": "Scope Lens",
+          "moves": [
+            "Air Slash",
+            "Dazzling Gleam",
+            "Flamethrower",
+            "Grass Knot"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "nature": "조심",
+            "boost": "spa",
+            "reduce": "atk"
+          },
+          "dynamax": true
         }
       ]
     },

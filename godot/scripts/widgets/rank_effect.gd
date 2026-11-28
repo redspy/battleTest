@@ -122,6 +122,13 @@ func _draw_self(fade: float) -> void:
 					var angle := TAU * i / 12.0 + 0.12 * sin(float(i) * 2.0)
 					var point := center + Vector2.from_angle(angle) * (39.0 + 71.0 * burst)
 					_shard(point, 5.0 + (i % 3) * 3.0, angle + p * 5.0, ink)
+		"self_ice_restore":
+			var radius := lerpf(102.0, 22.0, smoothstep(0.0, 0.72, p))
+			for i in 10:
+				var angle := TAU * i / 10.0 + p
+				_shard(center + Vector2.from_angle(angle) * radius, 5.0 + i % 3, angle, ink)
+			if p > 0.43:
+				_ellipse(center, Vector2(50, 58), Color(tint, fade), 3.0)
 		"self_plates":
 			for i in 3:
 				var travel := smoothstep(float(i) * 0.08, 0.7, p)

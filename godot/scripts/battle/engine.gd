@@ -37,7 +37,7 @@ static func create(picks0: Array, picks1: Array, rng_seed: int, set_id: String =
 				pp[id_move] = max_pp(set_id, str(id_move))
 			mons.append({ "id": id, "set": set_id, "form": form, "types": Data.types(set_id, id, form),
 				"moves": moves, "pp": pp, "stats": stats, "canEvolve": sp.get("canEvolve", false), "teraType": member.get("teraType", ""),
-				"seat": seat, "mega": mega, "gmax": gmax.get("id") == "gmax", "gmaxTurns": 0, "training": training,
+				"seat": seat, "mega": mega, "gmax": gmax.get("id") == "gmax", "dynamax": member.get("dynamax", false), "gmaxTurns": 0, "training": training,
 				"ability": member.get("ability", detail.get("battleAbility", "")), "item": member.get("item", ""),
 				"itemUsed": false, "choiceMove": "", "fresh": true, "status": "", "sleep": 0, "hp": hp, "max": hp,
 				"atk": 0, "def": 0, "spa": 0, "spd": 0, "spe": 0, "accuracy": 0, "evasion": 0, "dot": 0, "slow": 0,
@@ -90,6 +90,7 @@ static func _source(mon: Dictionary, category: String, id: String) -> String:
 	return "%s의 %s %s" % [Data.display_name(mon["set"], mon["id"], mon["form"]), kind, name]
 
 static func _field(s: Dictionary, key: String, value: String, ev: Array, turns := 5, source := "") -> void:
+	var previous: String = s[key]
 	s[key] = value
 	s[key + "Turns"] = turns
 	s["effectSources"][key] = source
@@ -97,6 +98,9 @@ static func _field(s: Dictionary, key: String, value: String, ev: Array, turns :
 	if key == "terrain":
 		for seat in 2:
 			_activate_seed(s, seat, ev)
+	elif key == "weather" and value == "눈" and previous != value:
+		for seat in 2:
+			_restore_ice_face(s, seat, ev)
 
 static func _activate_seed(s: Dictionary, seat: int, ev: Array) -> void:
 	var mon := active(s, seat)
@@ -168,6 +172,8 @@ static func _enter(s: Dictionary, seat: int, ev: Array, switching := true) -> vo
 			elif foe["ability"] not in ["Clear Body", "White Smoke", "Hyper Cutter", "Inner Focus", "Own Tempo", "Oblivious", "Scrappy"]:
 				_stage(foe, 1 - seat, "atk", -1, ev, _source(mon, "abilities", "Intimidate"), true)
 		"Hospitality": pass # 아군이 동시에 나와 있을 때만 발동한다.
+	if s["weather"] == "눈":
+		_restore_ice_face(s, seat, ev)
 
 static func _entry_hazards(s: Dictionary, seat: int, ev: Array) -> bool:
 	var mon := active(s, seat)
@@ -202,7 +208,7 @@ static func _clear_side(side: Dictionary, keys: Array) -> void:
 
 static func _gimmicks(s: Dictionary, seat: int) -> Array:
 	var side: Dictionary = s["sides"][seat]
-	if side["usedGimmick"] or side["need"] or active(s, seat)["hp"] <= 0:
+	if side["usedGimmick"] or side["need"] or s.get("pivotSeat", -1) >= 0 or active(s, seat)["hp"] <= 0:
 		return []
 	var mon := active(s, seat)
 	var result := []
@@ -210,7 +216,7 @@ static func _gimmicks(s: Dictionary, seat: int) -> Array:
 		var next := Data.form(mon["set"], mon["id"], mon["mega"])
 		if next.get("requiresItem", "") == mon["item"] and mon["item"] != "":
 			result.append("mega")
-	if s["allowGmax"] and mon["gmax"]:
+	if s["allowGmax"] and (mon["gmax"] or mon["dynamax"]):
 		result.append("gmax")
 	if Data.TYPE_COLOR.has(str(mon.get("teraType", ""))):
 		result.append("tera")
@@ -232,11 +238,12 @@ static func _transform(s: Dictionary, seat: int, kind: String, ev: Array) -> voi
 		ev.append({"e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": "테라스탈"})
 	else:
 		mon["previousForm"] = mon["form"]
-		mon["form"] = "gmax"
+		if mon["gmax"]:
+			mon["form"] = "gmax"
 		mon["gmaxTurns"] = 3
 		mon["hp"] = int(mon["hp"]) * 2
 		mon["max"] = int(mon["max"]) * 2
-		ev.append({ "e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": "거다이맥스" })
+		ev.append({ "e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": "거다이맥스" if mon["gmax"] else "다이맥스" })
 
 static func _apply_tera(mon: Dictionary) -> void:
 	mon["originalTypes"] = mon["types"].duplicate()
@@ -248,12 +255,22 @@ static func _set_form(mon: Dictionary, form: String) -> void:
 	mon["types"] = [mon["teraType"]] if mon.get("terastallized", false) else Data.types(mon["set"], mon["id"], form)
 	mon["stats"] = Data.battle_stats(Data.form(mon["set"], mon["id"], form)["baseStats"], mon["training"])
 
+static func _change_face(mon: Dictionary, seat: int, form: String, effect: String, message: String, ev: Array) -> void:
+	_set_form(mon, form)
+	ev.append({"e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": message, "effect": effect})
+
+static func _restore_ice_face(s: Dictionary, seat: int, ev: Array) -> void:
+	var mon := active(s, seat)
+	if mon["id"] == "eiscue" and mon["ability"] == "Ice Face" and mon["form"] == "noice" and int(mon["hp"]) > 0:
+		_change_face(mon, seat, "base", "ice_restore", "아이스페이스 복구", ev)
+
 static func preview_combatant(mon: Dictionary, gimmick: String) -> Dictionary:
 	if gimmick == "":
 		return mon
 	var preview := mon.duplicate()
 	if gimmick == "gmax":
-		preview["form"] = "gmax"
+		if mon["gmax"]:
+			preview["form"] = "gmax"
 		preview["gmaxTurns"] = 3
 	elif gimmick == "tera":
 		_apply_tera(preview)
@@ -268,12 +285,21 @@ static func preview_move(s: Dictionary, mon: Dictionary, id: String, gimmick: St
 static func move_name(mv: Dictionary) -> String:
 	return str(mv.get("en", ""))
 
+static func _max_power(power: int, type: String) -> int:
+	var reduced := type in ["격투", "독"]
+	var thresholds := [150, 110, 75, 65, 55, 45]
+	var powers := [100, 95, 90, 85, 80, 75] if reduced else [150, 140, 130, 120, 110, 100]
+	for i in thresholds.size():
+		if power >= thresholds[i]:
+			return powers[i]
+	return 70 if reduced else 90
+
 static func _end_gmax(mon: Dictionary, seat: int, ev: Array) -> void:
 	mon["form"] = mon["previousForm"]
 	mon["gmaxTurns"] = 0
 	mon["hp"] = ceili(float(mon["hp"]) / 2.0)
 	mon["max"] = int(mon["stats"]["hp"])
-	ev.append({ "e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": "거다이맥스 종료" })
+	ev.append({ "e": "transform", "seat": seat, "mon": mon.duplicate(true), "what": "거다이맥스 종료" if mon["gmax"] else "다이맥스 종료" })
 
 static func _grounded(mon: Dictionary) -> bool:
 	return "비행" not in mon["types"] and mon["ability"] != "Levitate" and not (mon.get("item") == "Air Balloon" and not mon.get("itemUsed", false))
@@ -300,10 +326,20 @@ static func _stat(mon: Dictionary, key: String) -> int:
 static func effectiveness(move_type: String, defender: Dictionary, attacker := {}) -> Array:
 	var balloon: bool = defender.get("item") == "Air Balloon" and not defender.get("itemUsed", false)
 	var levitates: bool = move_type == "땅" and (balloon or (defender.get("ability") == "Levitate" and attacker.get("ability") != "Mold Breaker"))
-	var lightning_rod: bool = move_type == "전기" and defender.get("ability") == "Lightning Rod" and attacker.get("ability") != "Mold Breaker"
-	var multiplier := 0.0 if levitates or lightning_rod else TypeChart.mult(move_type, defender["types"])
+	var electric_immunity: bool = move_type == "전기" and defender.get("ability") in ["Lightning Rod", "Volt Absorb"] and attacker.get("ability") != "Mold Breaker"
+	var water_immunity: bool = move_type == "물" and defender.get("ability") == "Water Absorb" and attacker.get("ability") != "Mold Breaker"
+	var multiplier := 0.0 if levitates or electric_immunity or water_immunity else TypeChart.mult(move_type, defender["types"])
 	var label := "immune" if multiplier == 0.0 else ("strong" if multiplier > 1.0 else ("weak" if multiplier < 1.0 else ""))
 	return [multiplier, label]
+
+static func _move_effectiveness(mv: Dictionary, defender: Dictionary, attacker: Dictionary) -> Array:
+	if mv.get("typeless", false):
+		return [1.0, ""]
+	if mv.get("freezeDry", false) and not mv.get("maxMove", false) and "물" in defender["types"]:
+		var other_types: Array = defender["types"].filter(func(type): return type != "물")
+		var multiplier := 2.0 * TypeChart.mult("얼음", other_types)
+		return [multiplier, "strong" if multiplier > 1.0 else ""]
+	return effectiveness(str(mv["type"]), defender, attacker)
 
 static func _type_of(mon: Dictionary) -> String:
 	return str(mon["types"][0])
@@ -312,7 +348,7 @@ static func _type_of(mon: Dictionary) -> String:
 static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: int, s := {}, critical := false) -> int:
 	if mv.get("power") == null or (mv.get("sound", false) and defender.get("ability") == "Soundproof" and att.get("ability") != "Mold Breaker"):
 		return 0
-	var multiplier := 1.0 if mv.get("typeless", false) else float(effectiveness(str(mv["type"]), defender, att)[0])
+	var multiplier := float(_move_effectiveness(mv, defender, att)[0])
 	if multiplier == 0.0:
 		return 0
 	var special: bool = mv.get("damageClass") == "special"
@@ -328,6 +364,8 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 			defense = int(defender["stats"][defense_key])
 	if att.get("gmaxTurns", 0) == 0 and att.get("item") == ("Choice Specs" if special else "Choice Band"):
 		attack = floori(attack * 1.5)
+	if not special and att.get("ability") == "Hustle":
+		attack = floori(attack * 1.5)
 	if special and att.get("ability") == "Solar Power" and s.get("weather") == "쾌청":
 		attack = floori(attack * 1.5)
 	if defender.get("ability") == "Thick Fat" and att.get("ability") != "Mold Breaker" and mv["type"] in ["불꽃", "얼음"]:
@@ -337,6 +375,8 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 	if defender.get("canEvolve", false) and defender.get("item") == "Eviolite" and not defender.get("itemUsed", false):
 		defense = floori(defense * 1.5)
 	var power := int(mv["power"])
+	if att.get("ability") == "Strong Jaw" and not mv.get("maxMove", false) and (mv.get("bite", false) or move_name(mv) == "Crunch"):
+		power = floori(power * 1.5)
 	if att.get("ability") == "Sharpness" and mv.get("slicing", false) and not mv.get("maxMove", false):
 		power = floori(power * 1.5)
 	if att.get("ability") == "Sand Force" and s.get("weather") == "모래바람" and mv["type"] in ["땅", "바위", "강철"]:
@@ -401,7 +441,7 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 		var side: Dictionary = s["sides"][int(defender["seat"])]
 		if int(side.get("auroraVeil", 0)) > 0 or int(side.get("lightScreen" if special else "reflect", 0)) > 0:
 			result = floori(result * 0.5)
-	if defender["guard"]:
+	if defender["guard"] and not _is_feint(mv):
 		var pierces := _pierces_guard(att, defender, mv)
 		var max_chip: bool = mv.get("maxMove", false) and defender.get("guardMove") != "max"
 		return maxi(1, floori(result * 0.25)) if pierces or max_chip else 0
@@ -432,6 +472,9 @@ static func _hit_count(s: Dictionary, mon: Dictionary, mv: Dictionary) -> int:
 static func _pierces_guard(mon: Dictionary, foe: Dictionary, mv: Dictionary) -> bool:
 	return mon["ability"] == "Piercing Drill" and mv.get("contact", false) and not mv.get("maxMove", false) and foe.get("guardMove") != "max"
 
+static func _is_feint(mv: Dictionary) -> bool:
+	return move_name(mv) == "Feint" and not mv.get("maxMove", false)
+
 static func estimate(att: Dictionary, defender: Dictionary, mv: Dictionary, s := {}) -> float:
 	return float(damage(att, defender, mv, 92, s) + damage(att, defender, mv, 93, s)) / 2.0
 
@@ -441,7 +484,10 @@ static func legal(s: Dictionary, seat: int) -> Array:
 	if s["over"]:
 		return out
 	var side: Dictionary = s["sides"][seat]
-	var need_phase := bool(s["sides"][0]["need"]) or bool(s["sides"][1]["need"])
+	var pivot_seat := int(s.get("pivotSeat", -1))
+	if pivot_seat >= 0 and seat != pivot_seat:
+		return out
+	var need_phase := pivot_seat >= 0 or bool(s["sides"][0]["need"]) or bool(s["sides"][1]["need"])
 	if not need_phase:
 		var mon := active(s, seat)
 		if mon.get("recharge", false):
@@ -477,7 +523,7 @@ static func legal(s: Dictionary, seat: int) -> Array:
 			out.append({ "k": "move", "id": str(id), "ok": why == "", "why": why })
 		if not out.any(func(a): return a["ok"]):
 			out.append({ "k": "move", "id": "practice_struggle", "ok": true, "why": "" })
-	if (not need_phase and active(s, seat).get("charge", "") != "") or (need_phase and not side["need"]):
+	if (not need_phase and active(s, seat).get("charge", "") != "") or (need_phase and pivot_seat < 0 and not side["need"]):
 		return out
 	var mon := active(s, seat)
 	var trapped: bool = "고스트" not in mon["types"] and (mon.get("trapped", false) or (active(s, 1 - seat)["ability"] == "Shadow Tag" and mon["ability"] != "Shadow Tag"))
@@ -489,6 +535,9 @@ static func legal(s: Dictionary, seat: int) -> Array:
 static func waiting_for(s: Dictionary, seat: int) -> bool:
 	if s["over"]:
 		return false
+	var pivot_seat := int(s.get("pivotSeat", -1))
+	if pivot_seat >= 0:
+		return seat == pivot_seat
 	var side: Dictionary = s["sides"][seat]
 	var need_phase := bool(s["sides"][0]["need"]) or bool(s["sides"][1]["need"])
 	if need_phase:
@@ -508,6 +557,16 @@ static func submit(s: Dictionary, seat: int, action: Dictionary) -> Array:
 	var gimmick := str(action.get("gimmick", ""))
 	if gimmick != "" and (action["k"] != "move" or gimmick not in _gimmicks(s, seat)):
 		return []
+	if int(s.get("pivotSeat", -1)) == seat:
+		var events := []
+		s.erase("pivotSeat")
+		var pending: Array = s["pendingMoves"]
+		s["pendingMoves"] = pending.filter(func(entry): return int(entry["seat"]) != seat)
+		_swap(s, seat, int(action["to"]), events)
+		active(s, seat)["switchedThisTurn"] = true
+		_faints(s, events)
+		_continue_turn(s, events)
+		return events
 	s["sides"][seat]["choice"] = action
 	if waiting_for(s, 0) or waiting_for(s, 1):
 		return []
@@ -529,7 +588,7 @@ static func _swap(s: Dictionary, seat: int, to: int, ev: Array) -> void:
 		_set_form(old, "base")
 	old["slow"] = 0
 	old["choiceMove"] = ""
-	for flag in ["trapped", "leechSeed", "recharge", "quickGuard", "destinyBond", "taunt", "encoreTurns", "encoreMove", "lastMove", "disableTurns", "disabledMove"]:
+	for flag in ["trapped", "leechSeed", "cursed", "recharge", "quickGuard", "destinyBond", "taunt", "encoreTurns", "encoreMove", "lastMove", "disableTurns", "disabledMove"]:
 		old.erase(flag)
 	if old.has("lostElectric"):
 		old.erase("lostElectric")
@@ -545,6 +604,8 @@ static func _swap(s: Dictionary, seat: int, to: int, ev: Array) -> void:
 		old["ability"] = "Trace"
 	old["guard"] = false
 	old["guardChain"] = 0
+	old["acted"] = false
+	old["flinch"] = false
 	side["active"] = to
 	side["mons"][to]["seen"] = true
 	side["mons"][to]["fresh"] = true
@@ -564,7 +625,6 @@ static func _resolve_need(s: Dictionary) -> Array:
 	return ev
 
 static func _resolve_turn(s: Dictionary) -> Array:
-	var r := rules()
 	var ev := [{ "e": "turn", "n": int(s["turn"]) }]
 	# 순서: 교체(우선도 9) → 기술 우선도 → 스피드 → 무작위
 	var order := []
@@ -585,27 +645,45 @@ static func _resolve_turn(s: Dictionary) -> Array:
 		var c: Dictionary = s["sides"][seat]["choice"]
 		if c["k"] != "move":
 			continue
-		var pri := 0
-		if c["k"] == "move":
-			var mon := active(s, seat)
-			var mv := _effective_move(s, mon, str(c["id"]))
-			pri = int(mv.get("priority", 0))
-			if mon["ability"] == "Prankster" and mv.get("power") == null and not mv.get("maxMove", false):
-				pri += 1
-			if mon["ability"] == "Gale Wings" and mv["type"] == "비행" and mon["hp"] == mon["max"]:
-				pri += 1
+		var mon := active(s, seat)
+		var mv := _effective_move(s, mon, str(c["id"]))
+		var pri := _move_priority(mon, mv)
 		var speed := _speed(s, seat)
-		order.append({ "seat": seat, "pri": pri, "spd": -speed if s["trickRoom"] > 0 and c["k"] == "move" else speed, "tie": _rand(s) })
+		order.append({ "seat": seat, "pri": pri, "spd": -speed if s["trickRoom"] > 0 else speed, "tie": _rand(s) })
 	order.sort_custom(func(a, b):
 		if a["pri"] != b["pri"]: return a["pri"] > b["pri"]
 		if a["spd"] != b["spd"]: return a["spd"] > b["spd"]
 		return a["tie"] > b["tie"])
-	for o in order:
-		var seat: int = o["seat"]
-		var c: Dictionary = s["sides"][seat]["choice"]
-		if int(active(s, seat)["hp"]) > 0 and not active(s, seat).get("flinch", false):
-			_use(s, seat, str(c["id"]), ev, int(c.get("target", -1)))
-		active(s, seat)["acted"] = true
+	s["pendingMoves"] = order
+	_continue_turn(s, ev)
+	return ev
+
+static func _continue_turn(s: Dictionary, ev: Array) -> void:
+	var pending: Array = s["pendingMoves"]
+	while not pending.is_empty():
+		var entry: Dictionary = pending.pop_front()
+		var seat: int = entry["seat"]
+		var mon := active(s, seat)
+		var choice: Dictionary = s["sides"][seat]["choice"]
+		if int(mon["hp"]) > 0:
+			if mon.get("flinch", false):
+				mon["lastFailed"] = true
+				ev.append({"e": "status", "seat": seat, "what": "풀죽어서 움직이지 못했다"})
+			else:
+				_use(s, seat, str(choice["id"]), ev, int(choice.get("target", -1)), int(entry["pri"]))
+		mon["acted"] = true
+		var pivot_seat := int(s.get("pivotSeat", -1))
+		if pivot_seat >= 0:
+			var foe_mons: Array = s["sides"][1 - pivot_seat]["mons"]
+			if int(active(s, pivot_seat)["hp"]) > 0 and foe_mons.any(func(foe): return int(foe["hp"]) > 0):
+				ev.append({"e": "need", "seat": pivot_seat, "pivot": true})
+				return
+			s.erase("pivotSeat")
+	s.erase("pendingMoves")
+	_finish_turn(s, ev)
+
+static func _finish_turn(s: Dictionary, ev: Array) -> void:
+	var r := rules()
 	# 턴 끝: 그을음 피해와 지속 시간
 	for seat in 2:
 		var mon := active(s, seat)
@@ -633,7 +711,11 @@ static func _resolve_turn(s: Dictionary) -> Array:
 			s[key + "Turns"] -= 1
 			if s[key + "Turns"] == 0:
 				s[key] = ""
-	s["trickRoom"] = maxi(0, int(s["trickRoom"]) - 1)
+	if int(s["trickRoom"]) > 0:
+		s["trickRoom"] -= 1
+		if int(s["trickRoom"]) == 0:
+			s["effectSources"].erase("trickRoom")
+			ev.append({"e": "field", "what": "트릭룸 종료", "key": "trickRoom", "turns": 0})
 	_faints(s, ev)
 	_check_over(s, ev)
 	if not s["over"]:
@@ -646,7 +728,6 @@ static func _resolve_turn(s: Dictionary) -> Array:
 			s["over"] = true
 			s["winner"] = -1 if is_equal_approx(ratio[0], ratio[1]) else (0 if ratio[0] > ratio[1] else 1)
 			ev.append({ "e": "over", "winner": s["winner"], "why": "limit" })
-	return ev
 
 static func _heal(mon: Dictionary, seat: int, amount: int, ev: Array) -> void:
 	amount = mini(amount, int(mon["max"]) - int(mon["hp"]))
@@ -687,6 +768,8 @@ static func _residual(s: Dictionary, seat: int, ev: Array, phase: String) -> voi
 				_chip_damage(mon, seat, amount, ev, "seed")
 				_heal(active(s, 1 - seat), 1 - seat, amount, ev)
 		"status":
+			if mon.get("cursed", false):
+				_chip_damage(mon, seat, maxi(1, floori(float(mon["max"]) / 4.0)), ev, "저주")
 			if mon["status"] in ["화상", "독"]:
 				_chip_damage(mon, seat, maxi(1, floori(float(mon["max"]) / (16.0 if mon["status"] == "화상" else 8.0))), ev, "status")
 			if mon["status"] == "맹독":
@@ -758,7 +841,7 @@ static func _effective_move(s: Dictionary, mon: Dictionary, id: String) -> Dicti
 	if id == "Tera Blast" and mon.get("terastallized", false):
 		mv["type"] = mon["teraType"]
 		mv["damageClass"] = "physical" if _stat(mon, "atk") > _stat(mon, "spa") else "special"
-	if mon["form"] == "gmax" and id in mon["moves"]:
+	if int(mon["gmaxTurns"]) > 0 and id in mon["moves"]:
 		mv["maxMove"] = true
 		mv["accuracy"] = 100
 		if mv.get("power") == null:
@@ -769,8 +852,11 @@ static func _effective_move(s: Dictionary, mon: Dictionary, id: String) -> Dicti
 		else:
 			mv["ko"] = "다이맥스 " + str(mv["type"])
 			mv["priority"] = 0
+			mv["contact"] = false
+			mv["sound"] = false
+			mv["ko"] = {"비행": "다이제트", "바위": "다이록", "땅": "다이어스"}.get(mv["type"], mv["ko"])
 			var power := int(mv["power"])
-			mv["power"] = 90 if power < 65 else (120 if power < 85 else (130 if power < 110 else 140))
+			mv["power"] = _max_power(power, mv["type"])
 			var weather: String = { "불꽃": "쾌청", "물": "비", "바위": "모래바람", "얼음": "눈" }.get(mv["type"], "")
 			var terrain: String = { "풀": "그래스필드", "전기": "일렉트릭필드", "에스퍼": "사이코필드", "페어리": "미스트필드" }.get(mv["type"], "")
 			var raised: String = { "격투": "atk", "강철": "def", "독": "spa", "땅": "spd", "비행": "spe" }.get(mv["type"], "")
@@ -794,10 +880,21 @@ static func _effective_move(s: Dictionary, mon: Dictionary, id: String) -> Dicti
 				if mon["id"] == "rillaboom":
 					mv["power"] = 160
 					mv["effects"] = []
+			if mon["id"] == "lapras" and mon["form"] == "gmax" and mv["type"] == "얼음":
+				mv["ko"] = "거다이선율"
+				mv["effects"] = [{"kind": "screen", "key": "auroraVeil", "ignoreWeather": true}]
 			mv["desc"] = "변신 위력 %d." % int(mv["power"])
 	return mv
 
-static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target := -1) -> void:
+static func _move_priority(mon: Dictionary, mv: Dictionary) -> int:
+	var priority := int(mv.get("priority", 0))
+	if mon["ability"] == "Prankster" and mv.get("power") == null and not mv.get("maxMove", false):
+		priority += 1
+	if mon["ability"] == "Gale Wings" and mv["type"] == "비행" and mon["hp"] == mon["max"]:
+		priority += 1
+	return priority
+
+static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target := -1, queued_priority = null) -> void:
 	var side: Dictionary = s["sides"][seat]
 	var foe_seat := 1 - seat
 	var foe_side: Dictionary = s["sides"][foe_seat]
@@ -872,19 +969,19 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 		accuracy *= float(3 + maxi(0, aim)) / float(3 - mini(0, aim))
 	if mon["ability"] == "Compound Eyes":
 		accuracy *= 1.3
+	if mon["ability"] == "Hustle" and mv.get("damageClass") == "physical":
+		accuracy *= 0.8
 	if move_id in ["Thunder", "Hurricane"] and s["weather"] == "비":
 		accuracy = 100
 	if mon["ability"] != "No Guard" and foe["ability"] != "No Guard" and not mv.get("alwaysHit", false) and not mv.get("maxMove", false) and _rand(s) * 100.0 >= accuracy:
 		ev.append({ "e": "status", "seat": seat, "what": "기술이 빗나갔다" })
 		return
-	var priority := int(mv.get("priority", 0))
-	if mon["ability"] == "Prankster" and mv.get("power") == null:
-		priority += 1
-	if mon["ability"] == "Gale Wings" and mv["type"] == "비행" and mon["hp"] == mon["max"]:
-		priority += 1
+	var priority := _move_priority(mon, mv) if queued_priority == null else int(queued_priority)
 	var targets_foe: bool = mv.get("target", "") in ["normal", "any", "allAdjacentFoes", "allAdjacent"]
 	var armor_tail: bool = foe["ability"] == "Armor Tail" and mon["ability"] != "Mold Breaker"
-	if priority > 0 and targets_foe and (armor_tail or foe.get("quickGuard", false) or (s["terrain"] == "사이코필드" and _grounded(foe))):
+	var feint := _is_feint(mv)
+	var quick_guard: bool = foe.get("quickGuard", false) and not feint
+	if priority > 0 and targets_foe and (armor_tail or quick_guard or (s["terrain"] == "사이코필드" and _grounded(foe))):
 		ev.append({ "e": "status", "seat": foe_seat, "what": "우선도 기술을 막았다" })
 		return
 	if mv.get("power") == null and targets_foe and foe["ability"] == "Good as Gold" and mon["ability"] != "Mold Breaker":
@@ -893,11 +990,13 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 	if move_id == "Thunder Wave" and foe["ability"] == "Magic Bounce":
 		_apply_status(mon, seat, "마비", ev, s)
 		return
-	if move_id == "Feint":
-		foe["guard"] = false
-	if move_id == "Sucker Punch":
+	if feint:
+		foe["quickGuard"] = false
+		if foe.get("guardMove") != "max":
+			foe["guard"] = false
+	if move_id == "Sucker Punch" and not mv.get("maxMove", false):
 		var option = foe_side["choice"]
-		if option == null or option.get("k") != "move" or foe.get("acted", false) or move(foe["set"], str(option.get("id", ""))).get("power") == null:
+		if option == null or option.get("k") != "move" or foe.get("acted", false) or foe.get("switchedThisTurn", false) or _effective_move(s, foe, str(option.get("id", ""))).get("power") == null:
 			ev.append({ "e": "status", "seat": seat, "what": "기습이 실패했다" })
 			return
 	if move_id == "Poltergeist" and (foe["item"] == "" or foe["itemUsed"]):
@@ -909,7 +1008,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 	if move_id in ["Sleep Powder", "Rage Powder"] and "풀" in foe["types"]:
 		ev.append({ "e": "status", "seat": foe_seat, "what": "가루 기술이 통하지 않는다" })
 		return
-	if foe["guard"] and not _pierces_guard(mon, foe, mv) and not mv.get("maxMove", false) and (mv.get("power") != null or (mv.get("target", "") == "normal" and foe.get("guardMove") != "King's Shield")):
+	if foe["guard"] and not feint and not _pierces_guard(mon, foe, mv) and not mv.get("maxMove", false) and (mv.get("power") != null or (mv.get("target", "") == "normal" and foe.get("guardMove") != "King's Shield" and move_id != "Curse")):
 		if mv.get("contact", false) and foe.get("guardMove") == "King's Shield":
 			_stage(mon, seat, "atk", -1, ev, "%s의 기술 킹실드" % Data.display_name(foe["set"], foe["id"], foe["form"]), true)
 		if mv.get("contact", false) and foe.get("guardMove") == "Spiky Shield":
@@ -919,6 +1018,10 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 	if targets_foe and mon["ability"] != "Mold Breaker" and foe["hp"] > 0:
 		if foe["ability"] == "Lightning Rod" and mv["type"] == "전기":
 			_stage(foe, foe_seat, "spa", 1, ev, _source(foe, "abilities", "Lightning Rod"))
+			return
+		if (foe["ability"] == "Volt Absorb" and mv["type"] == "전기") or (foe["ability"] == "Water Absorb" and mv["type"] == "물"):
+			ev.append({"e": "status", "seat": foe_seat, "what": _source(foe, "abilities", foe["ability"]) + "로 기술을 흡수했다"})
+			_heal(foe, foe_seat, maxi(1, floori(float(foe["stats"]["hp"]) / 4.0)), ev)
 			return
 		if foe["ability"] == "Soundproof" and mv.get("sound", false):
 			ev.append({ "e": "status", "seat": foe_seat, "what": "방음으로 소리 기술을 막았다" })
@@ -934,16 +1037,22 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 		if reflected <= 0:
 			ev.append({"e": "status", "seat": seat, "what": "되돌려줄 피해가 없었다"})
 			return
+	if move_id == "Parting Shot" and not mv.get("maxMove", false):
+		_parting_shot(s, seat, move_source, ev)
+		return
 	var dealt := 0
 	var landed_on_foe := false
+	var connected := false
 	var decoy_blocks: bool = int(foe.get("substitute", 0)) > 0 and not mv.get("sound", false) and mon["ability"] != "Infiltrator"
-	if decoy_blocks and targets_foe and mv.get("power") == null and move_id != "Defog":
+	if decoy_blocks and targets_foe and mv.get("power") == null and move_id not in ["Defog", "Curse"]:
 		ev.append({"e": "status", "seat": foe_seat, "what": "대타가 기술을 막았다"})
 		return
 	if mv.get("power") != null and int(foe["hp"]) > 0:
-		var eff: Array = [1.0, ""] if mv.get("typeless", false) else effectiveness(str(mv["type"]), foe, mon)
-		if move_id == "Brick Break" and float(eff[0]) > 0.0:
+		var eff := _move_effectiveness(mv, foe, mon)
+		if move_id in ["Brick Break", "Psychic Fangs"] and not mv.get("maxMove", false) and float(eff[0]) > 0.0:
 			_clear_side(foe_side, SCREENS.keys())
+		if mv.get("doublesBeforeTarget", false) and not mv.get("maxMove", false) and (not foe.get("acted", false) or foe.get("switchedThisTurn", false)):
+			mv["power"] = int(mv["power"]) * 2
 		var weight := float(Data.form(foe["set"], foe["id"], foe["form"]).get("weightKg", 0))
 		if move_id in ["Grass Knot", "Low Kick", "Heavy Slam"] and not mv.get("maxMove", false) and foe["gmaxTurns"] > 0:
 			ev.append({ "e": "status", "seat": foe_seat, "what": "거다이맥스 상대에게 통하지 않는다" })
@@ -961,6 +1070,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				break
 			var critical := not retaliate and _critical(s, mon, foe, mv)
 			var hit := (reflected if float(eff[0]) > 0.0 else 0) if retaliate else damage(mon, foe, mv, 85 + int(_rand(s) * 16.0), s, critical)
+			connected = connected or hit > 0
 			if move_id == "Super Fang" and int(hit) > 0:
 				hit = maxi(1, floori(float(foe["hp"]) / 2.0))
 			if hit > 0 and decoy_blocks and int(foe.get("substitute", 0)) > 0:
@@ -969,6 +1079,15 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				dealt += absorbed
 				ev.append({"e": "substitute", "seat": foe_seat, "hp": foe["substitute"], "what": "파괴" if foe["substitute"] == 0 else "피격"})
 				continue
+			if hit > 0 and foe["form"] == "base" and mon["ability"] != "Mold Breaker":
+				if foe["id"] == "mimikyu" and foe["ability"] == "Disguise":
+					_change_face(foe, foe_seat, "busted", "disguise_break", "탈이 벗겨졌다", ev)
+					_chip_damage(foe, foe_seat, maxi(1, floori(float(foe["stats"]["hp"]) / 8.0)), ev, "탈")
+					_check_sitrus(foe, foe_seat, mon, ev)
+					continue
+				if foe["id"] == "eiscue" and foe["ability"] == "Ice Face" and mv.get("damageClass") == "physical":
+					_change_face(foe, foe_seat, "noice", "ice_break", "아이스페이스가 깨졌다", ev)
+					continue
 			var resist_berry: String = { "Chople Berry": "격투", "Passho Berry": "물", "Kasib Berry": "고스트", "Occa Berry": "불꽃", "Haban Berry": "드래곤" }.get(foe["item"], "")
 			if hit > 0 and not retaliate and resist_berry == mv["type"] and float(eff[0]) > 1.0 and not foe["itemUsed"] and mon["ability"] != "Unnerve":
 				foe["itemUsed"] = true
@@ -979,10 +1098,6 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				if not sturdy:
 					foe["itemUsed"] = true
 				ev.append({ "e": "status", "seat": foe_seat, "what": "쓰러지지 않고 버텼다" })
-			if hit > 0 and foe["ability"] == "Disguise" and not foe.get("disguiseBroken", false) and mon["ability"] != "Mold Breaker":
-				foe["disguiseBroken"] = true
-				_chip_damage(foe, foe_seat, maxi(1, floori(float(foe["max"]) / 8.0)), ev, "탈")
-				continue
 			hit = mini(hit, int(foe["hp"]))
 			foe["hp"] = int(foe["hp"]) - hit
 			ev.append({ "e": "dmg", "seat": foe_seat, "amount": hit, "hp": foe["hp"], "eff": eff[1], "guard": foe["guard"], "critical": critical })
@@ -991,6 +1106,14 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 			dealt += hit
 			landed_on_foe = true
 			foe["lastDirectHit"] = {"turn": s["turn"], "category": mv.get("damageClass", "physical"), "damage": hit}
+			if foe["hp"] > 0 and not foe["itemUsed"]:
+				if foe["item"] == "Kee Berry" and mv.get("damageClass") == "physical" and foe["def"] < 6:
+					foe["itemUsed"] = true
+					_stage(foe, foe_seat, "def", 1, ev, _source(foe, "items", "Kee Berry"))
+				elif foe["item"] == "Weakness Policy" and eff[1] == "strong" and (foe["atk"] < 6 or foe["spa"] < 6):
+					foe["itemUsed"] = true
+					_stage(foe, foe_seat, "atk", 2, ev, _source(foe, "items", "Weakness Policy"))
+					_stage(foe, foe_seat, "spa", 2, ev, _source(foe, "items", "Weakness Policy"))
 			if foe["item"] == "Air Balloon":
 				foe["itemUsed"] = true
 			if foe["hp"] <= 0 and foe.get("destinyBond", false) and mon["hp"] > 0:
@@ -1030,11 +1153,22 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 		if decoy_blocks and mv.get("power") != null and not landed_on_foe and e["kind"] in ["status", "randomStatus", "knockOff", "confuse", "bugBite", "trap", "leechSeed", "throatChop", "flinch", "debuff"]:
 			continue
 		match str(e["kind"]):
+			"curse":
+				if "고스트" not in mon["types"]:
+					_stage(mon, seat, "spe", -1, ev, move_source)
+					_stage(mon, seat, "atk", 1, ev, move_source)
+					_stage(mon, seat, "def", 1, ev, move_source)
+				elif not foe.get("cursed", false) and foe["hp"] > 0:
+					foe["cursed"] = true
+					ev.append({"e": "status", "seat": foe_seat, "what": "저주에 걸렸다"})
+					_chip_damage(mon, seat, maxi(1, floori(float(mon["max"]) / 2.0)), ev, "저주")
 			"substitute":
 				var cost := maxi(1, floori(float(mon["max"]) / 4.0))
-				if int(mon.get("substitute", 0)) > 0 or int(mon["hp"]) <= cost:
+				var already_has_decoy := int(mon.get("substitute", 0)) > 0
+				if already_has_decoy or int(mon["hp"]) <= cost:
 					mon["lastFailed"] = true
-					ev.append({"e": "status", "seat": seat, "what": "대타출동에 실패했다"})
+					var reason := "이미 대타가 있다" if already_has_decoy else "대타출동에 필요한 HP가 부족하다"
+					ev.append({"e": "status", "seat": seat, "what": reason})
 				else:
 					mon["hp"] -= cost
 					mon["substitute"] = cost
@@ -1048,7 +1182,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 					ev.append({"e": "field", "seat": foe_seat, "what": HAZARDS[key], "source": move_source})
 			"screen":
 				var key: String = e["key"]
-				if int(side.get(key, 0)) > 0 or (key == "auroraVeil" and s["weather"] != "눈"):
+				if int(side.get(key, 0)) > 0 or (key == "auroraVeil" and s["weather"] != "눈" and not e.get("ignoreWeather", false)):
 					mon["lastFailed"] = true
 					ev.append({"e": "status", "seat": seat, "what": SCREENS[key] + " 실패"})
 				else:
@@ -1113,22 +1247,25 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 			"throatChop":
 				foe["throatChop"] = 2
 			"pivot":
-				if mon["hp"] > 0 and side["mons"].any(func(x): return x != mon and x["hp"] > 0):
-					side["need"] = true
+				if connected and _can_pivot(side):
+					s["pivotSeat"] = seat
 			"tailwind":
 				side["tailwind"] = 4
 				side["effectSources"]["tailwind"] = move_source
 				ev.append({ "e": "field", "what": "순풍", "source": move_source })
 			"trickRoom":
 				s["trickRoom"] = 0 if s["trickRoom"] > 0 else 5
-				s["effectSources"]["trickRoom"] = move_source
+				if s["trickRoom"] > 0:
+					s["effectSources"]["trickRoom"] = move_source
+				else:
+					s["effectSources"].erase("trickRoom")
 				ev.append({ "e": "field", "what": "트릭룸" if s["trickRoom"] > 0 else "트릭룸 해제", "source": move_source, "key": "trickRoom", "turns": s["trickRoom"] })
 			"weather", "terrain":
 				_field(s, str(e["kind"]), str(e["value"]), ev, 5, move_source)
 			"status":
 				_apply_status(foe, foe_seat, str(e["status"]), ev, s)
 			"flinch":
-				if foe["ability"] != "Inner Focus" and (not e.get("firstTurn", false) or mon["fresh"]):
+				if foe["ability"] != "Inner Focus" and int(foe["gmaxTurns"]) == 0 and (not e.get("firstTurn", false) or mon["fresh"]):
 					foe["flinch"] = true
 			"destinyBond":
 				if not bonded:
@@ -1205,20 +1342,72 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				mon["guard"] = true
 				mon["guardMove"] = "max" if mv.get("maxMove", false) else move_id
 				ev.append({ "e": "status", "seat": seat, "what": "수비 태세" })
-	for check in [[mon, seat], [foe, foe_seat]]:
-		var holder: Dictionary = check[0]
-		if holder["item"] == "White Herb" and not holder["itemUsed"] and Data.BATTLE_RANKS.any(func(key): return holder[key] < 0):
-			holder["itemUsed"] = true
-			for key in Data.BATTLE_RANKS:
-				if holder[key] < 0:
-					var before := int(holder[key])
-					holder[key] = 0
-					_record_stage(holder, int(check[1]), key, before, _source(holder, "items", "White Herb"), ev)
+	_check_white_herb(mon, seat, ev)
+	_check_white_herb(foe, foe_seat, ev)
+	if mon["item"] == "Throat Spray" and not mon["itemUsed"] and mon["spa"] < 6 and not mon["lastFailed"] and mv.get("sound", false):
+		mon["itemUsed"] = true
+		_stage(mon, seat, "spa", 1, ev, _source(mon, "items", "Throat Spray"))
 	if mon["item"] == "Life Orb" and dealt > 0:
 		_chip_damage(mon, seat, maxi(1, floori(float(mon["stats"]["hp"]) / 10.0)), ev, "item")
 	_check_sitrus(mon, seat, foe, ev)
 	_check_sitrus(foe, foe_seat, mon, ev)
 	_faints(s, ev)
+
+static func _can_pivot(side: Dictionary) -> bool:
+	var current := int(side["active"])
+	if int(side["mons"][current]["hp"]) <= 0:
+		return false
+	for index in side["mons"].size():
+		if index != current and int(side["mons"][index]["hp"]) > 0:
+			return true
+	return false
+
+static func _parting_shot(s: Dictionary, seat: int, source: String, ev: Array) -> void:
+	var user := active(s, seat)
+	var foe := active(s, 1 - seat)
+	if int(foe["hp"]) <= 0:
+		return
+	var reflected: bool = foe["ability"] == "Magic Bounce" and user["ability"] != "Mold Breaker"
+	var pivot_seat := 1 - seat if reflected else seat
+	var target_seat := 1 - pivot_seat
+	var actor := active(s, pivot_seat)
+	var target := active(s, target_seat)
+	if reflected:
+		source += " · " + _source(foe, "abilities", "Magic Bounce") + "로 반사"
+	var ignores_ability: bool = actor["ability"] == "Mold Breaker"
+	var blocked: bool = target["ability"] == "Full Metal Body" or (not ignores_ability and target["ability"] in ["Clear Body", "White Smoke", "Soundproof"])
+	var applied: bool = not ignores_ability and target["ability"] == "Mirror Armor"
+	if applied:
+		for stat in ["atk", "spa"]:
+			_stage(actor, pivot_seat, stat, -1, ev, source + " · " + _source(target, "abilities", "Mirror Armor") + "로 반사", true)
+	elif not blocked:
+		for stat in ["atk", "spa"]:
+			if stat == "atk" and target["ability"] == "Hyper Cutter" and not ignores_ability:
+				continue
+			var previous := int(target[stat])
+			_stage(target, target_seat, stat, -1, ev, source, true)
+			applied = applied or int(target[stat]) != previous
+	user["lastFailed"] = not applied
+	if not applied:
+		ev.append({"e": "status", "seat": seat, "what": "막말내뱉기가 통하지 않았다"})
+	elif _can_pivot(s["sides"][pivot_seat]):
+		s["pivotSeat"] = pivot_seat
+	_check_white_herb(user, seat, ev)
+	_check_white_herb(foe, 1 - seat, ev)
+	_check_sitrus(user, seat, foe, ev)
+	_check_sitrus(foe, 1 - seat, user, ev)
+
+static func _check_white_herb(mon: Dictionary, seat: int, ev: Array) -> void:
+	if mon["item"] != "White Herb" or mon["itemUsed"]:
+		return
+	if not Data.BATTLE_RANKS.any(func(key): return mon[key] < 0):
+		return
+	mon["itemUsed"] = true
+	for key in Data.BATTLE_RANKS:
+		if mon[key] < 0:
+			var before := int(mon[key])
+			mon[key] = 0
+			_record_stage(mon, seat, key, before, _source(mon, "items", "White Herb"), ev)
 
 static func _check_sitrus(mon: Dictionary, seat: int, foe: Dictionary, ev: Array) -> void:
 	if mon["item"] == "Sitrus Berry" and not mon["itemUsed"] and foe["ability"] != "Unnerve" and mon["hp"] > 0 and int(mon["hp"]) * 2 <= int(mon["max"]):
@@ -1282,6 +1471,7 @@ static func _check_over(s: Dictionary, ev: Array) -> void:
 ## 이 자리에 보여 줄 상태. 상대가 아직 내보내지 않은 몬스터는 가린다.
 static func view(s: Dictionary, seat: int) -> Dictionary:
 	var sides := []
+	var pivot_seat := int(s.get("pivotSeat", -1))
 	for i in 2:
 		var side: Dictionary = s["sides"][i]
 		var mons := []
@@ -1293,10 +1483,10 @@ static func view(s: Dictionary, seat: int) -> Dictionary:
 				if i != seat and not entry.get("terastallized", false):
 					entry.erase("teraType")
 				mons.append(entry)
-		var public_side := { "faints": side["faints"], "stealthRock": side.get("stealthRock", false), "toxicSpikes": side.get("toxicSpikes", 0), "effectSources": side["effectSources"].duplicate(), "tailwind": side["tailwind"], "gmaxResidual": side["gmaxResidual"], "gmaxResidualTurns": side["gmaxResidualTurns"], "active": side["active"], "mons": mons, "need": side["need"], "chosen": side["choice"] != null }
+		var public_side := { "faints": side["faints"], "stealthRock": side.get("stealthRock", false), "toxicSpikes": side.get("toxicSpikes", 0), "effectSources": side["effectSources"].duplicate(), "tailwind": side["tailwind"], "gmaxResidual": side["gmaxResidual"], "gmaxResidualTurns": side["gmaxResidualTurns"], "active": side["active"], "mons": mons, "need": i == pivot_seat if pivot_seat >= 0 else side["need"], "chosen": i != pivot_seat if pivot_seat >= 0 else side["choice"] != null }
 		for key in HAZARDS.keys() + SCREENS.keys():
 			if side.has(key):
 				public_side[key] = side[key]
 		sides.append(public_side)
-	return { "turn": s["turn"], "over": s["over"], "winner": s["winner"], "sides": sides,
+	return { "turn": s["turn"], "over": s["over"], "winner": s["winner"], "pivotSwitch": pivot_seat == seat, "sides": sides,
 		"legal": legal(s, seat), "waiting": waiting_for(s, seat), "gimmicks": _gimmicks(s, seat), "effectSources": s["effectSources"].duplicate(), "weather": s["weather"], "weatherTurns": s["weatherTurns"], "terrain": s["terrain"], "terrainTurns": s["terrainTurns"], "trickRoom": s["trickRoom"] }
