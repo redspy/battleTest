@@ -36,9 +36,182 @@
   ],
   "teams": [
     {
-      "id": "soeul",
+      "id": "nangman",
       "event": "CUSTOM",
       "rank": 1,
+      "placement": "커스텀",
+      "name": "낭만",
+      "tags": [
+        "싱글",
+        "6→3",
+        "교체·역전"
+      ],
+      "summary": "나옹과 데덴네의 속이기·마비·교체 기술로 흐름을 만들고, 마자용의 반격과 앙코르로 상대의 행동을 읽어 메가마폭시가 나쁜음모를 쓸 틈을 만드는 팀입니다. 기본 선출은 나옹 → 마자용 → 메가마폭시입니다. 빠른 상대에게는 데덴네, 물·비행이 많으면 피카츄, 물리 상대나 랭크업 팀에는 오케이징을 골라 보세요. 고스트에게는 그림자밟기와 카운터가 통하지 않고, 악 타입에는 미러코트가 통하지 않습니다.",
+      "roles": {
+        "wobbuffet": "그림자밟기로 교체를 묶고 물리 공격은 카운터, 특수 공격은 미러코트로 돌려줍니다. 상대가 변화기를 쓰면 앙코르로 고정해 에이스가 나올 틈을 만듭니다.",
+        "pikachu": "전기구슬로 특수 화력을 높입니다. 볼트체인지로 공격하며 빠지고, 전기가 통하지 않는 땅 타입은 파도타기나 풀묶기로 노립니다.",
+        "meowth": "첫 턴 테크니션 속이기로 상대를 깎습니다. 탁쳐서떨구기로 도구를 없애고 유턴으로 안전한 교체를 노립니다. 페인트는 방어를 깨거나 낮은 HP를 마무리합니다.",
+        "inkay": "진화의휘석으로 버티며 엄청난힘을 사용합니다. 심술꾸러기로 공격·방어 하락이 상승으로 뒤집힙니다. 뒤집어엎기는 상대가 쌓은 랭크업을 역이용합니다.",
+        "dedenne": "볼부비부비로 속도를 낮추고 볼트체인지로 연결합니다. 대타출동으로 자뭉열매 발동 구간을 만들 수 있고, 볼주머니가 한 번 더 체력을 회복합니다.",
+        "delphox": "메가진화 후 부유로 땅 공격을 피하고 나쁜음모로 특수공격을 올립니다. 화염방사와 사이코키네시스가 주력이며 무거운 물·땅 타입은 풀묶기로 노립니다."
+      },
+      "members": [
+        {
+          "species": "wobbuffet",
+          "form": "base",
+          "ability": "Shadow Tag",
+          "item": "Leftovers",
+          "moves": [
+            "Counter",
+            "Mirror Coat",
+            "Encore",
+            "Destiny Bond"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 32,
+              "spe": 0
+            },
+            "boost": "def",
+            "reduce": "atk",
+            "nature": "bold"
+          }
+        },
+        {
+          "species": "pikachu",
+          "form": "base",
+          "ability": "Lightning Rod",
+          "item": "Light Ball",
+          "moves": [
+            "Thunderbolt",
+            "Surf",
+            "Grass Knot",
+            "Volt Switch"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        },
+        {
+          "species": "meowth",
+          "form": "base",
+          "ability": "Technician",
+          "item": "Focus Sash",
+          "moves": [
+            "Fake Out",
+            "Knock Off",
+            "Feint",
+            "U-turn"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "spa",
+            "nature": "jolly"
+          }
+        },
+        {
+          "species": "inkay",
+          "form": "base",
+          "ability": "Contrary",
+          "item": "Eviolite",
+          "moves": [
+            "Superpower",
+            "Knock Off",
+            "Psycho Cut",
+            "Topsy-Turvy"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 32,
+              "def": 2,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "boost": "atk",
+            "reduce": "spa",
+            "nature": "adamant"
+          }
+        },
+        {
+          "species": "dedenne",
+          "form": "base",
+          "ability": "Cheek Pouch",
+          "item": "Sitrus Berry",
+          "moves": [
+            "Nuzzle",
+            "Volt Switch",
+            "Dazzling Gleam",
+            "Substitute"
+          ],
+          "training": {
+            "points": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        },
+        {
+          "species": "delphox",
+          "form": "mega",
+          "ability": "Blaze",
+          "item": "Delphoxite",
+          "moves": [
+            "Nasty Plot",
+            "Flamethrower",
+            "Psychic",
+            "Grass Knot"
+          ],
+          "training": {
+            "points": {
+              "hp": 2,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 0,
+              "spe": 32
+            },
+            "boost": "spe",
+            "reduce": "atk",
+            "nature": "timid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "soeul",
+      "event": "CUSTOM",
+      "rank": 2,
       "placement": "커스텀",
       "name": "소을",
       "tags": [
@@ -211,7 +384,7 @@
     {
       "id": "daeul",
       "event": "CUSTOM",
-      "rank": 2,
+      "rank": 3,
       "placement": "커스텀",
       "name": "다을",
       "tags": [
@@ -384,7 +557,7 @@
     {
       "id": "mechanics-practice",
       "event": "CUSTOM",
-      "rank": 3,
+      "rank": 4,
       "placement": "규칙 실습",
       "name": "전투 규칙 실습",
       "tags": [

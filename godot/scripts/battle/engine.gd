@@ -36,7 +36,7 @@ static func create(picks0: Array, picks1: Array, rng_seed: int, set_id: String =
 			for id_move in moves:
 				pp[id_move] = max_pp(set_id, str(id_move))
 			mons.append({ "id": id, "set": set_id, "form": form, "types": Data.types(set_id, id, form),
-				"moves": moves, "pp": pp, "stats": stats, "teraType": member.get("teraType", ""),
+				"moves": moves, "pp": pp, "stats": stats, "canEvolve": sp.get("canEvolve", false), "teraType": member.get("teraType", ""),
 				"seat": seat, "mega": mega, "gmax": gmax.get("id") == "gmax", "gmaxTurns": 0, "training": training,
 				"ability": member.get("ability", detail.get("battleAbility", "")), "item": member.get("item", ""),
 				"itemUsed": false, "choiceMove": "", "fresh": true, "status": "", "sleep": 0, "hp": hp, "max": hp,
@@ -61,7 +61,7 @@ static func active(s: Dictionary, seat: int) -> Dictionary:
 
 static func move(set_id: String, id: String) -> Dictionary:
 	if id == "practice_struggle":
-		return { "ko": "발버둥", "type": "노말", "power": 50, "typeless": true,
+		return { "ko": "발버둥", "type": "노말", "power": 50, "damageClass": "physical", "typeless": true,
 			"effects": [{ "kind": "struggle" }], "desc": "사용할 수 있는 기술이 없을 때 공격하고 최대 HP의 ¼을 잃습니다." }
 	if id == "practice_recharge":
 		return { "ko": "반동으로 쉬기", "type": "노말", "desc": "직전 기술의 반동으로 이번 턴에 쉽니다." }
@@ -332,6 +332,10 @@ static func damage(att: Dictionary, defender: Dictionary, mv: Dictionary, roll: 
 		attack = floori(attack * 1.5)
 	if defender.get("ability") == "Thick Fat" and att.get("ability") != "Mold Breaker" and mv["type"] in ["불꽃", "얼음"]:
 		attack = maxi(1, floori(attack * 0.5))
+	if att.get("id") == "pikachu" and att.get("item") == "Light Ball" and not att.get("itemUsed", false):
+		attack *= 2
+	if defender.get("canEvolve", false) and defender.get("item") == "Eviolite" and not defender.get("itemUsed", false):
+		defense = floori(defense * 1.5)
 	var power := int(mv["power"])
 	if att.get("ability") == "Sharpness" and mv.get("slicing", false) and not mv.get("maxMove", false):
 		power = floori(power * 1.5)
@@ -531,6 +535,7 @@ static func _swap(s: Dictionary, seat: int, to: int, ev: Array) -> void:
 		old.erase("lostElectric")
 		old["types"] = [old["teraType"]] if old.get("terastallized", false) else Data.types(old["set"], old["id"], old["form"])
 	old.erase("charge")
+	old.erase("lastDirectHit")
 	old.erase("throatChop")
 	old.erase("confusion")
 	if old["ability"] == "Regenerator":
@@ -920,6 +925,15 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 			return
 	if move_id == "Thunder Wave" and float(effectiveness("전기", foe, mon)[0]) == 0.0:
 		return
+	var retaliate: bool = mv.get("retaliate", false) and not mv.get("maxMove", false)
+	var reflected := 0
+	if retaliate:
+		var received: Dictionary = mon.get("lastDirectHit", {})
+		if int(received.get("turn", -1)) == int(s["turn"]) and received.get("category") == mv["damageClass"]:
+			reflected = 2 * int(received["damage"])
+		if reflected <= 0:
+			ev.append({"e": "status", "seat": seat, "what": "되돌려줄 피해가 없었다"})
+			return
 	var dealt := 0
 	var landed_on_foe := false
 	var decoy_blocks: bool = int(foe.get("substitute", 0)) > 0 and not mv.get("sound", false) and mon["ability"] != "Infiltrator"
@@ -945,8 +959,8 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 		for hit_index in hits:
 			if int(mon["hp"]) <= 0 or int(foe["hp"]) <= 0:
 				break
-			var critical := _critical(s, mon, foe, mv)
-			var hit := damage(mon, foe, mv, 85 + int(_rand(s) * 16.0), s, critical)
+			var critical := not retaliate and _critical(s, mon, foe, mv)
+			var hit := (reflected if float(eff[0]) > 0.0 else 0) if retaliate else damage(mon, foe, mv, 85 + int(_rand(s) * 16.0), s, critical)
 			if move_id == "Super Fang" and int(hit) > 0:
 				hit = maxi(1, floori(float(foe["hp"]) / 2.0))
 			if hit > 0 and decoy_blocks and int(foe.get("substitute", 0)) > 0:
@@ -956,7 +970,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				ev.append({"e": "substitute", "seat": foe_seat, "hp": foe["substitute"], "what": "파괴" if foe["substitute"] == 0 else "피격"})
 				continue
 			var resist_berry: String = { "Chople Berry": "격투", "Passho Berry": "물", "Kasib Berry": "고스트", "Occa Berry": "불꽃", "Haban Berry": "드래곤" }.get(foe["item"], "")
-			if hit > 0 and resist_berry == mv["type"] and float(eff[0]) > 1.0 and not foe["itemUsed"] and mon["ability"] != "Unnerve":
+			if hit > 0 and not retaliate and resist_berry == mv["type"] and float(eff[0]) > 1.0 and not foe["itemUsed"] and mon["ability"] != "Unnerve":
 				foe["itemUsed"] = true
 				hit = maxi(1, floori(hit * 0.5))
 			var sturdy: bool = foe["ability"] == "Sturdy" and mon["ability"] != "Mold Breaker"
@@ -976,6 +990,7 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 				return
 			dealt += hit
 			landed_on_foe = true
+			foe["lastDirectHit"] = {"turn": s["turn"], "category": mv.get("damageClass", "physical"), "damage": hit}
 			if foe["item"] == "Air Balloon":
 				foe["itemUsed"] = true
 			if foe["hp"] <= 0 and foe.get("destinyBond", false) and mon["hp"] > 0:
@@ -1056,6 +1071,12 @@ static func _use(s: Dictionary, seat: int, move_id: String, ev: Array, target :=
 					mon.erase("leechSeed")
 					mon.erase("trapped")
 					_stage(mon, seat, "spe", 1, ev, move_source)
+			"invertStages":
+				for stat in Data.BATTLE_RANKS:
+					var previous := int(foe.get(stat, 0))
+					if previous != 0:
+						foe[stat] = -previous
+						_record_stage(foe, foe_seat, stat, previous, move_source, ev)
 			"focusEnergy":
 				mon["focusEnergy"] = 2
 			"randomStatus":
@@ -1203,6 +1224,8 @@ static func _check_sitrus(mon: Dictionary, seat: int, foe: Dictionary, ev: Array
 	if mon["item"] == "Sitrus Berry" and not mon["itemUsed"] and foe["ability"] != "Unnerve" and mon["hp"] > 0 and int(mon["hp"]) * 2 <= int(mon["max"]):
 		mon["itemUsed"] = true
 		_heal(mon, seat, floori(float(mon["max"]) / 4.0), ev)
+		if mon["ability"] == "Cheek Pouch":
+			_heal(mon, seat, floori(float(mon["max"]) / 3.0), ev)
 
 static func _apply_status(mon: Dictionary, seat: int, status: String, ev: Array, s := {}) -> void:
 	var terrain := str(s.get("terrain", ""))

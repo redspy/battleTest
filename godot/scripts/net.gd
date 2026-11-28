@@ -3,18 +3,20 @@ extends Node
 ## 같은 Wi-Fi 에서 ENet 으로 연결한다. 호스트는 UDP 방송으로 자기를 알리고, 참가 쪽은 목록에서 고르거나 주소를 직접 넣는다.
 ## 혼자 하기(solo) 는 연결 없이 자리 1 을 AI 가 맡는다.
 ##
-## 흐름: lobby(팀 고르기·준비) → pick(3 마리 비공개 선출) → battle(1:1 대전)
+## 흐름: lobby(팀 고르기·준비) → pick(3마리 선출 또는 6마리 선봉 선택) → battle(1:1 대전)
 ## 화면은 view 와 changed 신호만 본다. 입력은 send(msg).
-##   msg: {t:"team", id} {t:"ready", v} {t:"ai_team", id} {t:"picks", picks:[번호]} {t:"act", a} {t:"again"}
+##   msg: {t:"team", id} {t:"ready", v} {t:"ai_team", id} {t:"rules", pickCount?, allowGmax?} {t:"picks", picks:[번호]} {t:"act", a} {t:"again"}
 
 signal changed
 signal closed(reason: String)
 signal hosts_changed
 
 const SET_ID := "pokemon"
-const BATTLE_MODE := "battle"
-const BEACON := "BT6|pokemon|battle"
-const PICK_COUNT := 3
+const BATTLE_MODE := "battle-v2"
+const BEACON := "BT7|pokemon|battle"
+const DEFAULT_PICK_COUNT := 3
+const FULL_TEAM_COUNT := 6
+const DEFAULT_GMAX := true
 
 const PORT := 47317
 const BEACON_PORT := 47311
@@ -73,7 +75,7 @@ func start(p_role: String) -> String:
 			_beacon.set_dest_address("255.255.255.255", BEACON_PORT)
 		status = "상대를 기다리는 중"
 	if is_host():
-		_s = { "phase": "lobby", "solo": role == "solo",
+		_s = { "phase": "lobby", "solo": role == "solo", "pickCount": DEFAULT_PICK_COUNT, "allowGmax": DEFAULT_GMAX,
 			"players": [_new_player("나" if role == "solo" else "방장"), _new_player("AI" if role == "solo" else "")], "battle": {}, "events": [] }
 		_s["players"][0]["here"] = true
 		if role == "solo":
@@ -208,14 +210,24 @@ func _handle(who: int, msg: Dictionary) -> void:
 				if not Data.team(SET_ID, team_id).is_empty():
 					_s["players"][1]["team"] = team_id
 					p["ready"] = false
+		"rules":
+			if who == 0 and _s["phase"] == "lobby":
+				var count = msg.get("pickCount", _s["pickCount"])
+				var gmax = msg.get("allowGmax", _s["allowGmax"])
+				if count in [DEFAULT_PICK_COUNT, FULL_TEAM_COUNT] and gmax is bool:
+					if count != _s["pickCount"] or gmax != _s["allowGmax"]:
+						_s["pickCount"] = int(count)
+						_s["allowGmax"] = gmax
+						for i in 2:
+							_s["players"][i]["ready"] = _s["solo"] and i == 1
 		"ready":
 			if _s["phase"] == "lobby" and p["team"] != "":
 				p["ready"] = bool(msg.get("v", false))
 				if _s["players"][0]["ready"] and _s["players"][1]["ready"] and _s["players"][1]["here"]:
 					_open_selection()
 		"picks":
-			var picks: Array = msg.get("picks", [])
-			if _s["phase"] == "pick" and (p["picks"] as Array).is_empty() and _valid_picks(picks):
+			var picks = msg.get("picks", [])
+			if _s["phase"] == "pick" and (p["picks"] as Array).is_empty() and picks is Array and _valid_picks(picks):
 				p["picks"] = picks.map(func(x): return int(x))
 				if not (_s["players"][0]["picks"] as Array).is_empty() and not (_s["players"][1]["picks"] as Array).is_empty():
 					_begin()
@@ -240,14 +252,14 @@ func _open_selection() -> void:
 	for player in _s["players"]:
 		player["picks"] = []
 	if _s["solo"]:
-		_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], PICK_COUNT)
+		_s["players"][1]["picks"] = BBot.pick_members(SET_ID, _s["players"][1]["team"], _s["players"][0]["team"], int(_s["pickCount"]))
 
 func _valid_picks(picks: Array) -> bool:
-	if picks.size() != PICK_COUNT:
+	if picks.size() != int(_s["pickCount"]):
 		return false
 	var seen := {}
 	for x in picks:
-		if int(x) < 0 or int(x) >= 6 or seen.has(int(x)):
+		if not x is int or x < 0 or x >= FULL_TEAM_COUNT or seen.has(x):
 			return false
 		seen[int(x)] = true
 	return true
@@ -257,7 +269,7 @@ func _begin() -> void:
 	for i in 2:
 		var members: Array = Data.team(SET_ID, _s["players"][i]["team"])["members"]
 		ids.append((_s["players"][i]["picks"] as Array).map(func(x): return members[x]))
-	_s["battle"] = BEngine.create(ids[0], ids[1], randi(), SET_ID, true)
+	_s["battle"] = BEngine.create(ids[0], ids[1], randi(), SET_ID, bool(_s["allowGmax"]))
 	_s["phase"] = "battle"
 
 ## 혼자 하기: AI 가 고를 차례면 고른다 (연쇄 처리)
@@ -280,7 +292,7 @@ func _view_for(who: int, events: Array) -> Dictionary:
 		players.append({ "name": p["name"], "here": p["here"], "team": p["team"], "ready": p["ready"],
 			"picked": not (p["picks"] as Array).is_empty(), "picks": p["picks"] if i == who else [] })
 	var v := { "set": SET_ID, "mode": BATTLE_MODE, "phase": _s["phase"], "solo": _s["solo"],
-		"seat": who, "players": players, "events": events }
+		"seat": who, "players": players, "events": events, "pickCount": _s["pickCount"], "allowGmax": _s["allowGmax"] }
 	if _s["phase"] == "battle":
 		var battle := BEngine.view(_s["battle"], who)
 		for seat in 2:

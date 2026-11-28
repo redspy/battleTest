@@ -115,6 +115,7 @@ func _build_lobby(v: Dictionary) -> void:
 		for a in Net.local_addresses():
 			(info[1] as VBoxContainer).add_child(UI.label(str(a), 34, UI.ACCENT))
 		_col.add_child(info[0])
+	_col.add_child(_battle_rules(v, me == 0))
 	for i in 2:
 		var p: Dictionary = players[i]
 		var c := Lay.card(UI.PANEL_HI if i == me else UI.PANEL, 18)
@@ -147,6 +148,33 @@ func _build_lobby(v: Dictionary) -> void:
 		_footer_surface.show()
 		_footer.add_child(ready)
 
+func _battle_rules(view: Dictionary, editable: bool) -> Control:
+	var count := int(view.get("pickCount", Net.DEFAULT_PICK_COUNT))
+	var gmax := bool(view.get("allowGmax", Net.DEFAULT_GMAX))
+	var card := Lay.card(UI.PANEL, 16)
+	var col: VBoxContainer = card[1]
+	col.add_child(UI.label("대전 규칙", 27, UI.ACCENT))
+	if not editable:
+		col.add_child(Lay.wrap("%d인 배틀 · 거다이맥스 %s" % [count, "켬" if gmax else "끔"], 24))
+		return card[0]
+	var counts := HBoxContainer.new()
+	counts.add_theme_constant_override("separation", 8)
+	for size_value in [Net.DEFAULT_PICK_COUNT, Net.FULL_TEAM_COUNT]:
+		var pick := UI.button("%d인 배틀" % size_value, 24, size_value == count, size_value == count)
+		pick.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		pick.tapped.connect(func(): Net.send({"t": "rules", "pickCount": size_value}))
+		counts.add_child(pick)
+	col.add_child(counts)
+	var modes := HBoxContainer.new()
+	modes.add_theme_constant_override("separation", 8)
+	for enabled in [true, false]:
+		var toggle := UI.button("거다이맥스 켬" if enabled else "거다이맥스 끔", 23, enabled == gmax, enabled == gmax)
+		toggle.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		toggle.tapped.connect(func(): Net.send({"t": "rules", "allowGmax": enabled}))
+		modes.add_child(toggle)
+	col.add_child(modes)
+	return card[0]
+
 func _open_team_picker(opponent: bool) -> void:
 	var title := "상대 팀 고르기" if opponent else "내 팀 고르기"
 	var picker := TeamSelectScreen.new(SET_ID, true, title)
@@ -171,7 +199,8 @@ func _mini_row(members: Array) -> Control:
 
 func _build_pick(v: Dictionary) -> void:
 	var me := int(v["seat"])
-	var n := Net.PICK_COUNT
+	var n := int(v.get("pickCount", Net.DEFAULT_PICK_COUNT))
+	var full_team := n == Net.FULL_TEAM_COUNT
 	var players: Array = v["players"]
 	var mine: Array = Data.team(SET_ID, str(players[me]["team"]))["members"]
 	var theirs: Array = Data.team(SET_ID, str(players[1 - me]["team"]))["members"]
@@ -188,25 +217,34 @@ func _build_pick(v: Dictionary) -> void:
 		_col.add_child(_grid(mine, w, players[me]["picks"], func(_i: int): pass))
 		_col.add_child(UI.label("상대를 기다리는 중…", 26, UI.TEXT_DIM))
 		return
-	_col.add_child(UI.label("내 팀에서 %d마리 고르기 (%d/%d) — 첫 번째가 선봉" % [n, _sel.size(), n], 26, UI.ACCENT))
+	_col.add_child(Lay.wrap("선봉 고르기 · 6마리 전원 참가" if full_team else "내 팀에서 %d마리 고르기 (%d/%d) — 첫 번째가 선봉" % [n, _sel.size(), n], 26, UI.ACCENT))
 	_col.add_child(Lay.wrap("길게 누르면 자세히 볼 수 있습니다.", 20, UI.TEXT_DIM))
 	var toggle := func(i: int):
-		if i in _sel:
+		if full_team:
+			_sel = [i]
+		elif i in _sel:
 			_sel.erase(i)
 		elif _sel.size() < n:
 			_sel.append(i)
 		_refresh()
 	var detail := func(i: int): Nav.push(MemberViewer.new(SET_ID, mine, i))
 	_col.add_child(_grid(mine, w, _sel, toggle, detail))
-	var ok := UI.button("선출 확정", 32, true, _sel.size() == n)
-	UI.set_enabled(ok, _sel.size() == n)
+	var required := 1 if full_team else n
+	var ok := UI.button("선봉 확정" if full_team else "선출 확정", 32, true, _sel.size() == required)
+	UI.set_enabled(ok, _sel.size() == required)
 	ok.tapped.connect(func():
-		if _sel.size() == n:
-			Net.send({ "t": "picks", "picks": _sel.duplicate() }))
+		if _sel.size() != required:
+			return
+		var picks := _sel.duplicate()
+		if full_team:
+			for index in mine.size():
+				if index != _sel[0]:
+					picks.append(index)
+		Net.send({ "t": "picks", "picks": picks }))
 	_footer_surface.show()
 	var slots := HBoxContainer.new()
 	slots.add_theme_constant_override("separation", 8)
-	for i in n:
+	for i in required:
 		var slot := Lay.card(UI.PANEL_HI if i < _sel.size() else UI.BG_DEEP, 8)
 		var title := "선봉" if i == 0 else "%d번" % (i + 1)
 		var name := "미선택"

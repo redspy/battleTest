@@ -453,7 +453,8 @@ func _draw_public_rosters() -> void:
 				sprite.modulate.a = 0.57
 			body.add_child(sprite)
 			body.add_child(Lay.wrap(Data.display_name(_set_id, member["species"], form), 20))
-			var mark := "선출 확인" if selected else ("미선출" if seat == _me else "선출 미공개")
+			var full_team: bool = side["mons"].size() == Net.FULL_TEAM_COUNT
+			var mark := "선출 확인" if selected else ("미선출" if seat == _me else ("미등장" if full_team else "선출 미공개"))
 			body.add_child(Lay.wrap(mark, 19, UI.ACCENT if selected else UI.TEXT_DIM))
 
 func _show_effect(col: VBoxContainer, title: String, source: String, effect: String) -> void:
@@ -669,9 +670,12 @@ func _draw_actions() -> void:
 		else:
 			bench.add_child(_swap_button(a))
 	if bench.get_child_count() > 0:
-		_bench.add_child(UI.label("교체" if not need else "내보낼 몬스터", 22, UI.TEXT_DIM))
-		_bench.add_child(bench)
-		_bench.show()
+		var large_team: bool = _b["sides"][_me]["mons"].size() == Net.FULL_TEAM_COUNT
+		var destination := _actions if large_team else _bench
+		destination.add_child(UI.label("교체" if not need else "내보낼 몬스터", 22, UI.TEXT_DIM))
+		destination.add_child(bench)
+		if destination == _bench:
+			_bench.show()
 	else:
 		bench.free()
 
@@ -694,7 +698,7 @@ func _move_button(a: Dictionary, me: Dictionary, foe: Dictionary) -> Control:
 	head.add_child(UI.chip(str(mv["type"]), Data.type_color(str(mv["type"]))))
 	var name := Lay.wrap(str(mv["ko"]), 25, UI.TEXT)
 	head.add_child(name)
-	if mv.get("power") != null and not foe.get("hidden", false):
+	if mv.get("power") != null and not mv.get("retaliate", false) and not foe.get("hidden", false):
 		var eff := str(BEngine.effectiveness(str(mv["type"]), foe, preview)[1])
 		if eff != "":
 			var label: String = { "strong": "▲ 유리", "weak": "▼ 불리", "immune": "효과 없음" }[eff]

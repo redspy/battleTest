@@ -51,6 +51,14 @@ static func choose(s: Dictionary, seat: int) -> Dictionary:
 			var dmg := BEngine.estimate(me, foe, mv, s)
 			if mv.get("power") != null and dmg == 0.0:
 				continue
+			if mv.get("retaliate", false):
+				var expected := 0.0
+				for reply in foe["moves"]:
+					var incoming := BEngine.preview_move(s, foe, str(reply), "")
+					if incoming.get("damageClass") == mv["damageClass"]:
+						expected = maxf(expected, BEngine.estimate(foe, me, incoming, s))
+				if expected > 0.0 and expected < float(me["hp"]):
+					v += expected * 1.6
 			v += dmg
 			if dmg >= float(foe["hp"]):
 				v += 60.0

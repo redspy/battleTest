@@ -3058,6 +3058,127 @@
           }
         }
       ]
+    },
+    "Counter": {
+      "ko": "카운터",
+      "en": "Counter",
+      "type": "격투",
+      "category": "attack",
+      "damageClass": "physical",
+      "pp": 20,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": -5,
+      "desc": "이번 턴 상대의 물리 기술로 받은 피해를 두 배로 돌려줍니다.",
+      "retaliate": true,
+      "contact": true,
+      "power": 1
+    },
+    "Mirror Coat": {
+      "ko": "미러코트",
+      "en": "Mirror Coat",
+      "type": "에스퍼",
+      "category": "attack",
+      "damageClass": "special",
+      "pp": 20,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": -5,
+      "desc": "이번 턴 상대의 특수 기술로 받은 피해를 두 배로 돌려줍니다.",
+      "retaliate": true,
+      "power": 1
+    },
+    "Superpower": {
+      "ko": "엄청난힘",
+      "en": "Superpower",
+      "type": "격투",
+      "category": "attack",
+      "damageClass": "physical",
+      "pp": 5,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "desc": "공격 후 자신의 공격과 방어가 1랭크씩 내려갑니다.",
+      "contact": true,
+      "effects": [
+        {
+          "kind": "selfStages",
+          "stats": {
+            "atk": -1,
+            "def": -1
+          }
+        }
+      ],
+      "power": 120
+    },
+    "Topsy-Turvy": {
+      "ko": "뒤집어엎기",
+      "en": "Topsy-Turvy",
+      "type": "악",
+      "category": "support",
+      "damageClass": "status",
+      "pp": 20,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "desc": "상대의 능력 랭크 변화를 반대로 뒤집습니다.",
+      "effects": [
+        {
+          "kind": "invertStages"
+        }
+      ]
+    },
+    "Surf": {
+      "ko": "파도타기",
+      "en": "Surf",
+      "type": "물",
+      "category": "attack",
+      "damageClass": "special",
+      "pp": 15,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "desc": "물로 공격합니다.",
+      "power": 90
+    },
+    "U-turn": {
+      "ko": "유턴",
+      "en": "U-turn",
+      "type": "벌레",
+      "category": "attack",
+      "damageClass": "physical",
+      "pp": 20,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "desc": "공격한 뒤 아군과 교체합니다.",
+      "contact": true,
+      "effects": [
+        {
+          "kind": "pivot"
+        }
+      ],
+      "power": 70
+    },
+    "Flamethrower": {
+      "ko": "화염방사",
+      "en": "Flamethrower",
+      "type": "불꽃",
+      "category": "attack",
+      "damageClass": "special",
+      "pp": 15,
+      "accuracy": 100,
+      "target": "normal",
+      "priority": 0,
+      "desc": "10% 확률로 상대를 화상 상태로 만듭니다.",
+      "effects": [
+        {
+          "kind": "status",
+          "status": "화상",
+          "chance": 10
+        }
+      ],
+      "power": 90
     }
   },
   "items": {
@@ -3248,6 +3369,14 @@
     "Venusaurite": {
       "ko": "이상해꽃나이트",
       "desc": "이상해꽃을 메가진화시킵니다."
+    },
+    "Light Ball": {
+      "ko": "전기구슬",
+      "desc": "피카츄의 공격과 특수공격을 2배로 높입니다."
+    },
+    "Eviolite": {
+      "ko": "진화의휘석",
+      "desc": "진화할 수 있는 포켓몬의 방어와 특수방어를 1.5배로 높입니다."
     }
   },
   "abilities": {
@@ -3516,6 +3645,10 @@
     "Sharpness": {
       "ko": "예리함",
       "desc": "베는 기술의 위력이 1.5배가 됩니다."
+    },
+    "Cheek Pouch": {
+      "ko": "볼주머니",
+      "desc": "나무열매를 먹으면 열매 효과에 더해 최대 HP의 ⅓을 회복합니다."
     }
   },
   "practiceSets": {

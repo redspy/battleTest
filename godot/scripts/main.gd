@@ -31,6 +31,9 @@ func _nettest(target: String) -> void:
 		print("%s 시작 실패: %s" % [tag, err])
 		get_tree().quit(1)
 		return
+	var six := "--six" in OS.get_cmdline_user_args()
+	if target == "host" and six:
+		Net.send({"t": "rules", "pickCount": Net.FULL_TEAM_COUNT, "allowGmax": false})
 	var sent := ""
 	var acts := 0
 	for i in 600:
@@ -48,8 +51,12 @@ func _nettest(target: String) -> void:
 			"pick":
 				if not me["picked"] and sent != "picks":
 					sent = "picks"
-					Net.send({ "t": "picks", "picks": range(Net.PICK_COUNT) })
+					Net.send({ "t": "picks", "picks": range(int(Net.view.get("pickCount", Net.DEFAULT_PICK_COUNT))) })
 			"battle":
+				if six and (int(v["pickCount"]) != Net.FULL_TEAM_COUNT or bool(v["allowGmax"]) or v["battle"]["sides"][0]["mons"].size() != Net.FULL_TEAM_COUNT):
+					print("%s 6인 규칙 동기화 실패" % tag)
+					get_tree().quit(1)
+					return
 				if v["battle"]["over"]:
 					print("%s 대전 끝: 승자 자리 %d, 내 자리 %d, 턴 %d, 내 입력 %d번" % [tag, int(v["battle"]["winner"]), int(v["seat"]), int(v["battle"]["turn"]), acts])
 					await _wait(0.5)
@@ -209,10 +216,56 @@ func _daeul_test() -> bool:
 	target["atk"] = 2
 	return BEngine.damage(user, target, foul_play, 100, battle) > damage
 
+func _nangman_test() -> bool:
+	var team := Data.team(Net.SET_ID, "nangman")
+	var members: Array = team["members"]
+	if Data.sets[Net.SET_ID]["teams"][0]["id"] != "nangman" or members.size() != 6:
+		return false
+	for member: Dictionary in members:
+		var match_state := BEngine.create([member], [members[0]], 7)
+		if BEngine.active(match_state, 0)["moves"].size() != 4:
+			return false
+	var events := []
+	var state := BEngine.create([members[0]], [members[3]], 7)
+	var wobbuffet := BEngine.active(state, 0)
+	var foe := BEngine.active(state, 1)
+	BEngine._use(state, 1, "Psycho Cut", events)
+	var initial := int(foe["hp"])
+	var received := int(wobbuffet["lastDirectHit"]["damage"])
+	BEngine._use(state, 0, "Mirror Coat", events)
+	if foe["hp"] != initial:
+		return false
+	BEngine._use(state, 0, "Counter", events)
+	if foe["hp"] != initial - received * 2:
+		return false
+	wobbuffet["lastDirectHit"] = {"turn": state["turn"], "category": "special", "damage": 12}
+	BEngine._use(state, 0, "Mirror Coat", events)
+	if foe["hp"] != initial - received * 2:
+		return false # 악 타입은 미러코트를 무효화한다.
+	BEngine._use(state, 1, "Superpower", events)
+	if foe["atk"] != 1 or foe["def"] != 1:
+		return false
+	wobbuffet["spa"] = 2
+	BEngine._use(state, 1, "Topsy-Turvy", events)
+	if wobbuffet["spa"] != -2:
+		return false
+	var test := BEngine.create([members[1]], [members[4]], 7)
+	var pikachu := BEngine.active(test, 0)
+	var dedenne := BEngine.active(test, 1)
+	var surf := BEngine.move(Net.SET_ID, "Surf")
+	var boosted := BEngine.damage(pikachu, dedenne, surf, 100, test)
+	pikachu["itemUsed"] = true
+	if boosted <= BEngine.damage(pikachu, dedenne, surf, 100, test):
+		return false
+	var maximum := int(dedenne["max"])
+	dedenne["hp"] = 1
+	BEngine._check_sitrus(dedenne, 1, pikachu, events)
+	return dedenne["itemUsed"] and int(dedenne["hp"]) == 1 + floori(maximum / 4.0) + floori(maximum / 3.0)
+
 func _soeul_test() -> bool:
 	var team := Data.team(Net.SET_ID, "soeul")
 	var members: Array = team["members"]
-	if Data.sets[Net.SET_ID]["teams"][0]["id"] != "soeul" or members.size() != 6:
+	if members.size() != 6:
 		return false
 	for member: Dictionary in members:
 		var state := BEngine.create([member], [members[5]], 7)
@@ -350,6 +403,9 @@ func _team_profile_test() -> bool:
 
 func _selftest() -> void:
 	var fails := 0
+	if not _nangman_test():
+		print("[selftest] 낭만 팀 또는 신규 효과 오류")
+		fails += 1
 	if not _soeul_test():
 		print("[selftest] 소을 팀 또는 신규 특성·기술 오류")
 		fails += 1
@@ -472,7 +528,7 @@ func _selftest() -> void:
 		print("[selftest] 4마리 선출을 허용함")
 	var picks := [lead]
 	for i in 3:
-		if i != lead and picks.size() < Net.PICK_COUNT:
+		if i != lead and picks.size() < Net.DEFAULT_PICK_COUNT:
 			picks.append(i)
 	Net.send({ "t": "picks", "picks": picks })
 	if Net.view.get("phase") == "battle":
@@ -495,6 +551,26 @@ func _selftest() -> void:
 		if Net.view["phase"] != "lobby" or Net.view["players"][1]["team"] != "singles-2":
 			fails += 1
 			print("[selftest] 재대전에서 AI 팀 유지 오류")
+	Net.leave()
+	Net.start("solo")
+	Net.send({"t": "rules", "pickCount": Net.FULL_TEAM_COUNT, "allowGmax": false})
+	Net._handle(1, {"t": "rules", "pickCount": Net.DEFAULT_PICK_COUNT, "allowGmax": true})
+	Net.send({"t": "team", "id": gmax_team["id"]})
+	Net.send({"t": "ready", "v": true})
+	Net.send({"t": "rules", "pickCount": Net.DEFAULT_PICK_COUNT, "allowGmax": true})
+	Net.send({"t": "picks", "picks": picks})
+	if Net.view["phase"] != "pick" or Net.view["pickCount"] != Net.FULL_TEAM_COUNT or Net.view["allowGmax"]:
+		fails += 1
+		print("[selftest] 6인 규칙 또는 호스트 권한 오류")
+	var full_picks := [lead]
+	for index in Net.FULL_TEAM_COUNT:
+		if index != lead:
+			full_picks.append(index)
+	Net.send({"t": "picks", "picks": full_picks})
+	var six: Dictionary = Net.view.get("battle", {})
+	if six.is_empty() or six["sides"][0]["mons"].size() != 6 or six["sides"][1]["mons"].size() != 6 or "gmax" in six["gimmicks"] or not "mega" in six["gimmicks"]:
+		fails += 1
+		print("[selftest] 6인 배틀 기믹 또는 로스터 오류")
 	Net.leave()
 	print("[selftest] 끝: 실패 %d" % fails)
 	get_tree().quit(1 if fails > 0 else 0)
@@ -745,4 +821,20 @@ func _shots() -> void:
 		if not giant._playing:
 			break
 	await _shot("gmax")
+	Net.leave()
+	await _back_to_home()
+	var six_session := SessionScreen.new("solo")
+	Nav.push(six_session, false)
+	Net.send({"t": "team", "id": team["id"]})
+	Net.send({"t": "rules", "pickCount": Net.FULL_TEAM_COUNT, "allowGmax": false})
+	await _shot("six_lobby")
+	Net.send({"t": "ready", "v": true})
+	await _shot("six_lead")
+	six_session._sel = [3]
+	six_session._refresh()
+	var confirm := six_session._footer.get_child(-1) as TapArea
+	confirm.tapped.emit()
+	await _wait(1.0)
+	assert(Net.view["battle"]["sides"][0]["mons"].size() == 6)
+	await _shot("six_battle")
 	get_tree().quit()

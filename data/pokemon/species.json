@@ -193,6 +193,37 @@
       ]
     },
     {
+      "id": "pikachu",
+      "no": 25,
+      "en": "Pikachu",
+      "ko": "피카츄",
+      "types": [
+        "전기"
+      ],
+      "role": "전기구슬 특수 어태커",
+      "roleText": "전기구슬 특수 어태커",
+      "canEvolve": true,
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0025_pikachu_base",
+          "baseStats": {
+            "hp": 35,
+            "atk": 55,
+            "def": 40,
+            "spa": 50,
+            "spd": 50,
+            "spe": 90
+          },
+          "battleAbility": "Lightning Rod",
+          "weightKg": 6,
+          "assetSource": "https://namu.wiki/w/%ED%94%BC%EC%B9%B4%EC%B8%84",
+          "assetUrl": "https://i.namu.wiki/i/RspyhkW1sEhArrb-XVtC97ZZjKsFmChZB7vPy9r5ByRlr1Hzm7WZw76hJ-0I2h6yMigi3wzrsM4gVd-tQ-J3CQ.gif"
+        }
+      ]
+    },
+    {
       "id": "raichu",
       "no": 26,
       "en": "Raichu",
@@ -318,6 +349,37 @@
           ],
           "requiresItem": "Clefablite",
           "assetSource": "https://namu.wiki/w/%ED%94%BD%EC%8B%9C%28%ED%8F%AC%EC%BC%93%EB%AA%AC%EC%8A%A4%ED%84%B0%29"
+        }
+      ]
+    },
+    {
+      "id": "meowth",
+      "no": 52,
+      "en": "Meowth",
+      "ko": "나옹",
+      "types": [
+        "노말"
+      ],
+      "role": "속이기와 도구 제거",
+      "roleText": "속이기와 도구 제거",
+      "canEvolve": true,
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0052_meowth_base",
+          "baseStats": {
+            "hp": 40,
+            "atk": 45,
+            "def": 35,
+            "spa": 40,
+            "spd": 40,
+            "spe": 90
+          },
+          "battleAbility": "Technician",
+          "weightKg": 4.2,
+          "assetSource": "https://namu.wiki/w/%EB%82%98%EC%98%B9",
+          "assetUrl": "https://i.namu.wiki/i/iw-Fm8BewRZv2UcLKWpw_qKgko3BURbFPDS1JmJpO2tm2o7yphEVGES9R9qm0_Pkxvh6lzpyAVlHbquF3NOOgQ.gif"
         }
       ]
     },
@@ -586,6 +648,37 @@
           "weightKg": 27,
           "assetSource": "https://namu.wiki/w/%EB%B8%94%EB%9E%98%ED%82%A4",
           "assetUrl": "https://i.namu.wiki/i/Lzkrl3ZxayW_wtlolItY8YxTY07kfY8AbXMgVp-_CNYaPbpKfisY1WSeXcTyhpwWqvYVX9Hl2HJ8ZD_INOqV7w.gif"
+        }
+      ]
+    },
+    {
+      "id": "wobbuffet",
+      "no": 202,
+      "en": "Wobbuffet",
+      "ko": "마자용",
+      "types": [
+        "에스퍼"
+      ],
+      "role": "반격과 기술 고정",
+      "roleText": "반격과 기술 고정",
+      "canEvolve": false,
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0202_wobbuffet_base",
+          "baseStats": {
+            "hp": 190,
+            "atk": 33,
+            "def": 58,
+            "spa": 33,
+            "spd": 58,
+            "spe": 33
+          },
+          "battleAbility": "Shadow Tag",
+          "weightKg": 28.5,
+          "assetSource": "https://namu.wiki/w/%EB%A7%88%EC%9E%90%EC%9A%A9",
+          "assetUrl": "https://i.namu.wiki/i/0fsf4VI5ti9gNsvfS7mXB_e-55oyt43m8RIeSHdLBeoLnFzwCO3PWLFUzGOSfKmWuRQcKv4LFpVk7ng6RE7_-Q.gif"
         }
       ]
     },
@@ -1592,6 +1685,38 @@
       ]
     },
     {
+      "id": "inkay",
+      "no": 686,
+      "en": "Inkay",
+      "ko": "오케이징",
+      "types": [
+        "악",
+        "에스퍼"
+      ],
+      "role": "엄청난힘 랭크업",
+      "roleText": "엄청난힘 랭크업",
+      "canEvolve": true,
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0686_inkay_base",
+          "baseStats": {
+            "hp": 53,
+            "atk": 54,
+            "def": 53,
+            "spa": 37,
+            "spd": 46,
+            "spe": 45
+          },
+          "battleAbility": "Contrary",
+          "weightKg": 3.5,
+          "assetSource": "https://namu.wiki/w/%EC%98%A4%EC%BC%80%EC%9D%B4%EC%A7%95",
+          "assetUrl": "https://i.namu.wiki/i/8oSOMYnzIGQLZVEta_MYDGDNBhfGXm_0ahBpG6o0vGStM4TShDWhnXybck5eqBAlUwwSvDCClodpZD8WWMPkVQ.gif"
+        }
+      ]
+    },
+    {
       "id": "sylveon",
       "no": 700,
       "en": "Sylveon",
@@ -1616,6 +1741,38 @@
           },
           "battleAbility": "Cute Charm",
           "weightKg": 23.5
+        }
+      ]
+    },
+    {
+      "id": "dedenne",
+      "no": 702,
+      "en": "Dedenne",
+      "ko": "데덴네",
+      "types": [
+        "전기",
+        "페어리"
+      ],
+      "role": "마비와 열매 회복",
+      "roleText": "마비와 열매 회복",
+      "canEvolve": false,
+      "forms": [
+        {
+          "id": "base",
+          "label": "기본",
+          "file": "0702_dedenne_base",
+          "baseStats": {
+            "hp": 67,
+            "atk": 58,
+            "def": 57,
+            "spa": 81,
+            "spd": 67,
+            "spe": 101
+          },
+          "battleAbility": "Cheek Pouch",
+          "weightKg": 2.2,
+          "assetSource": "https://namu.wiki/w/%EB%8D%B0%EB%8D%B4%EB%84%A4",
+          "assetUrl": "https://i.namu.wiki/i/tZRsQg8fqSRWVOTeuZpJ4qQU88_4wHgXvRhQFjWmvyTELJDNpAK4C-RlEH7bfVNccpqqKw8AqDyS_SXqtqWOSQ.gif"
         }
       ]
     },
